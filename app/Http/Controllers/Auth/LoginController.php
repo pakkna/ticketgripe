@@ -27,6 +27,11 @@ class LoginController extends Controller
      */
     protected $redirectTo = '/dashboard';
 
+
+    public function showRegistarForm(){
+        return View('auth.register');
+    }
+
     /**
      * Create a new controller instance.
      *

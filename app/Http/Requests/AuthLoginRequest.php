@@ -24,7 +24,7 @@ class AuthLoginRequest extends FormRequest
     public function rules()
     {
         return [
-            "name" => "required",
+            "username" => "required",
             "password" => "required"
         ];
     }

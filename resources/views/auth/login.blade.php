@@ -1,81 +1,85 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, shrink-to-fit=9">
+        <meta name="description" content="Gambolthemes">
+        <meta name="author" content="Gambolthemes">
+        <title>Ticket Gripe - Login Now</title>
+		
+        <!-- Favicon Icon -->
+        <link rel="icon" type="image/png" href="{!! asset('master/images/fav.png') !!}">
+		
+        <!-- Stylesheets -->
+        <link href="{!! asset('master/css/responsive.css') !!}" rel="stylesheet">
+        <link href="{!! asset('master/css/style.css') !!}" rel="stylesheet">
+        <link href="{!! asset('master/css/datepicker.min.css') !!}" rel="stylesheet">
+        <link href="{!! asset('master/css/bootstrap.min.css') !!}" rel="stylesheet">
+        <link href="{!! asset('master/css/all.min.css') !!}" rel="stylesheet">
+        <link href="{!! asset('master/css/owl.carousel.css') !!}" rel="stylesheet">
+        <link href="{!! asset('master/css/owl.theme.default.min.css') !!}" rel="stylesheet">
+	
+    </head>
 
-@section('content')
-<div class="container">
-    <br><br><br><br>
-    <div class="row">
-        <div class="col-md-offset-5 col-md-7">
-            <a href="{{ url('/') }}">
-                <div style="margin-left: 24px;height: 23px;width: 97px;margin-bottom:50px"><img src="assets/images/login-logo.png" style="width: 125%;margin-top: -30px;" alt=""></div> {{--{{ config('app.name', 'Laravel') }}--}}
-            </a><br>
-
-        </div>
-
-    </div>
-    <h3 align="center"> User Login Portal</h3>
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            @include("layouts.includes.flash")
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
-
-                <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('user.login') }}">
-                        {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">User Name</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
-
-                                @if ($errors->has('name'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('name') }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('password') }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                                    </label>
+    <body class="body-bg" oncontextmenu="return false;">				
+        <!-- Body Start -->	
+        <main class="register-mp">	
+            <div class="main-section">
+                <div class="container">					
+                    <div class="row justify-content-md-center">
+                        <div class="col-md-10">
+                            <div class="login-register-bg">
+                                <div class="row no-gutters">
+                                    <div class="col-lg-6">
+                                        <div class="lg-left">
+                                            <div class="lg-logo">
+                                                <a href="{{route('/')}}"><img src="{!! asset('master/images/login-register/logo.svg') !!}" alt=""></a>
+                                            </div>
+                                            <div class="lr-text">
+                                                <h2>Login Now</h2>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla interdum blandit felis a hendrerit.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="lr-right">
+                                        <h4>Sign In to Ticket Gripe</h4>
+                                            <div class="login-register-form">
+                                            @include("layouts.includes.flash")
+                                            <form class="form-horizontal" method="POST" action="{{ route('user.login') }}">
+                                                    {{ csrf_field() }}
+                                                    <div class="form-group">									
+                                                        <input class="title-discussion-input{{ $errors->has('username') ? ' has-error' : '' }}" type="text" name="username" placeholder="Your user name / email" value="{{ old('username') }}" required>
+                                                        @if ($errors->has('username'))
+                                                        <span class="help-block">
+                                                            <strong>{{ $errors->first('username') }}</strong>
+                                                        </span>
+                                                        @endif
+                                                    </div>
+                                                    <div class="form-group">									
+                                                        <input class="title-discussion-input{{ $errors->has('username') ? ' has-error' : '' }}" type="password" name="password" placeholder="Password" required>
+                                                        @if ($errors->has('password'))
+                                                        <span class="help-block">
+                                                            <strong>{{ $errors->first('password') }}</strong>
+                                                        </span>
+                                                        @endif
+                                                    </div>
+                                                    <button class="login-btn" type="submit">Login Now</button>
+                                                </form>
+                                                <a href="{{ route('password.request')}}" class="forgot-link">Forgot Password?</a>
+                                                <div class="regstr-link">Don’t have an account? <a href="{{route('sign-up')}}">Register Now</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Login
-                                </button>
-
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Forgot Your Password?
-                                </a>
-                            </div>
-                        </div>
-                    </form>
+                        </div>							
+                    </div>										
+										
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-@endsection
+        </main>
+        <!-- Body End -->			
+        @include('layouts.master_layout.footer')
+

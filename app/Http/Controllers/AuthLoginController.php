@@ -19,30 +19,68 @@ class AuthLoginController extends Controller
         return view('auth.adduser');
     }
 
+    public function register(Request $request){
+
+        $validatedData = $request->validate([
+            'username' => 'required|unique:users|max:255',
+            'email' => 'required|unique:users|max:255',
+            'fullname' => 'required|max:255',
+            'password' => 'required|min:6',
+        ]);
+
+        $data = [
+
+            "username" => $request->username,
+
+            "email" => $request->email,
+
+            "fullname" => $request->fullname,
+          
+            "password" => bcrypt($request->password),
+
+            "user_type" => 'user',
+
+            "status" => '1',
+
+            "created_at" => date('Y-m-d h:i:s')
+
+        ];
+
+
+        try {
+
+            DB::table('users')->insert($data);
+            return redirect()->route('login')->with("flashMessageSuccess", "Your Account Created Successfully ! ");
+
+        } catch (\Exception $e) {
+            return  redirect()->route('sign-up')->with("flashMessageDanger", $e->getMessage());
+            
+        }
+ 
+    }
+
     public function login(AuthLoginRequest $request)
     {
 
-        $credentials = $request->only('name', 'password');
+       
+        $request->request->add(['email' =>  $request->username]);
+        $credentials1 = $request->only('username','password');
+        $credentials2 = $request->only('email','password');
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials1) || Auth::attempt($credentials2)) {
             // Authentication passed...
-
-            if(Auth::user()->user_type=="User" && Auth::user()->status<2){
-                
-             return redirect()->route('guest_entry');
-            }else{
-                return redirect()->route('all-guest-details');
-            }
-    
+  
+             dd($credentials1);
+        
         } else {
-            return redirect("login")->with("flashMessageDanger", "Invalid User Credentials.");
+            return redirect()->route("login")->with("flashMessageDanger", "Invalid User Credentials.");
         }
     }
 
     public function logout()
     {
         Auth::logout();
-        return redirect("login")->with("flashMessageSuccess", "Logout Succesfully");
+        return redirect()->route("login")->with("flashMessageSuccess", "Logout Succesfully");
     }
     /**
      * Show the form for creating a new resource.

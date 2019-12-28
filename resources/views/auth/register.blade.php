@@ -46,21 +46,46 @@
 										<div class="lr-right">
 											<h4>Sign Up to Ticket Gripe</h4>
 											<div class="login-register-form">
-												<form>
+											@include("layouts.includes.flash")
+												<form class="form-horizontal" method="POST" action="{{ route('user.register') }}">
+											     	{{ csrf_field() }}
 													<div class="form-group">									
-														<input class="title-discussion-input" type="text" name="name" placeholder="Full Name" required>
+														<input class="title-discussion-input{{ $errors->has('username') ? ' has-error' : '' }}" type="text" name="username" placeholder="User Name" value="{{ old('username') }}" required>
+														@if ($errors->has('username'))
+														<span class="help-block">
+															<strong>{{ $errors->first('username') }}</strong>
+														</span>
+														@endif
 													</div>
 													<div class="form-group">									
-														<input class="title-discussion-input" type="email" name="email" placeholder="Email Address" required>
+														<input class="title-discussion-input{{ $errors->has('fullname') ? ' has-error' : '' }}" type="text" name="fullname" placeholder="Your Name" value="{{ old('fullname') }}" required>
+														@if ($errors->has('fullname'))
+														<span class="help-block">
+															<strong>{{ $errors->first('fullname') }}</strong>
+														</span>
+														@endif
+													</div>
+													<div class="form-group">									
+														<input class="title-discussion-input{{ $errors->has('email') ? ' has-error' : '' }}" type="email" name="email" placeholder="Email Address" value="{{ old('email') }}" required>
+														@if ($errors->has('email'))
+														<span class="help-block">
+															<strong>{{ $errors->first('email') }}</strong>
+														</span>
+														@endif
 													</div>
 													<div class="form-group">								 	
-														<input class="title-discussion-input" type="password" name="password" placeholder="Password" required>
+														<input class="title-discussion-input{{ $errors->has('name') ? ' has-error' : '' }}" type="password" name="password" placeholder="Password" required>
+														@if ($errors->has('password'))
+														<span class="help-block">
+															<strong>{{ $errors->first('password') }}</strong>
+														</span>
+														@endif
 													</div>													
 													<div class="rgstr-dt-txt">
 														By clicking Sign Up, you agree to our <a href="#">Terms</a>, <a href="#">Data Policy</a> and <a href="#">Cookie Policy</a>. You may receive Email notifications from us and can opt out at any time.
 													</div>
 													<button class="login-btn" type="submit">Register Now</button>
-													<div class="login-link">If you have an account? <a href="{{route('sign-in')}}">Login Now</a></div>
+													<div class="login-link">If you have an account? <a href="{{route('login')}}">Login Now</a></div>
 												</form>											
 												
 											</div>
