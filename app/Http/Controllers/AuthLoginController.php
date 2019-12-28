@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AuthLoginRequest;
+use App\Http\Requests\RegisterRequest;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\DB;
@@ -19,14 +20,7 @@ class AuthLoginController extends Controller
         return view('auth.adduser');
     }
 
-    public function register(Request $request){
-
-        $validatedData = $request->validate([
-            'username' => 'required|unique:users|max:255',
-            'email' => 'required|unique:users|max:255',
-            'fullname' => 'required|max:255',
-            'password' => 'required|min:6',
-        ]);
+    public function register(RegisterRequest $request){
 
         $data = [
 
