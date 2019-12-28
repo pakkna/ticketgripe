@@ -9,16 +9,16 @@
 		<title>Ticket Gripe - Login Now</title>
 		
 		<!-- Favicon Icon -->
-		<link rel="icon" type="image/png" href="images/fav.png">
+		<link rel="icon" type="image/png" href="{!! asset('master/images/fav.png') !!}">
 		
 		<!-- Stylesheets -->
-		<link href="css/responsive.css" rel="stylesheet">
-		<link href="css/style.css" rel="stylesheet">
-		<link href="css/datepicker.min.css" rel="stylesheet">
-		<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-		<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-		<link href="vendor/OwlCarousel/assets/owl.carousel.css" rel="stylesheet">
-		<link href="vendor/OwlCarousel/assets/owl.theme.default.min.css" rel="stylesheet">
+		<link href="{!! asset('master/css/responsive.css') !!}" rel="stylesheet">
+		<link href="{!! asset('master/css/style.css') !!}" rel="stylesheet">
+		<link href="{!! asset('master/css/datepicker.min.css') !!}" rel="stylesheet">
+		<link href="{!! asset('master/css/bootstrap.min.css') !!}" rel="stylesheet">
+		<link href="{!! asset('master/css/all.min.css') !!}" rel="stylesheet">
+		<link href="{!! asset('master/css/owl.carousel.css') !!}" rel="stylesheet">
+		<link href="{!! asset('master/css/owl.theme.default.min.css') !!}" rel="stylesheet">
 	
 	</head>
 
@@ -34,7 +34,7 @@
 									<div class="col-lg-6">
 										<div class="lg-left">
 											<div class="lg-logo">
-												<a href="index.php"><img src="images/login-register/logo.svg" alt=""></a>
+												<a href="{{route('/')}}"><img src="{!! asset('master/images/login-register/logo.svg') !!}" alt=""></a>
 											</div>
 											<div class="lr-text">
 												<h2>Login Now</h2>
@@ -56,7 +56,7 @@
 													<button class="login-btn" type="submit">Login Now</button>
 												</form>
 												<a href="#" class="forgot-link">Forgot Password?</a>
-												<div class="regstr-link">Don’t have an account? <a href="register.php">Register Now</a></div>
+												<div class="regstr-link">Don’t have an account? <a href="{{route('sign-up')}}">Register Now</a></div>
 											</div>
 										</div>
 									</div>
@@ -69,4 +69,5 @@
 			</div>
 		</main>
 		<!-- Body End -->			
-		<?php include('master_layout/footer.php') ?>
+		@include('layouts.master_layout.footer')
+

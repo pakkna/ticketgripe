@@ -6,19 +6,19 @@
         <meta name="viewport" content="width=device-width, shrink-to-fit=9">
         <meta name="description" content="Gambolthemes">
         <meta name="author" content="Gambolthemes">
-        <title>Goeveni - Home</title>
+        <title>Ticket Gripe</title>
 		
         <!-- Favicon Icon -->
-        <link rel="icon" type="image/png" href="images/fav.png">
+        <link rel="icon" type="image/png" href="{!! asset('images/fav.png') !!}">
 		
         <!-- Stylesheets -->
-        <link href="css/responsive.css" rel="stylesheet">
-        <link href="css/style.css" rel="stylesheet">
-        <link href="css/datepicker.min.css" rel="stylesheet">
-        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-        <link href="vendor/OwlCarousel/assets/owl.carousel.css" rel="stylesheet">
-        <link href="vendor/OwlCarousel/assets/owl.theme.default.min.css" rel="stylesheet">		
+        <link href="{!! asset('master/css/responsive.css') !!}" rel="stylesheet">
+        <link href="{!! asset('master/css/style.css') !!}" rel="stylesheet">
+        <link href="{!! asset('master/css/datepicker.min.css') !!}" rel="stylesheet">
+        <link href="{!! asset('master/css/bootstrap.min.css') !!}" rel="stylesheet">
+        <link href="{!! asset('master/css/all.min.css') !!}" rel="stylesheet">
+        <link href="{!! asset('master/css/owl.carousel.css') !!}" rel="stylesheet">
+        <link href="{!! asset('master/css/owl.theme.default.min.css') !!}" rel="stylesheet">		
 	
     </head>
 
@@ -29,7 +29,7 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <nav class="navbar navbar-expand-lg navbar-light bg-dark1 justify-content-sm-start">
-                            <a class="order-1 order-lg-0 ml-lg-0 ml-3 mr-auto" href="index.html"><img src="images/logo.svg" alt=""></a>
+                            <a class="order-1 order-lg-0 ml-lg-0 ml-3 mr-auto" href="{{route('/')}}"><img src="{!! asset('master/images/logo.svg') !!}" alt=""></a>
                             <button class="navbar-toggler align-self-start" type="button">
                                 <i class="fas fa-bars"></i>
                             </button>

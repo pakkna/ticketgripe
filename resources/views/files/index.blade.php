@@ -1,4 +1,5 @@
-<?php include('master_layout/header.php') ?>
+@include('layouts.master_layout.header')
+
 <!-- Body Start -->	
 		<main>	
 			<div class="main-section">
@@ -1509,4 +1510,5 @@
 			</div>
 		</main>
 		<!-- Body End -->			
-<?php include('master_layout/footer.php') ?>
+@include('layouts.master_layout.footer')
+

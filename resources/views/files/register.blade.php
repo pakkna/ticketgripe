@@ -9,16 +9,16 @@
 		<title>Ticket Gripe - Register Now</title>
 		
 		<!-- Favicon Icon -->
-		<link rel="icon" type="image/png" href="images/fav.png">
+		<link rel="icon" type="image/png" href="{!! asset('master/images/fav.png') !!}">
 		
 		<!-- Stylesheets -->
-		<link href="css/responsive.css" rel="stylesheet">
-		<link href="css/style.css" rel="stylesheet">
-		<link href="css/datepicker.min.css" rel="stylesheet">
-		<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-		<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-		<link href="vendor/OwlCarousel/assets/owl.carousel.css" rel="stylesheet">
-		<link href="vendor/OwlCarousel/assets/owl.theme.default.min.css" rel="stylesheet">
+		<link href="{!! asset('master/css/responsive.css') !!}" rel="stylesheet">
+		<link href="{!! asset('master/css/style.css') !!}" rel="stylesheet">
+		<link href="{!! asset('master/css/datepicker.min.css') !!}" rel="stylesheet">
+		<link href="{!! asset('master/css/bootstrap.min.css') !!}" rel="stylesheet">
+		<link href="{!! asset('master/css/all.min.css') !!}" rel="stylesheet">
+		<link href="{!! asset('master/css/owl.carousel.css') !!}" rel="stylesheet">
+		<link href="{!! asset('master/css/owl.theme.default.min.css') !!}" rel="stylesheet">
 	
 	</head>
 
@@ -34,7 +34,7 @@
 									<div class="col-lg-6">
 										<div class="lg-left">
 											<div class="lg-logo">
-												<a href="index.html"><img src="images/login-register/logo.svg" alt=""></a>
+												<a href="{{route('/')}}"><img src="{!! asset('master/images/login-register/logo.svg') !!}" alt=""></a>
 											</div>
 											<div class="lr-text">
 												<h2>Register Now</h2>
@@ -60,7 +60,7 @@
 														By clicking Sign Up, you agree to our <a href="#">Terms</a>, <a href="#">Data Policy</a> and <a href="#">Cookie Policy</a>. You may receive Email notifications from us and can opt out at any time.
 													</div>
 													<button class="login-btn" type="submit">Register Now</button>
-													<div class="login-link">If you have an account? <a href="login.php">Login Now</a></div>
+													<div class="login-link">If you have an account? <a href="{{route('sign-in')}}">Login Now</a></div>
 												</form>											
 												
 											</div>
@@ -75,4 +75,4 @@
 			</div>
 		</main>
 		<!-- Body End -->			
-		<?php include('master_layout/footer.php') ?>
+		@include('layouts.master_layout.footer')
