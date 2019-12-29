@@ -18,4 +18,8 @@ class HomeController extends Controller
     {
         return View('files.register');
     }
+    public function my_events()
+    {
+        return View('files.my_events');
+    }
 }

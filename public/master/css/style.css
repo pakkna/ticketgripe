@@ -1329,6 +1329,10 @@ main {
 	margin-bottom: 0;
 }
 
+.event-top-left h4 span{
+    color: #ff7555;
+}
+
 .event-top-right {
 	float: right;
 	display: flex;
@@ -1482,7 +1486,7 @@ main {
 }
 
 .city-dt-list li {
-    width: 24.4%;
+    width: 31.1%;
     text-align: center;
 	display: inline-block;
 }
@@ -3108,8 +3112,8 @@ footer {
 }
 
 .all-search-filters {
-	margin-top: 50px;
-	padding-bottom: 25px;
+	/* margin-top: 50px;
+	padding-bottom: 25px; */
 	border-bottom: 1px solid #e1e1e1;
 	width: 100%;
 	float: left;
@@ -3213,7 +3217,7 @@ footer {
 }
 
 .all-search-events {
-	margin-top: 50px;
+	margin-top: 27px;
 	float: left;
     width: 100%;
 }
@@ -5949,7 +5953,7 @@ footer {
 }
 
 .dash-tab-links {
-	margin-top: 50px;
+	margin-top: 20px;
 }
 
 .dash-tab-links .nav-tabs {

@@ -36,7 +36,7 @@
                             <div class="collapse navbar-collapse d-flex flex-column flex-lg-row flex-xl-row justify-content-lg-end bg-dark1 p-3 p-lg-0 mt1-5 mt-lg-0 mobileMenu" id="navbarSupportedContent">
                                 <ul class="navbar-nav align-self-stretch">
                                     <li class="nav-item active">
-                                        <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+                                        <a class="nav-link" href="{{route('/')}}">Home <span class="sr-only">(current)</span></a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="discussions.html">How it works</a>
@@ -65,20 +65,16 @@
                                 </ul>
                                 <a href="add_new_event.html" class="add-event">Add New Event</a>
                             </div>
-                            <ul class="group-icons">
-                                <li><a href="search_result.html" class="icon-set"><i class="fas fa-search"></i></a></li>
-                            </ul>
-                            <?php if (isset($_SESSION['user_id'])) { ?>
+                            <?php if ((Auth::user())) { ?>
                                 <div class="account order-1 dropdown">
                                 <a href="#" class="account-link dropdown-toggle-no-caret" role="button" data-toggle="dropdown"> 
-                                    <div class="user-dp"><img src="images/dp.jpg" alt=""></div>
+                                    <div class="user-dp"><img src="{!! asset('master/images/dp.jpg') !!}" alt=""></div>
                                     <span>Hi! John</span>
                                     <i class="fas fa-angle-down"></i>
                                 </a>
                                 <div class="dropdown-menu account-dropdown dropdown-menu-right">
                                     <a class="link-item" href="my_dashboard_activity.html">Profile</a>
                                     <a class="link-item" href="my_dashboard_booked_events.html">Events</a>
-                                    <a class="link-item" href="my_dashboard_credits.html">Credit <span class="right-cm">$100</span></a>
                                     <a class="link-item" href="invite.html">Invite</a>
                                     <a class="link-item" href="my_dashboard_setting_info.html">Setting</a>
                                     <a class="link-item" href="login.html">Logout</a>									
@@ -90,7 +86,7 @@
                                     <a class="nav-link" href="{{route('sign-up')}}">Sign Up </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{route('sign-in')}}">Sign In </a>
+                                    <a class="nav-link" href="{{route('login')}}">Sign In </a>
                                 </li>
                             </ul>
                         <?php } ?>
