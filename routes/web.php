@@ -6,12 +6,13 @@
 // +===================================+
 
 Route::group(['middleware' => 'auth'], function () {
-
-
+    //my-events page
+    Route::get("my-events","HomeController@my_events")->name("MyEvents");
 });
 Route::get("/","HomeController@index")->name("/");
 //Route::get("login","HomeController@login")->name("sign-in");
 //Route::get('clear', 'DashboardController@All_clear');
+
 
 //login form
 Route::get('sign-in', 'Auth\LoginController@showLoginForm')->name('login');
@@ -21,7 +22,6 @@ Route::get("sign-up","Auth\LoginController@showRegistarForm")->name("sign-up");
 Route::post("user-login","AuthLoginController@login")->name("user.login");
 //register action
 Route::post("user-register","AuthLoginController@register")->name("user.register");
-
 //user Logout action
 Route::post('user-logout', 'AuthLoginController@logout')->name("user.logout");
 

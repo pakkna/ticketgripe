@@ -62,9 +62,7 @@ class AuthLoginController extends Controller
 
         if (Auth::attempt($credentials1) || Auth::attempt($credentials2)) {
             // Authentication passed...
-  
-             dd($credentials1);
-        
+            return redirect()->route("MyEvents");
         } else {
             return redirect()->route("login")->with("flashMessageDanger", "Invalid User Credentials.");
         }
