@@ -2,7 +2,7 @@
 <!-- Body Start -->
 <main class="dashboard-mp">
     <div class="dash-todo-thumbnail-area1">
-        <div class="todo-thumb1 dash-bg-image1 dash-bg-overlay" style="background-image:url(images/event-view/my-bg.jpg);"></div>
+        <div class="todo-thumb1 dash-bg-image1 dash-bg-overlay" style="background-image:url(master/images/event-view/my-bg.jpg);"></div>
         <div class="dash-todo-header1">
             <div class="container">
                 <div class="row">
@@ -23,8 +23,8 @@
                 <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="event-title">
                         <div class="my-dash-dt">
-                            <h3>John Doe</h3>
-                            <span>Member since August 2017</span>
+                            <h3>{{ Auth::user()->fullname }}</h3>
+                            <span>Member since {{date("jS F Y", strtotime(Auth::user()->created_at))}}</span>
                             <span><i class="fas fa-map-marker-alt"></i>India</span>
                         </div>
                     </div>
@@ -383,4 +383,5 @@
     </div>
 </main>
 <!-- Body End -->
+<script src="{!! asset('master/js/jquery.min.js') !!}"></script>
 @include('layouts.master_layout.footer')

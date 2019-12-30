@@ -9,6 +9,7 @@ Route::group(['middleware' => 'auth'], function () {
     //my-events page
     Route::get("my-events","HomeController@my_events")->name("MyEvents");
     Route::get("add-events","HomeController@add_events")->name("AddEvent");
+    Route::get("user-setting","HomeController@user_setting")->name("UserSetting");
 });
 Route::get("/","HomeController@index")->name("/");
 //Route::get("login","HomeController@login")->name("sign-in");
