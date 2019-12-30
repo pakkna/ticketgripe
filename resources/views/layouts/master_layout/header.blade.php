@@ -4,21 +4,22 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, shrink-to-fit=9">
-        <meta name="description" content="Gambolthemes">
-        <meta name="author" content="Gambolthemes">
-        <title>Ticket Gripe</title>
+        <meta name="description" content="Ticketgripe is online E-ticketing system.">
+        <meta name="author" content="innovadeus">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <title>{{ config('app.name', 'Laravel') }}</title>
 		
         <!-- Favicon Icon -->
         <link rel="icon" type="image/png" href="{!! asset('master/images/fav.png') !!}">
         
-
         <!-- Stylesheets -->
         <link href="{!! asset('master/css/responsive.css') !!}" rel="stylesheet">
         <link href="{!! asset('master/css/style.css') !!}" rel="stylesheet">
         <link href="{!! asset('master/css/bootstrap.min.css') !!}" rel="stylesheet">
         <link href="{!! asset('master/css/all.min.css') !!}" rel="stylesheet">
         <link href="{!! asset('master/css/owl.carousel.css') !!}" rel="stylesheet">
-        <link href="{!! asset('master/css/owl.theme.default.min.css') !!}" rel="stylesheet">	
+        <link href="{!! asset('master/css/owl.theme.default.min.css') !!}" rel="stylesheet">
+        <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
 	
 	
     </head>
