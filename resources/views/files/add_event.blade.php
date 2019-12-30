@@ -26,7 +26,7 @@
     <div class="main-section">
         <div class="container">
             <div class="row justify-content-md-center">
-                <div class="col-lg-8 col-md-8">
+                <div class="col-lg-12 col-md-8">
                     <div class="checkout-heading text-center">
                         <h2>Add New Event</h2>								
                     </div>
@@ -48,13 +48,13 @@
                                 </div>
                                 <div class="add-input-items">
                                     <div class="add-evnt-dt">											
-                                        <div class="event-add-img1 event-feature-img" id="imagePreview" style="background-image: url(master/images/homepage/center/post-img-1.jpg);">
+                                        <div class="event-add-img1 event-feature-img" id="imagePreview" style="background-image: url(master/images/event-view/demo.jpg);">
                                             <!-- <img src="{!! asset('master/images/homepage/center/post-img-1.jpg') !!}" alt=""> -->
                                         </div>
                                         <div class="addpic" id="OpenImgUpload">
                                             <input type="file" id="file" name="event_flyer">
                                             <label for="file">Choose File</label>
-                                            <p>Maximum file size : 1 MB</p>
+                                            <p>Minimum image dimension : 1920 x 420</p>
                                         </div>
                                         <script>
                                             function readURL(input) {
