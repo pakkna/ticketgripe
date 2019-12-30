@@ -42,7 +42,6 @@ class AuthLoginController extends Controller
 
 
         try {
-
             DB::table('users')->insert($data);
             return redirect()->route('login')->with("flashMessageSuccess", "Your Account Created Successfully ! ");
 
