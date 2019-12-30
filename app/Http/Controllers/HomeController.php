@@ -22,4 +22,8 @@ class HomeController extends Controller
     {
         return View('files.my_events');
     }
+    public function add_events()
+    {
+        return View('files.add_event');
+    }
 }

@@ -69,5 +69,6 @@
 			</div>
 		</main>
 		<!-- Body End -->			
+		<script src="{!! asset('master/js/jquery.min.js') !!}"></script>
 		@include('layouts.master_layout.footer')
 

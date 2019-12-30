@@ -310,7 +310,8 @@ body::-webkit-scrollbar-thumb {
 /* === Input Text Placeholder Color === */
 
 input[type="text"]::placeholder { /* Firefox, Chrome, Opera */ 
-    color: #847577; 
+    color: #847577;
+    opacity: 1;
 } 
  
 input[type="text"]:-ms-input-placeholder { /* Internet Explorer 10-11 */ 
@@ -578,7 +579,7 @@ header {
 }
 
 .mt1-5 {
-	margin-top: 104px !important;
+	margin-top: 59px !important;
 }
 
 .page-links {
@@ -7451,4 +7452,25 @@ footer {
 	border: 1px solid #ff7555 !important;
 	background: #ff7555 !important;
 	box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.07);
+}
+.date-span{
+    margin-right: 5px;
+    margin-top: 4px;
+    color: #877577;
+    font-size: 13px;
+}
+#out_datetime {
+    height: 30px;
+}
+.date-custom{
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    margin-top: 20px;
+    padding: 7px 12px;
+}
+.event-feature-img{
+    width: 100%;
+    border-radius: 5px;
+    height: 200px;
+    background-size: cover;
 }

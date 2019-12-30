@@ -10,15 +10,16 @@
 		
         <!-- Favicon Icon -->
         <link rel="icon" type="image/png" href="{!! asset('master/images/fav.png') !!}">
-		
+        
+
         <!-- Stylesheets -->
         <link href="{!! asset('master/css/responsive.css') !!}" rel="stylesheet">
         <link href="{!! asset('master/css/style.css') !!}" rel="stylesheet">
-        <link href="{!! asset('master/css/datepicker.min.css') !!}" rel="stylesheet">
         <link href="{!! asset('master/css/bootstrap.min.css') !!}" rel="stylesheet">
         <link href="{!! asset('master/css/all.min.css') !!}" rel="stylesheet">
         <link href="{!! asset('master/css/owl.carousel.css') !!}" rel="stylesheet">
-        <link href="{!! asset('master/css/owl.theme.default.min.css') !!}" rel="stylesheet">		
+        <link href="{!! asset('master/css/owl.theme.default.min.css') !!}" rel="stylesheet">	
+	
 	
     </head>
 
@@ -63,7 +64,7 @@
                                         <a class="nav-link" href="our_blog.html">Blog</a>
                                     </li>
                                 </ul>
-                                <a href="add_new_event.html" class="add-event">Add New Event</a>
+                                <a href="{{route('AddEvent')}}" class="add-event">Add New Event</a>
                             </div>
                             <?php if ((Auth::user())) { ?>
                                 <div class="account order-1 dropdown">
