@@ -69,16 +69,20 @@
                             <?php if ((Auth::user())) { ?>
                                 <div class="account order-1 dropdown">
                                 <a href="#" class="account-link dropdown-toggle-no-caret" role="button" data-toggle="dropdown"> 
-                                    <div class="user-dp"><img src="{!! asset('master/images/dp.jpg') !!}" alt=""></div>
-                                    <span>Hi! John</span>
+                                    <div class="user-dp"><img src="{{ Auth::user()->image==null ? 'master/images/dp.jpg' : 'master/images/'. Auth::user()->image }}" alt=""></div>
+                                    <span>{{ Auth::user()->username }}</span>
                                     <i class="fas fa-angle-down"></i>
                                 </a>
                                 <div class="dropdown-menu account-dropdown dropdown-menu-right">
                                     <a class="link-item" href="my_dashboard_activity.html">Profile</a>
-                                    <a class="link-item" href="my_dashboard_booked_events.html">Events</a>
+                                    <a class="link-item" href="/my-events">Events</a>
                                     <a class="link-item" href="invite.html">Invite</a>
                                     <a class="link-item" href="my_dashboard_setting_info.html">Setting</a>
-                                    <a class="link-item" href="login.html">Logout</a>									
+                                    <a class="link-item" href="javascript:void(0)" onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">Logout</a>
+                                    <form id="logout-form" action="{{ route('user.logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>								
                                 </div>
                             </div>
                         <?php }else{ ?>
