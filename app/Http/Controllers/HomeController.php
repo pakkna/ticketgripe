@@ -18,10 +18,7 @@ class HomeController extends Controller
     {
         return View('files.register');
     }
-    public function my_events()
-    {
-        return View('files.my_events');
-    }
+
     public function user_setting()
     {
         return View('files.user_dashboard');

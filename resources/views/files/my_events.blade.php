@@ -38,23 +38,19 @@
                     </div>
                     <div class="all-search-events">								
                         <div class="row">
+                        @foreach($event_details as $single_event)
                             <div class="col-lg-6 col-md-6">
                                 <div class="event-main-post">
                                     <div class="event-top">
                                         <div class="event-top-left">
-                                            <a href="single_discussion_view.html"><h4><span>Event Title Here</span></h4></a>
+                                            <a href="single_discussion_view.html"><h4><span>{{$single_event->title}}</span></h4></a>
                                         </div>
                                         <div class="event-top-right">
-                                            <div class="ticket-price">Ticket Price : <span>$15</span></div>
-                                            <!-- <div class="post-dt-dropdown dropdown">
-                                                <span class="dropdown-toggle-no-caret" role="button" data-toggle="dropdown"><i class="fas fa-ellipsis-v"></i></span>
-                                                <div class="dropdown-menu post-rt-dropdown dropdown-menu-right">
-                                                    <a class="post-link-item" href="#">Hide</a>
-                                                    <a class="post-link-item" href="#">Details</a>											
-                                                    <a class="post-link-item" href="#">User Profile</a>
-                                                    <a class="post-link-item" href="#">Report</a>																									
-                                                </div>
-                                            </div> -->
+                                            <div class="ticket-price">Ticket Price : <span>{{
+                                                
+                                                empty($single_event->ticket_price)? '0 BDT' :
+                                                $single_event->ticket_price.' '.$single_event->selling_currency}}</span></div>
+                                            
                                             <div class="right-comments">
                                                 <a href="#!" class="like-item" title="Share">
                                                     <i class="fas fa-share-alt"></i>
@@ -66,40 +62,19 @@
                                     <div class="event-main-image">
                                         <div class="main-photo">
                                             <div class="photo-overlay"></div>
-                                            <img src="{!! asset('master/images/homepage/center/post-img-1.jpg') !!}" alt="">
-                                            <!-- <div class="post-buttons">
-                                                <div class="left-buttons">
-                                                    <ul class="main-btns">
-                                                        <li><button class="main-btn-link" onclick="window.location.href = '#';">Buy Ticket</button></li>
-                                                        <li><button class="main-btn-link btn-hide" onclick="window.location.href = '#';">May Be</button></li>																		
-                                                    </ul>
-                                                </div>
-                                                <div class="right-buttons">
-                                                    <ul class="main-btns">
-                                                        <li><button class="main-btn-link btn-hide" onclick="window.location.href = '#';">450 Seats</button></li>
-                                                        <li><button class="main-btn-link btn-hide" onclick="window.location.href = '#';">Can't Go</button></li>
-                                                    </ul>
-                                                </div>
-                                            </div> -->
+                                            <img src="{{$single_event->image_path}}" alt="">
                                         </div>														
                                     </div>
                                     <div class="event-city-dt">
                                         <ul class="city-dt-list">
-                                            <!-- <li>
-                                                <div class="it-items">
-                                                    <i class="fas fa-map-marker-alt"></i>
-                                                    <div class="list-text-dt">
-                                                        <span>City</span>
-                                                        <ins>London</ins>
-                                                    </div>
-                                                </div>
-                                            </li> -->
+                                        
                                             <li>
                                                 <div class="it-items">
                                                     <i class="fas fa-calendar-alt"></i>
                                                     <div class="list-text-dt">
-                                                        <span>Date</span>
-                                                        <ins>21 Nov 2019</ins>
+                                                        <span>Start Date</span>
+                                                        <ins>{{ date("jS M Y g:i A", strtotime($single_event->start_date))}}</ins>
+     
                                                     </div>
                                                 </div>
                                             </li>
@@ -107,8 +82,8 @@
                                                 <div class="it-items">
                                                     <i class="fas fa-clock"></i>
                                                     <div class="list-text-dt">
-                                                        <span>Time</span>
-                                                        <ins>6 PM to 9 PM</ins>
+                                                        <span>End Date</span>
+                                                        <ins>{{ date("jS M Y g:i A", strtotime($single_event->end_date))}}</ins>
                                                     </div>
                                                 </div>
                                             </li>
@@ -117,7 +92,7 @@
                                                     <i class="fas fa-chair"></i>
                                                     <div class="list-text-dt">
                                                         <span>Seat</span>
-                                                        <ins>100</ins>
+                                                        <ins>{{$single_event->seat_number}}</ins>
                                                     </div>
                                                 </div>
                                             </li>
@@ -130,7 +105,7 @@
                                                     <i class="fas fa-map-marker-alt" style="color:#a7a8aa;"></i>
                                                     <div class="list-text-dt">
                                                         <span>City</span>
-                                                        <ins>London</ins>
+                                                        <ins>{{$single_event->city}}</ins>
                                                     </div>
                                                 </div>
                                             </li>
@@ -139,7 +114,7 @@
                                                     <i class="fas fa-check" style="color:#a7a8aa;"></i>
                                                     <div class="list-text-dt">
                                                         <span>Sold Out</span>
-                                                        <ins>20</ins>
+                                                        <ins>0</ins>
                                                     </div>
                                                 </div>
                                             </li>
@@ -148,7 +123,7 @@
                                                     <i class="fas fa-money-bill-wave" style="color:#a7a8aa;"></i>
                                                     <div class="list-text-dt">
                                                         <span>Collection</span>
-                                                        <ins>$ 70</ins>
+                                                        <ins>0</ins>
                                                     </div>
                                                 </div>
                                             </li>															
@@ -176,111 +151,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-6">
-                                <div class="event-main-post">
-                                    <div class="event-top">
-                                        <div class="event-top-left">
-                                            <a href="single_discussion_view.html"><h4><span>Event Title Here</span></h4></a>
-                                        </div>
-                                        <div class="event-top-right">
-                                            <div class="ticket-price">Ticket Price : <span>$15</span></div>
-                                            <div class="right-comments">
-                                                <a href="#!" class="like-item" title="Share">
-                                                    <i class="fas fa-share-alt"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="event-main-image">
-                                        <div class="main-photo">
-                                            <div class="photo-overlay"></div>
-                                            <img src="{!! asset('master/images/homepage/center/post-img-2.jpg') !!}" alt="">
-                                        </div>														
-                                    </div>
-                                    <div class="event-city-dt">
-                                        <ul class="city-dt-list">
-                                            <li>
-                                                <div class="it-items">
-                                                    <i class="fas fa-calendar-alt"></i>
-                                                    <div class="list-text-dt">
-                                                        <span>Date</span>
-                                                        <ins>21 Nov 2019</ins>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="it-items">
-                                                    <i class="fas fa-clock"></i>
-                                                    <div class="list-text-dt">
-                                                        <span>Time</span>
-                                                        <ins>6 PM to 9 PM</ins>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="it-items">
-                                                    <i class="fas fa-chair"></i>
-                                                    <div class="list-text-dt">
-                                                        <span>Seat</span>
-                                                        <ins>100</ins>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="event-go-dt">
-                                        <ul class="go-dt-list">
-                                            <li>
-                                                <div class="it-items">
-                                                    <i class="fas fa-map-marker-alt" style="color:#a7a8aa;"></i>
-                                                    <div class="list-text-dt">
-                                                        <span>City</span>
-                                                        <ins>London</ins>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="it-items">
-                                                    <i class="fas fa-check" style="color:#a7a8aa;"></i>
-                                                    <div class="list-text-dt">
-                                                        <span>Sold Out</span>
-                                                        <ins>20</ins>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="it-items">
-                                                    <i class="fas fa-money-bill-wave" style="color:#a7a8aa;"></i>
-                                                    <div class="list-text-dt">
-                                                        <span>Collection</span>
-                                                        <ins>$ 70</ins>
-                                                    </div>
-                                                </div>
-                                            </li>															
-                                        </ul>
-                                    </div>
-                                    <div class="like-comments">
-                                        <div class="left-comments">
-                                            <a href="#" class="like-item" title="Manage Events">
-                                                <i class="fas fa-tachometer-alt"></i>
-                                                <span><ins>Manage Events</ins></span>
-                                            </a>
-                                            <a href="#" class="like-item lc-left" title="Attendee List">
-                                                <i class="fas fa-users"></i>
-                                                <span><ins>Attendee List</ins></span>
-                                            </a>
-                                            <a href="#" class="like-item lc-left" title="View">
-                                                <i class="fas fa-eye"></i>
-                                                <span><ins>View</ins></span>
-                                            </a>
-                                            <a href="#" class="like-item lc-left" title="Manage Ticket">
-                                                <i class="fas fa-ticket-alt"></i>
-                                                <span><ins>Manage Ticket</ins></span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        @endforeach   
                         </div>								
                     </div>
                 </div>

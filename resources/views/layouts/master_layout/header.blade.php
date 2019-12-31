@@ -24,7 +24,7 @@
 	
     </head>
 
-    <body oncontextmenu="return false;">
+    <body oncontextmenu="return true;">
         <!-- Header Start -->
         <header>
             <div class="container">				
@@ -144,13 +144,13 @@
                         <li>
                             <div class="all-dis-evnt">
                                 <div class="dscun-txt">Events</div>
-                                <div class="dscun-numbr">22</div>
+                                <div class="dscun-numbr">{{total_events()}}</div>
                             </div>
                         </li>
                         <li>
                             <div class="all-dis-evnt">
                                 <div class="dscun-txt">Credit</div>
-                                <div class="dscun-numbr">$ 100</div>
+                                <div class="dscun-numbr">{{Auth::user()->balance}}</div>
                             </div>
                         </li>
                     </ul>

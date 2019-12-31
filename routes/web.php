@@ -7,8 +7,8 @@
 
 Route::group(['middleware' => 'auth'], function () {
     //my-events page
-    Route::get("my-events","HomeController@my_events")->name("MyEvents");
     Route::get("user-setting","HomeController@user_setting")->name("UserSetting");
+    Route::get("my-events","EventControler@show_my_events")->name("MyEvents");
     Route::get("add-events","EventControler@show_event_form")->name("AddEvent");
     Route::post("insert-event","EventControler@create_event")->name("createEvent");
 

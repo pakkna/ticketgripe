@@ -11,6 +11,23 @@ use App\Http\Requests\EventRequest;
 class EventControler extends Controller
 {
     
+   
+    public function show_my_events(){
+
+        $event_details = DB::table('events')
+        ->leftjoin('tickets','events.id','=','tickets.event_id')
+        ->select('events.id','title','start_date','end_date','city','seat_number','image_path','seat_number','custom_link','ticket_price','quantity','selling_currency')
+        //need collection and soldout form order table
+        ->get();
+
+/* echo '<pre>'; 
+echo '======================<br>';
+print_r($event_details);
+echo '<br>======================';
+exit(); */
+        return View('files.my_events',compact('event_details'));
+    }
+
     public function show_event_form(){
 
         return View('files.add_event');
@@ -18,12 +35,7 @@ class EventControler extends Controller
 
     public function create_event(EventRequest $request){
 
-        $upload_path=EventImageUpload($request->file('event_flyer'),'event_flayer/');
-
-    /*     if($upload_path==false){
-            return redirect()->route('AddEvent')->withErrors('event_flyer',"please Upload Image Perfect Size Width:1920px, height:420px");
-        }          
-         */
+        $upload_path=EventImageUpload($request->file('event_flyer'),'event_flayer');
 
         $data= [
 
