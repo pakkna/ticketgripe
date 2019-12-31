@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('address')->nullable();
             $table->string('image')->nullable();
             $table->string('cover_pic')->nullable();
+            $table->float('balance')->nullable();
             $table->string('status')->nullable();
             $table->rememberToken();
             $table->timestamps();
