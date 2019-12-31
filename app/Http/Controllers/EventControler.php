@@ -12,16 +12,4 @@ class EventControler extends Controller
 
         return View('files.add_event');
     }
-
-    public function create_event(EventRequest $request){
-
-
-
-
-        
-
-        $data= 
-
-
-    }
 }

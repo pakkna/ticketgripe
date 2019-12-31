@@ -10,7 +10,7 @@
                     <div class="col-lg-12 col-md-12">							
                         <div class="my-profile-dash">
                             <div class="my-dp-dash">
-                                <img src="{!! asset('master/images/my-dashboard/my-dp.jpg') !!}" alt="">
+                                <img src="{{ Auth::user()->image==null ? 'master/images/event-view/unknown.png' : 'master/images/'. Auth::user()->image }}" alt="">
                             </div>									
                         </div>														
                     </div>																		

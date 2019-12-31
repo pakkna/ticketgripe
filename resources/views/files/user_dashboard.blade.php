@@ -63,8 +63,8 @@
                                 <h3>Your Details</h3>
                             </div>
                             <div class="categories-items">
-                                <a class="tab-item-1 active" href="my_dashboard_setting_info.html">Personal Info</a>
-                                <a class="tab-item-1" href="my_dashboard_setting_profile.html">Profile</a>
+                                <a id="defaultOpen" onclick="openForm(0,this)" class="tab-item-1 tab-open" href="javascript:void(0)">Personal Info</a>
+                                <a id="defaultOpen" onclick="openForm(1,this)" class="tab-item-1 tab-open" href="javascript:void(0)">Profile</a>
                                 <a class="tab-item-1" href="my_dashboard_all_requests.html">All Friend Requests</a>
                                 <a class="tab-item-1" href="my_dashboard_all_notifications.html">All Notifications</a>
                                 <a class="tab-item-1" href="my_dashboard_setting_social.html">Social Networks</a>
@@ -75,7 +75,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-9 col-md-7">
+                    <div id="0" class="col-lg-9 col-md-7 tab-pane" style="display: none;">
                         <div class="setting-form">
                             <form>
                                 <div class="user-data full-width">
@@ -86,247 +86,38 @@
                                         <div class="row">
                                             <div class="col-lg-6 col-md-12">
                                                 <div class="form-group">
-                                                    <label>Full Name*</label>
-                                                    <input class="payment-input" type="text" placeholder="John Doe">
+                                                    <label>User Name*</label>
+                                                    <input class="payment-input" type="text" name="username" value="{{ Auth::user()->username}}" placeholder="User Name" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-12">
                                                 <div class="form-group">
-                                                    <label>Date of Birth*</label>
-                                                    <input class="payment-input datepicker-here" data-language="en" type="text" placeholder="08/29/1991">
+                                                    <label>Full Name*</label>
+                                                    <input class="payment-input" data-language="en" type="text" name="fullname" placeholder="Full Name" value="{{ Auth::user()->fullname }}" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-12">
                                                 <div class="form-group">
                                                     <label>Email Address*</label>
-                                                    <input class="payment-input" type="email" placeholder="Email Address*">
+                                                    <input class="payment-input" type="email" name="email" placeholder="Email Address" value="{{ Auth::user()->email }}" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-12">
                                                 <div class="form-group">
                                                     <label>Phone Number*</label>
-                                                    <input class="payment-input" type="tel" placeholder="+91 123 456 7890">
+                                                    <input class="payment-input" type="tel" placeholder="017xxxxxxxx" value="{{ Auth::user()->mobile }}" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-12">
-                                                <div class="form-group">
-                                                    <label>Gender*</label>
-                                                    <div class="select-bg">
-                                                        <select class="wide" style="display: none;">
-                                                            <option>Male</option>
-                                                            <option>Female</option>
-                                                            <option>Other</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-12">
-                                                <div class="form-group">
-                                                    <label>Status*</label>
-                                                    <div class="select-bg">
-                                                        <select class="wide" style="display: none;">
-                                                            <option>Single</option>
-                                                            <option>Married</option>
-                                                            <option>In a relationship</option>
-                                                            <option>Engaged</option>
-                                                            <option>Divorced</option>
-                                                            <option>It's complicated</option>
-                                                            <option>Widowed</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4 col-md-12">
-                                                <div class="form-group">
+                                            <div class="form-group">
                                                     <label>Country*</label>
-                                                    <div class="select-bg">
-                                                        <select class="wide" style="display: none;">
-                                                            <option>India</option>
-                                                            <option>Australia</option>
-                                                            <option>Canada</option>
-                                                            <option>Nepal</option>
-                                                            <option>Pakistan</option>
-                                                            <option>Bangladesh</option>
-                                                            <option>England</option>
-                                                            <option>United States</option>
-                                                        </select>
-                                                    </div>
+                                                    <input class="payment-input" data-language="en" type="text" name="country" placeholder="Country" value="{{ Auth::user()->country }}" required>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4 col-md-12">
+                                            <div class="col-lg-6 col-md-12">
                                                 <div class="form-group">
-                                                    <label>State*</label>
-                                                    <div class="select-bg">
-                                                        <select class="wide" style="display: none;">
-                                                            <option>Punjab</option>
-                                                            <option>Delhi</option>
-                                                            <option>Rajasthan</option>
-                                                            <option>Uttar Pardesh</option>
-                                                            <option>Bihar</option>
-                                                            <option>Gujrat</option>
-                                                            <option>Ladakh</option>
-                                                            <option>Maharastar</option>
-                                                            <option>Karnatank</option>
-                                                            <option>Channai</option>
-                                                            <option>Jharkhand</option>
-                                                            <option>Tamilnadu</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4 col-md-12">
-                                                <div class="form-group">
-                                                    <label>City*</label>
-                                                    <div class="select-bg">
-                                                        <select class="wide" style="display: none;">
-                                                            <option>Ludhiana</option>
-                                                            <option>Amritsar</option>
-                                                            <option>Moga</option>
-                                                            <option>Rajpura</option>
-                                                            <option>Mohali</option>
-                                                            <option>Jalandhar</option>
-                                                            <option>Beas</option>
-                                                            <option>Kapurthala</option>
-                                                            <option>Fagwara</option>
-                                                            <option>Husharpur</option>
-                                                            <option>Gurdaspur</option>
-                                                            <option>Fatehgrah</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="user-data full-width">
-                                    <div class="about-left-heading">
-                                        <h3>About Description</h3>
-                                    </div>
-                                    <div class="prsnl-info">
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12">
-                                                <div class="form-group">
-                                                    <label>Description Here*</label>
-                                                    <textarea class="replt-comnt" placeholder="Description"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="user-data full-width">
-                                    <div class="about-left-heading">
-                                        <h3>Hobbies</h3>
-                                    </div>
-                                    <div class="prsnl-info">
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12">
-                                                <div class="form-group">
-                                                    <label>Favourite Music*</label>
-                                                    <input class="payment-input" type="text" placeholder="Folk, Rap, Solo, Hiphop">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12 col-md-12">
-                                                <div class="form-group">
-                                                    <label>Favourite Books*</label>
-                                                    <input class="payment-input" type="email" placeholder="Novel, Comics, Jokes, Love Stories, Secience, History">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12 col-md-12">
-                                                <div class="form-group">
-                                                    <label>Favourite Movies*</label>
-                                                    <input class="payment-input" type="tel" placeholder="Dangle, Na Peru Suriya, Raja the Great, Bahubali 2">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12 col-md-12">
-                                                <div class="form-group">
-                                                    <label>Favourite Tv Shows*</label>
-                                                    <input class="payment-input" type="tel" placeholder="The Kapil Sharma Show, Kulfi, CID, Big Boss">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12 col-md-12">
-                                                <div class="form-group">
-                                                    <label>Favourite Games*</label>
-                                                    <input class="payment-input" type="tel" placeholder="Cricket, Football, Hockey, Kabaddi">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12 col-md-12">
-                                                <div class="form-group">
-                                                    <label>Favourite Brands*</label>
-                                                    <input class="payment-input" type="tel" placeholder="Apple, Oppo, Nike, Addidas, Puma. Jack & Jone, Nokia">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12 col-md-12">
-                                                <div class="form-group">
-                                                    <label>Favourite Artists*</label>
-                                                    <input class="payment-input" type="tel" placeholder="Babbu Maan, Salman Khan, Kapil Sharma, Priyanka Chopra">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12 col-md-12">
-                                                <div class="form-group">
-                                                    <label>Other Insterests*</label>
-                                                    <input class="payment-input" type="tel" placeholder="Travel, Hiking, Web designing">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="user-data full-width">
-                                    <div class="about-left-heading">
-                                        <h3>Education</h3>
-                                        <a href="#">Add New</a>
-                                    </div>
-                                    <div class="prsnl-info">
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12">
-                                                <div class="form-group">
-                                                    <label>Title*</label>
-                                                    <input class="payment-input" type="text" placeholder="Master of Science in Information Technology">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6">
-                                                <div class="form-group">
-                                                    <input class="payment-input" type="text" placeholder="From">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6">
-                                                <div class="form-group">
-                                                    <input class="payment-input" type="text" placeholder="to">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12 col-md-12">
-                                                <div class="form-group">
-                                                    <input class="payment-input" type="text" placeholder="www.college/institute.com">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="user-data full-width">
-                                    <div class="about-left-heading">
-                                        <h3>Employment</h3>
-                                        <a href="#">Add New</a>
-                                    </div>
-                                    <div class="prsnl-info">
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12">
-                                                <div class="form-group">
-                                                    <label>Title*</label>
-                                                    <input class="payment-input" type="text" placeholder="Graphic Designer">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6">
-                                                <div class="form-group">
-                                                    <input class="payment-input" type="text" placeholder="From">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6">
-                                                <div class="form-group">
-                                                    <input class="payment-input" type="text" placeholder="to">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12 col-md-12">
-                                                <div class="form-group">
-                                                    <input class="payment-input" type="text" placeholder="www.company.com">
+                                                    <label>Organaization*</label>
+                                                    <input class="payment-input" data-language="en" type="text" name="organaization" placeholder="Organaization" value="{{ Auth::user()->organization }}" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -338,6 +129,87 @@
                             </form>
                         </div>
                     </div>
+                    <div id="1" class="col-lg-9 col-md-7 tab-pane" style="display: none;">
+                    <div class="setting-form">
+                            <div class="user-data full-width">
+                                <div class="about-left-heading">
+                                    <h3>Profile</h3>										
+                                </div>
+                                <div class="prsnl-info">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12">													
+                                            <div class="form-group">
+                                                <label class="avatar-label">Avatar*</label>
+                                                <?php $def_logo = '<div class="setting-dp avatar-img" id="imagePreview" style="background-image: url('.'master/images/event-view/unknown.png'.')">';
+                                                ?>
+                                                <?php echo Auth::user()->image==null ? $def_logo : Auth::user()->image ?>
+                                                 
+                                                    <!-- <img src="{{ Auth::user()->image==null ? 'master/images/event-view/unknown.png' : 'master/images/'. Auth::user()->image }}" alt=""> -->
+                                                </div>														
+                                                <div class="setting-upload">
+                                                    <span>Upload a new avatar.</span>
+                                                    <div class="addpic" id="OpenImgUpload1">															
+                                                        <input type="file" id="file1">
+                                                        <label for="file">Choose File</label>
+                                                        <p>JPEG / PNG 150x150*</p>
+                                                    </div>
+                                                </div>
+                                                <script>
+                                                    function readURL(input) {
+                                                        if (input.files && input.files[0]) {
+                                                            var reader = new FileReader();
+                                                            reader.onload = function(e) {
+                                                                $('#imagePreview').css('background-image', 'url('+e.target.result +')');
+                                                                $('#imagePreview').hide();
+                                                                $('#imagePreview').fadeIn(650);
+                                                            }
+                                                            reader.readAsDataURL(input.files[0]);
+                                                        }
+                                                    }
+                                                    $("#file").change(function() {
+                                                        readURL(this);
+                                                    });
+                                                </script>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Background*</label>
+                                                <div class="setting-bg">
+                                                    <img src="{{ Auth::user()->image==null ? 'master/images/event-view/demo.jpg' : 'master/images/'. Auth::user()->image }}" alt="">
+                                                </div>														
+                                                <div class="setting-upload">
+                                                    <span>Upload a new background.</span>
+                                                    <div class="addpic" id="OpenImgUpload">															
+                                                        <input type="file" id="file">
+                                                        <label for="file">Choose File</label>
+                                                        <p>JPEG / PNG 150x150*</p>
+                                                    </div>
+                                                </div>	
+                                                <script>
+                                                    function readURL(input) {
+                                                        if (input.files && input.files[0]) {
+                                                            var reader = new FileReader();
+                                                            reader.onload = function(e) {
+                                                                $('#imagePreview').css('background-image', 'url('+e.target.result +')');
+                                                                $('#imagePreview').hide();
+                                                                $('#imagePreview').fadeIn(650);
+                                                            }
+                                                            reader.readAsDataURL(input.files[0]);
+                                                        }
+                                                    }
+                                                    $("#file").change(function() {
+                                                        readURL(this);
+                                                    });
+                                                </script>													
+                                            </div>
+                                            <div class="add-profile-btn">
+                                                <button class="setting-save-btn" type="submit">Save Changes</button>
+                                            </div>
+                                        </div>												
+                                    </div>
+                                </div>
+                            </div>																																				
+                        </div>	
+                    </div>
                 </div>
             </div>
         </div>
@@ -346,3 +218,21 @@
 <!-- Body End -->
 <script src="{!! asset('master/js/jquery.min.js') !!}"></script>
 @include('layouts.master_layout.footer')
+<script>
+    function openForm(tabAction, the) {
+        var i, tabopen, click;
+        tabopen = document.getElementsByClassName("tab-pane");
+        click = document.getElementsByClassName("tab-open");
+        for (i = 0; i < tabopen.length; i++) {
+            tabopen[i].style.display = "none";
+            click[i].classList.remove("active");
+        }
+        document.getElementById(tabAction).style.display = "block";
+        if (the == 1) {
+            document.getElementById("responsed").classList.add("active");
+        } else {
+            the.classList.add("active");
+        }
+    }
+    document.getElementById("defaultOpen").click();
+</script>

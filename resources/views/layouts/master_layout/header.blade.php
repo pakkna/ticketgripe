@@ -7,10 +7,10 @@
         <meta name="description" content="Ticketgripe is online E-ticketing system.">
         <meta name="author" content="innovadeus">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>Ticket Gripe</title>
 		
         <!-- Favicon Icon -->
-        <link rel="icon" type="image/png" href="{!! asset('master/images/fav.png') !!}">
+        <link rel="icon" type="image/png" href="{!! asset('master/images/icon1.png') !!}">
         
         <!-- Stylesheets -->
         <link href="{!! asset('master/css/responsive.css') !!}" rel="stylesheet">
@@ -31,7 +31,7 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <nav class="navbar navbar-expand-lg navbar-light bg-dark1 justify-content-sm-start">
-                            <a class="order-1 order-lg-0 ml-lg-0 ml-3 mr-auto" href="{{route('/')}}"><img src="{!! asset('master/images/logo.svg') !!}" alt=""></a>
+                            <a class="order-1 order-lg-0 ml-lg-0 ml-3 mr-auto" href="{{route('/')}}"><img src="{!! asset('master/images/logo.png') !!}" style="width: 125px;" alt=""></a>
                             <button class="navbar-toggler align-self-start" type="button">
                                 <i class="fas fa-bars"></i>
                             </button>
@@ -49,7 +49,7 @@
                                         </a>
                                         <div class="dropdown-menu pages-dropdown">
                                             <a class="link-item" href="login.html">Login</a>
-                                            <a class="link-item" href="register.html">Register</a>											
+                                            <a class="link-item" href="register.html">Register</a>
                                             <a class="link-item" href="error_404.html">Error 404</a>
                                             <a class="link-item" href="categories.html">Categories</a>
                                             <a class="link-item" href="select_seats.html">Select Seats</a>
@@ -70,7 +70,7 @@
                             <?php if ((Auth::user())) { ?>
                                 <div class="account order-1 dropdown">
                                 <a href="#" class="account-link dropdown-toggle-no-caret" role="button" data-toggle="dropdown"> 
-                                    <div class="user-dp"><img src="{{ Auth::user()->image==null ? 'master/images/dp.jpg' : 'master/images/'. Auth::user()->image }}" alt=""></div>
+                                    <div class="user-dp"><img src="{{ Auth::user()->image==null ? 'master/images/event-view/unknown.png' : 'master/images/'. Auth::user()->image }}" alt=""></div>
                                     <span>{{ Auth::user()->username }}</span>
                                     <i class="fas fa-angle-down"></i>
                                 </a>
