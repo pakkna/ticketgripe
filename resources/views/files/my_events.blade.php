@@ -21,16 +21,23 @@
     <div class="dash-dts">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="col-lg-5 col-md-6 col-sm-12">
                     <div class="event-title">
                         <div class="my-dash-dt">
-                            <h3>John Doe</h3>
-                            <span>Member since August 2017</span>									
+                            <h3>{{ Auth::user()->fullname }}</h3>
+                            <span>Member since {{date("jS F Y", strtotime(Auth::user()->created_at))}}</span>
                             <span><i class="fas fa-map-marker-alt"></i>India</span>								
                         </div>								
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="col-lg-7 col-md-6 col-sm-12">
+                    <div class="search-wrapper">
+                        <div class="input-holder">
+                            <input type="text" name="search" class="search-input" placeholder="Type to search" />
+                            <button class="search-icon" onclick="searchToggle(this, event);"><span></span></button>
+                        </div>
+                        <span class="close" onclick="searchToggle(this, event);"></span>
+                    </div>
                     <ul class="right-details">
                         <li>
                             <div class="all-dis-evnt">
@@ -41,7 +48,7 @@
                         <li>
                             <div class="all-dis-evnt">
                                 <div class="dscun-txt">Credit</div>
-                                <div class="dscun-numbr">$ 100</div>																	
+                                <div class="dscun-numbr">$ 100</div>
                             </div>
                         </li>
                     </ul>
@@ -341,3 +348,17 @@
 <!-- Body End -->
 <script src="{!! asset('master/js/jquery.min.js') !!}"></script>
 @include('layouts.master_layout.footer')
+<script>
+    function searchToggle(obj, evt){
+        var container = $(obj).closest('.search-wrapper');
+            if(!container.hasClass('active')){
+                container.addClass('active');
+                evt.preventDefault();
+            }
+            else if(container.hasClass('active') && $(obj).closest('.input-holder').length == 0){
+                container.removeClass('active');
+                // clear input
+                container.find('.search-input').val('');
+            }
+    }
+</script>
