@@ -7479,7 +7479,7 @@ footer {
 .search-wrapper {
     position: absolute;
     transform: translate(-50%, -50%);
-    top:41%;
+    top:55%;
     right: 22%;
 }
 .search-wrapper.active {

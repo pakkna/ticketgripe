@@ -1,6 +1,6 @@
 
 // Timer Script
-var count = new Date("Dec 25,2020 00:00:00").getTime();
+var count = new Date("Dec 1,2020 00:00:00").getTime();
 var x = setInterval(function() {
 	var now =  new Date().getTime();
 	var d = count - now;	

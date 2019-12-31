@@ -89,7 +89,7 @@
                                                 <div class="setting-upload">
                                                     <span>Upload a new avatar.</span>
                                                     <div class="addpic" id="OpenImgUpload">
-                                                        <input type="file" id="avatar_img">
+                                                        <input type="file" id="avatar_img" name="avatar" accept=".png, .jpg, .jpeg">
                                                         <label for="avatar_img">Choose File</label>
                                                         <p>JPEG / PNG 150x150*</p>
                                                     </div>
@@ -120,13 +120,13 @@
                                                 <div class="setting-upload">
                                                     <span>Upload a new background.</span>
                                                     <div class="addpic" id="OpenImgUpload1">
-                                                        <input type="file" id="avatar_bg">
+                                                        <input type="file" id="avatar_bg" name="avatar_bg" accept=".png, .jpg, .jpeg">
                                                         <label for="avatar_bg">Choose File</label>
                                                         <p>JPEG / PNG 150x150*</p>
                                                     </div>
                                                 </div>	
                                                 <script>
-                                                    function readURL(input) {
+                                                    function readURL2(input) {
                                                         if (input.files && input.files[0]) {
                                                             var reader = new FileReader();
                                                             reader.onload = function(e) {
@@ -138,7 +138,7 @@
                                                         }
                                                     }
                                                     $("#avatar_bg").change(function() {
-                                                        readURL(this);
+                                                        readURL2(this);
                                                     });
                                                 </script>											
                                             </div>

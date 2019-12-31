@@ -11,6 +11,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get("user-setting","HomeController@user_setting")->name("UserSetting");
     Route::get("add-events","EventControler@show_event_form")->name("AddEvent");
     Route::post("insert-event","EventControler@create_event")->name("createEvent");
+    Route::get("event-details","EventControler@event_detail")->name("EventDetails");
 
 });
 Route::get("/","HomeController@index")->name("/");
