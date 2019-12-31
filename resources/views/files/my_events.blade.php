@@ -48,7 +48,7 @@
                         <li>
                             <div class="all-dis-evnt">
                                 <div class="dscun-txt">Credit</div>
-                                <div class="dscun-numbr">$ 100</div>																	
+                                <div class="dscun-numbr">$ 100</div>
                             </div>
                         </li>
                     </ul>

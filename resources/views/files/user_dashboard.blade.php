@@ -9,7 +9,7 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="my-profile-dash">
                             <div class="my-dp-dash">
-                                <img src="images/my-dashboard/my-dp.jpg" alt="">
+                                <img src="{{ Auth::user()->image==null ? 'master/images/event-view/unknown.png' : 'master/images/'. Auth::user()->image }}" alt="">
                             </div>
                         </div>
                     </div>
@@ -33,7 +33,7 @@
                     <ul class="right-details">
                         <li>
                             <div class="my-all-evnts">
-                                <a href="#">View Events</a>
+                                <a href="{{route('MyEvents')}}">View Events</a>
                             </div>
                         </li>
                         <li>
@@ -44,8 +44,8 @@
                         </li>
                         <li>
                             <div class="all-dis-evnt">
-                                <div class="dscun-txt">Discussions</div>
-                                <div class="dscun-numbr">40</div>
+                                <div class="dscun-txt">Credit</div>
+                                <div class="dscun-numbr">$ 100</div>
                             </div>
                         </li>
                     </ul>
@@ -55,45 +55,6 @@
     </div>
     <div class="dash-tab-links">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12">
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <a class="nav-link" href="my_dashboard_activity.html">Activity</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="my_dashboard_about.html">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="my_dashboard_discussions.html">Discussions</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="my_dashboard_events.html">Events</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="my_dashboard_followers.html">Followers <span class="badge badge-alrts">20</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="my_dashboard_following.html">Following <span class="badge badge-alrts">20</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="my_dashboard_messages.html">Messages <span class="badge badge-alrts">2</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="my_dashboard_credits.html">Credits</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="my_dashboard_booked_events.html">Booked Events</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="my_dashboard_history.html">History</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="my_dashboard_setting_info.html">Setting</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
             <div class="setting-page mb-20">
                 <div class="row">
                     <div class="col-lg-3 col-md-5">
