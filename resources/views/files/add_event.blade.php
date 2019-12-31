@@ -58,7 +58,7 @@
                                         <div class="addpic" id="OpenImgUpload">
                                             <input type="file" id="file" name="event_flyer">
                                             <label for="file">Choose File</label>
-                                            <p>Minimum image dimension : 1920 x 420</p>
+                                            <p>Minimum image dimension : 1280 x 518</p>
                                             @if ($errors->has('event_flyer'))
                                             <span class="help-block text-danger">
                                                 <strong>{{ $errors->first('event_flyer') }}</strong>
@@ -84,15 +84,6 @@
                                     </div>
                                 </div>									
                             </div>
-                           <!--  <div class="input-section-item">
-                                <div class="add-input-title">								
-                                    <i class="fas fa-ticket-alt"></i>
-                                    <h6>Ticket Price*</h6>
-                                </div>
-                                <div class="add-input-items">
-                                    <input class="add-inputs" name="ticket_price" type="text" placeholder="Enter Ticket Price">
-                                </div>
-                            </div> -->
                             <div class="input-section-item">
                                 <div class="add-input-title">								
                                     <i class="fas fa-info-circle"></i>
