@@ -104,3 +104,57 @@
             </div>
         </header>
         <!-- Header End -->
+<!-- Body Start -->
+<main class="dashboard-mp">
+    <div class="dash-todo-thumbnail-area1">
+        <div class="todo-thumb1 dash-bg-image1 dash-bg-overlay" style="background-image:url(master/images/event-view/my-bg.jpg);"></div>
+        <div class="dash-todo-header1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="my-profile-dash">
+                            <div class="my-dp-dash">
+                                <img src="{{ Auth::user()->image==null ? 'master/images/event-view/unknown.png' : 'master/images/'. Auth::user()->image }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dash-dts">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="event-title">
+                        <div class="my-dash-dt">
+                            <h3>{{ Auth::user()->fullname }}</h3>
+                            <span>Member since {{date("jS F Y", strtotime(Auth::user()->created_at))}}</span>
+                            <span>{{Auth::user()->country==null ? ' ' : '<i class="fas fa-map-marker-alt"></i>'.Auth::user()->country}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <ul class="right-details">
+                        <li>
+                            <div class="my-all-evnts">
+                                <a href="{{route('MyEvents')}}">View Events</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="all-dis-evnt">
+                                <div class="dscun-txt">Events</div>
+                                <div class="dscun-numbr">22</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="all-dis-evnt">
+                                <div class="dscun-txt">Credit</div>
+                                <div class="dscun-numbr">$ 100</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
