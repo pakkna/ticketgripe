@@ -49,25 +49,6 @@ if (!function_exists('javascript_dateformate')) {
 }
 
 
-
-if (!function_exists('get_order_data')) {
-
-    function get_order_data()
-
-    {
-
-        return DB::table("ordered")
-
-            ->join('domains', 'domains.id', '=', 'ordered.domain_id')
-
-            ->select("ordered.*","domains.price")
-
-            ->orderBy('created_at', 'DESC')->get();
-
-    }
-
-}
-
 if (!function_exists('get_user_details')) {
 
     function get_user_details($id)
@@ -77,32 +58,27 @@ if (!function_exists('get_user_details')) {
     }
 }
 
-if (!function_exists('sms_send_function')) {
+if (!function_exists('FileUpload')) {
 
-    function sms_send_function($number,$message)
+    function FileUpload($image,$uploadpath){
 
-    {
+        $datetime =date('Ymd_His');
+        $file=$image->file('file');
+        $filename= $datetime.'-'. $file->getClientOriginalName();
+        $save_path= public_path($uploadpath);
+        $file->move($save_path,$filename);
+        return $uploadpath;
+    }
+}
 
-        $data = array('api_key' => 'R60000545db178e00b7066.63170959', 'type' => 'text', 'contacts' => $number, 'senderid' => 'eSMS', 'msg' => $message);
+if (!function_exists('EventImageUpload')) {
 
-        $string = http_build_query($data);
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'http://esms.dianahost.com/smsapi');
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $string);
+    function EventImageUpload($file,$uploadpath){
 
-
-        $content = curl_exec($ch);
-
-        $reg = 'SMS SUBMITTED: ID';
-
-        $array = (explode(" - ", $content));
-
-        if (strpos($reg, $array[0]) !== false) {
-          return true;
-         }
-
-        curl_close($ch);
+        $datetime =date('Ymd_His');
+            $filename= $datetime.'-'. $file->getClientOriginalName();
+            $save_path= public_path($uploadpath);
+            $file->move($save_path,$filename);
+            return $uploadpath."/".$filename;        
     }
 }
