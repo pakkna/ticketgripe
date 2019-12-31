@@ -58,6 +58,14 @@ if (!function_exists('get_user_details')) {
     }
 }
 
+if (!function_exists('total_events')) {
+
+    function total_events()
+
+    {
+        return DB::table("events")->where('user_id',Auth::user()->id)->count();
+    }
+}
 if (!function_exists('FileUpload')) {
 
     function FileUpload($image,$uploadpath){

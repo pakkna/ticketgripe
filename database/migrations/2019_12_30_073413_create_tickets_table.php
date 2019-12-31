@@ -28,6 +28,7 @@ class CreateTicketsTable extends Migration
             $table->integer('hide_ticket')->nullable()->default(0);
             $table->integer('max_ticket_per_order')->nullable();
             $table->integer('min_ticket_per_order')->nullable();
+            $table->string('selling_currency')->nullable()->default('BDT');
             $table->string('event_logo')->nullable();
             $table->string('sponser_logo')->nullable();
             $table->timestamps();
