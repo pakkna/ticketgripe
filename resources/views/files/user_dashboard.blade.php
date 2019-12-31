@@ -10,14 +10,9 @@
                             </div>
                             <div class="categories-items">
                                 <a id="defaultOpen" onclick="openForm(0,this)" class="tab-item-1 tab-open" href="javascript:void(0)">Personal Info</a>
-                                <a id="defaultOpen" onclick="openForm(1,this)" class="tab-item-1 tab-open" href="javascript:void(0)">Profile</a>
-                                <a class="tab-item-1" href="my_dashboard_all_requests.html">All Friend Requests</a>
-                                <a class="tab-item-1" href="my_dashboard_all_notifications.html">All Notifications</a>
-                                <a class="tab-item-1" href="my_dashboard_setting_social.html">Social Networks</a>
-                                <a class="tab-item-1" href="my_dashboard_setting_email.html">Email Setting</a>
-                                <a class="tab-item-1" href="my_dashboard_setting_notification.html">Notification Setting</a>
-                                <a class="tab-item-1" href="my_dashboard_setting_change_pass.html">Change Password</a>
-                                <a class="tab-item-1" href="my_dashboard_setting_delete_account.html">Deactivate Account</a>
+                                <a onclick="openForm(1,this)" class="tab-item-1 tab-open" href="javascript:void(0)">Profile</a>
+                                <a onclick="openForm(2,this)" class="tab-item-1 tab-open" href="javascript:void(0)">Email Setting</a>
+                                <a onclick="openForm(3,this)" class="tab-item-1 tab-open" href="javascript:void(0)">Change Password</a>
                             </div>
                         </div>
                     </div>
@@ -33,7 +28,7 @@
                                             <div class="col-lg-6 col-md-12">
                                                 <div class="form-group">
                                                     <label>User Name*</label>
-                                                    <input class="payment-input" type="text" name="username" value="{{ Auth::user()->username}}" placeholder="User Name" required>
+                                                    <input class="payment-input" type="text" name="username" value="{{ Auth::user()->username}}" placeholder="User Name" disabled required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-12">
@@ -45,7 +40,7 @@
                                             <div class="col-lg-6 col-md-12">
                                                 <div class="form-group">
                                                     <label>Email Address*</label>
-                                                    <input class="payment-input" type="email" name="email" placeholder="Email Address" value="{{ Auth::user()->email }}" required>
+                                                    <input class="payment-input" type="email" name="email" placeholder="Email Address" value="{{ Auth::user()->email }}" required disabled>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-12">
@@ -76,27 +71,26 @@
                         </div>
                     </div>
                     <div id="1" class="col-lg-9 col-md-7 tab-pane" style="display: none;">
-                    <div class="setting-form">
+                        <div class="setting-form">
                             <div class="user-data full-width">
                                 <div class="about-left-heading">
                                     <h3>Profile</h3>										
                                 </div>
                                 <div class="prsnl-info">
                                     <div class="row">
-                                        <div class="col-lg-12 col-md-12">													
+                                        <div class="col-lg-12 col-md-12">										
+                                            <script src="{!! asset('master/js/jquery.min.js') !!}"></script>
                                             <div class="form-group">
                                                 <label class="avatar-label">Avatar*</label>
-                                                <?php $def_logo = '<div class="setting-dp avatar-img" id="imagePreview" style="background-image: url('.'master/images/event-view/unknown.png'.')">';
+                                                <?php $def_logo = '<div class="setting-dp avatar-img" id="image0Preview" style="background-image: url('.'master/images/event-view/unknown.png'.')">';
                                                 ?>
                                                 <?php echo Auth::user()->image==null ? $def_logo : Auth::user()->image ?>
-                                                 
-                                                    <!-- <img src="{{ Auth::user()->image==null ? 'master/images/event-view/unknown.png' : 'master/images/'. Auth::user()->image }}" alt=""> -->
                                                 </div>														
                                                 <div class="setting-upload">
                                                     <span>Upload a new avatar.</span>
-                                                    <div class="addpic" id="OpenImgUpload1">															
-                                                        <input type="file" id="file1">
-                                                        <label for="file1">Choose File</label>
+                                                    <div class="addpic" id="OpenImgUpload">
+                                                        <input type="file" id="avatar_img">
+                                                        <label for="avatar_img">Choose File</label>
                                                         <p>JPEG / PNG 150x150*</p>
                                                     </div>
                                                 </div>
@@ -105,28 +99,29 @@
                                                         if (input.files && input.files[0]) {
                                                             var reader = new FileReader();
                                                             reader.onload = function(e) {
-                                                                $('#imagePreview').css('background-image', 'url('+e.target.result +')');
-                                                                $('#imagePreview').hide();
-                                                                $('#imagePreview').fadeIn(650);
+                                                                $('#image0Preview').css('background-image', 'url('+e.target.result +')');
+                                                                $('#image0Preview').hide();
+                                                                $('#image0Preview').fadeIn(650);
                                                             }
                                                             reader.readAsDataURL(input.files[0]);
                                                         }
                                                     }
-                                                    $("#file1").change(function() {
+                                                    $("#avatar_img").change(function() {
                                                         readURL(this);
                                                     });
                                                 </script>
                                             </div>
                                             <div class="form-group">
-                                                <label>Background*</label>
-                                                <div class="setting-bg">
-                                                    <img src="{{ Auth::user()->image==null ? 'master/images/event-view/demo.jpg' : 'master/images/'. Auth::user()->image }}" alt="">
-                                                </div>														
+                                                <label>Background*</label>	
+                                                <?php $def_bg = '<div class="setting-bg avatar-bg" id="imagePreview1" style="background-image: url('.'master/images/event-view/demo.jpg'.')">';
+                                                ?>
+                                                <?php echo Auth::user()->image==null ? $def_bg : Auth::user()->image ?>	
+                                                </div>
                                                 <div class="setting-upload">
                                                     <span>Upload a new background.</span>
-                                                    <div class="addpic" id="OpenImgUpload">															
-                                                        <input type="file" id="file">
-                                                        <label for="file">Choose File</label>
+                                                    <div class="addpic" id="OpenImgUpload1">
+                                                        <input type="file" id="avatar_bg">
+                                                        <label for="avatar_bg">Choose File</label>
                                                         <p>JPEG / PNG 150x150*</p>
                                                     </div>
                                                 </div>	
@@ -135,17 +130,17 @@
                                                         if (input.files && input.files[0]) {
                                                             var reader = new FileReader();
                                                             reader.onload = function(e) {
-                                                                $('#imagePreview').css('background-image', 'url('+e.target.result +')');
-                                                                $('#imagePreview').hide();
-                                                                $('#imagePreview').fadeIn(650);
+                                                                $('#imagePreview1').css('background-image', 'url('+e.target.result +')');
+                                                                $('#imagePreview1').hide();
+                                                                $('#imagePreview1').fadeIn(650);
                                                             }
                                                             reader.readAsDataURL(input.files[0]);
                                                         }
                                                     }
-                                                    $("#file").change(function() {
+                                                    $("#avatar_bg").change(function() {
                                                         readURL(this);
                                                     });
-                                                </script>													
+                                                </script>											
                                             </div>
                                             <div class="add-profile-btn">
                                                 <button class="setting-save-btn" type="submit">Save Changes</button>
@@ -156,13 +151,68 @@
                             </div>																																				
                         </div>	
                     </div>
+                    <div id="2" class="col-lg-9 col-md-7 tab-pane" style="display: none;">	
+                        <div class="setting-form">
+                            <form>
+                                <div class="user-data full-width">
+                                    <div class="about-left-heading">
+                                        <h3>Email Setting</h3>										
+                                    </div>
+                                    <div class="prsnl-info">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-12">
+                                                <div class="form-group">
+                                                    <label>Old Email Address*</label>
+                                                    <input class="payment-input" type="text" name="old_email" placeholder="Enter Old Email Address">
+                                                </div>	
+                                                <div class="form-group">
+                                                    <label>New Email Address*</label>
+                                                    <input class="payment-input" type="text" name="email" placeholder="Enter New Email Address">
+                                                </div>
+                                                <div class="add-profile-btn">
+                                                    <button class="setting-save-btn" type="submit">Save Changes</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>																					
+                            </form>
+                        </div>					
+                    </div>
+                    <div id="3" class="col-lg-9 col-md-7 tab-pane" style="display: none;">	
+                        <div class="setting-form">
+                            <form>
+                                <div class="user-data full-width">
+                                    <div class="about-left-heading">
+                                        <h3>Change Password</h3>										
+                                    </div>
+                                    <div class="prsnl-info">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-12">
+                                                <div class="form-group">
+                                                    <label>Old Password*</label>
+                                                    <input class="payment-input" type="Password" name="old_pass" placeholder="Enter Old Password" required>
+                                                </div>	
+                                                <div class="form-group">
+                                                    <label>New Password*</label>
+                                                    <input class="payment-input" type="Password" name="pass" placeholder="Enter New Password" required>
+                                                </div>
+                                                <div class="add-profile-btn">
+                                                    <button class="setting-save-btn" type="submit">Save Changes</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>																					
+                            </form>
+                        </div>					
+                    </div>	
                 </div>
             </div>
         </div>
     </div>
 </main>
 <!-- Body End -->
-<script src="{!! asset('master/js/jquery.min.js') !!}"></script>
 @include('layouts.master_layout.footer')
 <script>
     function openForm(tabAction, the) {

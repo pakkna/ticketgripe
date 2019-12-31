@@ -7621,8 +7621,16 @@ footer {
     border-radius: 100%;
     background-position: center;
     margin-top: 40px !important;
+    background-size: cover;
 }
 .avatar-label{
     position: absolute;
     left: 23px;
+}
+.avatar-bg{
+    width: 100%;
+    height: 270px;
+    border-radius: 3px;
+    background-size: cover;
+    background-position: center;
 }
