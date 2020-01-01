@@ -1217,6 +1217,9 @@ main {
 	.search-wrapper.active .input-holder{
 		width: 350px !important;
 	}
+	.padd-both-zero{
+		padding: 0px 23px !important;
+	}
 }
 @media (max-width: 630px) {
 	.dash-dts{
@@ -1263,5 +1266,10 @@ main {
 	}
 	.search-wrapper.active .close {
 		right: -30px !important;
+	}
+}
+@media (min-width: 768px) {
+	.padd-both-zero{
+		padding: 0px !important;
 	}
 }
