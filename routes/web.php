@@ -14,6 +14,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get("event-details","EventControler@event_detail")->name("EventDetails");
     Route::get("withdraw","WithdrawController@withdraw")->name("Withdraw");
 
+    Route::get("event-setup/{id}/{page?}","EventControler@event_setup_view")->name("event_setup");
+
+
+
 });
 Route::get("/","HomeController@index")->name("/");
 //Route::get("login","HomeController@login")->name("sign-in");
