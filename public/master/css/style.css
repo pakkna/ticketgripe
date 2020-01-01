@@ -1409,11 +1409,13 @@ main {
 .main-photo {
 	float: left;
 	width: 100%;
-	position: relative;
+    position: relative;
+    max-height: 237px;
 }
 
 .main-photo img {
-	width: 100%;
+    width: 100%;
+    max-height: 237px;
 }
 
 .photo-overlay {
@@ -1489,6 +1491,7 @@ main {
 
 .city-dt-list {
     margin-bottom: 0;
+    text-align: left;
 }
 
 .city-dt-list li {
