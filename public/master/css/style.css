@@ -6898,7 +6898,7 @@ footer {
     font-weight: 400;
     color: #fff;
     padding: 0 20px;
-    height: 50px;
+    height: 40px;
     border: 0;
     margin-top: 20px;
     margin-bottom: 0;
@@ -7479,7 +7479,7 @@ footer {
 .search-wrapper {
     position: absolute;
     transform: translate(-50%, -50%);
-    top:41%;
+    top:55%;
     right: 22%;
 }
 .search-wrapper.active {
@@ -7633,4 +7633,63 @@ footer {
     border-radius: 3px;
     background-size: cover;
     background-position: center;
+}
+.flash_msg {
+    padding-top: 24px;
+    margin-bottom: 0px !important;
+}
+/************************** withdraw design ************************/
+.pay_card {
+    box-shadow: 0px 3px 21px 
+rgba(0, 0, 0, 0.16) !important;
+height: 138%;
+padding-top: 9%;
+color:
+    #45BD6A;
+    font-weight: bolder;
+    border-radius: 7px;
+    font-size: 20px;
+    cursor: pointer;
+}
+.block-icon {
+    position: absolute;
+    top: 7px;
+    right: 22px;
+    color: 
+    #DD526F;
+}
+.title-align{
+    text-align: center;
+}
+.payment_padding {
+    padding: 0px 40px 0px 40px !important;
+}
+.btn_save{
+    font-size: 14px;
+    color:#fff !important;
+    background-color: #ff7555 !important;
+    padding: 8px 15px;
+    border-radius: 3px;
+    margin-left: 30px;
+    text-align: center;
+    margin-top: 25px;
+}
+.btn_save:hover{
+    color:#fff !important;
+    background: #f55f3d !important;
+}
+.custom-list .list {
+    height: auto !important;
+}
+.custom-header1{
+    padding: 0px;
+}
+.custom-header1 h3{
+    font-size: 18px;
+}
+.custom-header2 {
+    padding: 8px 32px;
+}
+.custom-header2 h3{
+    font-size: 18px;
 }

@@ -27,6 +27,10 @@ class EventControler extends Controller
 
         return View('files.add_event');
     }
+    public function event_detail(){
+
+        return View('files.event_detail');
+    }
 
     public function create_event(EventRequest $request){
 

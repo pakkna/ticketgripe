@@ -24,7 +24,7 @@
 	
     </head>
 
-    <body oncontextmenu="return true;">
+    <body oncontextmenu="return false;">
         <!-- Header Start -->
         <header>
             <div class="container">				
@@ -79,6 +79,7 @@
                                     <a class="link-item" href="{{route('MyEvents')}}">Events</a>
                                     <a class="link-item" href="invite.html">Invite</a>
                                     <a class="link-item" href="{{route('UserSetting')}}">Setting</a>
+                                    <a class="link-item" href="{{route('Withdraw')}}">Withdraw</a>
                                     <a class="link-item" href="javascript:void(0)" onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">Logout</a>
                                     <form id="logout-form" action="{{ route('user.logout') }}" method="POST" style="display: none;">
@@ -125,7 +126,7 @@
     <div class="dash-dts">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="col-lg-5 col-md-6 col-sm-12">
                     <div class="event-title">
                         <div class="my-dash-dt">
                             <h3>{{ Auth::user()->fullname }}</h3>
@@ -134,13 +135,20 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="col-lg-7 col-md-6 col-sm-12">
+                    <div class="search-wrapper">
+                        <div class="input-holder">
+                            <input type="text" name="search" class="search-input" placeholder="Type to search" />
+                            <button class="search-icon" onclick="searchToggle(this, event);"><span></span></button>
+                        </div>
+                        <span class="close" onclick="searchToggle(this, event);"></span>
+                    </div>
                     <ul class="right-details">
-                        <li>
+                        <!-- <li>
                             <div class="my-all-evnts">
                                 <a href="{{route('MyEvents')}}">View Events</a>
                             </div>
-                        </li>
+                        </li> -->
                         <li>
                             <div class="all-dis-evnt">
                                 <div class="dscun-txt">Events</div>
@@ -150,7 +158,7 @@
                         <li>
                             <div class="all-dis-evnt">
                                 <div class="dscun-txt">Credit</div>
-                                <div class="dscun-numbr">{{Auth::user()->balance}}</div>
+                                <div class="dscun-numbr">{{Auth::user()->balance == null ? 0 : Auth::user()->balance}}</div>
                             </div>
                         </li>
                     </ul>
