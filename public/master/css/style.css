@@ -5821,7 +5821,7 @@ footer {
 }
 
 .dash-todo-thumbnail-area1 .todo-thumb1 {
-    min-height: 350px;
+    max-height: 350px;
 }
 
 .dash-bg-overlay {
@@ -5829,9 +5829,10 @@ footer {
 }
 
 .dash-bg-image1 {
-    background-position: center center;
+    /* background-position: center center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: cover; */
+    width: 100%;
 }
 
 .dash-bg-overlay:before {
