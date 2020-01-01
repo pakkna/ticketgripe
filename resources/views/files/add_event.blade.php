@@ -182,22 +182,34 @@
                             <div class="input-section-item">
                                 <div class="add-input-title">								
                                     <i class="fas fa-check-square"></i>
-                                    <h6>Event Seats </h6>
+                                    <h6>Event Seats & Category </h6>
                                 </div>
                                 <div class="add-input-items">
                                     <div class="add-evnt-dt">											
                                         <div class="row">											
-                                            <div class="col-md-6">
-                                            <div class="select-bg">									
-                                                    <input class="add-inputs"  name="seat_number" type="number" placeholder="Seat number" value="{{ null !==old('seat_number') ? old('seat_number') : 0  }}" >
-                                                    @if ($errors->has('seat_number'))
-                                                    <span class="help-block text-danger">
-                                                        <strong>{{ $errors->first('seat_number') }}</strong>
-                                                    </span>
-                                                    @endif
+                                            <div class="col-md-4">
+                                                <div class="select-bg">									
+                                                        <input class="add-inputs"  name="seat_number" type="number" placeholder="Seat number" value="{{ null !==old('seat_number') ? old('seat_number') : 0  }}" >
+                                                        @if ($errors->has('seat_number'))
+                                                        <span class="help-block text-danger">
+                                                            <strong>{{ $errors->first('seat_number') }}</strong>
+                                                        </span>
+                                                        @endif
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">											
+                                            <div class="col-md-4">
+                                               <div class="select-bg">									
+                                                    <select class=" add-inputs payment-input wide custom-list" name="category">
+                                                    <option value="Promotion">Promotion</option>
+                                                        <option value="Music">Music</option>
+                                                        <option value="Festival">Festival</option>
+                                                        <option value="Art">Art</option>
+                                                        <option value="Club">Club</option> 
+                                                        <option value="Others">Others</option>
+                                                    </select>    
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">											
                                             <div class="input-section-item" style="border: 0px solid red;">
                                                     <div class="custom-control custom-checkbox mb-3">
                                                         <input type="checkbox" class="custom-control-input" id="customCheck" name="checkbox">

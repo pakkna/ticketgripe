@@ -43,7 +43,7 @@
                                 <div class="event-main-post">
                                     <div class="event-top">
                                         <div class="event-top-left">
-                                            <a href="single_discussion_view.html"><h4><span>{{$single_event->title}}</span></h4></a>
+                                            <a href="/event-setup/{{$single_event->id}}"><h4><i class="like-item fas fa-link mr-2"></i><span>{{$single_event->title}}</span></h4></a>
                                         </div>
                                         <div class="event-top-right">
                                             <div class="ticket-price">Ticket Price : <span>{{
@@ -131,11 +131,11 @@
                                     </div>
                                     <div class="like-comments">
                                         <div class="left-comments">
-                                            <a href="#" class="like-item" title="Manage Events">
+                                            <a href="/event-setup/{{$single_event->id}}" class="like-item" title="Manage Events">
                                                 <i class="fas fa-tachometer-alt"></i>
                                                 <span><ins>Manage Events</ins></span>
                                             </a>
-                                            <a href="#" class="like-item lc-left" title="Attendee List">
+                                            <a href="/event-setup/{{$single_event->id}}/attende" class="like-item lc-left" title="Attendee List">
                                                 <i class="fas fa-users"></i>
                                                 <span><ins>Attendee List</ins></span>
                                             </a>
@@ -143,7 +143,7 @@
                                                 <i class="fas fa-eye"></i>
                                                 <span><ins>View</ins></span>
                                             </a>
-                                            <a href="#" class="like-item lc-left" title="Manage Ticket">
+                                            <a href="/event-setup/{{$single_event->id}}/tickets" class="like-item lc-left" title="Manage Ticket">
                                                 <i class="fas fa-ticket-alt"></i>
                                                 <span><ins>Manage Ticket</ins></span>
                                             </a>

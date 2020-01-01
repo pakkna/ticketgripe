@@ -42,6 +42,7 @@ class EventControler extends Controller
             'start_date' => datetime_validate($request->start_time),
             'end_date' => datetime_validate($request->end_time),
             'image_path' => $upload_path,
+            'category' => $request->category,
             'country' => $request->country,
             'address' => $request->address,
             'city' => $request->city,
@@ -65,6 +66,12 @@ class EventControler extends Controller
         } catch (\Exception $th) {
             return redirect()->route('AddEvent')->with('flashMessageDanger',$th->getMessage());
         }
+
+    }
+
+    public function event_setup_view(){
+
+        return view('eventsetup.event_sidebar');
 
     }
 }

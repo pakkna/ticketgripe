@@ -70,7 +70,12 @@
                             <?php if ((Auth::user())) { ?>
                                 <div class="account order-1 dropdown">
                                 <a href="#" class="account-link dropdown-toggle-no-caret" role="button" data-toggle="dropdown"> 
-                                    <div class="user-dp"><img src="{{ Auth::user()->image==null ? 'master/images/event-view/unknown.png' : 'master/images/'. Auth::user()->image }}" alt=""></div>
+                                    <div class="user-dp">
+                                    <?php     
+
+                                     Auth::user()->image==null ? $logo_path='master/images/event-view/unknown.png' : $logo_path=Auth::user()->image;
+                                    ?>
+                                    <img src="{!! asset($logo_path) !!}" alt=""></div>
                                     <span>{{ Auth::user()->username }}</span>
                                     <i class="fas fa-angle-down"></i>
                                 </a>
@@ -108,14 +113,18 @@
 <!-- Body Start -->
 <main class="dashboard-mp">
     <div class="dash-todo-thumbnail-area1">
-        <div class="todo-thumb1 dash-bg-image1 dash-bg-overlay" style="background-image:url(master/images/event-view/my-bg.jpg);"></div>
+  
+        <?php
+        Auth::user()->cover_pic==null ? $cover_path='master/images/event-view/my-bg.jpg' : $cover_path=Auth::user()->cover_pic;
+        ?>
+        <img class="todo-thumb1 dash-bg-image1 dash-bg-overlay" src="{!! asset($cover_path)!!}"></img>
         <div class="dash-todo-header1">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
                         <div class="my-profile-dash">
                             <div class="my-dp-dash">
-                                <img src="{{ Auth::user()->image==null ? 'master/images/event-view/unknown.png' : 'master/images/'. Auth::user()->image }}" alt="">
+                                <img src="{!! asset($logo_path) !!}" alt="prifile pic">
                             </div>
                         </div>
                     </div>

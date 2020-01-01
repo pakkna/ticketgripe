@@ -26,6 +26,7 @@ class EventRequest extends FormRequest
         return [
             "event_title" => "required|string",
             "event_flyer" => "required|mimes:jpeg,bmp,png|dimensions:width=1280,height=518",
+            "category" => "required",
             "country" => "required",
             "city" => "required",
             "state" => "required",
