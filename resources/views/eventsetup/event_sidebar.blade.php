@@ -1,4 +1,4 @@
-@include('layouts.master_layout.header')
+@include('layouts.master_layout.header_event')
     <div class="dash-tab-links">
         <div class="container">
             <div class="setting-page mb-20">

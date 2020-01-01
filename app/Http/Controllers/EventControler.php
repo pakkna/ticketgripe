@@ -69,9 +69,15 @@ class EventControler extends Controller
 
     }
 
-    public function event_setup_view(){
+    public function event_setup_view($id){
 
-        return view('eventsetup.event_sidebar');
+        $event_details = DB::table('events')
+        ->leftjoin('tickets','events.id','=','tickets.event_id')
+        ->select('events.id','title','start_date','end_date','city','seat_number','image_path','seat_number','custom_link','ticket_price','quantity','selling_currency')
+        ->where('events.id',$id)
+        //need collection and soldout form order table
+        ->first();
+        return view('eventsetup.event_sidebar',compact('event_details'));
 
     }
 }
