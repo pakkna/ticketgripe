@@ -6,7 +6,8 @@ Fonts
 
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900' crossorigin="anonymous");
 @import url('https://fonts.google.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i' crossorigin="anonymous");
-@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');/* ================================================================================== 
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+/* ================================================================================== 
 Reset Css
 ===================================================================================== */
 body{
@@ -5821,7 +5822,7 @@ footer {
 }
 
 .dash-todo-thumbnail-area1 .todo-thumb1 {
-    max-height: 350px;
+    height: 350px;
 }
 
 .dash-bg-overlay {
