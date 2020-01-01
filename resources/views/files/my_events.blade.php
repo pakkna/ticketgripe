@@ -36,7 +36,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="all-search-events">								
+                    <div class="all-search-events">
+                    @include("layouts.includes.flash")								
                         <div class="row">
                         @foreach($event_details as $single_event)
                             <div class="col-lg-6 col-md-6">
@@ -101,7 +102,7 @@
                                                     <i class="fas fa-info"></i>
                                                     <div class="list-text-dt">
                                                         <span>Status</span>
-                                                        <ins>{{$single_event->seat_number}}</ins>
+                                                        <ins>{{$single_event->event_status}}</ins>
                                                     </div>
                                                 </div>
                                             </li>
@@ -152,10 +153,10 @@
                                                 <i class="fas fa-users"></i>
                                                 <span><ins>Attendee List</ins></span>
                                             </a>
-                                            <span href="#" class="like-item lc-left" title="Delete">
+                                            <a href="/delete-event/{{$single_event->id}}" class="like-item lc-left" title="Delete">
                                                 <i class="fa fa-trash-alt"></i>
                                                 <span><ins>Delete</ins></span>
-                                            </span>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
