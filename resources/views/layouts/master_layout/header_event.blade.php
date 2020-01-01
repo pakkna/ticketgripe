@@ -131,7 +131,7 @@
     <div class="dash-dts">
         <div class="container">
             <div class="row">
-                <div class="col-lg-5 col-md-6 col-sm-12">
+                <div class="col-lg-8 col-md-6 col-sm-12">
                     <div class="event-title">
                         <div class="my-dash-dt">
                             <h3>{{ $event_details->title }}</h3>
@@ -140,7 +140,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-7 col-md-6 col-sm-12">
+                <div class="col-lg-4 col-md-6 col-sm-12">
                     <ul class="right-details">
                         <!-- <li>
                             <div class="my-all-evnts">
