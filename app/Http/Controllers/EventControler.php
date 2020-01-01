@@ -20,11 +20,6 @@ class EventControler extends Controller
         //need collection and soldout form order table
         ->get();
 
-/* echo '<pre>'; 
-echo '======================<br>';
-print_r($event_details);
-echo '<br>======================';
-exit(); */
         return View('files.my_events',compact('event_details'));
     }
 
