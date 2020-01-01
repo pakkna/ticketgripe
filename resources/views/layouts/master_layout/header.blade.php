@@ -24,7 +24,7 @@
 	
     </head>
 
-    <body oncontextmenu="return true;">
+    <body oncontextmenu="return false;">
         <!-- Header Start -->
         <header>
             <div class="container">				
@@ -79,6 +79,7 @@
                                     <a class="link-item" href="{{route('MyEvents')}}">Events</a>
                                     <a class="link-item" href="invite.html">Invite</a>
                                     <a class="link-item" href="{{route('UserSetting')}}">Setting</a>
+                                    <a class="link-item" href="{{route('Withdraw')}}">Withdraw</a>
                                     <a class="link-item" href="javascript:void(0)" onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">Logout</a>
                                     <form id="logout-form" action="{{ route('user.logout') }}" method="POST" style="display: none;">
@@ -157,7 +158,7 @@
                         <li>
                             <div class="all-dis-evnt">
                                 <div class="dscun-txt">Credit</div>
-                                <div class="dscun-numbr">{{Auth::user()->balance}}</div>
+                                <div class="dscun-numbr">{{Auth::user()->balance == null ? 0 : Auth::user()->balance}}</div>
                             </div>
                         </li>
                     </ul>

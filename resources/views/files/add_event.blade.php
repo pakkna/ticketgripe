@@ -30,7 +30,9 @@
                     <div class="add-event-bg">
                     <form class="form-horizontal" method="post" action="{{ route('createEvent') }}" enctype="multipart/form-data">
                     {{ csrf_field() }}
-                            @include("layouts.includes.flash")
+                            <div class="flash_msg">
+                                @include("layouts.includes.flash")
+                            </div>
                             <div class="input-section-item">
                                 <div class="add-input-title">								
                                     <i class="fas fa-pencil-alt"></i>
@@ -232,10 +234,6 @@
 <!-- Body End -->	
 @include('layouts.master_layout.footer')
 
-<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>\
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" /> -->
-        
 <script>
     $(document).ready(function() {
     $('#id_0').datetimepicker({

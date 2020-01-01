@@ -62,10 +62,10 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="add-crdt-amnt">
+                                            <button class="setting-save-btn" type="submit">Save Changes</button>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="add-crdt-amnt">
-                                    <button class="setting-save-btn" type="submit">Save Changes</button>
                                 </div>
                             </form>
                         </div>
