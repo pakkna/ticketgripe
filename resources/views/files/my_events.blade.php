@@ -13,7 +13,7 @@
                                                 <a href="#" class="filter-d wt-mp dropdown-toggle-no-caret" role="button" data-toggle="dropdown" aria-expanded="false">Category<i class="fas fa-angle-down"></i></a>
                                                 <div class="dropdown-menu cate-dropdown" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 21px, 0px);">
                                                     <a class="link-item" href="#">Music</a>
-                                                    <a class="link-item" href="#">Festival</a>											
+                                                    <a class="link-item" href="#">Festival</a>	
                                                     <a class="link-item" href="#">Art</a>
                                                     <a class="link-item" href="#">Club</a>
                                                     <a class="link-item" href="#">Comedy</a>
