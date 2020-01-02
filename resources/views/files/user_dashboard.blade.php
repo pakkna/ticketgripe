@@ -22,7 +22,16 @@
                                 {{ csrf_field() }}
                                 <div class="user-data full-width">
                                     <div class="flash_msg">
-                                        @include("layouts.includes.flash")
+                                    @if(Session::has('UserinfoSuccess'))
+                                            <div class="alert alert-success alert-dismissible text-center display-10" role="alert">
+                                                {{ Session::get('UserinfoSuccess') }}
+                                            </div>
+                                        @endif
+                                        @if(Session::has('userinfoDanger'))
+                                            <div class="alert alert-danger alert-dismissible text-center display-10" role="alert">
+                                                {{ Session::get('userinfoDanger') }}
+                                            </div>
+                                        @endif
                                     </div>
                                     <div class="about-left-heading">
                                         <h3>Personal Info</h3>
@@ -96,11 +105,19 @@
                     </div>
                     <div id="1" class="col-lg-9 col-md-7 tab-pane" style="display: none;">
                         <div class="setting-form">
-                            <form class="form-horizontal" method="post" action="{{ route('UserAvatarCng') }}" enctype="multipart/form-data">
+                            <form class="form-horizontal" method="post" action="{{route('UserAvatarCng')}}" enctype="multipart/form-data">
                                 {{ csrf_field() }}
                                 <div class="user-data full-width">
-                                @include("layouts.includes.flash")
-                                    <div class="about-left-heading">
+                                    @if(Session::has('UseravatarSuccess'))
+                                            <div class="alert alert-success alert-dismissible text-center display-10" role="alert">
+                                                {{ Session::get('UseravatarSuccess') }}
+                                            </div>
+                                        @endif
+                                        @if(Session::has('UseravatarDanger'))
+                                            <div class="alert alert-danger alert-dismissible text-center display-10" role="alert">
+                                                {{ Session::get('UseravatarDanger') }}
+                                            </div>
+                                        @endif                                    <div class="about-left-heading">
                                         <h3>Profile</h3>										
                                     </div>
                                     <div class="prsnl-info">
@@ -187,9 +204,19 @@
                     </div>
                     <div id="2" class="col-lg-9 col-md-7 tab-pane" style="display: none;">	
                         <div class="setting-form">
-                            <form class="form-horizontal" method="post" action="{{ route('UserAvatarCng') }}" enctype="multipart/form-data">
+                            <form class="form-horizontal" method="post" action="{{ route('UserEmailCng') }}" enctype="multipart/form-data">
+                            {{ csrf_field() }}
                                 <div class="user-data full-width">
-                                @include("layouts.includes.flash")
+                                        @if(Session::has('UseremailSuccess'))
+                                            <div class="alert alert-success alert-dismissible text-center display-10" role="alert">
+                                                {{ Session::get('UseremailSuccess') }}
+                                            </div>
+                                        @endif
+                                        @if(Session::has('UseremailDanger'))
+                                            <div class="alert alert-danger alert-dismissible text-center display-10" role="alert">
+                                                {{ Session::get('UseremailDanger') }}
+                                            </div>
+                                        @endif                                     
                                     <div class="about-left-heading">
                                         <h3>Email Setting</h3>										
                                     </div>
@@ -198,12 +225,22 @@
                                             <div class="col-lg-6 col-md-12">
                                                 <div class="form-group">
                                                     <label>Old Email Address*</label>
-                                                    <input class="payment-input" type="text" name="old_email" placeholder="Enter Old Email Address">
+                                                    <input class="payment-input" type="text" name="old_email" placeholder="Enter Old Email Address" required>
                                                 </div>	
+                                                @if ($errors->has('old_email'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('old_email') }}</strong>
+                                                </span>
+                                                @endif
                                                 <div class="form-group">
                                                     <label>New Email Address*</label>
-                                                    <input class="payment-input" type="text" name="email" placeholder="Enter New Email Address">
+                                                    <input class="payment-input" type="text" name="email" placeholder="Enter New Email Address" required>
                                                 </div>
+                                                @if ($errors->has('email'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('email') }}</strong>
+                                                </span>
+                                                @endif
                                                 <div class="add-profile-btn">
                                                     <button class="setting-save-btn" type="submit">Save Changes</button>
                                                 </div>
@@ -216,9 +253,19 @@
                     </div>
                     <div id="3" class="col-lg-9 col-md-7 tab-pane" style="display: none;">	
                         <div class="setting-form">
-                            <form class="form-horizontal" method="post" action="{{ route('UserEmailCng') }}" enctype="multipart/form-data">
+                            <form class="form-horizontal" method="post" action="{{ route('UserpassCng') }}" enctype="multipart/form-data">
+                            {{ csrf_field() }}
                                 <div class="user-data full-width">
-                                @include("layouts.includes.flash")
+                                    @if(Session::has('UserpassSuccess'))
+                                            <div class="alert alert-success alert-dismissible text-center display-10" role="alert">
+                                                {{ Session::get('UserpassSuccess') }}
+                                            </div>
+                                        @endif
+                                        @if(Session::has('UserpassDanger'))
+                                            <div class="alert alert-danger alert-dismissible text-center display-10" role="alert">
+                                                {{ Session::get('UserpassDanger') }}
+                                            </div>
+                                        @endif                                    
                                     <div class="about-left-heading">
                                         <h3>Change Password</h3>										
                                     </div>
@@ -233,6 +280,11 @@
                                                     <label>New Password*</label>
                                                     <input class="payment-input" type="Password" name="pass" placeholder="Enter New Password" required>
                                                 </div>
+                                                @if ($errors->has('pass'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('pass') }}</strong>
+                                                </span>
+                                                @endif
                                                 <div class="add-profile-btn">
                                                     <button class="setting-save-btn" type="submit">Save Changes</button>
                                                 </div>

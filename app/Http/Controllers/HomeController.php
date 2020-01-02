@@ -40,9 +40,9 @@ class HomeController extends Controller
         ];
         try {
             $dataSet = DB::table('users')->where('id', Auth::user()->id)->update($data);
-            return redirect()->route('UserSetting')->with('flashMessageSuccess','Information updated succeessfully !');
+            return redirect()->route('UserSetting')->with('UserinfoSuccess','Information updated succeessfully !');
         } catch (\Exception $th) {
-            return redirect()->route('UserSetting')->with('flashMessageDanger',$th->getMessage());
+            return redirect()->route('UserSetting')->with('userinfoDanger',$th->getMessage());
         }
     }
     public function edit_user_avatar(Request $request)
@@ -71,9 +71,44 @@ class HomeController extends Controller
         ];
         try {
             $dataSet = DB::table('users')->where('id', Auth::user()->id)->update($data);
-            return redirect('user-setting/profile')->with('flashMessageSuccess','Information updated succeessfully !');
+            return redirect('user-setting/profile')->with('UseravatarSuccess','Information updated succeessfully !');
         } catch (\Exception $th) {
-            return redirect('user-setting/profile')->with('flashMessageDanger',$th->getMessage());
+            return redirect('user-setting/profile')->with('UseravatarDanger',$th->getMessage());
+        }
+    }
+    public function edit_user_email(Request $request)
+    {
+        $validatedData = $request->validate([
+            "email" => "required|email|unique:users",
+        ]);
+        $old_email = DB::table('users')->select('email')->where('id', Auth::user()->id)->first();
+
+        if ($old_email->email == $request->old_email) {
+            try {
+                $dataSet = DB::table('users')->where('id', Auth::user()->id)->update(['email'=> $request->email]);
+                return redirect('user-setting/email')->with('UseremailSuccess','Information updated succeessfully !');
+            } catch (\Exception $th) {
+                return redirect('user-setting/email')->with('UseremailDanger',$th->getMessage());
+            }
+        }else{
+            return redirect('user-setting/email')->with('UseremailDanger','Old email address is invalid !');
+        }
+    }
+    public function edit_user_pass(Request $request)
+    {
+        $user_credentials = array('email'=> Auth::user()->email,'password' => $request->old_pass);
+
+        if (Auth::attempt($user_credentials)) {
+     
+            try {
+                DB::table('users')->where('id', Auth::user()->id)->update(['password' => bcrypt($request->pass)]);
+                return redirect('user-setting/passsword')->with('UserpassSuccess', 'Password Updated Succesfully ! Now login With New Password.'); 
+            } catch (\Exception $th) {
+                return redirect('user-setting/passsword')->with('UserpassDanger', $th->getMessage()); 
+            }
+        
+        }else{
+            return redirect('user-setting/passsword')->with('UserpassDanger',"Old password is not matched !"); 
         }
     }
 }

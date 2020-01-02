@@ -7,7 +7,7 @@
          
             {{ csrf_field() }}
                     <div class="flash_msg">
-                    @if(Session::has('EventSuccess'))
+                        @if(Session::has('EventSuccess'))
                             <div class="alert alert-success alert-dismissible text-center display-10" role="alert">
                                 {{ Session::get('EventSuccess') }}
                             </div>

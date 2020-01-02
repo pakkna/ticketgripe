@@ -140,7 +140,10 @@
                         <div class="my-dash-dt">
                             <h3>{{ Auth::user()->fullname }}</h3>
                             <span>Member since {{date("jS F Y", strtotime(Auth::user()->created_at))}}</span>
-                            <span> {{Auth::user()->country==null ? ' ' : ' <i class="fas fa-map-marker-alt"></i> '.Auth::user()->country}} </span>
+                            <?php 
+                                if (Auth::user()->country != null) { ?>
+                                    <span><i class="fas fa-map-marker-alt"></i> <?php echo Auth::user()->country; ?> </span>
+                                <?php }else{ echo '';} ?>
                         </div>
                     </div>
                 </div>
