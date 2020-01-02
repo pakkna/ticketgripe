@@ -1,52 +1,118 @@
-<div class="setting-form">
-    <form>
-        <div class="user-data full-width">
-            <div class="about-left-heading">
-                <h3>Personal Info</h3>
-            </div>
-            <div class="prsnl-info">
-                <div class="row">
-                    <div class="col-lg-6 col-md-12">
-                        <div class="form-group">
-                            <label>User Name*</label>
-                            <input class="payment-input" type="text" name="username" value="{{ Auth::user()->username}}" placeholder="User Name" disabled required>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-12">
-                        <div class="form-group">
-                            <label>Full Name*</label>
-                            <input class="payment-input" data-language="en" type="text" name="fullname" placeholder="Full Name" value="{{ Auth::user()->fullname }}" required>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-12">
-                        <div class="form-group">
-                            <label>Email Address*</label>
-                            <input class="payment-input" type="email" name="email" placeholder="Email Address" value="{{ Auth::user()->email }}" required disabled>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-12">
-                        <div class="form-group">
-                            <label>Phone Number*</label>
-                            <input class="payment-input" type="tel" placeholder="017xxxxxxxx" value="{{ Auth::user()->mobile }}" required>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-12">
-                    <div class="form-group">
-                            <label>Country*</label>
-                            <input class="payment-input" data-language="en" type="text" name="country" placeholder="Country" value="{{ Auth::user()->country }}" required>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-12">
-                        <div class="form-group">
-                            <label>Organaization*</label>
-                            <input class="payment-input" data-language="en" type="text" name="organaization" placeholder="Organaization" value="{{ Auth::user()->organization }}" required>
-                        </div>
-                    </div>
-                </div>
-                <div class="add-crdt-amnt">
-                    <button class="setting-save-btn" type="submit">Save Changes</button>
-                </div>
-            </div>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+* {
+box-sizing: border-box;
+}
+
+body {
+font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Float four columns side by side */
+.column {
+float: left;
+width: 25%;
+padding: 0 5px;
+}
+
+.row {margin: 0 -5px;}
+
+/* Clear floats after the columns */
+.row:after {
+content: "";
+display: table;
+clear: both;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+.column {
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+}
+}
+
+/* Style the counter cards */
+.card {
+    box-shadow: 0 4px 8px 0
+    rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    text-align: center;
+    background-color:#fff;
+    color:#818181;
+}
+
+.card p{
+   color: #8d8d8d;
+}
+
+.card .fa {font-size:50px;}
+</style>
+<div class="row mt-3">
+    <div class="column">
+        <div class="card">
+        <p><i class="fa fa-user"></i></p>
+        <h3>11+</h3>
+        <p>Partners</p>
         </div>
-    </form>
+    </div>
+    <div class="column">
+        <div class="card">
+        <p><i class="fa fa-check"></i></p>
+        <h3>55+</h3>
+        <p>Projects</p>
+        </div>
+    </div>
+    
+    <div class="column">
+        <div class="card">
+        <p><i class="fa fa-smile-o"></i></p>
+        <h3>100+</h3>
+        <p>Happy Clients</p>
+        </div>
+    </div>
+    
+    <div class="column">
+        <div class="card">
+        <p><i class="fa fa-coffee"></i></p>
+        <h3>100+</h3>
+        <p>Meetings</p>
+        </div>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="column">
+        <div class="card">
+        <p><i class="fa fa-user"></i></p>
+        <h3>11+</h3>
+        <p>Partners</p>
+        </div>
+    </div>
+    <div class="column">
+        <div class="card">
+        <p><i class="fa fa-check"></i></p>
+        <h3>55+</h3>
+        <p>Projects</p>
+        </div>
+    </div>
+    
+    <div class="column">
+        <div class="card">
+        <p><i class="fa fa-smile-o"></i></p>
+        <h3>100+</h3>
+        <p>Happy Clients</p>
+        </div>
+    </div>
+    
+    <div class="column">
+        <div class="card">
+        <p><i class="fa fa-coffee"></i></p>
+        <h3>100+</h3>
+        <p>Meetings</p>
+        </div>
+    </div>
 </div>
