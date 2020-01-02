@@ -51,7 +51,17 @@ class HomeController extends Controller
             "avatar_img" => "nullable|mimes:jpeg,bmp,png",
             "avatar_bg" => "nullable|mimes:jpeg,bmp,png|dimensions:width=1280,height=518",
         ]);
-        $upload_path=EventImageUpload($request->file('event_flyer'),'event_flayer');
+        if ($request->avatar_img != null) {
+            $upload_path=FileUpload($request->file('avatar_img'),'profile_pic');
+            echo '<pre>'; 
+            echo '======================<br>';
+            print_r($upload_path);
+            echo '<br>======================';
+            exit();
+        }else{
+
+        }
+        // $upload_path=EventImageUpload($request->file('event_flyer'),'event_flayer');
 
         $data=[
             'avatar_img' => $request->fullname,
