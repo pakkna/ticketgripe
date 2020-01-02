@@ -1,6 +1,6 @@
 @include('layouts.master_layout.header')
     <div class="dash-tab-links">
-        <div class="container">
+        <div class="container" style="max-width: 1368px !important;">
             <div class="setting-page mb-20">
                 <div class="row">
                     <div class="col-lg-3 col-md-5">
@@ -9,10 +9,10 @@
                                 <h3>Your Details</h3>
                             </div>
                             <div class="categories-items">
-                                <a id="defaultOpen" onclick="openForm(0,this)" class="tab-item-1 tab-open" href="javascript:void(0)">Personal Info</a>
-                                <a id="profile" onclick="openForm(1,this)" class="tab-item-1 tab-open" href="javascript:void(0)">Profile</a>
-                                <a id="email" onclick="openForm(2,this)" class="tab-item-1 tab-open" href="javascript:void(0)">Email Setting</a>
-                                <a id="passsword" onclick="openForm(3,this)" class="tab-item-1 tab-open" href="javascript:void(0)">Change Password</a>
+                                <a id="personal-info" onclick="openForm(0,this)" class="tab-item-1 tab-open" href="javascript:void(0)"><i class="fas fa-sitemap mr-2" aria-hidden="true"></i>Personal Info</a>
+                                <a id="profile" onclick="openForm(1,this)" class="tab-item-1 tab-open" href="javascript:void(0)"><i class="fa fa-user-alt"></i>Profile</a>
+                                <a id="email" onclick="openForm(2,this)" class="tab-item-1 tab-open" href="javascript:void(0)"><i class="fa fa-envelope-open"></i>Email Setting</a>
+                                <a id="passsword" onclick="openForm(3,this)" class="tab-item-1 tab-open" href="javascript:void(0)"><i class="fa fa-cogs"></i>Change Password</a>
                             </div>
                         </div>
                     </div>
@@ -310,6 +310,7 @@
         for (i = 0; i < tabopen.length; i++) {
             tabopen[i].style.display = "none";
             click[i].classList.remove("active");
+            window.history.pushState("object or string", "Title", "/user-setting/"+the.id);
         }
         document.getElementById(tabAction).style.display = "block";
         if (the == 1) {
@@ -318,7 +319,7 @@
             the.classList.add("active");
         }
     }
-    document.getElementById("defaultOpen").click();
-    <?php null !== Request::segment(2) ? $click=Request::segment(2):$click="defaultOpen" ?> 
+    document.getElementById("personal-info").click();
+    <?php null !== Request::segment(2) ? $click=Request::segment(2):$click="personal-info" ?> 
     document.getElementById('{{$click}}').click();
 </script>

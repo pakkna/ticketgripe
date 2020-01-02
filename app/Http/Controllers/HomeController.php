@@ -5,9 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Artisan;
 
 class HomeController extends Controller
 {
+        public function All_clear(){
+            $exitCode1 = Artisan::call('cache:clear');
+            $exitCode2 = Artisan::call('route:clear');
+            $exitCode3 = Artisan::call('config:clear');
+            $exitCode1 = Artisan::call('cache:clear');
+            $exitCode1 = Artisan::call('view:clear');
+            return redirect('/my-events');
+        }
     public function index()
     {
         return View('files.index');

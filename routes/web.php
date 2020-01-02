@@ -27,8 +27,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 });
 Route::get("/","HomeController@index")->name("/");
-//Route::get("login","HomeController@login")->name("sign-in");
-Route::get('clear', 'DashboardController@All_clear');
+
+Route::get('clear', 'HomeController@All_clear');
 
 
 //login form
