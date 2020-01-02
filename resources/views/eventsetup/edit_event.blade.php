@@ -1,3 +1,4 @@
+
 <div class="setting-form">
     <div class="user-data full-width">
         <div class="add-event-bg">
@@ -9,15 +10,32 @@
                     <div class="input-section-item">
                         <div class="add-input-title">								
                             <i class="fas fa-pencil-alt"></i>
-                            <h6>Event Title*</h6>
+                            <h6>Event Title & Status*</h6>
                         </div>
                         <div class="add-input-items">
-                            <input class="add-inputs" name="event_title" type="text" value="{{ old('event_title') }}" placeholder="Event Title Here">
-                            @if ($errors->has('event_title'))
-                            <span class="help-block text-danger">
-                                <strong>{{ $errors->first('event_title') }}</strong>
-                            </span>
-                            @endif
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <input class="add-inputs" name="event_title" type="text" value="{{$event_details->title}}" placeholder="Event Title Here">
+                                    @if ($errors->has('event_title'))
+                                    <span class="help-block text-danger">
+                                        <strong>{{ $errors->first('event_title') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="select-bg">									
+                                            <select class="add-inputs payment-input wide custom-list" name="status">
+                                                <?php if($event_details->event_status=='Active'){ ?>
+                                                    <option value="Active">Active</option>
+                                                    <option value="Cancel">Cancel</option>
+                                                <?php }else{?>
+                                                    <option value="Cancel">Cancel</option>
+                                                    <option value="Active">Active</option>
+                                                <?php }?>   
+                                            </select>    
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="input-section-item">
@@ -27,9 +45,10 @@
                         </div>
                         <div class="add-input-items">
                             <div class="add-evnt-dt">											
-                                <div class="event-add-img1 event-feature-img" id="imagePreview" style="background-image: url(master/images/event-view/demo.jpg);">
-                                    <!-- <img src="{!! asset('master/images/homepage/center/post-img-1.jpg') !!}" alt=""> -->
-                                </div>
+                                <img class="event-add-img1 event-feature-img" id="imagePreview" src="{!!asset($event_details->image_path)!!}">
+                                </img>
+                                <script src="{!! asset('master/js/jquery3.3.1.js') !!}"></script>
+
                                 <div class="addpic" id="OpenImgUpload">
                                     <input type="file" id="file" name="event_flyer">
                                     <label for="file">Choose File</label>
@@ -45,7 +64,8 @@
                                         if (input.files && input.files[0]) {
                                             var reader = new FileReader();
                                             reader.onload = function(e) {
-                                                $('#imagePreview').css('background-image', 'url('+e.target.result +')');
+                                               
+                                               $('#imagePreview').attr('src', e.target.result);
                                                 $('#imagePreview').hide();
                                                 $('#imagePreview').fadeIn(650);
                                             }
@@ -66,7 +86,7 @@
                         </div>
                         <div class="add-input-items">										
                             <div class="add-evnt-dt">										
-                                <input class="add-inputs" type="text"  value="{{ old('country') }}"  name="country" placeholder="Country" required>
+                                <input class="add-inputs" type="text"  value="{{$event_details->country}}"  name="country" placeholder="Country" required>
                                 @if ($errors->has('country'))
                                 <span class="help-block text-danger">
                                     <strong>{{ $errors->first('country') }}</strong>
@@ -75,7 +95,7 @@
                                 <!-- <i class="fas fa-search ev-icon"></i> -->
                             </div>
                             <div class="add-evnt-dt">
-                                <input class="add-inputs" value="{{ old('address') }}"  name="address" type="text" placeholder="Address" required>
+                                <input class="add-inputs" value="{{ $event_details->address}}"  name="address" type="text" placeholder="Address" required>
                                 @if ($errors->has('address'))
                                 <span class="help-block text-danger">
                                     <strong>{{ $errors->first('address') }}</strong>
@@ -85,7 +105,7 @@
                             <div class="add-evnt-dt">
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <input class="add-inputs" value="{{ old('city') }}" name="city" type="text" placeholder="City" required>
+                                        <input class="add-inputs" value="{{ $event_details->city }}" name="city" type="text" placeholder="City" required>
                                         @if ($errors->has('city'))
                                         <span class="help-block text-danger">
                                             <strong>{{ $errors->first('city') }}</strong>
@@ -93,7 +113,7 @@
                                         @endif
                                     </div>
                                     <div class="col-md-4">
-                                        <input class="add-inputs" value="{{ old('state') }}" name="state" type="text" placeholder="State/Province" required>
+                                        <input class="add-inputs" value="{{$event_details->state }}" name="state" type="text" placeholder="State/Province" required>
                                         @if ($errors->has('state'))
                                         <span class="help-block text-danger">
                                             <strong>{{ $errors->first('state') }}</strong>
@@ -101,7 +121,7 @@
                                         @endif
                                     </div>
                                     <div class="col-md-4">
-                                        <input class="add-inputs" value="{{ old('zip') }}"  name="zip" type="text" placeholder="Zip/Postal" required>
+                                        <input class="add-inputs" value="{{ $event_details->state }}"  name="zip" type="text" placeholder="Zip/Postal" required>
                                         @if ($errors->has('zip'))
                                         <span class="help-block text-danger">
                                             <strong>{{ $errors->first('zip') }}</strong>
@@ -116,7 +136,7 @@
                                         <div class="select-bg">									
                                         <div class="input-group date" id="id_0">
                                                 <span class="date-span">Start Time :</span>
-                                                <input value="{{ old('start_time') }}"  id="out_datetime" name="start_time" type="text" class="form-control" style="border-top-left-radius: .25rem;border-bottom-left-radius: .25rem;" required>
+                                                <input value="{{ $event_details->start_date }}"  id="out_datetime" name="start_time" type="text" class="form-control" style="border-top-left-radius: .25rem;border-bottom-left-radius: .25rem;" required>
                                                 <div class="input-group-addon input-group-append">
                                                     <div class="input-group-text">
                                                         <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
@@ -134,7 +154,7 @@
                                         <div class="select-bg">									
                                         <div class="input-group date" id="id_1">
                                                 <span class="date-span">End Time :</span>
-                                                <input id="out_datetime" value="{{ old('end_time') }}"  name="end_time" type="text" class="form-control" style="border-top-left-radius: .25rem;border-bottom-left-radius: .25rem;" required>
+                                                <input id="out_datetime" value="{{ $event_details->end_date }}"  name="end_time" type="text" class="form-control" style="border-top-left-radius: .25rem;border-bottom-left-radius: .25rem;" required>
                                                 <div class="input-group-addon input-group-append">
                                                     <div class="input-group-text">
                                                         <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
@@ -162,7 +182,7 @@
                                 <div class="row">											
                                     <div class="col-md-4">
                                         <div class="select-bg">									
-                                                <input class="add-inputs"  name="seat_number" type="number" placeholder="Seat number" value="{{ null !==old('seat_number') ? old('seat_number') : 0  }}" >
+                                                <input class="add-inputs"  name="seat_number" type="number" placeholder="Seat number" value="{{$event_details->seat_number }}" >
                                                 @if ($errors->has('seat_number'))
                                                 <span class="help-block text-danger">
                                                     <strong>{{ $errors->first('seat_number') }}</strong>
@@ -173,7 +193,9 @@
                                     <div class="col-md-4">
                                     <div class="select-bg">									
                                             <select class=" add-inputs payment-input wide custom-list" name="category">
-                                            <option value="Promotion">Promotion</option>
+                                                 <?php echo '<option value="'.$event_details->category.'">'.$event_details->category.'</option>'; ?>
+                                                 <option  value="">-------------</option>
+                                                <option value="Promotion">Promotion</option>
                                                 <option value="Music">Music</option>
                                                 <option value="Festival">Festival</option>
                                                 <option value="Art">Art</option>
@@ -185,7 +207,7 @@
                                     <div class="col-md-4">											
                                     <div class="input-section-item" style="border: 0px solid red;">
                                             <div class="custom-control custom-checkbox mb-3">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck" name="checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="customCheck" name="checkbox" {{ $event_details->hide_date_event_page==1 ? 'checked' : '' }}>
                                                 <label class="custom-control-label" for="customCheck" style="font-size: 12px;">Hide Expire date on event page </label>
                                             </div>
                                         </div>
@@ -200,14 +222,14 @@
                             <h6>Event Description*</h6>
                         </div>
                         <div class="add-input-items">
-                            <textarea class="add-event-des" name="event_des" placeholder="Description here">{{old('event_des') }}</textarea>
+                            <textarea class="add-event-des" name="event_des" placeholder="Description here">{{$event_details->description }}</textarea>
                             <script>
                                 CKEDITOR.replace('event_des');
                             </script>
                         </div>
                     </div>
                     <div class="upload-mp">
-                        <button class="upload-btn" type="submit">Create Event</button>
+                        <button class="upload-btn" type="submit">Update Event</button>
                     </div>
                 </form>
         

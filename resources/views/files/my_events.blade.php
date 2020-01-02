@@ -14,7 +14,7 @@
                                                 <a href="#" class="filter-d wt-mp dropdown-toggle-no-caret" role="button" data-toggle="dropdown" aria-expanded="false">Category<i class="fas fa-angle-down"></i></a>
                                                 <div class="dropdown-menu cate-dropdown" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 21px, 0px);">
                                                     <a class="link-item" href="#">Music</a>
-                                                    <a class="link-item" href="#">Festival</a>											
+                                                    <a class="link-item" href="#">Festival</a>	
                                                     <a class="link-item" href="#">Art</a>
                                                     <a class="link-item" href="#">Club</a>
                                                     <a class="link-item" href="#">Comedy</a>
@@ -37,7 +37,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="all-search-events">								
+                    <div class="all-search-events">
+                    @include("layouts.includes.flash")								
                         <div class="row">
                             <table id="example" style="width:100%; text-align: center">
                                 <thead style="display: none;">
@@ -75,8 +76,7 @@
                                         </div>
                                         <div class="event-city-dt">
                                             <ul class="city-dt-list">
-                                            
-                                                <li>
+                                               <li>
                                                     <div class="it-items">
                                                         <i class="fas fa-calendar-alt"></i>
                                                         <div class="list-text-dt">
@@ -104,14 +104,15 @@
                                                         </div>
                                                     </div>
                                                 </li>
+                                           
                                                 <li style="width: 0px;">
-                                                    <div class="it-items">
+                                                   <div class="it-items">
                                                         <i class="fas fa-info"></i>
                                                         <div class="list-text-dt">
                                                             <span>Status</span>
-                                                            <ins>{{$single_event->seat_number}}</ins>
+                                                            <ins>{{$single_event->event_status}}</ins>
                                                         </div>
-                                                    </div>
+                                                   </div>    
                                                 </li>
                                             </ul>
                                         </div>
@@ -144,28 +145,28 @@
                                                         </div>
                                                     </div>
                                                 </li>															
-                                            </ul>
+                                           </ul>
+                                    </div>
+                                    <div class="like-comments">
+                                        <div class="left-comments">
+                                            <a href="/event-setup/{{$single_event->id}}" class="like-item" title="Manage Events">
+                                                <i class="fas fa-tachometer-alt"></i>
+                                                <span><ins>Manage Events</ins></span>
+                                            </a>
+                                            <a href="/event-setup/{{$single_event->id}}/tickets" class="like-item lc-left" title="Manage Ticket">
+                                                <i class="fas fa-ticket-alt"></i>
+                                                <span><ins>Manage Ticket</ins></span>
+                                            </a>
+                                            <a href="/event-setup/{{$single_event->id}}/attende" class="like-item lc-left" title="Attendee List">
+                                                <i class="fas fa-users"></i>
+                                                <span><ins>Attendee List</ins></span>
+                                            </a>
+                                            <a href="/delete-event/{{$single_event->id}}" class="like-item lc-left" title="Delete">
+                                                <i class="fa fa-trash-alt"></i>
+                                                <span><ins>Delete</ins></span>
+                                            </a>
                                         </div>
-                                        <div class="like-comments">
-                                            <div class="left-comments">
-                                                <a href="/event-setup/{{$single_event->id}}" class="like-item" title="Manage Events">
-                                                    <i class="fas fa-tachometer-alt"></i>
-                                                    <span><ins>Manage Events</ins></span>
-                                                </a>
-                                                <a href="/event-setup/{{$single_event->id}}/tickets" class="like-item lc-left" title="Manage Ticket">
-                                                    <i class="fas fa-ticket-alt"></i>
-                                                    <span><ins>Manage Ticket</ins></span>
-                                                </a>
-                                                <a href="/event-setup/{{$single_event->id}}/attende" class="like-item lc-left" title="Attendee List">
-                                                    <i class="fas fa-users"></i>
-                                                    <span><ins>Attendee List</ins></span>
-                                                </a>
-                                                <span href="#" class="like-item lc-left" title="Delete">
-                                                    <i class="fa fa-trash-alt"></i>
-                                                    <span><ins>Delete</ins></span>
-                                                </span>
-                                            </div>
-                                        </div>
+                                    </div>    
                                     </td>
                                 </tr>
                             @endforeach 

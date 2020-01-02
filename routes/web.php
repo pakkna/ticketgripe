@@ -18,6 +18,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get("event-setup/{id}/{page?}","EventControler@event_setup_view")->name("event_setup");
 
+    Route::get("delete-event/{id}","EventControler@delete_event")->name("delete-event");
+
 
 
 });

@@ -16,7 +16,7 @@ class EventControler extends Controller
 
         $event_details = DB::table('events')
         ->leftjoin('tickets','events.id','=','tickets.event_id')
-        ->select('events.id','title','start_date','end_date','city','seat_number','image_path','seat_number','custom_link','ticket_price','quantity','selling_currency')
+        ->select('events.id','title','start_date','end_date','event_status','city','seat_number','image_path','seat_number','custom_link','ticket_price','quantity','selling_currency')
         //need collection and soldout form order table
         ->get();
 
@@ -68,11 +68,35 @@ class EventControler extends Controller
 
     }
 
+    public function delete_event($id){
+
+      $check =DB::table('events')->where('id',$id)->where('user_id',Auth::user()->id)->first();
+
+     if(count($check)){
+
+        try { 
+            DB::table('events')->where('id',$id)->delete();
+               
+            return redirect()->route('MyEvents')->with('flashMessageSuccess','Your Event Delete Successfully !');
+        
+            } catch (\Exception $th) {
+                return redirect()->route('MyEvents')->with('flashMessageDanger',$th->getMessage());
+            }
+     }else{
+        return redirect()->route('MyEvents')->with('flashMessageDanger',"Your not authorized to delete this event !");
+     }
+        
+      
+
+
+    }
+
     public function event_setup_view($id){
 
+        
         $event_details = DB::table('events')
         ->leftjoin('tickets','events.id','=','tickets.event_id')
-        ->select('events.id','title','start_date','end_date','city','seat_number','image_path','seat_number','custom_link','ticket_price','quantity','selling_currency')
+        ->select('events.id','title','image_path','start_date','end_date','country','address','city','state','zip','event_status','seat_number','category','hide_date_event_page','description','custom_link')
         ->where('events.id',$id)
         //need collection and soldout form order table
         ->first();
