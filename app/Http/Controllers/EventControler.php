@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Yajra\Datatables\Datatables;
 use App\Http\Requests\EventRequest;
+use App\Http\Requests\EditEventRequest;
 
 class EventControler extends Controller
 {
@@ -89,6 +90,46 @@ class EventControler extends Controller
         
       
 
+
+    }
+
+    public function edit_event(EditEventRequest $request){
+
+        if(!empty($request->event_flyer)){
+            $upload_path=EventImageUpload($request->file('event_flyer'),'event_flayer');
+        }else{
+            $image=DB::table('events')->select('image_path')->where('id',$request->id)->first(); 
+            $upload_path=$image->image_path;
+        }
+        $data= [
+
+            'title' => $request->event_title,
+            'start_date' => datetime_validate($request->start_time),
+            'end_date' => datetime_validate($request->end_time),
+            'image_path' => $upload_path,
+            'category' => $request->category,
+            'country' => $request->country,
+            'address' => $request->address,
+            'city' => $request->city,
+            'state' => $request->state,
+            'zip' => $request->zip,
+            'seat_number' =>$request->seat_number,
+            'hide_date_event_page' =>isset($request->checkbox) ? 1 : 0,
+            'description' => $request->event_des,
+            'event_status' => $request->status,
+            'updated_at'=>date('Y-m-d h:i:s')
+        ];
+
+       
+        try {
+            
+        DB::table('events')->where('id',$request->id)->update($data);
+       
+           return redirect('/event-setup/'.$request->id.'/edit-event')->with('EventSuccess','Your Event Updated Successfully !');
+
+        } catch (\Exception $th) {
+            return redirect('/event-setup/'.$request->id.'/edit-event')->with('EventDanger',$th->getMessage());
+        }
 
     }
 

@@ -1,11 +1,22 @@
 
 <div class="setting-form">
     <div class="user-data full-width">
-        <div class="add-event-bg">
-        <form class="form-horizontal" method="post" action="{{ route('createEvent') }}" enctype="multipart/form-data">
+        <div class="add-event-bg"><br>
+        
+        <form class="form-horizontal" method="post" action="{{ route('edit-event') }}" enctype="multipart/form-data">
+         
             {{ csrf_field() }}
                     <div class="flash_msg">
-                        @include("layouts.includes.flash")
+                    @if(Session::has('EventSuccess'))
+                            <div class="alert alert-success alert-dismissible text-center display-10" role="alert">
+                                {{ Session::get('EventSuccess') }}
+                            </div>
+                        @endif
+                        @if(Session::has('EventDanger'))
+                            <div class="alert alert-danger alert-dismissible text-center display-10" role="alert">
+                                {{ Session::get('EventDanger') }}
+                            </div>
+                        @endif
                     </div>
                     <div class="input-section-item">
                         <div class="add-input-title">								
@@ -21,6 +32,7 @@
                                         <strong>{{ $errors->first('event_title') }}</strong>
                                     </span>
                                     @endif
+                                    <input  name="id" type="text" value="{{$event_details->id}}" hidden>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="select-bg">									
@@ -121,7 +133,7 @@
                                         @endif
                                     </div>
                                     <div class="col-md-4">
-                                        <input class="add-inputs" value="{{ $event_details->state }}"  name="zip" type="text" placeholder="Zip/Postal" required>
+                                        <input class="add-inputs" value="{{ $event_details->zip }}"  name="zip" type="text" placeholder="Zip/Postal" required>
                                         @if ($errors->has('zip'))
                                         <span class="help-block text-danger">
                                             <strong>{{ $errors->first('zip') }}</strong>
