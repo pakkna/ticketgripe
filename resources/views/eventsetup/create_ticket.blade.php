@@ -7,6 +7,9 @@
     <form class="form-horizontal" method="post" action="{{ route('/') }}" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="user-data full-width">
+            <div class="about-left-heading">
+                <h3> <i class="fas fa-plus mr-2"></i> Add Ticket</h3>
+            </div>
             <div class="flash_msg">
             @if(Session::has('UserinfoSuccess'))
                     <div class="alert alert-success alert-dismissible text-center display-10" role="alert">
@@ -18,9 +21,6 @@
                         {{ Session::get('userinfoDanger') }}
                     </div>
                 @endif
-            </div>
-            <div class="about-left-heading">
-                <h3>Personal Info</h3>
             </div>
             <div class="prsnl-info">
                 <div class="row">

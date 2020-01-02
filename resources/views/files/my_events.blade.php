@@ -4,7 +4,7 @@
         <div class="container">
             <div class="dash-discussions mb20">
                 <div class="main-section">
-                <div class="all-search-filters">
+                <!-- <div class="all-search-filters">
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-12">
@@ -36,7 +36,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="all-search-events">
                     @include("layouts.includes.flash")								
                         <div class="row">
