@@ -48,32 +48,32 @@ class HomeController extends Controller
     public function edit_user_avatar(Request $request)
     {
         $validatedData = $request->validate([
-            "avatar_img" => "nullable|mimes:jpeg,bmp,png",
+            "avatar" => "nullable|mimes:jpeg,bmp,png",
             "avatar_bg" => "nullable|mimes:jpeg,bmp,png|dimensions:width=1280,height=518",
         ]);
-        if ($request->avatar_img != null) {
-            $upload_path=FileUpload($request->file('avatar_img'),'profile_pic');
-            echo '<pre>'; 
-            echo '======================<br>';
-            print_r($upload_path);
-            echo '<br>======================';
-            exit();
-        }else{
 
+        if (!empty($request->avatar)) {
+            $upload_path1=EventImageUpload($request->file('avatar'),'profile_pic');
+        }else{
+            $upload_path1 = DB::table('users')->select('image')->where('id', Auth::user()->id)->first();
+            $upload_path1=$upload_path1->image;
         }
-        // $upload_path=EventImageUpload($request->file('event_flyer'),'event_flayer');
+        if (!empty($request->avatar_bg)) {
+            $upload_path2=EventImageUpload($request->file('avatar_bg'),'profile_cover');
+        }else{
+            $upload_path2 = DB::table('users')->select('cover_pic')->where('id', Auth::user()->id)->first();
+            $upload_path2=$upload_path2->cover_pic;
+        }
 
         $data=[
-            'avatar_img' => $request->fullname,
-            'avatar_bg' => $request->mobile,
-            'country' => $request->country,
-            'organization' => $request->organaization
+            'image' => $upload_path1,
+            'cover_pic' => $upload_path2,
         ];
         try {
             $dataSet = DB::table('users')->where('id', Auth::user()->id)->update($data);
-            return redirect()->route('UserSetting')->with('flashMessageSuccess','Information updated succeessfully !');
+            return redirect('user-setting/profile')->with('flashMessageSuccess','Information updated succeessfully !');
         } catch (\Exception $th) {
-            return redirect()->route('UserSetting')->with('flashMessageDanger',$th->getMessage());
+            return redirect('user-setting/profile')->with('flashMessageDanger',$th->getMessage());
         }
     }
 }
