@@ -9,8 +9,9 @@ Route::group(['middleware' => 'auth'], function () {
     //my-events page
     Route::get("user-setting/{page?}","HomeController@user_setting")->name("UserSetting");
     Route::post("basic-info","HomeController@edit_basic_info")->name("BasicInfo");
-    Route::post("basic-info2","HomeController@edit_user_avatar")->name("user-avater-cng");
-    Route::post("basic-info2","HomeController@edit_user_email")->name("UserEmailCng");
+    Route::post("basic-info2","HomeController@edit_user_avatar")->name("UserAvatarCng");
+    Route::post("basic-info3","HomeController@edit_user_email")->name("UserEmailCng");
+    Route::post("basic-info4","HomeController@edit_user_pass")->name("UserpassCng");
     Route::get("my-events","EventControler@show_my_events")->name("MyEvents");
     Route::get("add-events","EventControler@show_event_form")->name("AddEvent");
     Route::post("insert-event","EventControler@create_event")->name("createEvent");

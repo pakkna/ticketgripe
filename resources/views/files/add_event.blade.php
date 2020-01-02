@@ -141,7 +141,7 @@
                                         <div class="row">											
                                             <div class="col-md-6">											
                                                 <div class="select-bg">									
-                                                <div class="input-group date" id="id_0">
+                                                    <div class="input-group date" id="id_0">
                                                         <span class="date-span">Start Time :</span>
                                                         <input value="{{ old('start_time') }}"  id="out_datetime" name="start_time" type="text" class="form-control" style="border-top-left-radius: .25rem;border-bottom-left-radius: .25rem;" required>
                                                         <div class="input-group-addon input-group-append">
@@ -210,7 +210,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-4">											
-                                            <div class="input-section-item" style="border: 0px solid red;">
+                                                <div class="input-section-item" style="border: 0px solid red;">
                                                     <div class="custom-control custom-checkbox mb-3">
                                                         <input type="checkbox" class="custom-control-input" id="customCheck" name="checkbox">
                                                         <label class="custom-control-label" for="customCheck" style="font-size: 15px;">Hide Expire date on event page </label>

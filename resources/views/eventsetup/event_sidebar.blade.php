@@ -1,6 +1,6 @@
 @include('layouts.master_layout.header_event')
     <div class="dash-tab-links">
-        <div class="container">
+        <div class="container" style="max-width: 1368px !important;">
             <div class="setting-page mb-20">
                 <div class="row">
                     <div class="col-lg-3 col-md-5">
@@ -46,7 +46,6 @@
     </div>
 </main>
 <!-- Body End -->
-<script src="{!! asset('master/js/jquery.min.js') !!}"></script>
 
 @include('layouts.master_layout.footer')
 <script>
