@@ -96,7 +96,7 @@
                     </div>
                     <div id="1" class="col-lg-9 col-md-7 tab-pane" style="display: none;">
                         <div class="setting-form">
-                            <form class="form-horizontal" method="post" action="{{ route('UserAvatarCng') }}" enctype="multipart/form-data">
+                            <form class="form-horizontal" method="post" action="{{route('user-avater-cng')}}" enctype="multipart/form-data">
                                 {{ csrf_field() }}
                                 <div class="user-data full-width">
                                 @include("layouts.includes.flash")

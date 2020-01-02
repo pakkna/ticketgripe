@@ -13,8 +13,9 @@
                                 <a id="edit-event" onclick="openForm(1,this)" class="tab-item-1 tab-open" href="javascript:void(0)"><i class="fas fa-edit mr-2" aria-hidden="true"></i>Edit Events</a>
                                 <a id="create-ticket" onclick="openForm(2,this)" class="tab-item-1 tab-open" href="javascript:void(0)"><i class="fas fa-plus mr-2" aria-hidden="true"></i>Add Ticket</a>
                                 <a id="tickets" onclick="openForm(3,this)" class="tab-item-1 tab-open" href="javascript:void(0)"><i class="fas fa-paste mr-2" aria-hidden="true"></i>Tickets</a>
-                                <a id="orders" onclick="openForm(4,this)" class="tab-item-1 tab-open" href="javascript:void(0)"><i class="fas fa-shopping-cart mr-2"></i>Orders</a>
-                                <a id="attende" onclick="openForm(5,this)" class="tab-item-1 tab-open" href="javascript:void(0)"><i class="fas fa-list"></i>Attende List</a>
+                                <a id="order-form" onclick="openForm(4,this)" class="tab-item-1 tab-open" href="javascript:void(0)"><i class="fas fa-shopping-cart mr-2"></i>Order Form</a>
+                                <a id="orders" onclick="openForm(5,this)" class="tab-item-1 tab-open" href="javascript:void(0)"><i class="fas fa-shopping-cart mr-2"></i>Orders</a>
+                                <a id="attende" onclick="openForm(6,this)" class="tab-item-1 tab-open" href="javascript:void(0)"><i class="fas fa-list"></i>Attende List</a>
                             </div>
                         </div>
                     </div>
@@ -31,9 +32,12 @@
                        @include('eventsetup.ticket_setup')					
                     </div>
                     <div id="4" class="col-lg-9 col-md-7 tab-pane" style="display: none;">	
-                       @include('eventsetup.orders') 					
+                    @include('eventsetup.orders_form') 					
                     </div>
                     <div id="5" class="col-lg-9 col-md-7 tab-pane" style="display: none;">	
+                       @include('eventsetup.orders') 					
+                    </div>
+                    <div id="6" class="col-lg-9 col-md-7 tab-pane" style="display: none;">	
                        @include('eventsetup.attendee_list') 					
                     </div>		
                 </div>
@@ -53,6 +57,7 @@
         for (i = 0; i < tabopen.length; i++) {
             tabopen[i].style.display = "none";
             click[i].classList.remove("active");
+            window.history.pushState("object or string", "Title", "/event-setup/{{Request::segment(2)}}/"+the.id);
         }
         document.getElementById(tabAction).style.display = "block";
         if (the == 1) {
@@ -63,4 +68,5 @@
     }
     <?php null !== Request::segment(3) ? $click=Request::segment(3):$click="overview" ?> 
     document.getElementById('{{$click}}').click();
+    window.history.pushState("object or string", "Title", "/event-setup/{{Request::segment(2)}}/{{$click}}");
 </script>

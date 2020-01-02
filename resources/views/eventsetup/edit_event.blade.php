@@ -7,13 +7,13 @@
          
             {{ csrf_field() }}
                     <div class="flash_msg">
-                    @if(Session::has('EventSuccess'))
-                            <div class="alert alert-success alert-dismissible text-center display-10" role="alert">
+                       @if(Session::has('EventSuccess'))
+                            <div class="alert alert-success alert-dismissible text-center display-15" role="alert">
                                 {{ Session::get('EventSuccess') }}
                             </div>
                         @endif
                         @if(Session::has('EventDanger'))
-                            <div class="alert alert-danger alert-dismissible text-center display-10" role="alert">
+                            <div class="alert alert-danger alert-dismissible text-center display-15" role="alert">
                                 {{ Session::get('EventDanger') }}
                             </div>
                         @endif
@@ -60,9 +60,9 @@
                                 <br>
                                 <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon4">http://ticketgripe.com/event/</span>
+                                    <span class="input-group-text display-10" id="basic-addon4">http://ticketgripe.com/event/</span>
                                 </div>
-                                <input type="text" value="{{ !empty($event_details->custom_link)? $event_details->custom_link : ''}}" name="custom_link" class="form-control" id="basic-url" aria-describedby="basic-addon4">
+                                <input type="text" value="{{ !empty($event_details->custom_link)? $event_details->custom_link : ''}}" name="custom_link" class="form-control display-10" id="basic-url" aria-describedby="basic-addon4">
                                 @if ($errors->has('custom_link'))
                                     <span class="help-block text-danger">
                                         <strong>{{ $errors->first('custom_link') }}</strong>
@@ -255,7 +255,7 @@
                             <h6>Event Description*</h6>
                         </div>
                         <div class="add-input-items">
-                            <textarea class="add-event-des" name="event_des" placeholder="Description here">{{$event_details->description }}</textarea>
+                            <textarea class="add-event-des" name="event_des" placeholder="Description here">{{$event_details->description}}</textarea>
                             <script>
                                 CKEDITOR.replace('event_des');
                             </script>

@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Http\Request;
 class EditEventRequest extends FormRequest
 {
     /**
@@ -27,7 +27,7 @@ class EditEventRequest extends FormRequest
             "event_title" => "required|string",
             "status" => "required|string",
             "event_flyer" => "nullable|mimes:jpeg,bmp,png|dimensions:min_width=1280,min_height=518",
-            "custom_link" => "nullable|unique:events",
+            "custom_link" => "nullable|unique:events,custom_link,".$this->get('id'),
             "category" => "required",
             "country" => "required",
             "city" => "required",
