@@ -94,9 +94,10 @@ class EventControler extends Controller
 
     public function event_setup_view($id){
 
+        
         $event_details = DB::table('events')
         ->leftjoin('tickets','events.id','=','tickets.event_id')
-        ->select('events.id','title','start_date','end_date','city','seat_number','image_path','seat_number','custom_link','ticket_price','quantity','selling_currency')
+        ->select('events.id','title','image_path','start_date','end_date','country','address','city','state','zip','event_status','seat_number','category','hide_date_event_page','description','custom_link')
         ->where('events.id',$id)
         //need collection and soldout form order table
         ->first();

@@ -5,6 +5,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, shrink-to-fit=9">
         <meta name="description" content="Ticketgripe is online E-ticketing system.">
+        <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+        <META HTTP-EQUIV="EXPIRES" CONTENT="Mon, 22 Jul 2002 11:12:01 GMT">
         <meta name="author" content="innovadeus">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>Ticket Gripe</title>
