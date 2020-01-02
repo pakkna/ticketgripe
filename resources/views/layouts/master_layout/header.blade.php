@@ -140,24 +140,24 @@
                         <div class="my-dash-dt">
                             <h3>{{ Auth::user()->fullname }}</h3>
                             <span>Member since {{date("jS F Y", strtotime(Auth::user()->created_at))}}</span>
-                            <span>{{Auth::user()->country==null ? ' ' : '<i class="fas fa-map-marker-alt"></i>'.Auth::user()->country}}</span>
+                            <span> {{Auth::user()->country==null ? ' ' : ' <i class="fas fa-map-marker-alt"></i> '.Auth::user()->country}} </span>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-7 col-md-6 col-sm-12">
-                    <div class="search-wrapper">
+                    <!-- <div class="search-wrapper">
                         <div class="input-holder">
                             <input type="text" name="search" class="search-input" placeholder="Type to search" />
                             <button class="search-icon" onclick="searchToggle(this, event);"><span></span></button>
                         </div>
                         <span class="close" onclick="searchToggle(this, event);"></span>
-                    </div>
+                    </div> -->
                     <ul class="right-details">
-                        <!-- <li>
+                        <li>
                             <div class="my-all-evnts">
                                 <a href="{{route('MyEvents')}}">View Events</a>
                             </div>
-                        </li> -->
+                        </li>
                         <li>
                             <div class="all-dis-evnt">
                                 <div class="dscun-txt">Events</div>

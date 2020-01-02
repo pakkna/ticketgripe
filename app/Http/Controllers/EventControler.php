@@ -41,7 +41,6 @@ class EventControler extends Controller
         $upload_path=EventImageUpload($request->file('event_flyer'),'event_flayer');
 
         $data= [
-
             'title' => $request->event_title,
             'start_date' => datetime_validate($request->start_time),
             'end_date' => datetime_validate($request->end_time),
