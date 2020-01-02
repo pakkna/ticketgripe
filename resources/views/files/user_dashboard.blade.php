@@ -10,9 +10,9 @@
                             </div>
                             <div class="categories-items">
                                 <a id="defaultOpen" onclick="openForm(0,this)" class="tab-item-1 tab-open" href="javascript:void(0)">Personal Info</a>
-                                <a onclick="openForm(1,this)" class="tab-item-1 tab-open" href="javascript:void(0)">Profile</a>
-                                <a onclick="openForm(2,this)" class="tab-item-1 tab-open" href="javascript:void(0)">Email Setting</a>
-                                <a onclick="openForm(3,this)" class="tab-item-1 tab-open" href="javascript:void(0)">Change Password</a>
+                                <a id="profile" onclick="openForm(1,this)" class="tab-item-1 tab-open" href="javascript:void(0)">Profile</a>
+                                <a id="email" onclick="openForm(2,this)" class="tab-item-1 tab-open" href="javascript:void(0)">Email Setting</a>
+                                <a id="passsword" onclick="openForm(3,this)" class="tab-item-1 tab-open" href="javascript:void(0)">Change Password</a>
                             </div>
                         </div>
                     </div>
@@ -99,6 +99,7 @@
                             <form class="form-horizontal" method="post" action="{{ route('UserAvatarCng') }}" enctype="multipart/form-data">
                                 {{ csrf_field() }}
                                 <div class="user-data full-width">
+                                @include("layouts.includes.flash")
                                     <div class="about-left-heading">
                                         <h3>Profile</h3>										
                                     </div>
@@ -108,24 +109,28 @@
                                                 <script src="{!! asset('master/js/jquery.min.js') !!}"></script>
                                                 <div class="form-group">
                                                     <label class="avatar-label">Avatar*</label>
-                                                    <?php $def_logo = '<div class="setting-dp avatar-img" id="image0Preview" style="background-image: url('.'master/images/event-view/unknown.png'.')">';
-                                                    ?>
-                                                    <?php echo Auth::user()->image==null ? $def_logo : Auth::user()->image ?>
+                                                    <img class="setting-dp avatar-img" id="image0Preview" src="{!!asset(Auth::user()->image)!!}">
+                                                        </img>
                                                     </div>														
                                                     <div class="setting-upload">
                                                         <span>Upload a new avatar.</span>
                                                         <div class="addpic" id="OpenImgUpload">
-                                                            <input type="file" id="avatar_img" name="avatar" accept=".png, .jpg, .jpeg" required>
+                                                            <input type="file" id="avatar_img" name="avatar" accept=".png, .jpg, .jpeg">
                                                             <label for="avatar_img">Choose File</label>
                                                             <p>JPEG / PNG 150x150*</p>
                                                         </div>
+                                                        @if ($errors->has('avatar'))
+                                                        <span class="help-block">
+                                                            <strong>{{ $errors->first('avatar') }}</strong>
+                                                        </span>
+                                                        @endif
                                                     </div>
                                                     <script>
                                                         function readURL(input) {
                                                             if (input.files && input.files[0]) {
                                                                 var reader = new FileReader();
                                                                 reader.onload = function(e) {
-                                                                    $('#image0Preview').css('background-image', 'url('+e.target.result +')');
+                                                                    $('#image0Preview').attr('src', e.target.result);
                                                                     $('#image0Preview').hide();
                                                                     $('#image0Preview').fadeIn(650);
                                                                 }
@@ -139,9 +144,8 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Background*</label>	
-                                                    <?php $def_bg = '<div class="setting-bg avatar-bg" id="imagePreview1" style="background-image: url('.'master/images/event-view/demo.jpg'.')">';
-                                                    ?>
-                                                    <?php echo Auth::user()->image==null ? $def_bg : Auth::user()->image ?>	
+                                                    <img class="setting-bg avatar-bg" id="imagePreview1" src="{!!asset(Auth::user()->cover_pic)!!}">
+                                                        </img>
                                                     </div>
                                                     <div class="setting-upload">
                                                         <span>Upload a new background.</span>
@@ -150,13 +154,18 @@
                                                             <label for="avatar_bg">Choose File</label>
                                                             <p>JPEG / PNG 150x150*</p>
                                                         </div>
+                                                        @if ($errors->has('avatar_bg'))
+                                                        <span class="help-block">
+                                                            <strong>{{ $errors->first('avatar_bg') }}</strong>
+                                                        </span>
+                                                        @endif
                                                     </div>	
                                                     <script>
                                                         function readURL2(input) {
                                                             if (input.files && input.files[0]) {
                                                                 var reader = new FileReader();
                                                                 reader.onload = function(e) {
-                                                                    $('#imagePreview1').css('background-image', 'url('+e.target.result +')');
+                                                                    $('#imagePreview1').attr('src', e.target.result);
                                                                     $('#imagePreview1').hide();
                                                                     $('#imagePreview1').fadeIn(650);
                                                                 }
@@ -173,15 +182,14 @@
                                                 </div>
                                             </div>												
                                         </div>
-                                    </div>
-                                </div>
                             </form>
                         </div>	
                     </div>
                     <div id="2" class="col-lg-9 col-md-7 tab-pane" style="display: none;">	
                         <div class="setting-form">
-                            <form>
+                            <form class="form-horizontal" method="post" action="{{ route('UserAvatarCng') }}" enctype="multipart/form-data">
                                 <div class="user-data full-width">
+                                @include("layouts.includes.flash")
                                     <div class="about-left-heading">
                                         <h3>Email Setting</h3>										
                                     </div>
@@ -208,8 +216,9 @@
                     </div>
                     <div id="3" class="col-lg-9 col-md-7 tab-pane" style="display: none;">	
                         <div class="setting-form">
-                            <form>
+                            <form class="form-horizontal" method="post" action="{{ route('UserEmailCng') }}" enctype="multipart/form-data">
                                 <div class="user-data full-width">
+                                @include("layouts.includes.flash")
                                     <div class="about-left-heading">
                                         <h3>Change Password</h3>										
                                     </div>
@@ -258,4 +267,6 @@
         }
     }
     document.getElementById("defaultOpen").click();
+    <?php null !== Request::segment(2) ? $click=Request::segment(2):$click="defaultOpen" ?> 
+    document.getElementById('{{$click}}').click();
 </script>

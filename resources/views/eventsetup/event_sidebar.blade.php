@@ -9,7 +9,7 @@
                                 <h3>Your Details</h3>
                             </div>
                             <div class="categories-items">
-<a id="overview" onclick="openForm(0,this)" class="tab-item-1 tab-open" href="javascript:void(0)"><i class="fas fa-sitemap mr-2" aria-hidden="true"></i>Event Overview</a>
+                                <a id="overview" onclick="openForm(0,this)" class="tab-item-1 tab-open" href="javascript:void(0)"><i class="fas fa-sitemap mr-2" aria-hidden="true"></i>Event Overview</a>
                                 <a id="edit-event" onclick="openForm(1,this)" class="tab-item-1 tab-open" href="javascript:void(0)"><i class="fas fa-edit mr-2" aria-hidden="true"></i>Edit Events</a>
                                 <a id="tickets" onclick="openForm(2,this)" class="tab-item-1 tab-open" href="javascript:void(0)"><i class="fas fa-paste mr-2" aria-hidden="true"></i>Tickets</a>
                                 <a id="orders" onclick="openForm(3,this)" class="tab-item-1 tab-open" href="javascript:void(0)"><i class="fas fa-shopping-cart mr-2"></i>Orders</a>
