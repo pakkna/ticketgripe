@@ -32,6 +32,7 @@ class CreateEventsTable extends Migration
             $table->string('zip')->nullable();
             $table->string('event_status');
             $table->integer('page_visitor')->nullable();
+            $table->float('event_credit')->nullable()->default(0);
             $table->timestamps();
             $table->engine = 'InnoDB'; 	
             $table->charset = 'utf8';

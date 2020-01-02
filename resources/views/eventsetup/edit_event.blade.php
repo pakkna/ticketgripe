@@ -18,6 +18,7 @@
                             </div>
                         @endif
                     </div>
+
                     <div class="input-section-item">
                         <div class="add-input-title">								
                             <i class="fas fa-pencil-alt"></i>
@@ -48,6 +49,26 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="input-section-item">
+                        <div class="add-input-title">								
+                            <i class="fas fa-pencil-alt"></i>
+                            <h6>Customize Your Event Link</h6>
+                        </div>
+                        <div class="add-input-items">
+                                <br>
+                                <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon4">http://ticketgripe.com/event/</span>
+                                </div>
+                                <input type="text" value="{{ !empty($event_details->custom_link)? $event_details->custom_link : ''}}" name="custom_link" class="form-control" id="basic-url" aria-describedby="basic-addon4">
+                                @if ($errors->has('custom_link'))
+                                    <span class="help-block text-danger">
+                                        <strong>{{ $errors->first('custom_link') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
                         </div>
                     </div>
                     <div class="input-section-item">

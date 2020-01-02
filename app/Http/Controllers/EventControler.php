@@ -12,7 +12,10 @@ use App\Http\Requests\EditEventRequest;
 class EventControler extends Controller
 {
     
-   
+   public function __construct()
+   {
+    date_default_timezone_set('Asia/Dhaka');
+   }
     public function show_my_events(){
 
         $event_details = DB::table('events')
@@ -107,6 +110,7 @@ class EventControler extends Controller
             'start_date' => datetime_validate($request->start_time),
             'end_date' => datetime_validate($request->end_time),
             'image_path' => $upload_path,
+            'custom_link' => !empty($request->custom_link) ? $request->custom_link : NULL,
             'category' => $request->category,
             'country' => $request->country,
             'address' => $request->address,

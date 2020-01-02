@@ -11,9 +11,10 @@
                             <div class="categories-items">
 <a id="overview" onclick="openForm(0,this)" class="tab-item-1 tab-open" href="javascript:void(0)"><i class="fas fa-sitemap mr-2" aria-hidden="true"></i>Event Overview</a>
                                 <a id="edit-event" onclick="openForm(1,this)" class="tab-item-1 tab-open" href="javascript:void(0)"><i class="fas fa-edit mr-2" aria-hidden="true"></i>Edit Events</a>
-                                <a id="tickets" onclick="openForm(2,this)" class="tab-item-1 tab-open" href="javascript:void(0)"><i class="fas fa-paste mr-2" aria-hidden="true"></i>Tickets</a>
-                                <a id="orders" onclick="openForm(3,this)" class="tab-item-1 tab-open" href="javascript:void(0)"><i class="fas fa-shopping-cart mr-2"></i>Orders</a>
-                                <a id="attende" onclick="openForm(4,this)" class="tab-item-1 tab-open" href="javascript:void(0)"><i class="fas fa-list"></i>Attende List</a>
+                                <a id="create-ticket" onclick="openForm(2,this)" class="tab-item-1 tab-open" href="javascript:void(0)"><i class="fas fa-plus mr-2" aria-hidden="true"></i>Add Ticket</a>
+                                <a id="tickets" onclick="openForm(3,this)" class="tab-item-1 tab-open" href="javascript:void(0)"><i class="fas fa-paste mr-2" aria-hidden="true"></i>Tickets</a>
+                                <a id="orders" onclick="openForm(4,this)" class="tab-item-1 tab-open" href="javascript:void(0)"><i class="fas fa-shopping-cart mr-2"></i>Orders</a>
+                                <a id="attende" onclick="openForm(5,this)" class="tab-item-1 tab-open" href="javascript:void(0)"><i class="fas fa-list"></i>Attende List</a>
                             </div>
                         </div>
                     </div>
@@ -23,13 +24,16 @@
                     <div id="1" class="col-lg-9 col-md-7 tab-pane" style="display: none;">
                         @include('eventsetup.edit_event')
                     </div>
-                    <div id="2" class="col-lg-9 col-md-7 tab-pane" style="display: none;">	
-                       @include('eventsetup.ticket_setup')					
+                    <div id="2" class="col-lg-9 col-md-7 tab-pane" style="display: none;">
+                        @include('eventsetup.create_ticket')
                     </div>
                     <div id="3" class="col-lg-9 col-md-7 tab-pane" style="display: none;">	
-                       @include('eventsetup.orders') 					
+                       @include('eventsetup.ticket_setup')					
                     </div>
                     <div id="4" class="col-lg-9 col-md-7 tab-pane" style="display: none;">	
+                       @include('eventsetup.orders') 					
+                    </div>
+                    <div id="5" class="col-lg-9 col-md-7 tab-pane" style="display: none;">	
                        @include('eventsetup.attendee_list') 					
                     </div>		
                 </div>

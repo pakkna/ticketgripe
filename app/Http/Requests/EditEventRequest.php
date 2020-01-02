@@ -27,6 +27,7 @@ class EditEventRequest extends FormRequest
             "event_title" => "required|string",
             "status" => "required|string",
             "event_flyer" => "nullable|mimes:jpeg,bmp,png|dimensions:min_width=1280,min_height=518",
+            "custom_link" => "nullable|unique:events",
             "category" => "required",
             "country" => "required",
             "city" => "required",
