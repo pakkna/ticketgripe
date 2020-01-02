@@ -18,8 +18,12 @@
                     </div>
                     <div id="0" class="col-lg-9 col-md-7 tab-pane" style="display: none;">
                         <div class="setting-form">
-                            <form>
+                            <form class="form-horizontal" method="post" action="{{ route('BasicInfo') }}" enctype="multipart/form-data">
+                                {{ csrf_field() }}
                                 <div class="user-data full-width">
+                                    <div class="flash_msg">
+                                        @include("layouts.includes.flash")
+                                    </div>
                                     <div class="about-left-heading">
                                         <h3>Personal Info</h3>
                                     </div>
@@ -35,6 +39,11 @@
                                                 <div class="form-group">
                                                     <label>Full Name*</label>
                                                     <input class="payment-input" data-language="en" type="text" name="fullname" placeholder="Full Name" value="{{ Auth::user()->fullname }}" required>
+                                                    @if ($errors->has('fullname'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('fullname') }}</strong>
+                                                    </span>
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-12">
@@ -46,19 +55,34 @@
                                             <div class="col-lg-6 col-md-12">
                                                 <div class="form-group">
                                                     <label>Phone Number*</label>
-                                                    <input class="payment-input" type="tel" placeholder="017xxxxxxxx" value="{{ Auth::user()->mobile }}" required>
+                                                    <input class="payment-input" type="tel" name="mobile" placeholder="017xxxxxxxx" value="{{ Auth::user()->mobile }}">
+                                                    @if ($errors->has('mobile'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('mobile') }}</strong>
+                                                    </span>
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-12">
                                             <div class="form-group">
                                                     <label>Country*</label>
-                                                    <input class="payment-input" data-language="en" type="text" name="country" placeholder="Country" value="{{ Auth::user()->country }}" required>
+                                                    <input class="payment-input" data-language="en" type="text" name="country" placeholder="Country" value="{{ Auth::user()->country }}">
+                                                    @if ($errors->has('country'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('country') }}</strong>
+                                                    </span>
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-12">
                                                 <div class="form-group">
                                                     <label>Organaization*</label>
-                                                    <input class="payment-input" data-language="en" type="text" name="organaization" placeholder="Organaization" value="{{ Auth::user()->organization }}" required>
+                                                    <input class="payment-input" data-language="en" type="text" name="organaization" placeholder="Organaization" value="{{ Auth::user()->organization }}">
+                                                    @if ($errors->has('organaization'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('organaization') }}</strong>
+                                                    </span>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -72,83 +96,86 @@
                     </div>
                     <div id="1" class="col-lg-9 col-md-7 tab-pane" style="display: none;">
                         <div class="setting-form">
-                            <div class="user-data full-width">
-                                <div class="about-left-heading">
-                                    <h3>Profile</h3>										
-                                </div>
-                                <div class="prsnl-info">
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12">										
-                                            <script src="{!! asset('master/js/jquery.min.js') !!}"></script>
-                                            <div class="form-group">
-                                                <label class="avatar-label">Avatar*</label>
-                                                <?php $def_logo = '<div class="setting-dp avatar-img" id="image0Preview" style="background-image: url('.'master/images/event-view/unknown.png'.')">';
-                                                ?>
-                                                <?php echo Auth::user()->image==null ? $def_logo : Auth::user()->image ?>
-                                                </div>														
-                                                <div class="setting-upload">
-                                                    <span>Upload a new avatar.</span>
-                                                    <div class="addpic" id="OpenImgUpload">
-                                                        <input type="file" id="avatar_img" name="avatar" accept=".png, .jpg, .jpeg">
-                                                        <label for="avatar_img">Choose File</label>
-                                                        <p>JPEG / PNG 150x150*</p>
+                            <form class="form-horizontal" method="post" action="{{ route('UserAvatarCng') }}" enctype="multipart/form-data">
+                                {{ csrf_field() }}
+                                <div class="user-data full-width">
+                                    <div class="about-left-heading">
+                                        <h3>Profile</h3>										
+                                    </div>
+                                    <div class="prsnl-info">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12">										
+                                                <script src="{!! asset('master/js/jquery.min.js') !!}"></script>
+                                                <div class="form-group">
+                                                    <label class="avatar-label">Avatar*</label>
+                                                    <?php $def_logo = '<div class="setting-dp avatar-img" id="image0Preview" style="background-image: url('.'master/images/event-view/unknown.png'.')">';
+                                                    ?>
+                                                    <?php echo Auth::user()->image==null ? $def_logo : Auth::user()->image ?>
+                                                    </div>														
+                                                    <div class="setting-upload">
+                                                        <span>Upload a new avatar.</span>
+                                                        <div class="addpic" id="OpenImgUpload">
+                                                            <input type="file" id="avatar_img" name="avatar" accept=".png, .jpg, .jpeg" required>
+                                                            <label for="avatar_img">Choose File</label>
+                                                            <p>JPEG / PNG 150x150*</p>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <script>
-                                                    function readURL(input) {
-                                                        if (input.files && input.files[0]) {
-                                                            var reader = new FileReader();
-                                                            reader.onload = function(e) {
-                                                                $('#image0Preview').css('background-image', 'url('+e.target.result +')');
-                                                                $('#image0Preview').hide();
-                                                                $('#image0Preview').fadeIn(650);
+                                                    <script>
+                                                        function readURL(input) {
+                                                            if (input.files && input.files[0]) {
+                                                                var reader = new FileReader();
+                                                                reader.onload = function(e) {
+                                                                    $('#image0Preview').css('background-image', 'url('+e.target.result +')');
+                                                                    $('#image0Preview').hide();
+                                                                    $('#image0Preview').fadeIn(650);
+                                                                }
+                                                                reader.readAsDataURL(input.files[0]);
                                                             }
-                                                            reader.readAsDataURL(input.files[0]);
                                                         }
-                                                    }
-                                                    $("#avatar_img").change(function() {
-                                                        readURL(this);
-                                                    });
-                                                </script>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Background*</label>	
-                                                <?php $def_bg = '<div class="setting-bg avatar-bg" id="imagePreview1" style="background-image: url('.'master/images/event-view/demo.jpg'.')">';
-                                                ?>
-                                                <?php echo Auth::user()->image==null ? $def_bg : Auth::user()->image ?>	
+                                                        $("#avatar_img").change(function() {
+                                                            readURL(this);
+                                                        });
+                                                    </script>
                                                 </div>
-                                                <div class="setting-upload">
-                                                    <span>Upload a new background.</span>
-                                                    <div class="addpic" id="OpenImgUpload1">
-                                                        <input type="file" id="avatar_bg" name="avatar_bg" accept=".png, .jpg, .jpeg">
-                                                        <label for="avatar_bg">Choose File</label>
-                                                        <p>JPEG / PNG 150x150*</p>
+                                                <div class="form-group">
+                                                    <label>Background*</label>	
+                                                    <?php $def_bg = '<div class="setting-bg avatar-bg" id="imagePreview1" style="background-image: url('.'master/images/event-view/demo.jpg'.')">';
+                                                    ?>
+                                                    <?php echo Auth::user()->image==null ? $def_bg : Auth::user()->image ?>	
                                                     </div>
-                                                </div>	
-                                                <script>
-                                                    function readURL2(input) {
-                                                        if (input.files && input.files[0]) {
-                                                            var reader = new FileReader();
-                                                            reader.onload = function(e) {
-                                                                $('#imagePreview1').css('background-image', 'url('+e.target.result +')');
-                                                                $('#imagePreview1').hide();
-                                                                $('#imagePreview1').fadeIn(650);
+                                                    <div class="setting-upload">
+                                                        <span>Upload a new background.</span>
+                                                        <div class="addpic" id="OpenImgUpload1">
+                                                            <input type="file" id="avatar_bg" name="avatar_bg" accept=".png, .jpg, .jpeg">
+                                                            <label for="avatar_bg">Choose File</label>
+                                                            <p>JPEG / PNG 150x150*</p>
+                                                        </div>
+                                                    </div>	
+                                                    <script>
+                                                        function readURL2(input) {
+                                                            if (input.files && input.files[0]) {
+                                                                var reader = new FileReader();
+                                                                reader.onload = function(e) {
+                                                                    $('#imagePreview1').css('background-image', 'url('+e.target.result +')');
+                                                                    $('#imagePreview1').hide();
+                                                                    $('#imagePreview1').fadeIn(650);
+                                                                }
+                                                                reader.readAsDataURL(input.files[0]);
                                                             }
-                                                            reader.readAsDataURL(input.files[0]);
                                                         }
-                                                    }
-                                                    $("#avatar_bg").change(function() {
-                                                        readURL2(this);
-                                                    });
-                                                </script>											
-                                            </div>
-                                            <div class="add-profile-btn">
-                                                <button class="setting-save-btn" type="submit">Save Changes</button>
-                                            </div>
-                                        </div>												
+                                                        $("#avatar_bg").change(function() {
+                                                            readURL2(this);
+                                                        });
+                                                    </script>											
+                                                </div>
+                                                <div class="add-profile-btn">
+                                                    <button class="setting-save-btn" type="submit">Save Changes</button>
+                                                </div>
+                                            </div>												
+                                        </div>
                                     </div>
                                 </div>
-                            </div>																																				
+                            </form>
                         </div>	
                     </div>
                     <div id="2" class="col-lg-9 col-md-7 tab-pane" style="display: none;">	
