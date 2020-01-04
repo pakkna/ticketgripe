@@ -367,7 +367,7 @@ main {
 }
 
 .dashboard-mp {
-    padding: 104px 0 50px !important;
+    padding: 61px 0 50px !important;
 }
 
 .right-details {
@@ -714,7 +714,7 @@ main {
 }
 
 .dashboard-mp {
-    padding: 104px 0 50px !important;
+    padding: 61px 0 50px !important;
 }
 
 .right-details {
@@ -1022,7 +1022,7 @@ main {
 }
 
 .dashboard-mp {
-    padding: 104px 0 50px !important;
+    padding: 61px 0 50px !important;
 }
 
 .right-details li {
@@ -1220,6 +1220,12 @@ main {
 	.padd-both-zero{
 		padding: 0px 23px !important;
 	}
+	.dash-todo-thumbnail-area1{
+		min-height: auto !important;
+	}
+	.dash-todo-thumbnail-area1 .todo-thumb1{
+		height: auto !important;
+	}
 }
 @media (max-width: 630px) {
 	.dash-dts{
@@ -1236,6 +1242,28 @@ main {
 @media (max-width: 468px) {
 	.search-wrapper.active{
 		right: -23% !important;
+	}
+	.my-dp-dash img {
+		width: 120px !important;
+		height: 120px !important;
+	}
+	.my-dash-dt {
+		margin-left: 142px !important;
+	}
+	.my-dash-dt h3{
+		font-size: 17px !important;
+	}
+	.my-dash-dt span {
+		font-size: 12px !important;
+	}
+	.dscun-txt {
+		font-size: 12px !important;
+	}
+	.dscun-numbr {
+		font-size: 18px !important;
+	}
+	.dash-dts {
+		height: auto !important;
 	}
 }
 @media (max-width: 420px) {

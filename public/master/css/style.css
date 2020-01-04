@@ -7734,3 +7734,13 @@ color:
     color:
     #313131;
 }
+#example_info {
+    font-size: 14px;
+}
+.page-link{
+    padding: 5px 12px !important;
+    font-size: 15px;
+}
+.page-link:hover{
+    color: #000000e0 !important;
+}
