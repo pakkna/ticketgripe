@@ -33,6 +33,7 @@ class CreateEventsTable extends Migration
             $table->string('event_status');
             $table->integer('page_visitor')->nullable();
             $table->float('event_credit')->nullable()->default(0);
+            $table->float('event_currency')->nullable()->default("BDT");
             $table->timestamps();
             $table->engine = 'InnoDB'; 	
             $table->charset = 'utf8';
