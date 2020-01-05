@@ -1,67 +1,38 @@
 <link rel="stylesheet" href="{!!asset('master/css/dataTables.bootstrap4.min.css') !!}">
-    <div class="dash-tab-links">
-        <div class="container">
-            <div class="dash-discussions mb20">
-                <div class="main-section">
-                <!-- <div class="all-search-filters">
-                        <div class="container">
+    <div class="setting-form">
+        <div class="user-data full-width">
+            <div class="about-left-heading">
+                <h3> <i class="fas fa-info mr-2"></i> Event Tickets</h3>
+            </div>
+            <div class="add-event-bg">
+                <div class="dash-discussions mb20">
+                    <div class="main-section">
+                        <div class="all-search-events">
+                        @include("layouts.includes.flash")								
                             <div class="row">
-                                <div class="col-md-12">
-                                    <div class="search-filters">
-                                        <div class="search-filters-left">	
-                                            <div class="dropdown">										
-                                                <a href="#" class="filter-d wt-mp dropdown-toggle-no-caret" role="button" data-toggle="dropdown" aria-expanded="false">Category<i class="fas fa-angle-down"></i></a>
-                                                <div class="dropdown-menu cate-dropdown" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 21px, 0px);">
-                                                    <a class="link-item" href="#">Music</a>
-                                                    <a class="link-item" href="#">Festival</a>	
-                                                    <a class="link-item" href="#">Art</a>
-                                                    <a class="link-item" href="#">Club</a>
-                                                    <a class="link-item" href="#">Comedy</a>
-                                                    <a class="link-item" href="#">Theatre</a>
-                                                    <a class="link-item" href="#">Promotions</a>
-                                                    <a class="link-item" href="#">Other</a>
-                                                </div>	
-                                            </div>	
-                                        </div>
-                                        <div class="search-filters-right dropdown">
-                                            <a href="#" class="filter-d dropdown-toggle-no-caret" role="button" data-toggle="dropdown" aria-expanded="false">All Dates<i class="fas fa-angle-down"></i> </a>
-                                            <div class="dropdown-menu date-dropdown dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(72px, 21px, 0px);">
-                                                <a class="link-item" href="#">All Dates</a>
-                                                <a class="link-item" href="#">Upcoming Events</a>		
-                                                <a class="link-item" href="#">Past Events</a>
-                                            </div>	
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-                    <div class="all-search-events">
-                    @include("layouts.includes.flash")								
-                        <div class="row">
-                            <table id="example" style="width:100%; text-align: center">
-                                <thead style="display: none;">
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Ticket Name</th>
-                                        <th>Quantity</th>
-                                        <th>Price</th>
-                                        <th>Visibility</th>
-                                        <th>Ticket Sells End</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                            <tbody class="row">
+                                <table id="example" style="width:100%; text-align: center" class="table table-hover table-striped table-bordered display nowrap">
+                                    <thead class="custom-thead">
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Ticket Name</th>
+                                            <th>Quantity</th>
+                                            <th>Price</th>
+                                            <th>Visibility</th>
+                                            <th>Ticket Sells End</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="custom-tbody">
 
-                            </tbody>
-                            </table>  
-                        </div>								
+                                    </tbody>
+                                </table>  
+                            </div>								
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</main>
 <!-- Body End -->
 <!-- <script src="{!! asset('master/js/jquery.min.js') !!}"></script> -->
 <script src="{!! asset('master/js/jquery.dataTables.min.js') !!}"></script>
@@ -74,8 +45,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $(".dataTables_empty").css('width', '1000px');
-        $("#example_wrapper").css('width', '100%');
-        $(".datatable_custom_wrap").css('overflow-x', 'hidden');
+        // $(".datatable_custom_wrap").css('overflow-x', 'hidden');
 
         var table =
             $('#example').DataTable({
@@ -99,7 +69,9 @@
 
                 autoWidth: false,
 
-                dom: 'l<"#date-filter"><"#category-filter"><"#action-filter">fBrtip',
+                // dom: 'l<"#date-filter"><"#category-filter"><"#action-filter">fBrtip',
+
+                dom: 'lfBrtip',
 
                 ajax: {
 
@@ -157,11 +129,11 @@
 
                         currency: 'selling_currency',
 
-                        searchable: false,
+                        searchable: true,
 
                         render: function(data, type, row) {
 
-                            return row.ticket_price row.selling_currency;
+                            return row.ticket_price + " " + row.selling_currency ;
 
                         }
 
@@ -172,10 +144,16 @@
 
                         name: 'hide_ticket',
 
-                        searchable: true
+                        searchable: false,
+                        render: function(data, type, row) {
+                            if (row.hide_ticket == 1) {
+                                return "Hide";
+                            }else{
+                                return "Display";
+                            }
+                        }
 
                     },
-
                     {
 
                         data: 'untill_date',
@@ -200,16 +178,13 @@
 
                         render: function(data, type, row) {
 
-                            return "<a href='javascript:void(0)'data-toggle='modal' data-target='#sms_send' onclick='sms_pop_up(\"" + row.contact_no + "\",\"" + row.name + "\")' class='btn-hover-shine btn-shadow btn btn-alternate btn-sm'>Send sms</a>|<a href='guest-update/" + row.id + "' class='btn-hover-shine btn-shadow btn btn-warning btn-sm' target='_blank'>Detils</a>";
+                            return "<a href='guest-update/" + row.id + "' title='Edit' class='btn-hover-shine btn-shadow btn custom-action btn-sm' target='_blank'><i class='fas fa-edit'></i></a>|<a href='#!' title='View' class='btn-hover-shine btn-shadow btn custom-action btn-sm'><i class='fa fa-eye'></i></a>|<a href='guest-update/" + row.id + "' title='Delete' class='btn-hover-shine btn-shadow btn custom-action btn-sm' target='_blank'><i class='fa fa-trash'></i></a>";
 
                         }
 
                     },
-
                 ]
-
             });
-
 
         $("table").wrapAll("<div style='overflow-x:auto;width:100%' />");
 
@@ -218,6 +193,13 @@
         // $('.dataTables_processing').addClass('m-loader m-loader--brand');
 
         $('#process_data_table_length').addClass('col-lg-2 col-md-2 col-sm-2');
+        $('#example_length').addClass('col-lg-6 col-md-6 col-sm-12');
+        $('#example_length').css('padding','5px 0px');
+        $('#example_filter').css('padding','5px 0px');
+        $('#example_filter').addClass('col-lg-6 col-md-6 col-sm-12');
+        $('#example_info').addClass('col-lg-6 col-md-6 col-sm-12');
+        $('#example_paginate').addClass('col-lg-6 col-md-6 col-sm-12');
+        $("#example_wrapper").css('overflow-x', 'auto');
 
         $('#process_data_table_length select').addClass('custom-select custom-select-sm form-control form-control-sm');
 
@@ -231,6 +213,7 @@
         $('#process_data_table_filter').addClass('col-lg-2 col-md-2 col-sm-2');
 
         $('#process_data_table_filter input').addClass('form-control form-control-sm');
+        
     });
 
     $.ajaxSetup({

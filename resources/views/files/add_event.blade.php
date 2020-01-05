@@ -245,6 +245,7 @@
 </main>
 <!-- Body End -->	
 @include('layouts.master_layout.footer')
+<script src="{!! asset('master/js/jquery.nice-select.js') !!}"></script>
 
 <script>
     $(document).ready(function() {

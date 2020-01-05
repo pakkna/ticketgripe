@@ -16,7 +16,7 @@
 <!-- Footer End -->
 <!-- Scripts js -->
 <!-- <script src="{!! asset('master/js/jquery.min.js') !!}"></script> -->
-<script src="{!! asset('master/js/jquery.nice-select.js') !!}"></script>
+<!-- <script src="{!! asset('master/js/jquery.nice-select.js') !!}"></script> -->
 <!-- <script src="{!! asset('master/js/datepicker.min.js') !!}"></script> -->
 <!-- <script src="{!! asset('master/js/i18n/datepicker.en.js') !!}"></script> -->
 <script src="{!! asset('master/js/bootstrap.bundle.min.js') !!}"></script>

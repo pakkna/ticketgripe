@@ -5,8 +5,8 @@
             <h3> <i class="fas fa-edit mr-2"></i> Edit Event</h3>
         </div>
         <div class="add-event-bg">
-        <form class="form-horizontal" method="post" action="{{ route('edit-event') }}" enctype="multipart/form-data">
-            {{ csrf_field() }}
+            <form class="form-horizontal" method="post" action="{{ route('edit-event') }}" enctype="multipart/form-data">
+                {{ csrf_field() }}
                     <div class="flash_msg">
                        @if(Session::has('EventSuccess'))
                             <div class="alert alert-success alert-dismissible text-center display-15" role="alert">
