@@ -47,7 +47,7 @@
 </main>
 <!-- Body End -->
 
-@include('layouts.master_layout.footer')
+@include('layouts.master_layout.footer_events')
 <script>
     function openForm(tabAction, the) {
         var i, tabopen, click;

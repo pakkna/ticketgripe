@@ -7760,3 +7760,7 @@ color:
 .custom-tbody tr td a:hover{
     color: #000000c4 !important;
 }
+.help-block strong {
+    color: red;
+    font-size: 13px;
+}

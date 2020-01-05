@@ -37,11 +37,8 @@
 <!-- <script src="{!! asset('master/js/jquery.min.js') !!}"></script> -->
 <script src="{!! asset('master/js/jquery.dataTables.min.js') !!}"></script>
 <script src="{!! asset('master/js/dataTables.bootstrap4.min.js') !!}"></script>
-<script>
-    $(document).ready(function() {
-        
-    });
-</script>
+<!-- <script src="{!! asset('master/js/jquery.nice-select.js') !!}"></script> -->
+
 <script type="text/javascript">
     $(document).ready(function() {
         $(".dataTables_empty").css('width', '1000px');
@@ -201,6 +198,7 @@
         $('#example_paginate').addClass('col-lg-6 col-md-6 col-sm-12');
         $("#example_wrapper").css('overflow-x', 'auto');
 
+
         $('#process_data_table_length select').addClass('custom-select custom-select-sm form-control form-control-sm');
 
 
@@ -214,6 +212,9 @@
 
         $('#process_data_table_filter input').addClass('form-control form-control-sm');
         
+        // $(".custom-select").wrapAll("<div class='nice-select' />");
+        // $(".custom-select").addClass("nice-select");
+
     });
 
     $.ajaxSetup({

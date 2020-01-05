@@ -37,7 +37,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="select-bg">									
-                                            <select class="add-inputs payment-input wide custom-list" name="status">
+                                            <select class="nice-select add-inputs payment-input wide custom-list" name="status">
                                                 <?php if($event_details->event_status=='Active'){ ?>
                                                     <option value="Active">Active</option>
                                                     <option value="Cancel">Cancel</option>
@@ -169,7 +169,7 @@
                                         <div class="select-bg">									
                                         <div class="input-group date" id="id_5">
                                                 <span class="date-span">Start Time :</span>
-                                                <input value="{{ $event_details->start_date }}"  id="out_datetime" name="start_time" type="text" class="form-control" style="border-top-left-radius: .25rem;border-bottom-left-radius: .25rem;" required>
+                                                <input value="{{javascript_dateformate($event_details->start_date) }}"  id="out_datetime" name="start_time" type="text" class="form-control" style="border-top-left-radius: .25rem;border-bottom-left-radius: .25rem;" required>
                                                 <div class="input-group-addon input-group-append">
                                                     <div class="input-group-text">
                                                         <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
@@ -187,7 +187,7 @@
                                         <div class="select-bg">									
                                         <div class="input-group date" id="id_6">
                                                 <span class="date-span">End Time :</span>
-                                                <input id="out_datetime" value="{{ $event_details->end_date }}"  name="end_time" type="text" class="form-control" style="border-top-left-radius: .25rem;border-bottom-left-radius: .25rem;" required>
+                                                <input id="out_datetime" value="{{javascript_dateformate($event_details->end_date)}}"  name="end_time" type="text" class="form-control" style="border-top-left-radius: .25rem;border-bottom-left-radius: .25rem;" required>
                                                 <div class="input-group-addon input-group-append">
                                                     <div class="input-group-text">
                                                         <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
@@ -225,7 +225,7 @@
                                     </div>
                                     <div class="col-md-4">
                                     <div class="select-bg">									
-                                            <select class=" add-inputs payment-input wide custom-list" name="category">
+                                            <select class="nice-select add-inputs payment-input wide custom-list" name="category">
                                                  <?php echo '<option value="'.$event_details->category.'">'.$event_details->category.'</option>'; ?>
                                                  <option  value="">-------------</option>
                                                 <option value="Promotion">Promotion</option>
