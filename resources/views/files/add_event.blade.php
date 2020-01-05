@@ -1,11 +1,11 @@
 @include('layouts.master_layout.header')
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="{!! asset('master/js/moment-with-locales.min.js') !!}"></script>
 <link href="{!! asset('master/css/bootstrap-datetimepicker.min.css') !!}" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css">
 <script src="{!! asset('master/js/jquery3.3.1.js') !!}"></script>
 <script src="{!! asset('master/js/bootstrap-datetimepicker.min.js') !!}"></script>
-
 
 <!-- Title Bar Start -->
 <div class="title-bar">			

@@ -137,7 +137,6 @@ class EventControler extends Controller
     }
 
     public function event_setup_view($id){
-
         
         $event_details = DB::table('events')
         ->leftjoin('tickets','events.id','=','tickets.event_id')
@@ -145,7 +144,8 @@ class EventControler extends Controller
         ->where('events.id',$id)
         //need collection and soldout form order table
         ->first();
-        return view('eventsetup.event_sidebar',compact('event_details'));
+
+        return view('eventsetup.event_sidebar',compact('event_details',''));
 
     }
 }
