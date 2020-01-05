@@ -13,14 +13,9 @@ class TicketController extends Controller
     public function all_ticket(Request $request){
 
         $dataSet = DB::table("tickets")
-            // ->where('id', Auth::id())
+            ->where('user_id', Auth::id())
             ->where('event_id', $request->event_id)
             ->get();
-        echo '<pre>'; 
-        echo '======================<br>';
-        print_r($dataSet);
-        echo '<br>======================';
-        exit();
         return Datatables::of($dataSet)->make(true);
     }
 

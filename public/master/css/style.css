@@ -969,7 +969,7 @@ main {
 }
 
 .user-data {
-    text-align: center;
+    /* text-align: center; */
 }
 .full-width {
 	border-radius: 3px;
@@ -7743,4 +7743,24 @@ color:
 }
 .page-link:hover{
     color: #000000e0 !important;
+}
+.custom-thead tr th {
+    font-size: 14px;
+    font-weight: 600;
+}
+.custom-tbody tr td {
+    padding: 8px 0px !important;
+    color: #000000c4;
+}
+.custom-action:hover{
+    color: #000;
+    background-color: #ffc107 !important;
+    border-color: #ffc107 !important;
+}
+.custom-tbody tr td a:hover{
+    color: #000000c4 !important;
+}
+.help-block strong {
+    color: red;
+    font-size: 13px;
 }
