@@ -118,14 +118,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div class="col-lg-6 col-md-12">
-                                <div class="input-section-item" style="border: 0px solid red;">
-                                    <div class="custom-control custom-checkbox mb-3">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck2" name="checkbox">
-                                        <label class="custom-control-label custom-label" for="customCheck2" style="font-size: 14px;">Will display with a "Sold out" message after ticket quantity runs out</label>
-                                    </div>
-                                </div>
-                            </div> -->
                             <div class="col-lg-6 col-md-12">
                                 <div class="input-section-item" style="border: 0px solid red;">
                                     <div class="custom-control custom-checkbox mb-3">
@@ -172,6 +164,10 @@
                                 <div class="main-reply-comment" style="padding: 30px 0px;">
                                     <h6 style="font-size: 14px;">Short description</h6>
                                     <textarea class="replt-comnt" name="short_note" placeholder="Short Description">{{ old('short_note') }}</textarea>
+
+                                    <script>
+                                        CKEDITOR.replace('short_note');
+                                    </script>
                                     @if ($errors->has('short_note'))
                                     <strong class="help-block">
                                         <strong>{{ $errors->first('short_note') }}</strong>
