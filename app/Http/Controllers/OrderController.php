@@ -92,4 +92,20 @@ class OrderController extends Controller
         }   
     }
 
+    public function ticket_update_html(Request $request){
+
+        $ticket_question_details= DB::table('custom_form')
+        ->where('id',$request->id)
+        ->first();
+
+        $all_tickets = DB::table('tickets')
+        ->where('event_id',$request->event_id)
+        ->where('user_id',Auth::user()->id)
+        ->get();
+
+        $view =  view('eventsetup.edit_ticket_question',compact('ticket_question_details', 'all_tickets'))->render();
+
+        return response()->json(['html'=>$view]);
+    }
+
 }

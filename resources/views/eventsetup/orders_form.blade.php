@@ -91,7 +91,7 @@
                                                     <input type="checkbox" id="toggle_switch" onchange="toggle_btn({{$single_question->id}},this)" name="{{$single_question->id}}" data-toggle="toggle" data-on="<i class='fa fa-check-circle mt--2'></i>" data-off="<span style='position: relative;top: 4px;'>Off</span>" data-size="mini" {{$single_question->answer_required == 'on' ? 'checked' : '' }}>
                                                     
                                                 </td>
-                                                <td> <a href='javascript:void(0)' data-toggle='modal' data-target='#editmoadal' onclick='edit_action("+row.id+")' title='Edit' class='btn-hover-shine btn-shadow btn custom-action btn-sm'><i class='fas fa-edit'></i></a>|<a href='javascript:void(0)'  onclick='question_delete({{$single_question->id}},this)' title='Delete' class='btn-hover-shine btn-shadow btn custom-action btn-sm' ><i class='fa fa-trash'></i></a> </td>
+                                                <td> <a href='javascript:void(0)' data-toggle='modal' data-target='#largeModal2' onclick='edit_action_ques("{{$single_question->id}},{{$event_details->id}}")' title='Edit' class='btn-hover-shine btn-shadow btn custom-action btn-sm'><i class='fas fa-edit'></i></a>|<a href='javascript:void(0)'  onclick='question_delete({{$single_question->id}},this)' title='Delete' class='btn-hover-shine btn-shadow btn custom-action btn-sm' ><i class='fa fa-trash'></i></a> </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -237,6 +237,24 @@
     </div>
 </div>
 <!-- modal -->
+<!-- Modal -->
+<div class="modal fade" id="largeModal2" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-width">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel" style="color: #FF7555;font-weight: 600;">Add custom questions</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body" id="ticket-update-modal">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal -->
 <script type="text/javascript">
     $(function() {
         changeFieldType();
@@ -329,6 +347,24 @@ $.ajax({
             $(".swal-text").css('font-weight', '600');
             $(".swal-title").css('font-size', '18px');
 
+    }
+});
+}
+function edit_action_ques(id,event_id){
+
+$.ajax({
+
+    url: '/ticket-question-update',
+    type: 'post',
+    data: {
+        id: id,
+        event_id: event_id,
+
+        '_token': $('meta[name="csrf-token"]').attr('content'),
+    },
+    dataType: 'json',
+    success: function(response) {    
+    $('#ticket-update-modal').html(response.html);
     }
 });
 }
