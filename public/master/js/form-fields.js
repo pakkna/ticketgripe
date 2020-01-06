@@ -27,7 +27,8 @@ $(function() {
 
 function reIndexOptionNames() {
     var a = $("#availableOptionTable tr");
-
+    // console.debug(a);
+    // console.debug(a.size());
     a.each(function(a) {
         console.log("Index: " + a);
         $(this).find("input[name*='id']").attr("name", "choices[" + a + "].id");
@@ -38,10 +39,10 @@ function reIndexOptionNames() {
 function addOption() {
     console.debug("Adding Available Option");
     var a = $("<tr/>"),
-        b = $("<input/>").attr("type", "text").attr("name", "choices[].label"),
+        b = $("<input/>").attr("type", "text").attr("name", "choices[].label").addClass('payment-input cus-input'),
         b = $("<td/>").append(b),
-        c = $("<button/>").addClass("btn btn-xs btn-default option-up").append($("<i/>").addClass("fas fa-arrow-up")),
-        d = $("<button/>").addClass("btn btn-xs btn-default option-down").append($("<i/>").addClass("fas fa-arrow-down")),
+        c = $("<button/>").addClass("btn btn-xs btn-default btn-bg-custom option-up").append($("<i/>").addClass("fas fa-arrow-up")),
+        d = $("<button/>").addClass("btn btn-xs btn-default btn-bg-custom option-down").append($("<i/>").addClass("fas fa-arrow-down")),
         e = $("<button/>").addClass("btn btn-xs btn-danger option-delete").append($("<i/>").addClass("fas fa-trash")),
         c = $("<td/>").append(c).append("&nbsp;").append(d).append("&nbsp;").append(e);
     $("#availableOptionTable").append(a.append(b).append(c));

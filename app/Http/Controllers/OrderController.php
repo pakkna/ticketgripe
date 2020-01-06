@@ -30,4 +30,49 @@ class OrderController extends Controller
             exit();
         return Datatables::of($dataSet)->make(true);
     }
+    public function ticket_questoion_add(Request $request)
+    {
+        $validatedData = $request->validate([
+            'question_title' => 'required|string',
+            'tickets' => 'required'
+        ]);
+        $array = array();
+        foreach ($request->tickets as $key => $value) {
+            $option = $request->tickets[$key];
+            array_push($array,$option);
+        }
+        $tickets = implode('~',$array);
+        if (count($request->choices)) {
+            $array2 = array();
+            foreach ($request->choices as $key => $value) {
+                $option = $request->choices[$key];
+                array_push($array2,$option);
+            }
+            $choices = implode('~',$array2);
+        }
+        else{
+            $choices = null;
+        }
+
+        $data = [
+            'question_title' => $request->question_title,
+            'question_type' => $request->question_type,
+            'question_instruction' => $request->instructions,
+            'answer_required' => $request->required,
+            'select_specific_ticket' => $tickets,
+            'question_options' => $choices,
+            'user_id' => Auth::user()->id,
+            'event_id' => $request->event_id,
+            'created_at' => date('Y-m-d h:i:s')
+        ];
+
+        try {
+            $dataSet = DB::table('custom_form')->insert($data);
+            return redirect('/event-setup/'.$request->event_id.'/order-form')->with('TicketQuestionSuccess','Ticket question added successfully !');
+        } catch (\Exception $th) {
+            return redirect('/event-setup/'.$request->event_id.'/order-form')->with('TicketQuestionDanger',$th->getMessage());
+        }
+
+    }
+
 }

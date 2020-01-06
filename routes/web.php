@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post("create-tickets","TicketController@create_tickets")->name("create_tickets");
     Route::post("ticket-delete","TicketController@ticket_delete")->name("ticket_delete");
 
+    Route::post("ticket-question-add","OrderController@ticket_questoion_add")->name("ticket-question-add");
     Route::get("all-orders","OrderController@all_order")->name("all_order_datatable");
     Route::get("order-form","OrderController@order_form")->name("order_form_datatable");
 

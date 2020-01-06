@@ -142,10 +142,14 @@ class EventControler extends Controller
         ->leftjoin('tickets','events.id','=','tickets.event_id')
         ->select('events.id','title','image_path','start_date','end_date','country','address','city','state','zip','event_status','seat_number','category','hide_date_event_page','description','custom_link')
         ->where('events.id',$id)
-        //need collection and soldout form order table
         ->first();
 
-        return view('eventsetup.event_sidebar',compact('event_details',''));
+        $all_tickets = DB::table('tickets')
+        ->where('event_id',$id)
+        ->where('user_id',Auth::user()->id)
+        ->get();
+
+        return view('eventsetup.event_sidebar',compact('event_details','all_tickets'));
 
     }
 }

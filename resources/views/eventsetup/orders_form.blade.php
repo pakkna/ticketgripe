@@ -7,13 +7,26 @@
         <div class="user-data full-width">
             <div class="about-left-heading">
                 <h3> <i class="fas fa-info mr-2"></i> Ticket Order Form</h3>
-                <a href="#!" data-toggle="modal" data-target="#largeModal"><button class="setting-save-btn" type="button" style="margin-top: 0;"><i class="fas fa-plus mr-2"></i>Add Question</button></a>
+                @if(count($all_tickets) != 0)
+                    <a href="javascript:void(0)" data-toggle="modal" data-target="#largeModal"><button class="setting-save-btn" type="button" style="margin-top: 0;"><i class="fas fa-plus mr-2"></i>Add Question</button></a>
+                @endif
             </div>
             <div class="add-event-bg">
+                <div class="flash_msg">
+                    @if(Session::has('TicketQuestionSuccess'))
+                        <div class="alert alert-success alert-dismissible text-center display-10" role="alert">
+                            {{ Session::get('TicketQuestionSuccess') }}
+                        </div>
+                    @endif
+                    @if(Session::has('TicketQuestionDanger'))
+                        <div class="alert alert-danger alert-dismissible text-center display-10" role="alert">
+                            {{ Session::get('TicketQuestionDanger') }}
+                        </div>
+                    @endif
+                </div>
                 <div class="dash-discussions mb20">
                     <div class="main-section">
-                        <div class="all-search-events">
-                        @include("layouts.includes.flash")								
+                        <div class="all-search-events">								
                             <div class="row">
                                 <table id="order_form_table" style="width:100%; text-align: center" class="table table-hover table-striped table-bordered display nowrap">
                                     <thead class="custom-thead">
@@ -29,7 +42,7 @@
                                             <td>Name *</td>
                                             <td>Order</td>
                                             <td>
-                                            <input type="checkbox" name="one" data-toggle="toggle" data-on="<i class='fa fa-check-circle'></i>" data-off="" data-size="mini" checked disabled>
+                                            <input type="checkbox" name="one" data-toggle="toggle" data-on="<i class='fa fa-check-circle mt--2'></i>" data-off="" data-size="mini" checked disabled>
                                             </td>
                                             <td> --- </td>
                                         </tr>
@@ -37,7 +50,7 @@
                                             <td>Email  *</td>
                                             <td>Order</td>
                                             <td>
-                                            <input type="checkbox" name="two" data-toggle="toggle" data-on="<i class='fa fa-check-circle'></i>" data-off="" data-size="mini" checked disabled>
+                                            <input type="checkbox" name="two" data-toggle="toggle" data-on="<i class='fa fa-check-circle mt--2'></i>" data-off="" data-size="mini" checked disabled>
                                             </td>
                                             <td> --- </td>
 
@@ -46,7 +59,7 @@
                                             <td>Phone   *</td>
                                             <td>Order</td>
                                             <td>
-                                            <input type="checkbox" name="three" data-toggle="toggle" data-on="<i class='fa fa-check-circle'></i>" data-off="" data-size="mini" checked disabled>
+                                            <input type="checkbox" name="three" data-toggle="toggle" data-on="<i class='fa fa-check-circle mt--2'></i>" data-off="" data-size="mini" checked disabled>
                                             </td>
                                             <td> --- </td>
 
@@ -62,41 +75,43 @@
     </div>
 <!-- Body End -->
 <script type="text/javascript" src="{!! asset('master/js/form-fields.js') !!}"></script>
+<script type="text/javascript" src="https://ticketstripe.com/assets/global/plugins/uniform/jquery.uniform.min.js"></script>
 
 <!-- Modal -->
 <div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-width">
+    <div class="modal-dialog modal-xl modal-width">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="myModalLabel" style="color: #FF7555;font-weight: 600;">Add custom questions</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
-                <form action="/admin/orderField/save" method="post" enctype="multipart/form-data">
-                    <input type="hidden" name="eventId" value="1023681" id="eventId" />
+                <form action="{{route('ticket-question-add')}}" method="post" enctype="multipart/form-data">
+                {{ csrf_field() }}
+                    <input type="text" name="event_id" value="{{$event_details->id}}" hidden/>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="portlet box blue">
-                                <div class="portlet-title">
+                                <!-- <div class="portlet-title">
                                     <div class="caption ">Order Form &gt; Question</div>
-                                </div>
+                                </div> -->
                                 <div class="portlet-body">
                                     <div class="form-body">
-                                        <div class="form-group row  ">
+                                        <div class="form-group row mb-20 ">
                                             <label for="label" class="control-label col-sm-4 col-xs-12">
-                                                Question Prompt<span class="required-indicator">*</span>
+                                                Question Title<span class="required-indicator">*</span>
                                             </label>
                                             <div class="col-sm-8 col-xs-12">
-                                                <input type="text" class="form-control" name="label" value="" id="label" />
+                                                <input type="text" class="form-control" name="question_title" value="" id="label" required/>
                                                 <span class="help-inline"></span>
                                             </div>
                                         </div>
-                                        <div class="form-group row  required">
+                                        <div class="form-group row mb-20 required">
                                             <label for="fieldType" class="control-label col-sm-4 col-xs-12">
                                                 Question Type<span class="required-indicator">*</span>
                                             </label>
                                             <div class="col-sm-8 col-xs-12">
-                                                <select id="fieldTypeSelect" class="form-control" name="fieldType" required="">
+                                                <select id="fieldTypeSelect" class="form-control" name="question_type" required="">
                                                     <option value="SingleLineText">Text</option>
                                                     <option value="MultiLineText">Paragraph Text</option>
                                                     <option value="Number">Number</option>
@@ -108,7 +123,7 @@
                                             </div>
                                         </div>
                                         <div id="editFieldValuesBtnBox">
-                                            <div class="form-group row">
+                                            <div class="form-group mb-20 row">
                                                 <label for="fieldvaluesBtn" class="control-label col-sm-4 col-xs-12">
                                                     Available Options
                                                 </label>
@@ -126,7 +141,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group row  ">
+                                        <div class="form-group row mb-20 ">
                                             <label for="instructions" class="control-label col-sm-4 col-xs-12">
                                                 Instructions
                                             </label>
@@ -135,34 +150,13 @@
                                                 <span class="help-inline"></span>
                                             </div>
                                         </div>
-                                        <div class="form-group row  required">
-                                            <label for="orderFormType" class="control-label col-sm-4 col-xs-12">
-                                                Collect Per
-                                                <span class="required-indicator">*</span>
-                                            </label>
-                                            <div class="col-sm-8 col-xs-12">
-                                                <select name="orderFormType" class="form-control" required="" id="orderFormType">
-                                                    <option value="PER_ORDER">Order</option>
-                                                    <option value="PER_ATTENDEE">Attendee</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row  ">
-                                            <label for="required" class="control-label col-sm-4 col-xs-12">
-                                                Display Answer
-                                            </label>
-                                            <div class="col-sm-8 col-xs-12">
-                                                <input type="hidden" name="_showAnswerOnTicket" /><input type="checkbox" name="showAnswerOnTicket" id="showAnswerOnTicket" />
-                                                <span class="help-inline">Display attendee answer on the ticket</span>
-                                                <span class="help-inline"></span>
-                                            </div>
-                                        </div>
+
                                         <div class="form-group row  ">
                                             <label for="required" class="control-label col-sm-4 col-xs-12">
                                                 Required
                                             </label>
                                             <div class="col-sm-8 col-xs-12">
-                                                <input type="hidden" name="_required" /><input type="checkbox" name="required" id="required" />
+                                                <input type="checkbox" name="required" id="required" />
                                                 <span class="help-inline">Attendee has to provide an answer</span>
                                                 <span class="help-inline"></span>
                                             </div>
@@ -172,16 +166,25 @@
                                                 Ticket Specific
                                             </label>
                                             <div class="col-sm-8 col-xs-12">
-                                                <input type="hidden" name="_ticketSpecific" /><input type="checkbox" name="ticketSpecific" id="ticketSpecific" />
+                                                <input type="checkbox" name="ticketSpecific" id="ticketSpecific" required/>
                                                 <span class="help-inline">Ask This Question For Specific Ticket Types</span>
                                                 <span class="help-inline"></span>
                                                 <div class="col-sm-12" id="tickets-container" style="display: none">
                                                     <div class="form-group row  ">
                                                         <div class="col-sm-8 col-xs-12">
-
-                                                            <input type="hidden" name="tickets[0]._id" /><input type="checkbox" name="tickets[0].id" value="12101" id="tickets[0].id" />
-                                                            <span class="help-inline">General Admission</span><br>
-
+                                                            @foreach($all_tickets as $tickets)
+                                                                <div class="checker">
+                                                                    <span>
+                                                                        <input type="checkbox" name="tickets[]" value="{{$tickets->id}}" id="tickets[{{$tickets->id}}]" checked>
+                                                                    </span>
+                                                                    <span class="help-inline">{{$tickets->ticket_type}}</span><br>
+                                                                </div>
+                                                            @endforeach
+                                                            @if ($errors->has('tickets'))
+                                                            <span class="help-block">
+                                                                <strong>{{ $errors->first('tickets') }}</strong>
+                                                            </span>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
@@ -189,7 +192,7 @@
                                         </div>
                                     </div>
                                     <div class="form-actions text-center">
-                                        <input type="submit" name="save" class="save btn green btn-lg" value="Save" id="save" />
+                                        <button class="setting-save-btn" type="submit" style="margin-top: 0;">Save</button>
                                     </div>
                                 </div>
                             </div>
@@ -234,3 +237,4 @@
         }
     }
 </script>
+

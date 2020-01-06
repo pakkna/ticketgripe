@@ -7764,3 +7764,21 @@ color:
     color: red;
     font-size: 13px;
 }
+.mb-20{
+    margin-bottom: 20px !important;
+}
+.btn-bg-custom{
+    background-color: #fff !important;
+    box-shadow: 0 1px 3px
+    rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.18);
+}
+.btn-bg-custom:hover{
+    background-color:
+    #e6e6e6;
+    border-color:
+    #adadad;
+}
+.cus-input{
+    float: left;
+    min-height: 32px !important;
+}
