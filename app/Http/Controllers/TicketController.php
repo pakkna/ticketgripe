@@ -52,4 +52,15 @@ class TicketController extends Controller
 
 
     }
+
+    public function ticket_delete(Request $request){
+
+          $data= DB::table('tickets')->where('id',$request->id)->delete();
+         
+          if($data==true){
+              echo true;
+          }else{
+            echo false;
+          }   
+    }
 }

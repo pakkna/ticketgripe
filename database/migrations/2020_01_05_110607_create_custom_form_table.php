@@ -19,6 +19,7 @@ class CreateCustomFormTable extends Migration
             $table->string('question_type');
             $table->longText('question_options')->nullable();
             $table->string('question_instruction')->nullable();
+            $table->string('Active')->nullable();
             $table->string('answer_required')->nullable();
             $table->string('select_specific_ticket')->nullable();
             $table->unsignedBigInteger('user_id');
