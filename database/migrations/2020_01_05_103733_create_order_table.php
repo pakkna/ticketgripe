@@ -19,13 +19,15 @@ class CreateOrderTable extends Migration
             $table->string('email',100)->unique();
             $table->string('mobile');
             $table->longText('extra_form_answer')->nullable();
+            $table->string('order_confirm_id');
+            $table->string('attende_confirm');
             $table->integer('sold_ticket_number');
             $table->float('sold_ticket_amount');
             $table->float('sold_ticket_carge_fee');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('event_id');
             $table->unsignedBigInteger('ticket_id');         
-            $table->string('currentcy')->nullable();
+            $table->string('currency')->nullable();
             $table->timestamps();
             $table->engine = 'InnoDB'; 	
             $table->charset = 'utf8';

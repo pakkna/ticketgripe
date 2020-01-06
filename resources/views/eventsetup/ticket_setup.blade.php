@@ -34,6 +34,24 @@
         </div>
     </div>
 <!-- Body End -->
+
+<!-- Modal -->
+<div class="modal fade" id="editmoadal" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-width">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel" style="color: #FF7555;font-weight: 600;">Edit Tickets</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div id='response_show' class="modal-body">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- <script src="{!! asset('master/js/jquery.min.js') !!}"></script> -->
 <script src="{!! asset('master/js/jquery.dataTables.min.js') !!}"></script>
 <script src="{!! asset('master/js/dataTables.bootstrap4.min.js') !!}"></script>
@@ -96,9 +114,10 @@
 </script>
 
 <script type="text/javascript">
-    $(document).ready(function() {
-        $(".dataTables_empty").css('width', '1000px');
+    $('#tickets').click(function() {
+        // $(".dataTables_empty").css('width', '1000px');
         // $(".datatable_custom_wrap").css('overflow-x', 'hidden');
+        $('#example').DataTable().clear().destroy();
 
         var table =
             $('#example').DataTable({
@@ -131,6 +150,7 @@
                     url: '{{route("all_ticket_datatable")}}',
 
                     type: 'GET',
+                    cache: false,
 
                     data: function(d) {
 
@@ -231,7 +251,7 @@
 
                         render: function(data, type, row) {
 
-                            return "<a href='javascript:void(0)' onclick='edit_action("+row.id+")' title='Edit' class='btn-hover-shine btn-shadow btn custom-action btn-sm'><i class='fas fa-edit'></i></a>|<a href='#!' title='View' class='btn-hover-shine btn-shadow btn custom-action btn-sm'><i class='fa fa-eye'></i></a>|<a href='javascript:void(0)'  onclick='ticket_delete("+row.id+",this)' title='Delete' class='btn-hover-shine btn-shadow btn custom-action btn-sm' ><i class='fa fa-trash'></i></a>";
+                            return "<a href='javascript:void(0)' data-toggle='modal' data-target='#editmoadal' onclick='edit_action("+row.id+")' title='Edit' class='btn-hover-shine btn-shadow btn custom-action btn-sm'><i class='fas fa-edit'></i></a>|<a href='#!' title='View' class='btn-hover-shine btn-shadow btn custom-action btn-sm'><i class='fa fa-eye'></i></a>|<a href='javascript:void(0)'  onclick='ticket_delete("+row.id+",this)' title='Delete' class='btn-hover-shine btn-shadow btn custom-action btn-sm' ><i class='fa fa-trash'></i></a>";
 
                         }
 
@@ -239,11 +259,12 @@
                 ]
             });
 
-        $("table").wrapAll("<div style='overflow-x:auto;width:100%' />");
+        // $("table").wrapAll("<div style='overflow-x:auto;width:100%' />");
 
         $('.dataTables_wrapper').addClass('row');
 
         // $('.dataTables_processing').addClass('m-loader m-loader--brand');
+        $("#example").wrapAll("<div style='overflow-x:auto;width:100%' />");
 
         $('#process_data_table_length').addClass('col-lg-2 col-md-2 col-sm-2');
         $('#example_length').addClass('col-lg-6 col-md-6 col-sm-12');
@@ -287,11 +308,30 @@
                 '_token': $('meta[name="csrf-token"]').attr('content'),
             },
             dataType: 'json',
-            success: function(response) {
-
-            $('#editmodal').html(response);
-
+            success: function(response) {    
+            $('#response_show').html(response.html);
             }
         });
     }
+
+    @if(Session::has('updateTicketSuccess'))
+        swal({
+            title: "Ticket Action",
+            text: "Event Ticket Updated Successfully",
+            icon: "success",
+            buttons: false,
+        })
+    @endif
+    
+    @if(Session::has('updateTicketDanger'))
+    swal({
+        title: "Update Falid",
+        text: "Ticket Update Action Error",
+        icon: "error",
+        buttons: false,
+    })
+    $(".swal-text").css('color', '#B40000');
+    $(".swal-text").css('font-weight', '600');
+    $(".swal-title").css('font-size', '18px');
+    @endif    
 </script>    

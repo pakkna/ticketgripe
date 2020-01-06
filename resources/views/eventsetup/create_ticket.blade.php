@@ -70,7 +70,7 @@
                             </div>
                         </div>
                     </div>
-                   <!--  <div class="col-lg-12 col-md-12">
+                <!--  <div class="col-lg-12 col-md-12">
                         <div class="add-crdt-amnt" align="center">
                             <button id="display-toggle" class="more-option-btn" style="margin-top: 32px;" type="button"><i class="fa fa-cogs" style="margin-right: 11px;"></i>More Options</button>
                         </div>
