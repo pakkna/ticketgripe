@@ -82,4 +82,14 @@ class OrderController extends Controller
         $dataSet = DB::table('custom_form')->where('id', $request->id)->update($data);
     }
 
+    public function order_question_delete(Request $request){
+
+        $data= DB::table('custom_form')->where('id',$request->id)->delete();
+        if($data==true){
+            echo true;
+        }else{
+            echo false;
+        }   
+    }
+
 }

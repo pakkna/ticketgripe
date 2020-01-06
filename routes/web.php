@@ -40,6 +40,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get("order-form","OrderController@order_form")->name("order_form_datatable");
     Route::post("ticket-toggle","OrderController@ticket_toggle");
 
+    Route::post("question-delete","OrderController@order_question_delete")->name("question-delete");
+
+
     Route::get("all-attendee","AttendeeController@all_attendee")->name("all_attendee_datatable");
 
 
