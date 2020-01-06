@@ -28,9 +28,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get("all-tickets","TicketController@all_ticket")->name("all_ticket_datatable");
 
     Route::post("create-tickets","TicketController@create_tickets")->name("create_tickets");
+
     Route::post("ticket-delete","TicketController@ticket_delete")->name("ticket_delete");
 
-
+    Route::post("modal-edit-ticket","TicketController@edit_ticket")->name("edit-ticket");
 
 });
 Route::get("/","HomeController@index")->name("/");

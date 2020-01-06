@@ -231,7 +231,7 @@
 
                         render: function(data, type, row) {
 
-                            return "<a href='guest-update/" + row.id + "' title='Edit' class='btn-hover-shine btn-shadow btn custom-action btn-sm' target='_blank'><i class='fas fa-edit'></i></a>|<a href='#!' title='View' class='btn-hover-shine btn-shadow btn custom-action btn-sm'><i class='fa fa-eye'></i></a>|<a href='javascript:void(0)'  onclick='ticket_delete("+row.id+",this)' title='Delete' class='btn-hover-shine btn-shadow btn custom-action btn-sm' ><i class='fa fa-trash'></i></a>";
+                            return "<a href='javascript:void(0)' onclick='edit_action("+row.id+")' title='Edit' class='btn-hover-shine btn-shadow btn custom-action btn-sm'><i class='fas fa-edit'></i></a>|<a href='#!' title='View' class='btn-hover-shine btn-shadow btn custom-action btn-sm'><i class='fa fa-eye'></i></a>|<a href='javascript:void(0)'  onclick='ticket_delete("+row.id+",this)' title='Delete' class='btn-hover-shine btn-shadow btn custom-action btn-sm' ><i class='fa fa-trash'></i></a>";
 
                         }
 
@@ -274,3 +274,24 @@
     });
 
 </script>
+
+<script>
+    function edit_action(id){
+
+        $.ajax({
+
+            url: '/modal-edit-ticket',
+            type: 'post',
+            data: {
+                id: id,
+                '_token': $('meta[name="csrf-token"]').attr('content'),
+            },
+            dataType: 'json',
+            success: function(response) {
+
+            $('#editmodal').html(response);
+
+            }
+        });
+    }
+</script>    

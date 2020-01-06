@@ -32,8 +32,8 @@ class AddTicketRequest extends FormRequest
             "currency" => "required",
             "selling_date" => "required|date",
             "untill_date" => "required|date",
-            "max_ticket_per_order" => "required|numeric",
-            "min_ticket_per_order" => "required|numeric",
+            "max_ticket_per_order" => "required|numeric|min:1",
+            "min_ticket_per_order" => "required|numeric|min:1",
             "short_note" => "required",
         ];
     }

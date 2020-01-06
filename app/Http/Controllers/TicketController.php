@@ -53,6 +53,14 @@ class TicketController extends Controller
 
     }
 
+    public function edit_ticket(Request $request){
+
+        $one_ticket_details= DB::table('tickets')
+        ->where('id',$request->id)
+        ->first();
+        return view('eventsetup.edit-ticket',compact('event_details'));
+    }
+
     public function ticket_delete(Request $request){
 
           $data= DB::table('tickets')->where('id',$request->id)->delete();
