@@ -74,7 +74,7 @@
                                                 <td>
                                                     <input type="checkbox" name="three" data-toggle="toggle" data-on="<i class='fa fa-check-circle mt--2'></i>" data-off="" data-size="mini" checked>
                                                 </td>
-                                                <td> <a href='javascript:void(0)' data-toggle='modal' data-target='#editmoadal' onclick='edit_action("+row.id+")' title='Edit' class='btn-hover-shine btn-shadow btn custom-action btn-sm'><i class='fas fa-edit'></i></a>|<a href='javascript:void(0)'  onclick='ticket_delete("+row.id+",this)' title='Delete' class='btn-hover-shine btn-shadow btn custom-action btn-sm' ><i class='fa fa-trash'></i></a> </td>
+                                                <td> <a href='javascript:void(0)' data-toggle='modal' data-target='#editmoadal' onclick='edit_action("+row.id+")' title='Edit' class='btn-hover-shine btn-shadow btn custom-action btn-sm'><i class='fas fa-edit'></i></a>|<a href='javascript:void(0)'  onclick='question_delete({{$single_question->id}},this)' title='Delete' class='btn-hover-shine btn-shadow btn custom-action btn-sm' ><i class='fa fa-trash'></i></a> </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -270,5 +270,48 @@
     $(".swal-text").css('font-weight', '600');
     $(".swal-title").css('font-size', '18px');
     @endif   
+</script>
+<script>
+function question_delete(id,the) {
+
+$.ajax({
+
+    url: '/question-delete',
+    type: 'post',
+    data: {
+        id: id,
+        '_token': $('meta[name="csrf-token"]').attr('content'),
+    },
+    dataType: 'json',
+    success: function(response) {
+
+        if (response==1) {
+
+            $(the).closest("tr").fadeOut(200, function () {
+                $(this).remove();
+            });
+
+            swal({
+                title: "Question Delete Action",
+                text: "Order Form Question Deleted Successfully",
+                icon: "success",
+                buttons: false,
+            })
+
+        }else{
+            swal({
+                title: "Falid",
+                text: "Question Delete Action Error",
+                icon: "error",
+                buttons: false,
+            })
+        }
+            $(".swal-text").css('color', '#F55F3D');
+            $(".swal-text").css('font-weight', '600');
+            $(".swal-title").css('font-size', '18px');
+
+    }
+});
+}
 </script>
 

@@ -104,7 +104,7 @@
                         buttons: false,
                     })
                 }
-                    $(".swal-text").css('color', '#B40000');
+                    $(".swal-text").css('color', '#F55F3D');
                     $(".swal-text").css('font-weight', '600');
                     $(".swal-title").css('font-size', '18px');
 
