@@ -58,7 +58,7 @@ class OrderController extends Controller
             'question_title' => $request->question_title,
             'question_type' => $request->question_type,
             'question_instruction' => $request->instructions,
-            'answer_required' => $request->required,
+            'answer_required' => $request->required == 'on' ? 'on' : 'off',
             'select_specific_ticket' => $tickets,
             'question_options' => $choices,
             'user_id' => Auth::user()->id,
@@ -72,7 +72,14 @@ class OrderController extends Controller
         } catch (\Exception $th) {
             return redirect('/event-setup/'.$request->event_id.'/order-form')->with('TicketQuestionDanger',$th->getMessage());
         }
+    }
+    public function ticket_toggle(Request $request)
+    {
 
+        $data = [
+            'answer_required' => $request->flag=='true' ? 'on' : 'off'
+        ];
+        $dataSet = DB::table('custom_form')->where('id', $request->id)->update($data);
     }
 
 }

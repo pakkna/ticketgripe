@@ -1,5 +1,21 @@
 <script>
+    function toggle_btn(id,the) {
+        var res=   $(the).prop('checked');
+        $.ajax({
 
+        url: '/ticket-toggle',
+        type: 'post',
+        data: {
+            id: id,
+            flag: res,
+            '_token': $('meta[name="csrf-token"]').attr('content'),
+        },
+        dataType: 'json',
+        success: function(response) {
+            alert(res);
+        }
+    });
+}
 </script>
     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
@@ -72,7 +88,8 @@
                                                 <td>{{$single_question->question_type}}</td>
                                                 <td>Order</td>
                                                 <td>
-                                                    <input type="checkbox" name="three" data-toggle="toggle" data-on="<i class='fa fa-check-circle mt--2'></i>" data-off="" data-size="mini" checked>
+                                                    <input type="checkbox" id="toggle_switch" onchange="toggle_btn({{$single_question->id}},this)" name="{{$single_question->id}}" data-toggle="toggle" data-on="<i class='fa fa-check-circle mt--2'></i>" data-off="<span style='position: relative;top: 4px;'>Off</span>" data-size="mini" {{$single_question->answer_required == 'on' ? 'checked' : '' }}>
+                                                    
                                                 </td>
                                                 <td> <a href='javascript:void(0)' data-toggle='modal' data-target='#editmoadal' onclick='edit_action("+row.id+")' title='Edit' class='btn-hover-shine btn-shadow btn custom-action btn-sm'><i class='fas fa-edit'></i></a>|<a href='javascript:void(0)'  onclick='ticket_delete("+row.id+",this)' title='Delete' class='btn-hover-shine btn-shadow btn custom-action btn-sm' ><i class='fa fa-trash'></i></a> </td>
                                             </tr>
@@ -269,6 +286,8 @@
     $(".swal-text").css('color', '#B40000');
     $(".swal-text").css('font-weight', '600');
     $(".swal-title").css('font-size', '18px');
-    @endif   
+    @endif  
+
+   
 </script>
 
