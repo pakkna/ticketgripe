@@ -21,6 +21,14 @@ class HomeController extends Controller
     {
         return View('files.demo');
     }
+    public function demo_order_view()
+    {
+        return View('files.demo_order_form');
+    }
+    public function demo_order_q()
+    {
+        return View('files.demo_form_question');
+    }
     public function index()
     {
         return View('files.index');

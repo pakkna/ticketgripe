@@ -9,6 +9,8 @@ Route::group(['middleware' => 'auth'], function () {
     //my-events page
     Route::get("pay","PayOrderController@store")->name("demo");
     Route::get("demo","HomeController@demo_view")->name("demo");
+    Route::get("demo_order","HomeController@demo_order_view")->name("demo");
+    Route::get("demo_order_form","HomeController@demo_order_q")->name("demo");
     Route::get("user-setting/{page?}","HomeController@user_setting")->name("UserSetting");
     Route::post("basic-info","HomeController@edit_basic_info")->name("BasicInfo");
     Route::post("basic-info2","HomeController@edit_user_avatar")->name("UserAvatarCng");
@@ -28,6 +30,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get("all-tickets","TicketController@all_ticket")->name("all_ticket_datatable");
 
     Route::post("create-tickets","TicketController@create_tickets")->name("create_tickets");
+
+    Route::get("all-orders","OrderController@all_order")->name("all_order_datatable");
+    Route::get("order-form","OrderController@order_form")->name("order_form_datatable");
+
+    Route::get("all-attendee","AttendeeController@all_attendee")->name("all_attendee_datatable");
 
 
 

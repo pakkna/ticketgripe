@@ -40,9 +40,10 @@
 <!-- <script src="{!! asset('master/js/jquery.nice-select.js') !!}"></script> -->
 
 <script type="text/javascript">
-    $(document).ready(function() {
-        $(".dataTables_empty").css('width', '1000px');
+    $('#tickets').click(function() {
+        // $(".dataTables_empty").css('width', '1000px');
         // $(".datatable_custom_wrap").css('overflow-x', 'hidden');
+        $('#example').DataTable().clear().destroy();
 
         var table =
             $('#example').DataTable({
@@ -75,6 +76,7 @@
                     url: '{{route("all_ticket_datatable")}}',
 
                     type: 'GET',
+                    cache: false,
 
                     data: function(d) {
 
@@ -183,11 +185,12 @@
                 ]
             });
 
-        $("table").wrapAll("<div style='overflow-x:auto;width:100%' />");
+        // $("table").wrapAll("<div style='overflow-x:auto;width:100%' />");
 
         $('.dataTables_wrapper').addClass('row');
 
         // $('.dataTables_processing').addClass('m-loader m-loader--brand');
+        $("#example").wrapAll("<div style='overflow-x:auto;width:100%' />");
 
         $('#process_data_table_length').addClass('col-lg-2 col-md-2 col-sm-2');
         $('#example_length').addClass('col-lg-6 col-md-6 col-sm-12');
