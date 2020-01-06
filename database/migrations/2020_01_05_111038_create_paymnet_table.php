@@ -16,7 +16,8 @@ class CreatePaymnetTable extends Migration
         Schema::create('payment', function (Blueprint $table) {
 
             $table->increments('id');
-            $table->string('total_tickets');
+            $table->string('product');
+            $table->string('total_tickets')->nullable();
             $table->string('card_type');
             $table->string('tran_id');
             $table->string('val_id');

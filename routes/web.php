@@ -30,7 +30,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get("all-tickets","TicketController@all_ticket")->name("all_ticket_datatable");
 
     Route::post("create-tickets","TicketController@create_tickets")->name("create_tickets");
+
     Route::post("ticket-delete","TicketController@ticket_delete")->name("ticket_delete");
+    Route::post("modal-edit-ticket","TicketController@edit_ticket")->name("edit-ticket");
+    Route::post("action-edit-ticket","TicketController@action_edit_ticket")->name("action-edit-ticket");
 
     Route::post("ticket-question-add","OrderController@ticket_questoion_add")->name("ticket-question-add");
     Route::get("all-orders","OrderController@all_order")->name("all_order_datatable");
@@ -39,6 +42,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get("all-attendee","AttendeeController@all_attendee")->name("all_attendee_datatable");
 
 
+    
 
 });
 Route::get("/","HomeController@index")->name("/");
