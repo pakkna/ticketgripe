@@ -39,6 +39,62 @@
 <script src="{!! asset('master/js/dataTables.bootstrap4.min.js') !!}"></script>
 <!-- <script src="{!! asset('master/js/jquery.nice-select.js') !!}"></script> -->
 
+<script src="{!! asset('js/sweetalert.min.js') !!}"></script>
+
+<script>
+    $.ajaxSetup({
+
+        headers: {
+
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
+        }
+
+    });
+
+    function ticket_delete(id,the) {
+
+        $.ajax({
+
+            url: '/ticket-delete',
+            type: 'post',
+            data: {
+                id: id,
+                '_token': $('meta[name="csrf-token"]').attr('content'),
+            },
+            dataType: 'json',
+            success: function(response) {
+
+                if (response==1) {
+
+                    $(the).closest("tr").fadeOut(200, function () {
+                        $(this).remove();
+                    });
+
+                    swal({
+                        title: "Ticket Delete Action",
+                        text: "Event Ticket Deleted Successfully",
+                        icon: "success",
+                        buttons: false,
+                    })
+
+                }else{
+                    swal({
+                        title: "Falid",
+                        text: "ticket Delete Action Error",
+                        icon: "error",
+                        buttons: false,
+                    })
+                }
+                    $(".swal-text").css('color', '#B40000');
+                    $(".swal-text").css('font-weight', '600');
+                    $(".swal-title").css('font-size', '18px');
+
+            }
+        });
+    }
+</script>
+
 <script type="text/javascript">
     $(document).ready(function() {
         $(".dataTables_empty").css('width', '1000px');
@@ -175,7 +231,7 @@
 
                         render: function(data, type, row) {
 
-                            return "<a href='guest-update/" + row.id + "' title='Edit' class='btn-hover-shine btn-shadow btn custom-action btn-sm' target='_blank'><i class='fas fa-edit'></i></a>|<a href='#!' title='View' class='btn-hover-shine btn-shadow btn custom-action btn-sm'><i class='fa fa-eye'></i></a>|<a href='guest-update/" + row.id + "' title='Delete' class='btn-hover-shine btn-shadow btn custom-action btn-sm' target='_blank'><i class='fa fa-trash'></i></a>";
+                            return "<a href='guest-update/" + row.id + "' title='Edit' class='btn-hover-shine btn-shadow btn custom-action btn-sm' target='_blank'><i class='fas fa-edit'></i></a>|<a href='#!' title='View' class='btn-hover-shine btn-shadow btn custom-action btn-sm'><i class='fa fa-eye'></i></a>|<a href='javascript:void(0)'  onclick='ticket_delete("+row.id+",this)' title='Delete' class='btn-hover-shine btn-shadow btn custom-action btn-sm' ><i class='fa fa-trash'></i></a>";
 
                         }
 
@@ -214,14 +270,6 @@
         
         // $(".custom-select").wrapAll("<div class='nice-select' />");
         // $(".custom-select").addClass("nice-select");
-
-    });
-
-    $.ajaxSetup({
-
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
 
     });
 
