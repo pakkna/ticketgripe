@@ -31,7 +31,8 @@
                                 <table id="order_form_table" style="width:100%; text-align: center" class="table table-hover table-striped table-bordered display nowrap">
                                     <thead class="custom-thead">
                                         <tr>
-                                            <th>Information to collect</th>
+                                            <th style="text-align: center;">Information to collect</th>
+                                            <th>Type</th>
                                             <th>Collect Per</th>
                                             <th>Require</th>
                                             <th>Action</th>
@@ -40,6 +41,7 @@
                                     <tbody class="custom-tbody" id="order_form">
                                         <tr>
                                             <td>Name *</td>
+                                            <td>Text Input</td>
                                             <td>Order</td>
                                             <td>
                                             <input type="checkbox" name="one" data-toggle="toggle" data-on="<i class='fa fa-check-circle mt--2'></i>" data-off="" data-size="mini" checked disabled>
@@ -48,22 +50,33 @@
                                         </tr>
                                         <tr>
                                             <td>Email  *</td>
+                                            <td>Text Input</td>
                                             <td>Order</td>
                                             <td>
                                             <input type="checkbox" name="two" data-toggle="toggle" data-on="<i class='fa fa-check-circle mt--2'></i>" data-off="" data-size="mini" checked disabled>
                                             </td>
                                             <td> --- </td>
-
                                         </tr>
                                         <tr>
                                             <td>Phone   *</td>
+                                            <td>Text Input</td>
                                             <td>Order</td>
                                             <td>
                                             <input type="checkbox" name="three" data-toggle="toggle" data-on="<i class='fa fa-check-circle mt--2'></i>" data-off="" data-size="mini" checked disabled>
                                             </td>
                                             <td> --- </td>
-
                                         </tr>
+                                        @foreach($ticket_question as $single_question)
+                                            <tr>
+                                                <td>{{$single_question->question_title}}</td>
+                                                <td>{{$single_question->question_type}}</td>
+                                                <td>Order</td>
+                                                <td>
+                                                    <input type="checkbox" name="three" data-toggle="toggle" data-on="<i class='fa fa-check-circle mt--2'></i>" data-off="" data-size="mini" checked>
+                                                </td>
+                                                <td> <a href='javascript:void(0)' data-toggle='modal' data-target='#editmoadal' onclick='edit_action("+row.id+")' title='Edit' class='btn-hover-shine btn-shadow btn custom-action btn-sm'><i class='fas fa-edit'></i></a>|<a href='javascript:void(0)'  onclick='ticket_delete("+row.id+",this)' title='Delete' class='btn-hover-shine btn-shadow btn custom-action btn-sm' ><i class='fa fa-trash'></i></a> </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>  
                             </div>								
@@ -236,5 +249,26 @@
             $('#editFieldValuesBtnBox').hide();
         }
     }
+
+    @if(Session::has('TicketQuestionSuccess'))
+        swal({
+            title: "Ticket Action",
+            text: "Ticket Question Added Successfully",
+            icon: "success",
+            buttons: false,
+        })
+    @endif
+    
+    @if(Session::has('TicketQuestionDanger'))
+    swal({
+        title: "Update Falid",
+        text: "Ticket Question Added Error",
+        icon: "error",
+        buttons: false,
+    })
+    $(".swal-text").css('color', '#B40000');
+    $(".swal-text").css('font-weight', '600');
+    $(".swal-title").css('font-size', '18px');
+    @endif   
 </script>
 

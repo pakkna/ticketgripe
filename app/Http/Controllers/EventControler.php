@@ -149,7 +149,12 @@ class EventControler extends Controller
         ->where('user_id',Auth::user()->id)
         ->get();
 
-        return view('eventsetup.event_sidebar',compact('event_details','all_tickets'));
+        $ticket_question = DB::table('custom_form')
+        ->where('event_id',$id)
+        ->where('user_id',Auth::user()->id)
+        ->get();
+
+        return view('eventsetup.event_sidebar',compact('event_details','all_tickets','ticket_question'));
 
     }
 }
