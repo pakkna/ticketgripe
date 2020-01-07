@@ -40,6 +40,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get("order-form","OrderController@order_form")->name("order_form_datatable");
     Route::post("ticket-toggle","OrderController@ticket_toggle");
     Route::post("ticket-question-update","OrderController@ticket_update_html")->name("modal-edit-ticket-question");
+    Route::post("ticket-question-edit","OrderController@ticket_question_edit")->name("ticket-question-edit");
 
     Route::post("question-delete","OrderController@order_question_delete")->name("question-delete");
 

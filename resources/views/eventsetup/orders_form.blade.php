@@ -24,7 +24,7 @@
             <div class="about-left-heading">
                 <h3> <i class="fas fa-info mr-2"></i> Ticket Order Form</h3>
                 @if(count($all_tickets) != 0)
-                    <a href="javascript:void(0)" data-toggle="modal" data-target="#largeModal"><button class="setting-save-btn" type="button" style="margin-top: 0;"><i class="fas fa-plus mr-2"></i>Add Question</button></a>
+                    <a href="javascript:void(0)" id="modal1-open"><button class="setting-save-btn" type="button" style="margin-top: 0;"><i class="fas fa-plus mr-2"></i>Add Question</button></a>
                 @endif
             </div>
             <div class="add-event-bg">
@@ -37,6 +37,16 @@
                     @if(Session::has('TicketQuestionDanger'))
                         <div class="alert alert-danger alert-dismissible text-center display-10" role="alert">
                             {{ Session::get('TicketQuestionDanger') }}
+                        </div>
+                    @endif
+                    @if(Session::has('TicketQuestionEditSuccess'))
+                        <div class="alert alert-success alert-dismissible text-center display-10" role="alert">
+                            {{ Session::get('TicketQuestionEditSuccess') }}
+                        </div>
+                    @endif
+                    @if(Session::has('TicketQuestionEditDanger'))
+                        <div class="alert alert-danger alert-dismissible text-center display-10" role="alert">
+                            {{ Session::get('TicketQuestionEditDanger') }}
                         </div>
                     @endif
                 </div>
@@ -91,7 +101,7 @@
                                                     <input type="checkbox" id="toggle_switch" onchange="toggle_btn({{$single_question->id}},this)" name="{{$single_question->id}}" data-toggle="toggle" data-on="<i class='fa fa-check-circle mt--2'></i>" data-off="<span style='position: relative;top: 4px;'>Off</span>" data-size="mini" {{$single_question->answer_required == 'on' ? 'checked' : '' }}>
                                                     
                                                 </td>
-                                                <td> <a href='javascript:void(0)' data-toggle='modal' data-target='#largeModal2' onclick='edit_action_ques("{{$single_question->id}},{{$event_details->id}}")' title='Edit' class='btn-hover-shine btn-shadow btn custom-action btn-sm'><i class='fas fa-edit'></i></a>|<a href='javascript:void(0)'  onclick='question_delete({{$single_question->id}},this)' title='Delete' class='btn-hover-shine btn-shadow btn custom-action btn-sm' ><i class='fa fa-trash'></i></a> </td>
+                                                <td> <a href='javascript:void(0)' data-toggle='modal' data-target='#largeModal2' onclick='edit_action_ques({{$single_question->id}},{{$event_details->id}})' title='Edit' class='btn-hover-shine btn-shadow btn custom-action btn-sm'><i class='fas fa-edit'></i></a>|<a href='javascript:void(0)'  onclick='question_delete({{$single_question->id}},this)' title='Delete' class='btn-hover-shine btn-shadow btn custom-action btn-sm' ><i class='fa fa-trash'></i></a> </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -110,7 +120,7 @@
 <!-- Modal -->
 <div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-width">
-        <div class="modal-content">
+        <div class="modal-content" id="modalContent">
             <div class="modal-header">
                 <h5 class="modal-title" id="myModalLabel" style="color: #FF7555;font-weight: 600;">Add custom questions</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -142,12 +152,12 @@
                                             </label>
                                             <div class="col-sm-8 col-xs-12">
                                                 <select id="fieldTypeSelect" class="form-control" name="question_type" required="">
-                                                    <option value="SingleLineText">Text</option>
-                                                    <option value="MultiLineText">Paragraph Text</option>
+                                                    <option value="Text">Text</option>
+                                                    <option value="Paragraph Text">Paragraph Text</option>
                                                     <option value="Number">Number</option>
-                                                    <option value="SingleChoiceRadio">Radio Buttons</option>
-                                                    <option value="SingleChoiceDropDown">Dropdown</option>
-                                                    <option value="MultipleChoice">Checkboxes</option>
+                                                    <option value="Radio Buttons">Radio Buttons</option>
+                                                    <option value="Dropdown">Dropdown</option>
+                                                    <option value="Checkboxes">Checkboxes</option>
                                                 </select>
                                                 <span class="help-inline"></span>
                                             </div>
@@ -255,6 +265,19 @@
     </div>
 </div>
 <!-- modal -->
+<script>
+    $("#modal1-open").on("click", function (ev) {
+            $("#largeModal").modal({
+                cache:false,
+                keyboard: false
+            }, "show");
+        ev.preventDefault();
+        return false;
+    });    
+    $("#largeModal").on('hidden.bs.modal', function () {
+        $(this).data('bs.modal', null);
+    });
+</script>
 <script type="text/javascript">
     $(function() {
         changeFieldType();
@@ -275,10 +298,10 @@
 
     function changeFieldType() {
         var selected = $('#fieldTypeSelect').children("option:selected").val();
-        console.debug(selected);
+        // console.debug(selected);
 
-        if (selected == 'SingleChoiceRadio' || selected == 'SingleChoiceDropDown' || selected == 'MultipleChoice') {
-            console.debug('showing');
+        if (selected == 'Radio Buttons' || selected == 'Dropdown' || selected == 'Checkboxes') {
+            // console.debug('showing');
             $('#editFieldValuesBtnBox').show();
         } else {
             $('#editFieldValuesBtnBox').hide();
@@ -305,6 +328,27 @@
     $(".swal-text").css('font-weight', '600');
     $(".swal-title").css('font-size', '18px');
     @endif  
+
+    @if(Session::has('TicketQuestionEditSuccess'))
+        swal({
+            title: "Ticket Action",
+            text: "Ticket Question Updated Successfully",
+            icon: "success",
+            buttons: false,
+        })
+    @endif
+    
+    @if(Session::has('TicketQuestionEditDanger'))
+    swal({
+        title: "Update Falid",
+        text: "Ticket Question Added Error",
+        icon: "error",
+        buttons: false,
+    })
+    $(".swal-text").css('color', '#B40000');
+    $(".swal-text").css('font-weight', '600');
+    $(".swal-title").css('font-size', '18px');
+    @endif 
 
    
 </script>
