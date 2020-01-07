@@ -211,7 +211,9 @@
 
         $('#process_data_table_filter').addClass('col-lg-2 col-md-2 col-sm-2');
 
-        $('#process_data_table_filter input').addClass('form-control form-control-sm');
+        $('#process_data_table_filter input').addClass('form-control form-control-sm');  
+
+        
         
         // $(".custom-select").wrapAll("<div class='nice-select' />");
         // $(".custom-select").addClass("nice-select");

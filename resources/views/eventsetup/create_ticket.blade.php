@@ -168,9 +168,6 @@
                                     <h6 style="font-size: 14px;">Short description</h6>
                                     <textarea class="replt-comnt" name="short_note" placeholder="Short Description">{{ old('short_note') }}</textarea>
 
-                                    <script>
-                                        CKEDITOR.replace('short_note');
-                                    </script>
                                     @if ($errors->has('short_note'))
                                     <strong class="help-block">
                                         <strong>{{ $errors->first('short_note') }}</strong>
