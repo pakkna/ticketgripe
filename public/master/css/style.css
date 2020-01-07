@@ -5921,7 +5921,9 @@ footer {
 .right-details li {
 	display: inline-block;
 	margin-right: 44px;
-	vertical-align: middle;
+    vertical-align: middle;
+    position: relative;
+    top: 13px;
 }
 
 
@@ -5956,7 +5958,8 @@ footer {
 	color: #fff;
 	text-align: center;
 	font-size: 14px;
-	font-weight: 400;
+    font-weight: 400;
+    
 }
 
 .my-all-evnts a:hover {

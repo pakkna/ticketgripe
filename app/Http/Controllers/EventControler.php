@@ -31,9 +31,19 @@ class EventControler extends Controller
 
         return View('files.add_event');
     }
-    public function event_detail(){
+    public function event_detail($event_id){
 
-        return View('files.event_detail');
+        try {
+            $single_event = DB::table('events')->where('id', $event_id)->where('user_id', Auth::user()->id)->first();
+            $single_event_tickets = DB::table('tickets')->where('event_id', $event_id)->where('user_id', Auth::user()->id)->get();
+            
+        } catch (\Exception $th) {
+            return redirect('/event-setup/'.$request->event_id.'/order-form')->with('TicketQuestionEditDanger',$th->getMessage());
+        }
+
+        
+
+        return View('files.event_detail', compact('single_event', 'single_event_tickets'));
     }
 
     public function create_event(EventRequest $request){

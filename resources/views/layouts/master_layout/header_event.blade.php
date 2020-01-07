@@ -137,22 +137,23 @@
                     <div class="event-title">
                         <div class="my-dash-dt">
                             <h3>{{ $event_details->title }}</h3>
-                            <span>Created at {{date("jS F Y", strtotime(Auth::user()->created_at))}}</span>
+                            <span>Created at {{date("jS F Y", strtotime(Auth::user()->created_at))}} &nbsp;
                             <?php 
                             if (Auth::user()->country != null) { ?>
-                                <span><i class="fas fa-map-marker-alt"></i> <?php echo Auth::user()->country; ?> </span>
+                                <i class="fas fa-map-marker-alt"></i> <?php echo Auth::user()->country; ?>
                             <?php }else{ echo '';} ?>
+                            </span>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <ul class="right-details">
-                        <!-- <li>
-                            <div class="my-all-evnts">
-                                <a href="{{route('MyEvents')}}">View Events</a>
-                            </div>
-                        </li> -->
                         <li>
+                            <div class="my-all-evnts">
+                                <a href="{{route('EventDetails', ['event_id' => Request::segment(2)])}}">Event Details</a>
+                            </div>
+                        </li>
+                        <!-- <li>
                             <div class="all-dis-evnt">
                                 <div class="dscun-txt">Total ticket</div>
                                 <div class="dscun-numbr">{{$event_details->seat_number}}</div>
@@ -169,7 +170,7 @@
                                 <div class="dscun-txt">Revenue</div>
                                 <div class="dscun-numbr">{{$event_details->seat_number}}</div>
                             </div>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
             </div>

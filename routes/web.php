@@ -20,7 +20,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get("add-events","EventControler@show_event_form")->name("AddEvent");
     Route::post("insert-event","EventControler@create_event")->name("createEvent");
     Route::post("edit-event","EventControler@edit_event")->name("edit-event");
-    Route::get("event-details","EventControler@event_detail")->name("EventDetails");
+    Route::get("event-details/{event_id}","EventControler@event_detail")->name("EventDetails");
     Route::get("withdraw","WithdrawController@withdraw")->name("Withdraw");
 
     Route::get("event-setup/{id}/{page?}","EventControler@event_setup_view")->name("event_setup");
