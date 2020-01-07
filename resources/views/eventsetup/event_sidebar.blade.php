@@ -58,6 +58,9 @@
             click[i].classList.remove("active");
             window.history.pushState("object or string", "Title", "/event-setup/{{Request::segment(2)}}/"+the.id);
         }
+        // var curDivContent = document.getElementById(tabAction).innerHTML;
+        // document.getElementById(tabAction).innerHTML = " ";
+        // document.getElementById(tabAction).innerHTML = curDivContent;
         document.getElementById(tabAction).style.display = "block";
         if (the == 1) {
             document.getElementById("responsed").classList.add("active");

@@ -24,7 +24,7 @@
             <div class="about-left-heading">
                 <h3> <i class="fas fa-info mr-2"></i> Ticket Order Form</h3>
                 @if(count($all_tickets) != 0)
-                    <a href="javascript:void(0)" id="modal1-open"><button class="setting-save-btn" type="button" style="margin-top: 0;"><i class="fas fa-plus mr-2"></i>Add Question</button></a>
+                    <a href="javascript:void(0)" data-toggle='modal' data-target='#open_question_modal' ><button class="setting-save-btn" type="button" style="margin-top: 0;"><i class="fas fa-plus mr-2"></i>Add Question</button></a>
                 @endif
             </div>
             <div class="add-event-bg">
@@ -118,7 +118,7 @@
 <script type="text/javascript" src="https://ticketstripe.com/assets/global/plugins/uniform/jquery.uniform.min.js"></script>
 
 <!-- Modal -->
-<div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+<div class="modal fade" id="open_question_modal" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-width">
         <div class="modal-content" id="modalContent">
             <div class="modal-header">
