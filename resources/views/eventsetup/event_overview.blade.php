@@ -54,32 +54,32 @@ clear: both;
 <div class="row mt-3">
     <div class="column">
         <div class="card">
-        <p><i class="fa fa-user"></i></p>
-        <h3>11+</h3>
-        <p>Partners</p>
+        <p><i class="fa fa-money"></i></p>
+        <h3>0</h3>
+        <p>Revenue</p>
         </div>
     </div>
     <div class="column">
         <div class="card">
-        <p><i class="fa fa-check"></i></p>
-        <h3>55+</h3>
-        <p>Projects</p>
-        </div>
-    </div>
-    
-    <div class="column">
-        <div class="card">
-        <p><i class="fa fa-smile-o"></i></p>
-        <h3>100+</h3>
-        <p>Happy Clients</p>
+        <p><i class="fa fa-shopping-basket"></i></p>
+        <h3>0</h3>
+        <p>Sold Out Iteams</p>
         </div>
     </div>
     
     <div class="column">
         <div class="card">
-        <p><i class="fa fa-coffee"></i></p>
+        <p><i class="fa fa-recycle"></i></p>
+        <h3>0</h3>
+        <p>Ticket Remaining</p>
+        </div>
+    </div>
+    
+    <div class="column">
+        <div class="card">
+        <p><i class='fas fa-chair' style='font-size:48px'></i></p>
         <h3>100+</h3>
-        <p>Meetings</p>
+        <p>Events Seats</p>
         </div>
     </div>
 </div>
@@ -87,32 +87,32 @@ clear: both;
 <div class="row">
     <div class="column">
         <div class="card">
-        <p><i class="fa fa-user"></i></p>
+        <p><i class="fa fa-users"></i></p>
         <h3>11+</h3>
-        <p>Partners</p>
+        <p>Attende</p>
         </div>
     </div>
     <div class="column">
         <div class="card">
-        <p><i class="fa fa-check"></i></p>
-        <h3>55+</h3>
-        <p>Projects</p>
-        </div>
-    </div>
-    
-    <div class="column">
-        <div class="card">
-        <p><i class="fa fa-smile-o"></i></p>
-        <h3>100+</h3>
-        <p>Happy Clients</p>
+        <p><i class="fa fa-handshake-o"></i></p>
+        <h3>3</h3>
+        <p>Sponsers</p>
         </div>
     </div>
     
     <div class="column">
         <div class="card">
-        <p><i class="fa fa-coffee"></i></p>
+        <p><i class="fa fa-newspaper-o"></i></p>
+        <h3>2</h3>
+        <p>Create Tickets</p>
+        </div>
+    </div>
+    
+    <div class="column">
+        <div class="card">
+        <p><i class="fa fa-heart"></i></p>
         <h3>100+</h3>
-        <p>Meetings</p>
+        <p>Event Interested</p>
         </div>
     </div>
 </div>

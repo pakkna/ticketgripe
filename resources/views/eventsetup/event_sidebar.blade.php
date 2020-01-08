@@ -16,6 +16,7 @@
                                 <a id="order-form" onclick="openForm(4,this)" class="tab-item-1 tab-open" href="javascript:void(0)"><i class="fas fa-shopping-cart mr-2"></i>Order Form</a>
                                 <a id="orders" onclick="openForm(5,this)" class="tab-item-1 tab-open" href="javascript:void(0)"><i class="fas fa-shopping-cart mr-2"></i>Orders</a>
                                 <a id="attende" onclick="openForm(6,this)" class="tab-item-1 tab-open" href="javascript:void(0)"><i class="fas fa-list"></i>Attende List</a>
+                                <a id="sponser" onclick="openForm(7,this)" class="tab-item-1 tab-open" href="javascript:void(0)"><i class="fas fa-list"></i>Sponser</a>
                             </div>
                         </div>
                     </div>
@@ -39,6 +40,9 @@
                     </div>
                     <div id="6" class="col-lg-9 col-md-7 tab-pane" style="display: none;">	
                        @include('eventsetup.attendee_list') 					
+                    </div>
+                    <div id="7" class="col-lg-9 col-md-7 tab-pane" style="display: none;">	
+                       @include('eventsetup.sponser') 					
                     </div>		
                 </div>
             </div>

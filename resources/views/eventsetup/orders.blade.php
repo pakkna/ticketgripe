@@ -76,7 +76,7 @@
 
                     url: '{{route("all_order_datatable")}}',
 
-                    type: 'GET',
+                    type: 'POST',
                     cache: false,
 
                     data: function(d) {

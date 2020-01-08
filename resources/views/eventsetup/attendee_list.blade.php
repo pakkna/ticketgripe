@@ -76,7 +76,7 @@
 
                     url: '{{route("all_attendee_datatable")}}',
 
-                    type: 'GET',
+                    type: 'POST',
                     cache: false,
 
                     data: function(d) {
