@@ -149,7 +149,7 @@
 
                     url: '{{route("all_ticket_datatable")}}',
 
-                    type: 'GET',
+                    type: 'POST',
                     cache: false,
 
                     data: function(d) {

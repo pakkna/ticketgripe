@@ -27,7 +27,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get("delete-event/{id}","EventControler@delete_event")->name("delete-event");
 
-    Route::get("all-tickets","TicketController@all_ticket")->name("all_ticket_datatable");
+    Route::post("all-tickets","TicketController@all_ticket")->name("all_ticket_datatable");
 
     Route::post("create-tickets","TicketController@create_tickets")->name("create_tickets");
 
@@ -36,16 +36,19 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post("action-edit-ticket","TicketController@action_edit_ticket")->name("action-edit-ticket");
 
     Route::post("ticket-question-add","OrderController@ticket_questoion_add")->name("ticket-question-add");
-    Route::get("all-orders","OrderController@all_order")->name("all_order_datatable");
+    Route::post("all-orders","OrderController@all_order")->name("all_order_datatable");
     Route::get("order-form","OrderController@order_form")->name("order_form_datatable");
     Route::post("ticket-toggle","OrderController@ticket_toggle");
     Route::post("ticket-question-update","OrderController@ticket_update_html")->name("modal-edit-ticket-question");
     Route::post("ticket-question-edit","OrderController@ticket_question_edit")->name("ticket-question-edit");
 
+    Route::post("add-sponser","SponserController@add_sponser")->name("add-sponser");
+    Route::post("all-sponser","SponserController@all_sponsers")->name("all-sponser");
+    Route::post("sponser-delete","SponserController@sponser_delete")->name("sponser-delete");
+
     Route::post("question-delete","OrderController@order_question_delete")->name("question-delete");
 
-
-    Route::get("all-attendee","AttendeeController@all_attendee")->name("all_attendee_datatable");
+    Route::post("all-attendee","AttendeeController@all_attendee")->name("all_attendee_datatable");
 
 
     

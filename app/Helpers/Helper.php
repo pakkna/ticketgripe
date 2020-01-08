@@ -49,17 +49,8 @@ if (!function_exists('javascript_dateformate')) {
 }
 
 
-if (!function_exists('get_user_details')) {
-
-    function get_user_details($id)
-
-    {
-        return DB::table("users")->where('id',$id)->first();
-    }
-}
 
 if (!function_exists('total_events')) {
-
     function total_events()
 
     {
@@ -83,7 +74,7 @@ if (!function_exists('EventImageUpload')) {
 
     function EventImageUpload($file,$uploadpath){
 
-        $datetime =date('Ymd_His');
+            $datetime =date('Ymd_His');
             $filename= $datetime.'-'. $file->getClientOriginalName();
             $save_path= public_path($uploadpath);
             $file->move($save_path,$filename);
