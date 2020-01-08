@@ -85,7 +85,7 @@
                                 <div class="addpic" id="OpenImgUpload">
                                     <input type="file" id="file" name="event_flyer">
                                     <label for="file">Choose File</label>
-                                    <p>Minimum image dimension : 1280 x 518</p>
+                                    <p>Minimum image dimension : 925 x 467</p>
                                     @if ($errors->has('event_flyer'))
                                     <span class="help-block text-danger">
                                         <strong>{{ $errors->first('event_flyer') }}</strong>

@@ -5825,7 +5825,7 @@ footer {
 }
 
 .dash-todo-thumbnail-area1 .todo-thumb1 {
-    height: 350px;
+    height: 420px;
 }
 
 .dash-bg-overlay {
@@ -7486,7 +7486,7 @@ footer {
 .event-feature-img{
     width: 100%;
     border-radius: 5px;
-    height: 227px;
+    /* height: 227px; */
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -7784,4 +7784,16 @@ color:
 .cus-input{
     float: left;
     min-height: 32px !important;
+}
+.custom-bg-event {
+    position: absolute;
+    width: 49%;
+    left: 34%;
+    top: 17%;
+    bottom: 41%;
+    height: 28%;
+    height: auto !important;
+}
+.custom-bg-event2{
+    height: auto !important;
 }

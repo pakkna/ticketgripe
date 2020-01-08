@@ -115,7 +115,9 @@
 <!-- Body Start -->
 <main class="dashboard-mp">
     <div class="dash-todo-thumbnail-area1">
-        <img class="todo-thumb1 dash-bg-image1 dash-bg-overlay" src="{!! asset($single_event->image_path)!!}"></img>
+        <!-- <img class="todo-thumb1 dash-bg-image1 dash-bg-overlay" src="{!! asset($single_event->image_path)!!}"></img> -->
+        <img class="todo-thumb1 dash-bg-image1 dash-bg-overlay custom-bg-event2" src="{!! asset('master/images/event_banner.png')!!}"></img>
+        <img class="todo-thumb1 dash-bg-image1 dash-bg-overlay custom-bg-event" src="{!! asset($single_event->image_path)!!}"></img>
         <div class="dash-todo-header1">
             <div class="container">
                 <div class="row">
@@ -186,9 +188,11 @@
                         <li>
                             <button class="event-btn-1">{{$single_event->seat_number}} Seats</button>
                         </li>
+                        @if(Request::segment(1) == 'event-details')
                         <li>
-                           <a href="{{route('Buyticket', ['event_id' =>$single_event->id])}}"><button class="event-btn-1">Buy Ticket</button></a> 
+                            <a href="{{route('Buyticket', ['event_id' =>$single_event->id])}}"><button class="event-btn-1">Buy Ticket</button></a> 
                         </li>
+                        @endif
                     </ul>
                 </div>
             </div>

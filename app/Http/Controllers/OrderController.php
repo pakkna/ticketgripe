@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Auth;
 use Yajra\Datatables\Datatables;
+
 
 class OrderController extends Controller
 {
@@ -32,10 +34,12 @@ class OrderController extends Controller
     }
     public function ticket_questoion_add(Request $request)
     {
-        $validatedData = $request->validate([
-            'question_title' => 'required|string',
+        $validatedData = validator::make($request->all(),[
+            'question_title' => 'required|string|unique:custom_form,question_title,'.$request->event_id,
             'tickets' => 'required'
         ]);
+        if ($validatedData->passes()) {
+        
         $array = array();
         foreach ($request->tickets as $key => $value) {
             $option = $request->tickets[$key];
@@ -72,6 +76,9 @@ class OrderController extends Controller
         } catch (\Exception $th) {
             return redirect('/event-setup/'.$request->event_id.'/order-form')->with('TicketQuestionDanger',$th->getMessage());
         }
+    }else{
+        return redirect('/event-setup/'.$request->event_id.'/order-form')->with('TicketQuestionDanger','You can not add same question !');
+    }
     }
     public function ticket_toggle(Request $request)
     {
@@ -110,10 +117,12 @@ class OrderController extends Controller
 
     public function ticket_question_edit(Request $request)
     {
-        $validatedData = $request->validate([
-            'question_title' => 'required|string',
+        $validatedData = validator::make($request->all(),[
+            'question_title' => 'required|string|unique:custom_form,question_title,'.$request->event_id,
             'tickets' => 'required'
         ]);
+        if ($validatedData->passes()) {
+
         $array = array();
         foreach ($request->tickets as $key => $value) {
             $option = $request->tickets[$key];
@@ -147,6 +156,10 @@ class OrderController extends Controller
             return redirect('/event-setup/'.$request->event_id.'/order-form')->with('TicketQuestionEditSuccess','Ticket question updated successfully !');
         } catch (\Exception $th) {
             return redirect('/event-setup/'.$request->event_id.'/order-form')->with('TicketQuestionEditDanger',$th->getMessage());
+        }
+    }else{
+        return redirect('/event-setup/'.$request->event_id.'/order-form')->with('TicketQuestionUpdateDanger','Question already exists !');
+
         }
     }
 

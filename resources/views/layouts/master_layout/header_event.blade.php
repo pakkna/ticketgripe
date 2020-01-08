@@ -115,7 +115,10 @@
 <!-- Body Start -->
 <main class="dashboard-mp">
     <div class="dash-todo-thumbnail-area1">
-        <img class="todo-thumb1 dash-bg-image1 dash-bg-overlay" src="{!! asset($event_details->image_path)!!}"></img>
+    <?php
+        Auth::user()->cover_pic==null ? $cover_path='master/images/event-view/my-bg.jpg' : $cover_path=Auth::user()->cover_pic;
+        ?>
+        <img class="todo-thumb1 dash-bg-image1 dash-bg-overlay" src="{!! asset($cover_path)!!}"></img>
         <div class="dash-todo-header1">
             <div class="container">
                 <div class="row">

@@ -39,6 +39,11 @@
                             {{ Session::get('TicketQuestionDanger') }}
                         </div>
                     @endif
+                    @if(Session::has('TicketQuestionUpdateDanger'))
+                        <div class="alert alert-danger alert-dismissible text-center display-10" role="alert">
+                            {{ Session::get('TicketQuestionUpdateDanger') }}
+                        </div>
+                    @endif
                     @if(Session::has('TicketQuestionEditSuccess'))
                         <div class="alert alert-success alert-dismissible text-center display-10" role="alert">
                             {{ Session::get('TicketQuestionEditSuccess') }}
@@ -319,7 +324,7 @@
     
     @if(Session::has('TicketQuestionDanger'))
     swal({
-        title: "Update Falid",
+        title: "Ticket Addition Failed",
         text: "Ticket Question Added Error",
         icon: "error",
         buttons: false,
@@ -337,10 +342,19 @@
             buttons: false,
         })
     @endif
+
+    @if(Session::has('TicketQuestionUpdateDanger'))
+        swal({
+            title: "Ticket Action",
+            text: "Ticket Question Update Unsuccessfull",
+            icon: "error",
+            buttons: false,
+        })
+    @endif
     
     @if(Session::has('TicketQuestionEditDanger'))
     swal({
-        title: "Update Falid",
+        title: "Update Failed",
         text: "Ticket Question Added Error",
         icon: "error",
         buttons: false,

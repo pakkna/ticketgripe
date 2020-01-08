@@ -54,13 +54,13 @@
                                 </div>
                                 <div class="add-input-items">
                                     <div class="add-evnt-dt">											
-                                        <div class="event-add-img1 event-feature-img" id="imagePreview" style="background-image: url(master/images/event-view/demo.jpg);">
+                                        <div class="event-add-img1 event-feature-img" id="imagePreview" style="background-image: url(master/images/event-view/demo.jpg);height: 227px;">
                                             <!-- <img src="{!! asset('master/images/homepage/center/post-img-1.jpg') !!}" alt=""> -->
                                         </div>
                                         <div class="addpic" id="OpenImgUpload">
                                             <input type="file" id="file" name="event_flyer">
                                             <label for="file">Choose File</label>
-                                            <p>Minimum image dimension : 1280 x 518</p>
+                                            <p>Minimum image dimension : 925 x 467</p>
                                             @if ($errors->has('event_flyer'))
                                             <span class="help-block text-danger">
                                                 <strong>{{ $errors->first('event_flyer') }}</strong>

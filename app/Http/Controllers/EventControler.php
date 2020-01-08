@@ -173,10 +173,23 @@ class EventControler extends Controller
     }
     public function event_ticket($event_id)
     {
-        $ticket_question = DB::table('custom_form')->where('event_id', $event_id)->first();
+        $single_event = DB::table('events')->where('id', $event_id)->first();
 
         $single_event_tickets = DB::table('tickets')->where('event_id', $event_id)->get();
 
-        return View('files.event_detail', compact('single_event', 'single_event_tickets'));
+        return View('files.buy_ticket', compact('single_event', 'single_event_tickets'));
+    }
+
+    public function buy_ticket_option(Request $request)
+    {
+        $single_event = DB::table('events')->where('id', $request->event_id)->first();
+
+        $ticket_question = DB::table('custom_form')->where('event_id', $request->event_id)->get();
+
+        $single_event_tickets = DB::table('tickets')->where('event_id', $request->event_id)->where('ticket_type', $request->ticket)->first();
+
+        $view =  view('files.buy_ticket_form',compact('single_event', 'single_event_tickets', 'ticket_question'))->render();
+
+        return response()->json(['html'=>$view]);
     }
 }
