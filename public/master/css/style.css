@@ -1512,7 +1512,7 @@ main {
 }
 
 .list-text-dt span {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 500;
     color: #313131;
     line-height: 0;
@@ -1522,7 +1522,7 @@ main {
 
 .list-text-dt ins {
     font-weight: 400;
-    font-size: 11px;
+    font-size: 13px;
     line-height: 0;
     color: #847577;
     text-decoration: none;
@@ -3400,8 +3400,8 @@ footer {
 }
 
 .event-btn-1 {
-    padding: 0 20px;
-    height: 40px;
+    padding: 0 15px;
+    height: 36px;
     font-size: 14px;
     clear: both;
     font-weight: 400;

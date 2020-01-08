@@ -21,7 +21,7 @@
 <!-- <script src="{!! asset('master/js/i18n/datepicker.en.js') !!}"></script> -->
 <script src="{!! asset('master/js/bootstrap.bundle.min.js') !!}"></script>
 <script src="{!! asset('master/js/owl.carousel.js') !!}"></script>
-<!-- <script src="{!! asset('master/js/custom1.js') !!}"></script> -->
+<script src="{!! asset('master/js/custom1.js') !!}"></script>
 <!-- <script src="{!! asset('master/js/timer.js') !!}"></script> -->
 
 <script>
