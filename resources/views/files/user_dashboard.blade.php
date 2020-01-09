@@ -161,7 +161,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Background*</label>	
-                                                    <img class="setting-bg avatar-bg" id="imagePreview1" src="{!!asset(Auth::user()->cover_pic)!!}">
+                                                    <img class="event-add-img1 event-feature-img" id="imagePreview1" src="{!!asset(Auth::user()->cover_pic)!!}">
                                                         </img>
                                                     </div>
                                                     <div class="setting-upload">

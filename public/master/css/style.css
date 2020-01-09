@@ -7813,3 +7813,14 @@ color:
     #e6e6e6;
     padding: 27px 38px;
 }
+.evnt-ft-img{
+    height: 467px;
+}
+.event-ft-logo{
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    border: 3px solid #fff;
+    box-shadow: 0px 3px 12px 0px rgba(0, 0, 0, 0.09);
+    background-color: #fff;
+}

@@ -1235,6 +1235,9 @@ main {
 	.custom-padd-ticket{
 		padding: 0px !important;
 	}
+	.evnt-ft-img{
+		height: auto !important;
+	}
 }
 @media (max-width: 630px) {
 	.dash-dts{
