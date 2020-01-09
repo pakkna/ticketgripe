@@ -3420,7 +3420,7 @@ footer {
 }
 
 .event-sections {
-	padding: 50px 0 20px;
+	padding: 50px 0 50px;
 }
 
 .event-item-heading {
@@ -3871,7 +3871,7 @@ footer {
 
 .vip-seats {
 	float: left;
-	width: 100%;
+	width: 96%;
 	padding-top: 30px;
     padding-bottom: 17px;
     border-bottom: 1px solid #e6e6e6;
@@ -7798,9 +7798,18 @@ color:
     height: auto !important;
 }
 .header-buy-tickt{
-    font-weight: 600;
-    font-size: 18px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #313131;
 }
 .group-element {
     margin: 38px 0px;
+}
+.custom-padd-ticket {
+    padding: 0px 40px;
+}
+.custom-border-ticket {
+    border: 1px solid 
+    #e6e6e6;
+    padding: 27px 38px;
 }

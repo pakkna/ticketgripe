@@ -1229,6 +1229,12 @@ main {
 	.dash-todo-thumbnail-area1 .todo-thumb1{
 		height: auto !important;
 	}
+	.event-sections {
+		padding: 20px 0 20px !important;
+	}
+	.custom-padd-ticket{
+		padding: 0px !important;
+	}
 }
 @media (max-width: 630px) {
 	.dash-dts{
