@@ -18,7 +18,6 @@ class CreateOrderTable extends Migration
             $table->string('name');
             $table->string('email',100)->unique();
             $table->string('mobile');
-            $table->longText('extra_form_answer')->nullable();
             $table->string('order_confirm_id');
             $table->string('attende_confirm');
             $table->integer('sold_ticket_number');
