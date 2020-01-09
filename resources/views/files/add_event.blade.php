@@ -50,40 +50,45 @@
                             <div class="input-section-item">
                                 <div class="add-input-title">								
                                     <i class="fas fa-image"></i>
-                                    <h6>Event Flyer*</h6>
+                                    <h6>Event Flyer & Logo*</h6>
                                 </div>
                                 <div class="add-input-items">
-                                    <div class="add-evnt-dt">											
-                                        <div class="event-add-img1 event-feature-img" id="imagePreview" style="background-image: url(master/images/event-view/demo.jpg);height: 227px;">
-                                            <!-- <img src="{!! asset('master/images/homepage/center/post-img-1.jpg') !!}" alt=""> -->
-                                        </div>
-                                        <div class="addpic" id="OpenImgUpload">
-                                            <input type="file" id="file" name="event_flyer">
-                                            <label for="file">Choose File</label>
-                                            <p>Minimum image dimension : 925 x 467</p>
-                                            @if ($errors->has('event_flyer'))
-                                            <span class="help-block text-danger">
-                                                <strong>{{ $errors->first('event_flyer') }}</strong>
-                                            </span>
-                                            @endif
-                                        </div>
-                                        <script>
-                                            function readURL(input) {
-                                                if (input.files && input.files[0]) {
-                                                    var reader = new FileReader();
-                                                    reader.onload = function(e) {
-                                                        $('#imagePreview').css('background-image', 'url('+e.target.result +')');
-                                                        $('#imagePreview').hide();
-                                                        $('#imagePreview').fadeIn(650);
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                        <div class="add-evnt-dt">
+                                                <div class="event-add-img1 event-feature-img" id="imagePreview" style="background-image: url(master/images/event-view/demo.jpg);">
+                                                
+                                                </div>
+                                                <div class="addpic" id="OpenImgUpload">
+                                                    <input type="file" id="file" name="event_flyer">
+                                                    <label for="file">Choose File</label>
+                                                    <p>Minimum image dimension : 925 x 467</p>
+                                                    @if ($errors->has('event_flyer'))
+                                                    <span class="help-block text-danger">
+                                                        <strong>{{ $errors->first('event_flyer') }}</strong>
+                                                    </span>
+                                                    @endif
+                                                </div>
+                                                <script>
+                                                    function readURL(input) {
+                                                        if (input.files && input.files[0]) {
+                                                            var reader = new FileReader();
+                                                            reader.onload = function(e) {
+                                                                $('#imagePreview').css('background-image', 'url('+e.target.result +')');
+                                                                $('#imagePreview').hide();
+                                                                $('#imagePreview').fadeIn(650);
+                                                            }
+                                                            reader.readAsDataURL(input.files[0]);
+                                                        }
                                                     }
-                                                    reader.readAsDataURL(input.files[0]);
-                                                }
-                                            }
-                                            $("#file").change(function() {
-                                                readURL(this);
-                                            });
-                                        </script>
-                                    </div>
+                                                    $("#file").change(function() {
+                                                        readURL(this);
+                                                    });
+                                                </script>
+
+                                        </div>
+                                    </div>    											
+                             
                                 </div>									
                             </div>
                             <div class="input-section-item">
