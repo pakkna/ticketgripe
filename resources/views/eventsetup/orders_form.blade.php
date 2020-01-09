@@ -54,6 +54,15 @@
                             {{ Session::get('TicketQuestionEditDanger') }}
                         </div>
                     @endif
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul style="margin-bottom: 0px !important;">
+                            @foreach ($errors->all() as $error)
+                                <li>* {{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
                 </div>
                 <div class="dash-discussions mb20">
                     <div class="main-section">
@@ -325,7 +334,7 @@
     @if(Session::has('TicketQuestionDanger'))
     swal({
         title: "Ticket Addition Failed",
-        text: "Ticket Question Added Error",
+        text: {{ Session::get('TicketQuestionDanger') }},
         icon: "error",
         buttons: false,
     })

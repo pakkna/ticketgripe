@@ -9,7 +9,7 @@
                                 <div class="offset-md-2 col-md-8">
                                     <div class="select-bg" style="margin-bottom: 50px;">							
                                         <select id="ticket-select" class="nice-select add-inputs payment-input wide custom-list" style="margin-top: 0!important;" name="question_select">
-                                            <option value="null">Select Ticket</option>
+                                            <option value="none">Select Ticket</option>
                                             @foreach($single_event_tickets as $alltickets)
                                                 <option value="{{$alltickets->ticket_type}}">{{$alltickets->ticket_type}}</option>
                                             @endforeach
