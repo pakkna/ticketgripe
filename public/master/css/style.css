@@ -110,7 +110,7 @@ textarea {
 }
 
 p {
-	font-size: 14px;
+	font-size: 15px;
 	line-height: 26px;
 	color: #959fbb;
 }
@@ -3873,7 +3873,7 @@ footer {
 	float: left;
 	width: 100%;
 	padding-top: 30px;
-    padding-bottom: 27px;
+    padding-bottom: 17px;
     border-bottom: 1px solid #e6e6e6;
 }
 
@@ -7796,4 +7796,11 @@ color:
 }
 .custom-bg-event2{
     height: auto !important;
+}
+.header-buy-tickt{
+    font-weight: 600;
+    font-size: 18px;
+}
+.group-element {
+    margin: 38px 0px;
 }

@@ -77,7 +77,7 @@ class OrderController extends Controller
             return redirect('/event-setup/'.$request->event_id.'/order-form')->with('TicketQuestionDanger',$th->getMessage());
         }
     }else{
-        return redirect('/event-setup/'.$request->event_id.'/order-form')->with('TicketQuestionDanger','You can not add same question !');
+        return redirect('/event-setup/'.$request->event_id.'/order-form')->withErrors($validatedData);
     }
     }
     public function ticket_toggle(Request $request)
@@ -117,12 +117,10 @@ class OrderController extends Controller
 
     public function ticket_question_edit(Request $request)
     {
-        $validatedData = validator::make($request->all(),[
-            'question_title' => 'required|string|unique:custom_form,question_title,'.$request->event_id,
+        $validatedData = $request->validate([
+            'question_title' => 'required|string',
             'tickets' => 'required'
         ]);
-        if ($validatedData->passes()) {
-
         $array = array();
         foreach ($request->tickets as $key => $value) {
             $option = $request->tickets[$key];
@@ -156,10 +154,6 @@ class OrderController extends Controller
             return redirect('/event-setup/'.$request->event_id.'/order-form')->with('TicketQuestionEditSuccess','Ticket question updated successfully !');
         } catch (\Exception $th) {
             return redirect('/event-setup/'.$request->event_id.'/order-form')->with('TicketQuestionEditDanger',$th->getMessage());
-        }
-    }else{
-        return redirect('/event-setup/'.$request->event_id.'/order-form')->with('TicketQuestionUpdateDanger','Question already exists !');
-
         }
     }
 
