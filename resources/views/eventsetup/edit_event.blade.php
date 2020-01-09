@@ -110,6 +110,37 @@
                                     });
                                 </script>
                             </div>
+                            <div class="add-evnt-dt">											
+                                <img class="event-add-img1 event-feature-img event-ft-logo" id="imagePreview2" src="{!!asset($event_details->event_logo)!!}">
+                                </img>
+                                <div class="addpic" id="OpenImgUpload">
+                                    <input type="file" id="file2" name="event_logo">
+                                    <label for="file2">Choose File</label>
+                                    <p>Minimum image dimension : 150 x 150</p>
+                                    @if ($errors->has('event_logo'))
+                                    <span class="help-block text-danger">
+                                        <strong>{{ $errors->first('event_logo') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                                <script>
+                                    function readURL2(input) {
+                                        if (input.files && input.files[0]) {
+                                            var reader = new FileReader();
+                                            reader.onload = function(e) {
+                                               
+                                            $('#imagePreview2').attr('src', e.target.result);
+                                                $('#imagePreview2').hide();
+                                                $('#imagePreview2').fadeIn(650);
+                                            }
+                                            reader.readAsDataURL(input.files[0]);
+                                        }
+                                    }
+                                    $("#file2").change(function() {
+                                        readURL2(this);
+                                    });
+                                </script>
+                            </div>
                         </div>									
                     </div>
                     <div class="input-section-item">

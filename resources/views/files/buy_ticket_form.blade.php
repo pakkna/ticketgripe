@@ -46,11 +46,10 @@
                         @foreach($ticket_question as $one_ticket_question)
                         <div class="group-element">
                             <?php 
-                            array_push($question_id_array, $one_ticket_question->id);
-
                             $array2 = array();
                             $array2 = explode("~", $one_ticket_question->select_specific_ticket);
                             if($one_ticket_question->answer_required == 'on' && in_array($single_event_tickets->id,$array2) ){
+                                array_push($question_id_array, $one_ticket_question->id);
                                 $array3 = array();
                                 $array3 = explode("~", $one_ticket_question->question_options);    
                             ?>

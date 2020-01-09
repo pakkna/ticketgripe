@@ -28,8 +28,8 @@
             <div class="row justify-content-md-center">
                 <div class="col-lg-12 col-md-8">
                     <div class="add-event-bg">
-                    <form class="form-horizontal" method="post" action="{{ route('createEvent') }}" enctype="multipart/form-data">
-                    {{ csrf_field() }}
+                        <form class="form-horizontal" method="post" action="{{ route('createEvent') }}" enctype="multipart/form-data">
+                        {{ csrf_field() }}
                             <div class="flash_msg">
                                 @include("layouts.includes.flash")
                             </div>
@@ -54,11 +54,9 @@
                                 </div>
                                 <div class="add-input-items">
                                     <div class="row">
-                                        <div class="col-md-6">
-                                        <div class="add-evnt-dt">
-                                                <div class="event-add-img1 event-feature-img" id="imagePreview" style="background-image: url(master/images/event-view/demo.jpg);">
-                                                
-                                                </div>
+                                        <div class="col-md-12">
+                                            <div class="add-evnt-dt">
+                                                <img class="event-add-img1 event-feature-img" id="imagePreview" src="{!!asset('master/images/event-view/demo.jpg')!!}">
                                                 <div class="addpic" id="OpenImgUpload">
                                                     <input type="file" id="file" name="event_flyer">
                                                     <label for="file">Choose File</label>
@@ -74,7 +72,7 @@
                                                         if (input.files && input.files[0]) {
                                                             var reader = new FileReader();
                                                             reader.onload = function(e) {
-                                                                $('#imagePreview').css('background-image', 'url('+e.target.result +')');
+                                                                $('#imagePreview').attr('src', e.target.result);
                                                                 $('#imagePreview').hide();
                                                                 $('#imagePreview').fadeIn(650);
                                                             }
@@ -85,12 +83,42 @@
                                                         readURL(this);
                                                     });
                                                 </script>
-
+                                            </div>
                                         </div>
-                                    </div>    											
-                             
-                                </div>									
-                            </div>
+                                        <div class="col-md-12">
+                                            <div class="add-evnt-dt">
+                                                <img class="event-add-img1 event-feature-img event-ft-logo" id="imagePreview2" src="{!!asset('master/images/event-logo.png')!!}">
+                                                <div class="addpic" id="OpenImgUpload">
+                                                    <input type="file" id="file2" name="event_logo">
+                                                    <label for="file2">Choose File</label>
+                                                    <p>Minimum image dimension : 150 x 150</p>
+                                                    @if ($errors->has('event_logo'))
+                                                    <span class="help-block text-danger">
+                                                        <strong>{{ $errors->first('event_logo') }}</strong>
+                                                    </span>
+                                                    @endif
+                                                </div>
+                                                <script>
+                                                    function readURL2(input) {
+                                                        if (input.files && input.files[0]) {
+                                                            var reader = new FileReader();
+                                                            reader.onload = function(e) {
+                                                                $('#imagePreview2').attr('src', e.target.result);
+                                                                $('#imagePreview2').hide();
+                                                                $('#imagePreview2').fadeIn(650);
+                                                            }
+                                                            reader.readAsDataURL(input.files[0]);
+                                                        }
+                                                    }
+                                                    $("#file2").change(function() {
+                                                        readURL2(this);
+                                                    });
+                                                </script>
+                                            </div>
+                                        </div>  
+                                    </div>									
+                                </div>
+                            </div>    
                             <div class="input-section-item">
                                 <div class="add-input-title">								
                                     <i class="fas fa-info-circle"></i>

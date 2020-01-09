@@ -115,7 +115,7 @@
 <!-- Body Start -->
 <main class="dashboard-mp">
     <div class="dash-todo-thumbnail-area1">
-    <?php
+        <?php
         Auth::user()->cover_pic==null ? $cover_path='master/images/event-view/my-bg.jpg' : $cover_path=Auth::user()->cover_pic;
         ?>
         <img class="todo-thumb1 dash-bg-image1 dash-bg-overlay" src="{!! asset($cover_path)!!}"></img>
@@ -125,7 +125,10 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="my-profile-dash">
                             <div class="my-dp-dash">
-                                <img src="{!! asset('master/images/event-logo.png') !!}" alt="prifile pic">
+                                <?php
+                                $event_details->event_logo == null ? $logo_path='master/images/event-view/my-bg.jpg' : $logo_path=$event_details->event_logo;
+                                ?>
+                                <img src="{!! asset($logo_path) !!}" alt="prifile pic">
                             </div>
                         </div>
                     </div>

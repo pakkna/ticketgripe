@@ -54,12 +54,14 @@ class EventControler extends Controller
     public function create_event(EventRequest $request){
 
         $upload_path=EventImageUpload($request->file('event_flyer'),'event_flayer');
+        $upload_path2=EventImageUpload($request->file('event_logo'),'event_logo');
 
         $data= [
             'title' => $request->event_title,
             'start_date' => datetime_validate($request->start_time),
             'end_date' => datetime_validate($request->end_time),
             'image_path' => $upload_path,
+            'event_logo' => $upload_path2,
             'category' => $request->category,
             'country' => $request->country,
             'address' => $request->address,
@@ -118,12 +120,20 @@ class EventControler extends Controller
             $image=DB::table('events')->select('image_path')->where('id',$request->id)->first(); 
             $upload_path=$image->image_path;
         }
+
+        if(!empty($request->event_logo)){
+            $upload_path2=EventImageUpload($request->file('event_logo'),'event_logo');
+        }else{
+            $image=DB::table('events')->select('event_logo')->where('id',$request->id)->first(); 
+            $upload_path2=$image->event_logo;
+        }
         $data= [
 
             'title' => $request->event_title,
             'start_date' => datetime_validate($request->start_time),
             'end_date' => datetime_validate($request->end_time),
             'image_path' => $upload_path,
+            'event_logo' => $upload_path2,
             'custom_link' => !empty($request->custom_link) ? $request->custom_link : NULL,
             'category' => $request->category,
             'country' => $request->country,
@@ -155,7 +165,7 @@ class EventControler extends Controller
         
         $event_details = DB::table('events')
         ->leftjoin('tickets','events.id','=','tickets.event_id')
-        ->select('events.id','title','image_path','start_date','end_date','country','address','city','state','zip','event_status','seat_number','category','hide_date_event_page','description','custom_link')
+        ->select('events.id','title','image_path','events.event_logo','start_date','end_date','country','address','city','state','zip','event_status','seat_number','category','hide_date_event_page','description','custom_link')
         ->where('events.id',$id)
         ->first();
 
