@@ -191,7 +191,7 @@
                                 </div>
                                 <div class="add-input-items">
                                     <div class="add-evnt-dt">											
-                                        <div class="row">											
+                                        <div class="row">		 									
                                             <div class="col-md-4">
                                                 <div class="select-bg">									
                                                         <input class="add-inputs"  name="seat_number" type="number" placeholder="Seat number" value="{{ null !==old('seat_number') ? old('seat_number') : 0  }}" >
