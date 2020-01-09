@@ -31,7 +31,8 @@ class CreateEventsTable extends Migration
             $table->string('state')->nullable();
             $table->string('zip')->nullable();
             $table->string('event_status');
-            $table->integer('page_visitor')->nullable();
+            $table->string('event_logo')->nullable();
+            $table->integer('page_visitor');
             $table->float('event_credit')->nullable()->default(0);
             $table->float('event_currency')->nullable()->default("BDT");
             $table->timestamps();
