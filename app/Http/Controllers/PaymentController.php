@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Auth;
+use Session;
 
 class PaymentController extends Controller
 {
@@ -22,8 +23,27 @@ class PaymentController extends Controller
         $product_type=($ticket_info->ticket_type);
 
         //put buyer input infi in session
-        $request->session()->put('buyer_info',$request->all());
+        $session = session('buyer_info', []);
 
+
+        function initSession($pass)
+        {
+            session(['buyer_info' => $pass]);
+
+        }
+
+        if(empty($session))
+        {
+            initSession($request->all());
+        }
+
+      
+
+
+        //$request->session()->put('buyer_info',$request->all());
+
+        //session()->put('buyer_info',$request->all());
+        
         if($ticket_info->ticket_price>0){
             $this->pay_now_ssl($total_price,$product_type,$ticket_info->selling_currency,$request->all());
         }else{
@@ -124,11 +144,17 @@ class PaymentController extends Controller
     public function payment_status(Request $request)
     {
 
-        $bill_info=$request->session()->get('buyer_info');
+        $bill_info= session()->get('user_signup');   //$request->session()->get('buyer_info');
 
         $ticket_info=$this->ticket_details($bill_info['ticket_id']);
 
        // $request->session()->forget('buyer_info');
+
+echo '<pre>'; 
+echo '======================<br>';
+print_r($bill_info);
+echo '<br>======================';
+exit();
 
         if($request->card_type== "VALID" || "VALIDED" && $bill_info['_token']==$request->value_a ){
                
@@ -160,7 +186,7 @@ class PaymentController extends Controller
                 }
                
             }else{
-                return redirect("buy-ticket/{{$bill_info['ticket_id']}}")->with("flashMessageSuccess", "Online Payment System Request Invalid ! Try Again");
+                return redirect("buy-ticket/{$bill_info['ticket_id']}")->with("flashMessageSuccess", "Online Payment System Request Invalid ! Try Again");
             }      
     }
 
