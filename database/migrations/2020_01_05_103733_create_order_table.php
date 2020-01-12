@@ -15,18 +15,17 @@ class CreateOrderTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('email',100)->unique();
-            $table->string('mobile');
             $table->string('order_confirm_id');
-            $table->string('attende_confirm');
-            $table->integer('sold_ticket_number');
-            $table->float('sold_ticket_amount');
-            $table->float('sold_ticket_carge_fee');
+            $table->string('attende_confirm')->nullable();
+            $table->integer('sold_tickets');
+            $table->float('order_amount');
+            $table->float('ssl_charge');
+            $table->float('system_charge');
+            $table->float('sold_amount');
+            $table->unsignedBigInteger('payment_id')->nallable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('event_id');
-            $table->unsignedBigInteger('ticket_id');         
-            $table->string('currency')->nullable();
+            $table->unsignedBigInteger('ticket_id');      
             $table->timestamps();
             $table->engine = 'InnoDB'; 	
             $table->charset = 'utf8';

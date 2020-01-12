@@ -134,9 +134,8 @@
                                     <label>Fees</label>
                                     <div class="select-bg">									
                                         <select class="nice-select add-inputs payment-input wide custom-list" name="fees_consume">
-                                        <option value="0">Absorb Credit Card fees only</option>
+                                        <option value="0">Absorb Paymnet fees only</option>
                                         <option value="1">Pass all fees to the buyer</option>
-                                        <option value="2">Absorb Credit Card and Service fees</option>   
                                         </select>    
                                     </div>
                                 </div>

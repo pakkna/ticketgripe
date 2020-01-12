@@ -1,6 +1,6 @@
 <div class="">
     <div class="select-seats">
-        <form action="{{route('answere-submit-form')}}" method="post" enctype="multipart/form-data">
+        <form action="{{route('ticket-generate')}}" method="post" enctype="multipart/form-data">
         {{ csrf_field() }}
         <input type="hidden" name="ticket_id" id="" value="{{$single_event_tickets->id}}">
         <div class="vip-seats">
@@ -19,7 +19,7 @@
             </div>
             <div class="select-sts-right">
                 <div class="select-bg">									
-                    <select id="ticket-select" class="nice-select add-inputs payment-input wide custom-list" style="margin-top: 0!important;" name="seat_{{$single_event_tickets->id}}">
+                    <select id="ticket-select" class="nice-select add-inputs payment-input wide custom-list" style="margin-top: 0!important;" name="ticket_count">
                     <?php for ($i=$single_event_tickets->min_ticket_per_order; $i <= $single_event_tickets->max_ticket_per_order ; $i++) { ?>
                             <option value="{{$i}}">{{$i}}</option>
                     <?php } ?>
@@ -83,10 +83,12 @@
                                 <?php } ?>
                 
                                 <?php } ?>
+
+                            
                         </div>
                         @endforeach
-                        <input type="hidden" name="question_id_array" value="{{serialize($question_id_array)}}">
-
+                        <label>#Billing Address *</label>
+                        <input type="text" class="payment-input" name="address" required>
                         <div class="add-crdt-amnt">
                             <button class="setting-save-btn" type="submit">Submit</button>
                         </div>

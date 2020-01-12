@@ -14,9 +14,6 @@
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
 
     <!-- Bootstrap -->
-    
-          
-
     <link rel="stylesheet" href="https://ticketstripe.com/assets/global/plugins/bootstrap/css/bootstrap.min-2bb7f80efa63296bd4502f59689fbcfb.css"/>
 
     <!-- BEGIN GLOBAL MANDATORY STYLES -->

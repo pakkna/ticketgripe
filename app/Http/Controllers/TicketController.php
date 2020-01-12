@@ -105,14 +105,4 @@ class TicketController extends Controller
             echo false;
           }   
     }
-
-    public function answere_submit(Request $request)
-    {
-        echo '<pre>'; 
-        echo '======================<br>';
-        print_r($request->all());
-         print_r(unserialize($request->question_id_array));
-        echo '<br>======================';
-        exit();
-    }
 }

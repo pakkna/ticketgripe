@@ -21,13 +21,15 @@ class CreatePaymnetTable extends Migration
             $table->string('card_type');
             $table->string('tran_id');
             $table->string('val_id');
-            $table->string('total_amount');
-            $table->string('store_amount');
+            $table->float('total_amount');
+            $table->float('store_amount');
             $table->string('bank_tran_id');
             $table->string('card_no');
             $table->string('card_brand');
             $table->string('card_issuer');
             $table->string('card_issuer_country');
+            $table->string('currency')->nullable();
+            $table->float('currency_rate');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('event_id');
             $table->unsignedBigInteger('ticket_id');
