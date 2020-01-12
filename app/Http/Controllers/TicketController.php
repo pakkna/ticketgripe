@@ -42,7 +42,31 @@ class TicketController extends Controller
 
         try {
             
-        DB::table('tickets')->insert($data);
+            $last_ticket_id = DB::table('tickets')->insertGetId($data);
+            
+
+            for ($i=0; $i < 3; $i++) { 
+                if ($i == 0) {
+                    $title = 'Full name';
+                    $type = 'Text';
+                }elseif ($i == 1) {
+                    $title = 'Email';
+                    $type = 'email';
+                }else{
+                    $title = 'Mobile';
+                    $type = 'Text';
+                }
+                $dataSet = [
+                    'question_title' => $title,
+                    'question_type' => $type,
+                    'answer_required' => 'on',
+                    'select_specific_ticket' => $last_ticket_id,
+                    'user_id' => Auth::user()->id,
+                    'event_id' => $request->event_id,
+                    'created_at'=>date('Y-m-d h:i:s')
+                ];
+                $last_ticket_id = DB::table('custom_form')->insert($dataSet);
+            }
 
         return redirect('/event-setup/'.$request->event_id.'/create-ticket')->with('AddTicketSuccess','New Ticket Add Successfully !');
 

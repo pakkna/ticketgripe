@@ -84,7 +84,7 @@
                                             <td>Text Input</td>
                                             <td>Order</td>
                                             <td>
-                                            <input type="checkbox" name="one" data-toggle="toggle" data-on="<i class='fa fa-check-circle mt--2'></i>" data-off="" data-size="mini" checked disabled>
+                                            <input type="checkbox" name="one" data-toggle="toggle" data-on="<i class='fa fa-check-circle mt--2' style='margin-top:-2px'></i>" data-off="" data-size="mini" checked disabled>
                                             </td>
                                             <td> --- </td>
                                         </tr>
@@ -93,7 +93,7 @@
                                             <td>Text Input</td>
                                             <td>Order</td>
                                             <td>
-                                            <input type="checkbox" name="two" data-toggle="toggle" data-on="<i class='fa fa-check-circle mt--2'></i>" data-off="" data-size="mini" checked disabled>
+                                            <input type="checkbox" name="two" data-toggle="toggle" data-on="<i class='fa fa-check-circle mt--2' style='margin-top:-2px'></i>" data-off="" data-size="mini" checked disabled>
                                             </td>
                                             <td> --- </td>
                                         </tr>
@@ -102,7 +102,7 @@
                                             <td>Text Input</td>
                                             <td>Order</td>
                                             <td>
-                                            <input type="checkbox" name="three" data-toggle="toggle" data-on="<i class='fa fa-check-circle mt--2'></i>" data-off="" data-size="mini" checked disabled>
+                                            <input type="checkbox" name="three" data-toggle="toggle" data-on="<i class='fa fa-check-circle mt--2' style='margin-top:-2px'></i>" data-off="" data-size="mini" checked disabled>
                                             </td>
                                             <td> --- </td>
                                         </tr>
@@ -112,7 +112,7 @@
                                                 <td>{{$single_question->question_type}}</td>
                                                 <td>Order</td>
                                                 <td>
-                                                    <input type="checkbox" id="toggle_switch" onchange="toggle_btn({{$single_question->id}},this)" name="{{$single_question->id}}" data-toggle="toggle" data-on="<i class='fa fa-check-circle mt--2'></i>" data-off="<span style='position: relative;top: 4px;'>Off</span>" data-size="mini" {{$single_question->answer_required == 'on' ? 'checked' : '' }}>
+                                                    <input type="checkbox" id="toggle_switch" onchange="toggle_btn({{$single_question->id}},this)" name="{{$single_question->id}}" data-toggle="toggle" data-on="<i class='fa fa-check-circle mt--2' style='margin-top: -2px;'></i>" data-off="<span style='position: relative;top: 2px;left:-5px;'>Off</span>" data-size="mini" {{$single_question->answer_required == 'on' ? 'checked' : '' }}>
                                                     
                                                 </td>
                                                 <td> <a href='javascript:void(0)' data-toggle='modal' data-target='#largeModal2' onclick='edit_action_ques({{$single_question->id}},{{$event_details->id}})' title='Edit' class='btn-hover-shine btn-shadow btn custom-action btn-sm'><i class='fas fa-edit'></i></a>|<a href='javascript:void(0)'  onclick='question_delete({{$single_question->id}},this)' title='Delete' class='btn-hover-shine btn-shadow btn custom-action btn-sm' ><i class='fa fa-trash'></i></a> </td>

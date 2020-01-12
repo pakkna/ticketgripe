@@ -25,7 +25,7 @@ class AddTicketRequest extends FormRequest
     {
         return [
 
-            "ticket_type" => "required|string|unique:tickets,ticket_type,".$this->get('id'),
+            "ticket_type" => "required|string|unique:tickets,ticket_type,".$this->event_id.",event_id",
             "event_id" => "required|numeric",
             "quantity" => "required|numeric",
             "ticket_price" => "required|numeric",
