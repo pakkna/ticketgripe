@@ -121,7 +121,7 @@ class TicketController extends Controller
 
     public function ticket_delete(Request $request){
 
-          $data= DB::table('tickets')->where('id',$request->id)->delete();
+          $data= DB::table('tickets')->where('id',$request->id)->where('user_id',Auth::user()->id)->delete();
          
           if($data==true){
               echo true;

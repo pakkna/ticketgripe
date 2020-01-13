@@ -107,7 +107,7 @@ class EventControler extends Controller
                 return redirect()->route('MyEvents')->with('flashMessageDanger',$th->getMessage());
             }
      }else{
-        return redirect()->route('MyEvents')->with('flashMessageDanger',"Your not authorized to delete this event !");
+        return redirect()->route('MyEvents')->with('flashMessageDanger',"You are not authorized to delete this event !");
      }
         
       
@@ -185,6 +185,9 @@ class EventControler extends Controller
             ->skip(3)
             ->take(100)
             ->get();
+            if ($event_details == null) {
+                return redirect('my-events');
+            }
             return view('eventsetup.event_sidebar',compact('event_details','all_tickets','ticket_question'));
         } catch (\Throwable $th) {
             return redirect('my-events');

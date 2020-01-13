@@ -6,7 +6,7 @@
                 <ul class="copyright-text">
                     <li><a href="index.html"><img src="{!! asset('master/images/logo-2.svg') !!}" alt=""></a></li>
                     <li>
-                        <div class="ftr-1"><i class="far fa-copyright"></i> 2019 Ticket Gripe by <a href="http://innovadeus.com" target="_blank">Innovadeus</a>. All Rights Reserved.</div>
+                        <div class="ftr-1"><i class="far fa-copyright"></i> 2019 Ticket Gripe by <a href="http://innovadeus.com" target="_blank">Innovadeus Pvt Ltd</a>. All Rights Reserved.</div>
                     </li>
                 </ul>
             </div>

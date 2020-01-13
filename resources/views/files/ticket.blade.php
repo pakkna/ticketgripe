@@ -26,7 +26,7 @@
 
 <body oncontextmenu="return false;">
 <!-- Body Start -->
-<main class="discussion-mp">	
+<main class="discussion-mp" style="background: #8C8585D4;">	
     <div class="main-section">
         <div class="container">
             <div class="row justify-content-md-center cus-width">
