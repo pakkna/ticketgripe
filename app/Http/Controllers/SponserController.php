@@ -45,7 +45,7 @@ class SponserController extends Controller
 
     public function sponser_delete(Request $request){
 
-        $data= DB::table('sponser')->where('id',$request->id)->delete();
+        $data= DB::table('sponser')->where('id',$request->id)->where('user_id',Auth::user()->id)->delete();
          
         if($data==true){
             echo true;

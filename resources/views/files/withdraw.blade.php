@@ -72,7 +72,7 @@
                         </div>
                         <div class="row">
                             <div class="offset-md-10 col-md-2">
-                                <button type="submit" name="bank" class="btn btn_save add-event"> Send Request </button>
+                                <button type="button" name="bank" class="btn btn_save add-event"> Send Request </button>
                             </div>
                         </div>
                     </form>
@@ -114,7 +114,7 @@
                         </div>
                         <div class="row">
                             <div class="offset-md-10 col-md-2">
-                                <button type="submit" name="rocket" class="btn btn_save add-event"> Send Request </button>
+                                <button type="button" name="rocket" class="btn btn_save add-event"> Send Request </button>
                             </div>
                         </div>
                     </form>
@@ -154,7 +154,7 @@
                         </div>
                         <div class="row">
                             <div class="offset-md-10 col-md-2">
-                                <button type="submit" name="bkash" class="btn btn_save add-event"> Send Request </button>
+                                <button type="button" name="bkash" class="btn btn_save add-event"> Send Request </button>
                             </div>
                         </div>
                     </form>

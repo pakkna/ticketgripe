@@ -87,8 +87,6 @@
         return a.fn.bootstrapToggle = t, this
     }, a(function () {
         a("input[type=checkbox][data-toggle^=toggle]").bootstrapToggle()
-    }), a(document).on("click.bs.toggle", "div[data-toggle^=toggle]", function (t) {
-        a(this).find("input[type=checkbox]").bootstrapToggle("toggle"), t.preventDefault()
     })
 }(jQuery);
 //# sourceMappingURL=bootstrap4-toggle.min.js.map

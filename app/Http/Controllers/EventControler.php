@@ -107,7 +107,7 @@ class EventControler extends Controller
                 return redirect()->route('MyEvents')->with('flashMessageDanger',$th->getMessage());
             }
      }else{
-        return redirect()->route('MyEvents')->with('flashMessageDanger',"Your not authorized to delete this event !");
+        return redirect()->route('MyEvents')->with('flashMessageDanger',"You are not authorized to delete this event !");
      }
         
       
@@ -185,6 +185,9 @@ class EventControler extends Controller
             ->skip(3)
             ->take(100)
             ->get();
+            if ($event_details == null) {
+                return redirect('my-events');
+            }
             return view('eventsetup.event_sidebar',compact('event_details','all_tickets','ticket_question'));
         } catch (\Throwable $th) {
             return redirect('my-events');
@@ -204,7 +207,7 @@ class EventControler extends Controller
     {
         $single_event = DB::table('events')->where('id', $request->event_id)->first();
 
-        $ticket_question = DB::table('custom_form')->where('event_id', $request->event_id)->skip(3)->take(100)->get();
+        $ticket_question = DB::table('custom_form')->where('event_id', $request->event_id)->take(100)->get();
 
         $single_event_tickets = DB::table('tickets')->where('event_id', $request->event_id)->where('ticket_type', $request->ticket)->first();
 
