@@ -40,7 +40,7 @@
                                     <li class="nav-item active">
                                         <a class="nav-link" href="{{route('/')}}">Home <span class="sr-only">(current)</span></a>
                                     </li>
-                                    <li class="nav-item">
+                                    <!-- <li class="nav-item">
                                         <a class="nav-link" href="discussions.html">How it works</a>
                                     </li>									
                                     <li class="nav-item dropdown">
@@ -63,7 +63,7 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="our_blog.html">Blog</a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                                 <a href="{{route('AddEvent')}}" class="add-event">Add New Event</a>
                             </div>

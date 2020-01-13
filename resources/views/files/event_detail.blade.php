@@ -1,20 +1,4 @@
 @include('layouts.master_layout.header_event_details')
-            <!-- <div class="event-dts">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                            <div class="event-title">
-                                <h2>Lights Out at the Observatory</!
-                                
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                            
-                            
-                        </div>
-                    </div>
-                </div>
-            </div> -->
             <div class="event-sections">
                 <div class="container">
                     <div class="row">
@@ -28,52 +12,28 @@
                                     <p>{{strip_tags($single_event->description)}}</p>
                                 </div>
                             </div>
+                            @if(count($single_event_sponsor))
                             <div class="event-itm1 full-width">
                                 <div class="event-item-heading">
                                     <i class="fas fa-user"></i>
-                                    Organizer Team
+                                    Event Sponsors
                                 </div>
                                 <div class="event-item-description">									
                                     <div class="owl-carousel organizer-owl owl-theme">
+                                        @foreach($single_event_sponsor as $single_sponsor)
                                         <div class="item">
                                             <div class="ogr-bg">
                                                 <div class="org-img">
-                                                    <img src="images/event-view/org-1.jpg" alt="">																										
+                                                    <img src="{!! asset($single_sponsor->sponser_logo) !!}" alt="">																										
                                                 </div>
-                                                <a href="user_dashboard_activity.html"><h4>Rock Smith</h4></a>
-                                                <span>Singer</span>
-                                                <div class="organizer-butn">
-                                                    <a href="#" class="org-btn">Follow</a>
-                                                </div>
+                                                <a href="user_dashboard_activity.html"><h4>{{$single_sponsor->sponser_name}}</h4></a>
                                             </div>
                                         </div>
-                                        <div class="item">
-                                            <div class="ogr-bg">
-                                                <div class="org-img">
-                                                    <img src="images/event-view/org-2.jpg" alt="">																										
-                                                </div>
-                                                <a href="user_dashboard_activity.html"><h4>Jassica William</h4></a>
-                                                <span>Musician</span>
-                                                <div class="organizer-butn">
-                                                    <a href="#" class="org-btn1">Following</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <div class="ogr-bg">
-                                                <div class="org-img">
-                                                    <img src="images/event-view/org-3.jpg" alt="">																										
-                                                </div>
-                                                <a href="user_dashboard_activity.html"><h4>Johnson Doe</h4></a>
-                                                <span>Musician</span>
-                                                <div class="organizer-butn">
-                                                    <a href="#" class="org-btn">Follow</a>
-                                                </div>
-                                            </div>
-                                        </div>													
+                                        @endforeach													
                                     </div>																						
                                 </div>
                             </div>
+                            @endif
                         </div>
                         <div class="col-md-6 col-xs-12">
                             <div class="event-itm2 full-width">
@@ -92,7 +52,7 @@
                                     </ul>
                                 </div>
                             </div>							
-                            <div class="event-itm4 full-width">
+                            <!-- <div class="event-itm4 full-width">
                                 <div class="event-go-dt border-tb">
                                     <ul class="go-dt-list">
                                         <li>
@@ -124,7 +84,7 @@
                                         </li>															
                                     </ul>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="event-itm1 full-width">
                                 <div class="event-item-heading">
                                     <i class="fas fa-clock"></i>

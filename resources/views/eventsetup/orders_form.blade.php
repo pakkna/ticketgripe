@@ -98,7 +98,7 @@ function loadjscssfile(filename, filetype){
                     <div class="main-section">
                         <div class="all-search-events">								
                             <div class="row">
-                                <table id="order_form_table" style="width:100%; text-align: center" class="table table-hover table-striped table-bordered display nowrap">
+                                <!-- <table id="order_form_table" style="width:100%; text-align: center" class="table table-hover table-striped table-bordered display nowrap">
                                     <thead class="custom-thead">
                                         <tr>
                                             <th style="text-align: center !important;">Information to collect</th>
@@ -138,7 +138,7 @@ function loadjscssfile(filename, filetype){
                                         </tr>
                                         
                                     </tbody>
-                                </table>  
+                                </table>   -->
                             </div>								
                             <div class="row">
                                 <table id="order_form_table" style="width:100%; text-align: center;margin-top: 35px;" class="table table-hover table-striped table-bordered display nowrap">

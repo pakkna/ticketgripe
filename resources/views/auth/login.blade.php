@@ -9,7 +9,7 @@
         <title>Ticket Gripe - Login Now</title>
 		
         <!-- Favicon Icon -->
-        <link rel="icon" type="image/png" href="{!! asset('master/images/fav.png') !!}">
+        <link rel="icon" type="image/png" href="{!! asset('master/images/icon1.png') !!}">
 		
         <!-- Stylesheets -->
         <link href="{!! asset('master/css/responsive.css') !!}" rel="stylesheet">
@@ -34,11 +34,11 @@
                                     <div class="col-lg-6">
                                         <div class="lg-left">
                                             <div class="lg-logo">
-                                                <a href="{{route('/')}}"><img src="{!! asset('master/images/login-register/logo.svg') !!}" alt=""></a>
+                                                <a href="{{route('/')}}"><img src="{!! asset('master/images/logo.png') !!}" alt=""></a>
                                             </div>
                                             <div class="lr-text">
                                                 <h2>Login Now</h2>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla interdum blandit felis a hendrerit.</p>
+                                                <p>Ticketgripe.com a brand of Innovadeus Pvt Ltd.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -67,7 +67,7 @@
                                                     </div>
                                                     <button class="login-btn" type="submit">Login Now</button>
                                                 </form>
-                                                <a href="{{ route('password.request')}}" class="forgot-link">Forgot Password?</a>
+                                                <!-- <a href="{{ route('password.request')}}" class="forgot-link">Forgot Password?</a> -->
                                                 <div class="regstr-link">Don’t have an account? <a href="{{route('sign-up')}}">Register Now</a></div>
                                             </div>
                                         </div>

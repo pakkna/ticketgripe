@@ -7959,3 +7959,6 @@ color:
     padding: 0;
     font-size: 16px !important;
 }
+.alert-dismissible {
+    padding-right: 18px;
+}

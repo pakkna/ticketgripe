@@ -43,7 +43,7 @@ class EventControler extends Controller
 
             $single_event_sponsor = DB::table('sponser')->where('event_id', $event_id)->where('user_id', Auth::user()->id)->get();
 
-            return View('files.event_detail', compact('single_event', 'single_event_tickets'));
+            return View('files.event_detail', compact('single_event', 'single_event_tickets', 'single_event_sponsor'));
 
         } catch (\Exception $th) {
             return redirect('/');
@@ -165,26 +165,31 @@ class EventControler extends Controller
     }
 
     public function event_setup_view($id){
-        
-        $event_details = DB::table('events')
-        ->leftjoin('tickets','events.id','=','tickets.event_id')
-        ->select('events.id','title','image_path','events.event_logo','start_date','end_date','country','address','city','state','zip','event_status','seat_number','category','hide_date_event_page','description','custom_link')
-        ->where('events.id',$id)
-        ->first();
 
-        $all_tickets = DB::table('tickets')
-        ->where('event_id',$id)
-        ->where('user_id',Auth::user()->id)
-        ->get();
+        try {
+            $event_details = DB::table('events')
+            ->leftjoin('tickets','events.id','=','tickets.event_id')
+            ->select('events.id','title','image_path','events.event_logo','start_date','end_date','country','address','city','state','zip','event_status','seat_number','category','hide_date_event_page','description','custom_link')
+            ->where('events.id',$id)
+            ->where('events.user_id',Auth::user()->id)
+            ->first();
 
-        $ticket_question = DB::table('custom_form')
-        ->where('event_id',$id)
-        ->where('user_id',Auth::user()->id)
-        ->skip(3)
-        ->take(100)
-        ->get();
+            $all_tickets = DB::table('tickets')
+            ->where('event_id',$id)
+            ->where('user_id',Auth::user()->id)
+            ->get();
 
-        return view('eventsetup.event_sidebar',compact('event_details','all_tickets','ticket_question'));
+            $ticket_question = DB::table('custom_form')
+            ->where('event_id',$id)
+            ->where('user_id',Auth::user()->id)
+            ->skip(3)
+            ->take(100)
+            ->get();
+            return view('eventsetup.event_sidebar',compact('event_details','all_tickets','ticket_question'));
+        } catch (\Throwable $th) {
+            return redirect('my-events');
+        }
+
     }
     public function event_ticket($event_id)
     {
