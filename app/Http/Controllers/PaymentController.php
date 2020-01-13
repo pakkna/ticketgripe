@@ -71,14 +71,14 @@ class PaymentController extends Controller
         $post_data['cancel_url'] = $link . "/payment_status?_token=" . csrf_token();
 
         # CUSTOMER INFORMATIONs
-        $post_data['cus_name'] = $buyer_info['fullname'];
-        $post_data['cus_email'] = $buyer_info['email'];
+        $post_data['cus_name'] = $buyer_info['Full_name'];
+        $post_data['cus_email'] = $buyer_info['Email'];
         $post_data['cus_add1'] = $buyer_info['address'];
         $post_data['cus_city'] = "Dhaka";
         $post_data['cus_state'] = "Dhaka";
         $post_data['cus_postcode'] = "4700";
         $post_data['cus_country'] = "Bangladesh";
-        $post_data['cus_phone'] = $buyer_info['mobile'];
+        $post_data['cus_phone'] = $buyer_info['Mobile'];
 
         # SHIPMENT INFORMATION
         $post_data['ship_name'] = "ticketGripe.com";
@@ -217,13 +217,31 @@ class PaymentController extends Controller
 
         $data = DB::table('orders')->insert($data);
 
-        echo "#ordered Successfully";
+        $array_cut=$bill_info->toArray();
+         $request_array=array_splice($array_cut,3,count($array_cut));
 
-        echo '<pre>'; 
-        echo '======================<br>';
-        print_r($bill_info);
-        echo '<br>======================';
-        exit();
-        //next question ans save function
+
+        if($data==true){
+
+            for ($i=0; $i <count($request_array) ; $i++) { 
+         
+                $answer_set=[
+
+                    'question_title'=>$request_array[$i]->request_name,
+                    'question_ans'=>$request_array[$i]->request_value,
+                    'transaction_id'=>$request_array[$i]->transaction_id,
+                    'event_id'=>$request_array[$i]->event_id,
+                    'ticket_id'=>$request_array[$i]->ticket_id,
+                    "created_at" =>date('Y-m-d h:i:s'),
+                ];
+                DB::table('questionanswer')->insert($answer_set);
+
+            }
+
+        }
+
+        //create ticket page
+        return redirect();
+        
     }
 }

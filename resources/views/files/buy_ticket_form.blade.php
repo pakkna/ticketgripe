@@ -58,28 +58,28 @@
                                 if ($one_ticket_question->question_type == 'Checkboxes' || $one_ticket_question->question_type == 'Radio Buttons') {
                                 for ($i=0; $i < count($array3) ; $i++) {
                                     if ($one_ticket_question->question_type == 'Checkboxes') { ?>
-                                        <input type="checkbox" value="{{$array3[$i]}}" name="question_{{$one_ticket_question->id}}[]" checked>
+                                        <input type="checkbox" value="{{$array3[$i]}}" name="{{$one_ticket_question->question_title}}" checked>
                                    <?php }else{ ?>
-                                        <input type="radio" value="{{$array3[$i]}}" name="question_{{$one_ticket_question->id}}" required>
+                                        <input type="radio" value="{{$array3[$i]}}" name="{{$one_ticket_question->question_title}}" required>
                                    <?php }?>
                                         <span class="help-inline" style="font-size: 13px;">{{$array3[$i]}}</span><br>
                 
                                 <?php } }else if($one_ticket_question->question_type == 'Number'){ ?>
                 
-                                    <input type="number" class="payment-input" name="question_{{$one_ticket_question->id}}" required><br>
+                                    <input type="number" class="payment-input" name="{{$one_ticket_question->question_title}}" required><br>
         
                                 <?php }else if($one_ticket_question->question_type == 'Dropdown'){ 
-                                    echo '<select class="nice-select add-inputs payment-input wide custom-list" style="margin-top: 0!important;" name="question_'.$one_ticket_question->id.'" id="" required>';
+                                    echo '<select class="nice-select add-inputs payment-input wide custom-list" style="margin-top: 0!important;" name="'.$one_ticket_question->question_title.'" id="" required>';
                                     for ($i=0; $i < count($array3) ; $i++){
                                     ?>
                                         <option value="{{$array3[$i]}}">{{$array3[$i]}}</option>
         
                                 <?php } echo '</select>'; }else if($one_ticket_question->question_type == 'Text'){ ?>
-                                    <input type="text" class="payment-input" name="question_{{$one_ticket_question->id}}" required><br>
+                                    <input type="text" class="payment-input" name="{{$one_ticket_question->question_title}}" required><br>
                                 <?php }else if($one_ticket_question->question_type == 'Email'){ ?>
-                                    <input type="email" class="payment-input" name="question_{{$one_ticket_question->id}}" required><br>
+                                    <input type="email" class="payment-input" name="{{$one_ticket_question->question_title}}" required><br>
                                 <?php }else{ ?>
-                                    <textarea class="replt-comnt" name="question_{{$one_ticket_question->id}}" id="" cols="30" rows="10" required></textarea><br>
+                                    <textarea class="replt-comnt" name="{{$one_ticket_question->question_title}}" id="" cols="30" rows="10" required></textarea><br>
                                 <?php } ?>
         
                                 <?php if(count($one_ticket_question->question_instruction)){ ?>
@@ -92,7 +92,7 @@
                         </div>
                         @endforeach
                         <label>#Billing Address *</label>
-                        <input type="text" class="payment-input" name="address" required>
+                       <input type="text" class="payment-input" name="address" required>
                         <div class="add-crdt-amnt">
                             <button class="setting-save-btn" type="submit">Submit</button>
                         </div>

@@ -17,7 +17,7 @@ class CreateQuestionAnswerTable extends Migration
             $table->increments('id');
             $table->string('question_title');
             $table->string('question_ans');
-            $table->unsignedBigInteger('user_id');
+            $table->string('transaction_id');
             $table->unsignedBigInteger('event_id');
             $table->unsignedBigInteger('ticket_id');      
             $table->timestamps();
