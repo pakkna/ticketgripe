@@ -204,7 +204,7 @@ class EventControler extends Controller
     {
         $single_event = DB::table('events')->where('id', $request->event_id)->first();
 
-        $ticket_question = DB::table('custom_form')->where('event_id', $request->event_id)->skip(3)->take(100)->get();
+        $ticket_question = DB::table('custom_form')->where('event_id', $request->event_id)->take(100)->get();
 
         $single_event_tickets = DB::table('tickets')->where('event_id', $request->event_id)->where('ticket_type', $request->ticket)->first();
 

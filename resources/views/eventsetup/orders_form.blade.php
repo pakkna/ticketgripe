@@ -141,7 +141,7 @@ function loadjscssfile(filename, filetype){
                                 </table>   -->
                             </div>								
                             <div class="row">
-                                <table id="order_form_table" style="width:100%; text-align: center;margin-top: 35px;" class="table table-hover table-striped table-bordered display nowrap">
+                                <table id="order_form_table" style="width:100%; text-align: center;" class="table table-hover table-striped table-bordered display nowrap">
                                     <thead id="custom-thead" class="custom-thead">
                                         <tr>
                                             <th style="text-align: center !important;">Information to collect</th>
@@ -192,18 +192,20 @@ function loadjscssfile(filename, filetype){
                     
                     $("#cus-order-table").append('<tr id="rem"><td nowrap>' + response[i]['question_title'] + '</td><td nowrap>' + response[i]['question_type'] + '</td><td nowrap> Order </center></td><td nowrap><center>' + '<input type="checkbox" id="toggle_switch" onchange="toggle_btn('+response[i]['id']+',this)" name="'+response[i]['id']+'" data-toggle="toggle" data-on="<i class='+"'fa fa-check-circle mt--2'"+' style='+"'margin-top: -2px;'"+'></i>" data-off="<span style='+"'position: relative;top: 2px;left:-5px;'"+'>Off</span>" data-size="mini" '+tick+'>' + '</center></td><td nowrap>'+'<a href="javascript:void(0)" data-toggle="modal" data-target="#largeModal2" onclick="edit_action_ques('+response[i]['id']+',{{$event_details->id}})" title="Edit" class="btn-hover-shine btn-shadow btn custom-action btn-sm"><i class="fas fa-edit"></i></a>|<a href="javascript:void(0)"  onclick="question_delete('+response[i]['id']+',this)" title="Delete" class="btn-hover-shine btn-shadow btn custom-action btn-sm" ><i class="fa fa-trash"></i></a>'+'</td></tr>');
                 }
+        // loadjscssfile("/master/css/bootstrap4-toggle.min.css", "css");
             }
         });
-        loadjscssfile("/master/css/bootstrap4-toggle.min.css", "css");
     }
 
     $('#select_ticket_id').on('change', function (e) {
 
+        loadjscssfile("/master/js/bootstrap4-toggle.min2.js", "js");
         single_ticket_form(this.value);
 
         });
 
         $('#select_ticket_id').change();
+
 </script>
 <!-- Modal -->
 <div class="modal fade" id="open_question_modal" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
