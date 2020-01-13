@@ -30,7 +30,7 @@
         <div class="row" style="width: 100%;">
             <div class="col-md-12">
                     <div class="custom-question-form mt-20">
-                        <div class="form-group" style="margin-top: 5px;">
+                        <!-- <div class="form-group" style="margin-top: 5px;">
                             <label>#Your Full Name *</label>
                             <input type="text" class="payment-input" name="fullname" value="" required>
                         </div>
@@ -41,7 +41,7 @@
                         <div class="form-group" style="margin-top: 5px; margin-bottom: 15px !important;">
                             <label>#Your Mobile Number *</label>
                             <input type="text" class="payment-input" name="mobile" value="" required>
-                        </div>
+                        </div> -->
                         <?php $question_id_array = array(); ?>
                         @foreach($ticket_question as $one_ticket_question)
                         <div class="group-element">
@@ -74,7 +74,11 @@
                                     ?>
                                         <option value="{{$array3[$i]}}">{{$array3[$i]}}</option>
         
-                                <?php } echo '</select>'; }else{ ?>
+                                <?php } echo '</select>'; }else if($one_ticket_question->question_type == 'Text'){ ?>
+                                    <input type="text" class="payment-input" name="question_{{$one_ticket_question->id}}" required><br>
+                                <?php }else if($one_ticket_question->question_type == 'Email'){ ?>
+                                    <input type="email" class="payment-input" name="question_{{$one_ticket_question->id}}" required><br>
+                                <?php }else{ ?>
                                     <textarea class="replt-comnt" name="question_{{$one_ticket_question->id}}" id="" cols="30" rows="10" required></textarea><br>
                                 <?php } ?>
         
