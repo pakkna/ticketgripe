@@ -40,12 +40,6 @@ class OrderController extends Controller
         ]);
         if ($validatedData->passes()) {
         
-        $array = array();
-        foreach ($request->tickets as $key => $value) {
-            $option = $request->tickets[$key];
-            array_push($array,$option);
-        }
-        $tickets = implode('~',$array);
         if (count($request->choices)) {
             $array2 = array();
             foreach ($request->choices as $key => $value) {
@@ -58,24 +52,31 @@ class OrderController extends Controller
             $choices = null;
         }
 
-        $data = [
-            'question_title' => $request->question_title,
-            'question_type' => $request->question_type,
-            'question_instruction' => $request->instructions,
-            'answer_required' => $request->required == 'on' ? 'on' : 'off',
-            'select_specific_ticket' => $tickets,
-            'question_options' => $choices,
-            'user_id' => Auth::user()->id,
-            'event_id' => $request->event_id,
-            'created_at' => date('Y-m-d h:i:s')
-        ];
+        foreach ($request->tickets as $key => $value) {
+            $ticket_id = $request->tickets[$key];
 
-        try {
-            $dataSet = DB::table('custom_form')->insert($data);
-            return redirect('/event-setup/'.$request->event_id.'/order-form')->with('TicketQuestionSuccess','Ticket question added successfully !');
-        } catch (\Exception $th) {
-            return redirect('/event-setup/'.$request->event_id.'/order-form')->with('TicketQuestionDanger',$th->getMessage());
+            $data = [
+                'question_title' => $request->question_title,
+                'question_type' => $request->question_type,
+                'question_instruction' => $request->instructions,
+                'answer_required' => $request->required == 'on' ? 'on' : 'off',
+                'select_specific_ticket' =>$ticket_id,
+                'question_options' => $choices,
+                'user_id' => Auth::user()->id,
+                'event_id' => $request->event_id,
+                'created_at' => date('Y-m-d h:i:s')
+            ];
+
+            $dataSet = DB::table('custom_form')->insert($data);   
         }
+
+
+        if($dataSet==true) {
+            return redirect('/event-setup/'.$request->event_id.'/order-form')->with('TicketQuestionSuccess','Ticket question added successfully !');
+        } else {
+            return redirect('/event-setup/'.$request->event_id.'/order-form')->with('TicketQuestionDanger','Ticket question add Error!');
+        }
+        
     }else{
         return redirect('/event-setup/'.$request->event_id.'/order-form')->withErrors($validatedData);
     }

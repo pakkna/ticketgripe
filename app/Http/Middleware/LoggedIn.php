@@ -17,7 +17,7 @@ class LoggedIn
     {
         if (is_null(Auth::user())) {
 
-            return redirect('my-events');
+            return redirect('/');
         }
         return $next($request);
     }

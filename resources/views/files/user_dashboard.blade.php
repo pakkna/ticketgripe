@@ -126,8 +126,12 @@
                                                 <script src="{!! asset('master/js/jquery.min.js') !!}"></script>
                                                 <div class="form-group">
                                                     <label class="avatar-label">Avatar*</label>
+                                                    @if(Auth::user()->image == null)
+                                                    <img class="setting-dp avatar-img" id="image0Preview" src="{!!asset('master/images/event-view/unknown.png')!!}">
+                                                    @else
                                                     <img class="setting-dp avatar-img" id="image0Preview" src="{!!asset(Auth::user()->image)!!}">
                                                         </img>
+                                                    @endif
                                                     </div>														
                                                     <div class="setting-upload">
                                                         <span>Upload a new avatar.</span>
@@ -160,16 +164,20 @@
                                                     </script>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Background*</label>	
+                                                    <label>Background*</label>
+                                                    @if(Auth::user()->cover_pic == null)
+                                                    <img class="event-add-img1 event-feature-img" id="imagePreview1" src="{!!asset('master/images/event-view/my-bg.jpg')!!}">
+                                                    @else
                                                     <img class="event-add-img1 event-feature-img" id="imagePreview1" src="{!!asset(Auth::user()->cover_pic)!!}">
                                                         </img>
+                                                        @endif
                                                     </div>
                                                     <div class="setting-upload">
                                                         <span>Upload a new background.</span>
                                                         <div class="addpic" id="OpenImgUpload1">
                                                             <input type="file" id="avatar_bg" name="avatar_bg" accept=".png, .jpg, .jpeg">
                                                             <label for="avatar_bg">Choose File</label>
-                                                            <p>JPEG / PNG 150x150*</p>
+                                                            <p>JPEG / PNG 1280x518*</p>
                                                         </div>
                                                         @if ($errors->has('avatar_bg'))
                                                         <span class="help-block">

@@ -62,13 +62,12 @@ Route::group(['middleware' => 'auth'], function () {
 
 });
 
-Route::group(['middleware' => 'LoggedIn'], function () {
 
     //login form
     Route::get('sign-in', 'Auth\LoginController@showLoginForm')->name('login');
     //register form
     Route::get("sign-up","Auth\LoginController@showRegistarForm")->name("sign-up");
-});
+
 
 Route::get("/","HomeController@index")->name("/");
 
