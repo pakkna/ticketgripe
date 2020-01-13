@@ -51,7 +51,7 @@ class TicketController extends Controller
                     $type = 'Text';
                 }elseif ($i == 1) {
                     $title = 'Email';
-                    $type = 'email';
+                    $type = 'Email';
                 }else{
                     $title = 'Mobile';
                     $type = 'Text';
@@ -65,7 +65,7 @@ class TicketController extends Controller
                     'event_id' => $request->event_id,
                     'created_at'=>date('Y-m-d h:i:s')
                 ];
-                $last_ticket_id = DB::table('custom_form')->insert($dataSet);
+                DB::table('custom_form')->insert($dataSet);
             }
 
         return redirect('/event-setup/'.$request->event_id.'/create-ticket')->with('AddTicketSuccess','New Ticket Add Successfully !');
@@ -128,5 +128,10 @@ class TicketController extends Controller
           }else{
             echo false;
           }   
+    }
+
+    public function buy_ticket()
+    {
+        return view('files.ticket');
     }
 }

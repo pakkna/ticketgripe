@@ -19,8 +19,9 @@ class EventControler extends Controller
     public function show_my_events(){
 
         $event_details = DB::table('events')
-        ->leftjoin('tickets','events.id','=','tickets.event_id')
-        ->select('events.id','title','start_date','end_date','event_status','city','seat_number','image_path','seat_number','custom_link','ticket_price','quantity','selling_currency')
+        // ->leftjoin('tickets','events.id','=','tickets.event_id')
+        // ->select('events.id','title','start_date','end_date','event_status','city','seat_number','image_path','seat_number','custom_link','ticket_price','quantity','selling_currency')
+        ->where('events.user_id', Auth::user()->id)
         //need collection and soldout form order table
         ->get();
 
@@ -39,6 +40,8 @@ class EventControler extends Controller
             ->first();
 
             $single_event_tickets = DB::table('tickets')->where('event_id', $event_id)->get();
+
+            $single_event_sponsor = DB::table('sponser')->where('event_id', $event_id)->where('user_id', Auth::user()->id)->get();
 
             return View('files.event_detail', compact('single_event', 'single_event_tickets'));
 
@@ -177,6 +180,8 @@ class EventControler extends Controller
         $ticket_question = DB::table('custom_form')
         ->where('event_id',$id)
         ->where('user_id',Auth::user()->id)
+        ->skip(3)
+        ->take(100)
         ->get();
 
         return view('eventsetup.event_sidebar',compact('event_details','all_tickets','ticket_question'));
@@ -194,12 +199,19 @@ class EventControler extends Controller
     {
         $single_event = DB::table('events')->where('id', $request->event_id)->first();
 
-        $ticket_question = DB::table('custom_form')->where('event_id', $request->event_id)->get();
+        $ticket_question = DB::table('custom_form')->where('event_id', $request->event_id)->skip(3)->take(100)->get();
 
         $single_event_tickets = DB::table('tickets')->where('event_id', $request->event_id)->where('ticket_type', $request->ticket)->first();
 
         $view =  view('files.buy_ticket_form',compact('single_event', 'single_event_tickets', 'ticket_question'))->render();
 
         return response()->json(['html'=>$view]);
+    }
+
+    public function order_form_select(Request $request)
+    {
+        $single_event_ticket = DB::table('custom_form')->where('event_id', $request->event_id)->where('select_specific_ticket', $request->ticket)->get();
+
+        echo json_encode($single_event_ticket);
     }
 }

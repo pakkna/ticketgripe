@@ -16,9 +16,28 @@
         }
     });
 }
+
+function loadjscssfile(filename, filetype){
+        if (filetype=="js"){ //if filename is a external JavaScript file
+            var fileref=document.createElement('script')
+            fileref.setAttribute("type","text/javascript")
+            fileref.setAttribute("src", filename)
+        }
+        else if (filetype=="css"){ //if filename is an external CSS file
+            var fileref=document.createElement("link")
+            fileref.setAttribute("rel", "stylesheet")
+            fileref.setAttribute("type", "text/css")
+            fileref.setAttribute("href", filename)
+        }
+        if (typeof fileref!="undefined")
+            document.getElementById("cus-order-table").appendChild(fileref)
+    }
+
+
 </script>
-    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+
+    <link href="{!! asset('master/css/bootstrap4-toggle.min.css') !!}" rel="stylesheet">
+    <script src="{!! asset('master/js/bootstrap4-toggle.min.js') !!}"></script>
     <div class="setting-form">
         <div class="user-data full-width">
             <div class="about-left-heading">
@@ -64,6 +83,17 @@
                     </div>
                     @endif
                 </div>
+                <div class="row" id="custom-thead">
+                    <div class="offset-md-6 col-md-6">
+                        <div class="select-bg">									
+                            <select id="select_ticket_id" class="nice-select add-inputs payment-input wide custom-list" style="margin-top: 0!important;" name="ticket_type_def">
+                            @foreach($all_tickets as $single_ticket)
+                            <option value="{{$single_ticket->id}}">{{$single_ticket->ticket_type}}</option>
+                            @endforeach
+                            </select>    
+                        </div>
+                    </div>
+                </div>
                 <div class="dash-discussions mb20">
                     <div class="main-section">
                         <div class="all-search-events">								
@@ -71,7 +101,7 @@
                                 <table id="order_form_table" style="width:100%; text-align: center" class="table table-hover table-striped table-bordered display nowrap">
                                     <thead class="custom-thead">
                                         <tr>
-                                            <th style="text-align: center;">Information to collect</th>
+                                            <th style="text-align: center !important;">Information to collect</th>
                                             <th>Type</th>
                                             <th>Collect Per</th>
                                             <th>Require</th>
@@ -106,21 +136,26 @@
                                             </td>
                                             <td> --- </td>
                                         </tr>
-                                        @foreach($ticket_question as $single_question)
-                                            <tr>
-                                                <td>{{$single_question->question_title}}</td>
-                                                <td>{{$single_question->question_type}}</td>
-                                                <td>Order</td>
-                                                <td>
-                                                    <input type="checkbox" id="toggle_switch" onchange="toggle_btn({{$single_question->id}},this)" name="{{$single_question->id}}" data-toggle="toggle" data-on="<i class='fa fa-check-circle mt--2' style='margin-top: -2px;'></i>" data-off="<span style='position: relative;top: 2px;left:-5px;'>Off</span>" data-size="mini" {{$single_question->answer_required == 'on' ? 'checked' : '' }}>
-                                                    
-                                                </td>
-                                                <td> <a href='javascript:void(0)' data-toggle='modal' data-target='#largeModal2' onclick='edit_action_ques({{$single_question->id}},{{$event_details->id}})' title='Edit' class='btn-hover-shine btn-shadow btn custom-action btn-sm'><i class='fas fa-edit'></i></a>|<a href='javascript:void(0)'  onclick='question_delete({{$single_question->id}},this)' title='Delete' class='btn-hover-shine btn-shadow btn custom-action btn-sm' ><i class='fa fa-trash'></i></a> </td>
-                                            </tr>
-                                        @endforeach
+                                        
                                     </tbody>
                                 </table>  
                             </div>								
+                            <div class="row">
+                                <table id="order_form_table" style="width:100%; text-align: center;margin-top: 35px;" class="table table-hover table-striped table-bordered display nowrap">
+                                    <thead id="custom-thead" class="custom-thead">
+                                        <tr>
+                                            <th style="text-align: center !important;">Information to collect</th>
+                                            <th>Type</th>
+                                            <th>Collect Per</th>
+                                            <th>Require</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="custom-tbody" id="cus-order-table">
+    
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -130,7 +165,47 @@
 <!-- Body End -->
 <script type="text/javascript" src="{!! asset('master/js/form-fields.js') !!}"></script>
 <script type="text/javascript" src="https://ticketstripe.com/assets/global/plugins/uniform/jquery.uniform.min.js"></script>
+<script>
+    function single_ticket_form(ticket_id){
+        $.ajax({
 
+            url: '/order_form_select',
+            type: 'post',
+            data: {
+                ticket: ticket_id,
+                event_id: {{Request::segment(2)}},
+                '_token': $('meta[name="csrf-token"]').attr('content'),
+            },
+            dataType: 'json',
+            success: function(response) { 
+                if (response.length == 0) {
+                    $('#custom-thead').css('display', 'none');
+                }   
+                $('#cus-order-table').empty();
+                var len = response.length;
+                for (var i = 0; i < len; i++) {
+                    if ( response[i]['answer_required'] == 'on') {
+                        var tick = "checked";
+                    }else{
+                        var tick = " ";
+                    }
+                    
+                    $("#cus-order-table").append('<tr id="rem"><td nowrap>' + response[i]['question_title'] + '</td><td nowrap>' + response[i]['question_type'] + '</td><td nowrap> Order </center></td><td nowrap><center>' + '<input type="checkbox" id="toggle_switch" onchange="toggle_btn('+response[i]['id']+',this)" name="'+response[i]['id']+'" data-toggle="toggle" data-on="<i class='+"'fa fa-check-circle mt--2'"+' style='+"'margin-top: -2px;'"+'></i>" data-off="<span style='+"'position: relative;top: 2px;left:-5px;'"+'>Off</span>" data-size="mini" '+tick+'>' + '</center></td><td nowrap>'+'<a href="javascript:void(0)" data-toggle="modal" data-target="#largeModal2" onclick="edit_action_ques('+response[i]['id']+',{{$event_details->id}})" title="Edit" class="btn-hover-shine btn-shadow btn custom-action btn-sm"><i class="fas fa-edit"></i></a>|<a href="javascript:void(0)"  onclick="question_delete('+response[i]['id']+',this)" title="Delete" class="btn-hover-shine btn-shadow btn custom-action btn-sm" ><i class="fa fa-trash"></i></a>'+'</td></tr>');
+                }
+                loadjscssfile("/master/js/bootstrap4-toggle.min.js", "js");
+                loadjscssfile("/master/css/bootstrap4-toggle.min.css", "css");
+            }
+        });
+    }
+
+    $('#select_ticket_id').on('change', function (e) {
+
+        single_ticket_form(this.value);
+
+        });
+
+        $('#select_ticket_id').change();
+</script>
 <!-- Modal -->
 <div class="modal fade" id="open_question_modal" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-width">

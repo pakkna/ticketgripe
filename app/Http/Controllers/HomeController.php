@@ -31,7 +31,7 @@ class HomeController extends Controller
     }
     public function index()
     {
-        return View('files.index');
+        return redirect('sign-in');
     }
     public function login()
     {

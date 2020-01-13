@@ -188,7 +188,7 @@
                         <li>
                             <button class="event-btn-1">{{$single_event->seat_number}} Seats</button>
                         </li>
-                        @if(Request::segment(1) == 'event-details')
+                        @if(Request::segment(1) == 'event-details' && count($single_event_tickets) )
                         <li>
                             <a href="{{route('Buyticket', ['event_id' =>$single_event->id])}}"><button class="event-btn-1">Buy Ticket</button></a> 
                         </li>

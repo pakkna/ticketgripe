@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AddTicketRequest extends FormRequest
@@ -25,7 +26,8 @@ class AddTicketRequest extends FormRequest
     {
         return [
 
-            "ticket_type" => "required|string|unique:tickets,ticket_type,".$this->event_id.",event_id",
+            // "ticket_type" => "required|string|unique:tickets,ticket_type,".$this->event_id.",event_id",
+            // "ticket_type" => Rule::unique('tickets')->where('event_id', $this->event_id),
             "event_id" => "required|numeric",
             "quantity" => "required|numeric",
             "ticket_price" => "required|numeric",

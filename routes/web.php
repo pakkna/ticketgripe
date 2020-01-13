@@ -28,6 +28,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get("event-setup/{id}/{page?}","EventControler@event_setup_view")->name("event_setup");
 
     Route::get("delete-event/{id}","EventControler@delete_event")->name("delete-event");
+    Route::post("order_form_select","EventControler@order_form_select");
 
     Route::post("all-tickets","TicketController@all_ticket")->name("all_ticket_datatable");
 
@@ -36,6 +37,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post("ticket-delete","TicketController@ticket_delete")->name("ticket_delete");
     Route::post("modal-edit-ticket","TicketController@edit_ticket")->name("edit-ticket");
     Route::post("action-edit-ticket","TicketController@action_edit_ticket")->name("action-edit-ticket");
+    Route::get("checkout","TicketController@buy_ticket")->name("TicketOrder");
+
     Route::post("buy-ticket","PaymentController@ticket_generate")->name("ticket-generate");
     Route::any("payment_status","PaymentController@payment_status");
 
@@ -58,15 +61,21 @@ Route::group(['middleware' => 'auth'], function () {
     
 
 });
+
+Route::group(['middleware' => 'LoggedIn'], function () {
+
+    //login form
+    Route::get('sign-in', 'Auth\LoginController@showLoginForm')->name('login');
+    //register form
+    Route::get("sign-up","Auth\LoginController@showRegistarForm")->name("sign-up");
+});
+
 Route::get("/","HomeController@index")->name("/");
 
 Route::get('clear', 'HomeController@All_clear');
 
 
-//login form
-Route::get('sign-in', 'Auth\LoginController@showLoginForm')->name('login');
-//register form
-Route::get("sign-up","Auth\LoginController@showRegistarForm")->name("sign-up");
+
 //login action
 Route::post("user-login","AuthLoginController@login")->name("user.login");
 //register action

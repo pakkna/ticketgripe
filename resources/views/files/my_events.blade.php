@@ -55,10 +55,11 @@
                                                 <a href="/event-setup/{{$single_event->id}}"><h4><i class="like-item fas fa-link mr-2"></i><span>{{$single_event->title}}</span></h4></a>
                                             </div>
                                             <div class="event-top-right">
-                                                <div class="ticket-price">Ticket Price : <span>{{
+                                                <!-- <div class="ticket-price">Ticket Price : <span>{{
                                                     
                                                     empty($single_event->ticket_price)? '0 BDT' :
-                                                    $single_event->ticket_price.' '.$single_event->selling_currency}}</span></div>
+                                                    $single_event->ticket_price.' '.$single_event->selling_currency}}</span>
+                                                </div> -->
                                                 
                                                 <div class="right-comments">
                                                     <a href="#!" class="like-item" title="Share">

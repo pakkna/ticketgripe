@@ -35,7 +35,7 @@ class OrderController extends Controller
     public function ticket_questoion_add(Request $request)
     {
         $validatedData = validator::make($request->all(),[
-            'question_title' => 'required|string|unique:custom_form,question_title,'.$request->event_id,
+            // 'question_title' => 'required|string|unique:custom_form,question_title,'.$request->event_id,
             'tickets' => 'required'
         ]);
         if ($validatedData->passes()) {

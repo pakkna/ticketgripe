@@ -4074,9 +4074,9 @@ footer {
 }
 
 .check-img img {
-	border-radius: 3px;
-	width: 80px;
-	height: 80px;
+	/* border-radius: 3px; */
+	width: 158px;
+	/* height: 80px; */
 }
 
 .checkout-dt {
@@ -4232,20 +4232,22 @@ footer {
 /* === Confirm Order Page === */
 
 .confirm-order {
-    background: #fff;
-    border: 1px solid #e6e6e6;
+    /* background: #fff; */
+    /* border: 1px solid #e6e6e6; */
 	float: left;
 	width: 100%;
-	margin-bottom: 20px;
+    margin-bottom: 20px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
 }
 
 .checkout-dt1 {
-    padding: 30px;
+    padding: 8px 8px;
     width: 100%;
     display: flex;
 	float: left;
 	width: 100%;
-    border-bottom: 1px solid #e6e6e6;
+    /* border-bottom: 1px solid #e6e6e6; */
 }
 
 .evnt-dt-ckot1  {
@@ -4323,6 +4325,8 @@ footer {
     width: 100%;
     text-align: center;
     padding: 30px;
+    background: #fff;
+    height: 300px;
 }
 
 .congrats h4 {
@@ -4342,10 +4346,16 @@ footer {
 
 .congrats p {
     font-size: 14px;
-    color: #847577;
+    color: #fff;
     font-weight: 400;
     line-height: 24px;
-    margin-top: 17px;
+    margin-top: 17px !important;
+    background:
+    #607D8B;
+    border-radius: 11px;
+    padding: 5px 10px;
+    width: 71%;
+    text-transform: uppercase;
 }
 
 .congrats img {
@@ -7823,4 +7833,129 @@ color:
     border: 3px solid #fff;
     box-shadow: 0px 3px 12px 0px rgba(0, 0, 0, 0.09);
     background-color: #fff;
+}
+.cus-order-table{
+    padding: 8px 0px !important;
+    color:
+    #000000c4;
+}
+.cus-width{
+    width: 890px;
+    margin: 0px auto !important;
+}
+.cus-header{
+    background: #EBEBEB;
+    position: relative;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+}
+.cus-header .check-img{
+    /* width: 300px;
+    text-align: center; */
+}
+.cus-title h1{
+    color: #223F69;
+    font-weight: bold;
+    margin-bottom: 0px !important;
+    font-size: 27px;
+}
+.cus-title{
+    text-align: center;
+    width: 100%;
+}
+.cus-date{
+    color: #223F69;
+    font-weight: 500;
+    margin: 0;
+    font-size: 14px;
+}
+.check-img-right{
+    /* position: absolute;
+    right: 0; */
+}
+.cus-background{
+    background-image: url(/master/images/map.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+.congrats{
+    /* margin: 20px; */
+}
+.cus-bottom{
+    background-image: url(/master/images/bottom-part-design.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 47px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+.cus-bottom p{
+    color: #fff;
+    font-size: 13px;
+    padding: 0px 25px;
+    font-weight: bold;
+}
+.cus-bottom span{
+    color: #fff;
+    font-size: 13px;
+    padding: 2px 25px;
+    position: relative;
+    left: 106px;
+    top: 3px;
+    font-weight: bold;
+}
+
+.cus-background span{
+    float: right;
+    margin-top: 12px;
+    font-size: 22px;
+}
+.cus-background .names{
+    color: #65808E;
+    text-align: left;
+    width: 19%;
+    font-size: 17px;
+}
+.cus-background .names-names{
+    color: #607D89;
+    font-weight: bold;
+    text-align: left;
+    font-size: 17px;
+}
+.ticket-table{
+    text-transform: uppercase;
+}
+.ticket-table tr{
+    line-height: 39px;
+}
+.copyright-ticket{
+    transform: rotate(270deg);
+    color: #616161;
+    position: absolute;
+    right: 198px;
+    top: 321px;
+    font-size: 12px;
+}
+.qr-code{
+    width: 20%;
+    float: right;
+    position: relative;
+    top: -195px;
+    right: 0;
+}
+.ticket-code{
+    color: #3B3B3B !important;
+    position: relative;
+    font-size: 14px !important;
+    left: -47px;
+    top: -21px;
+}
+.sponsor-logo-name{
+    background: #fff;
+    color: #3A3A3A !important;
+    font-weight: 600 !important;
+    padding: 0;
+    font-size: 16px !important;
 }
