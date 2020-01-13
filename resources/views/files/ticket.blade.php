@@ -26,7 +26,7 @@
 
 <body oncontextmenu="return false;">
 <!-- Body Start -->
-<main class="discussion-mp" style="background: #8C8585D4;">	
+<main class="discussion-mp" style="background: #8C8585D4;height: 800px;">	
     <div class="main-section">
         <div class="container">
             <div class="row justify-content-md-center cus-width">
@@ -36,16 +36,29 @@
                     <div id="DomPrint" class="confirm-order">
                         <div class="checkout-dt1 cus-header">
                             <div class="check-img">
-                                <img src="{!! asset('master/images/TICKET-GRIPE-1st-logo.png') !!}" style="float: left;" alt="">
+                                <img src="{!! asset($event_info->event_logo) !!}" style="float: left;height: 67px;
+                                width: 100%;" alt="">
                             </div>
                             <div class="cus-title">
-                                <h1>EVENT NAME HERE</h1>
+                                <h1>{{$event_info->title}}</h1>
                                 <!-- <div class="ctgory1">Club</div> -->
-                                <div class="cus-date">JANARY 11, 2020 ( 2.00 PM to 9.00 PM ) </div>
+                                <?php 
+                                 $format = ('F d, Y');
+                                 $format2 = ('g:i A');
+
+                                    $start = date($format, strtotime($event_info->start_date));
+                                    $time1 = date($format2, strtotime($event_info->start_date));
+                                    $time2 = date($format2, strtotime($event_info->end_date));
+
+                                    
+                                    $end = date($format, strtotime($event_info->end_date));
+                                ?>
+                                <div class="cus-date">{{$start}} (
+                                    {{$time1}} to {{$time2}} ) </div>
                                 <!-- <div class="lctn-dt1"><i class="fas fa-map-marker-alt"></i> India</div> -->
                             </div>	
                             <div class="check-img check-img-right">
-                                <img src="{!! asset('master/images/TICKET-GRIPE-1st-logo.png') !!}" style="float: right;" alt="">
+                                <img src="{!! asset('master/images/TICKET-GRIPE-1st-logo.png') !!}" style="float: right;height: 67px;width: 100%;" alt="">
                             </div>								
                         </div>
                         <div class="congrats">
@@ -56,41 +69,44 @@
                                         <th></th>
                                     </thead>
                                     <tbody class="ticket-table">
+                                        @foreach($buyer_info as $user_info)
                                         <tr>
-                                            <td class="names">NAME &nbsp;<span style="text-align: right;">:</span></td>
-                                            <td class="names-names">&nbsp; &nbsp; &nbsp; ABDUL MUHIT</td>
+                                            <td class="names">{{$user_info->question_title}} &nbsp;<span style="text-align: right;">:</span></td>
+                                            <td class="names-names">&nbsp; &nbsp; &nbsp; {{$user_info->question_ans}}</td>
                                         </tr>
-                                        <tr>
+                                        @endforeach
+                                        <!-- <tr>
                                             <td class="names">Company &nbsp;<span style="text-align: right;">:</span></td>
                                             <td class="names-names">&nbsp; &nbsp; &nbsp; abc limited</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="names">mobile no. &nbsp;<span style="text-align: right;">:</span></td>
-                                            <td class="names-names">&nbsp; &nbsp; &nbsp; 01990523166</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="names">email &nbsp;<span style="text-align: right;">:</span></td>
-                                            <td class="names-names">&nbsp; &nbsp; &nbsp; info@gmail.com</td>
-                                        </tr>
+                                        </tr> -->
                                         <tr>
                                             <td class="names">order id &nbsp;<span style="text-align: right;">:</span></td>
-                                            <td class="names-names">&nbsp; &nbsp; &nbsp; 0099</td>
+                                            <td class="names-names">&nbsp; &nbsp; &nbsp; TGRIPE-{{$random_number}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
                                 <div class="qr-code">
                                     <img src="{!! asset('master/images/qr_code_PNG6.png') !!}" alt="">
-                                    <span class="ticket-code">TG - 151201</span>
-                                    <span class="sponsor-logo-name">TICKETING SPONSOR</span>
+                                    <span class="ticket-code">TGRIPE-{{$random_number}}</span>
+                                    <span style="width: 175px;margin-top: -19px;" class="sponsor-logo-name">EVENT SPONSOR</span>
+                                    <div class="sponsor-logo">
+                                        @foreach($sponsor_info as $sponsor_logo)
+                                        <img src="{!! asset($sponsor_logo->sponser_logo) !!}" alt="">
+                                        @endforeach
+                                    </div>
                                 </div>
                                 <!-- <p>Scan OR Code at the event place.</p> -->
                                 <!-- <img src="images/event-view/qr.svg" alt=""> -->
-                                <p class="sms">event address : 15 floor, bdbl bhaban kawran bazar, dhaka - 1205</p>
+                                <p class="sms">event address : {{$event_info->address}}, {{$event_info->city}}, {{$event_info->state}} - {{$event_info->zip}}, {{$event_info->country}}</p>
                             </div>
                         </div>
                         <div class="checkout-dt1 cus-bottom">
                             <p class="">Note : You are required to show your ticket ( Printed or Digital ) to enter</p>	
-                            <span>Booking : 06 - jan 2020 , 05:01 pm</span>
+                            <?php  $format = ('M d, Y g:i A');
+
+                                $datea = date($format, strtotime($buyer_info[0]->created_at));
+                            ?>
+                            <span>Booking : {{$datea}}</span>
                         </div>	
                         <p class="copyright-ticket">Ticketgripe.com a brand of Innovadeus Pvt Ltd</p>														
                     </div>	

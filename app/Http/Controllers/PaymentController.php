@@ -202,7 +202,7 @@ class PaymentController extends Controller
         $system_charged=$parcentage-$ssl_charge;
 
         $data = [
-            "order_confirm_id" => "TGripe-".$event_id.$bill_info[1]->request_value.'-'.$random_number,
+            "order_confirm_id" => "TGripe-".$random_number,
             "sold_tickets" => $bill_info[2]->request_value,
             "order_amount" =>  $total_amount,
             "ssl_charge" => $ssl_charge,
@@ -241,7 +241,22 @@ class PaymentController extends Controller
         }
 
         //create ticket page
-        return redirect();
+
+        echo "<meta http-equiv='refresh' content='0;url=ticket-view/".$request_array[0]->transaction_id."/".$event_id."/".$request_array[0]->ticket_id . "/".$random_number."'>";        
+
         
+    }
+
+    public function ticket_view($tran_id,$event_id,$ticket_id,$random_number)
+    {
+
+        $event_info = DB::table('events')->select('title','start_date','end_date','address','city','state','zip','country','event_logo')->where('id', $event_id)->first();
+
+        $sponsor_info = DB::table('sponser')->select('sponser_logo')->where('event_id', $event_id)->get();
+
+        $buyer_info = DB::table('questionanswer')->select('transaction_id','question_ans','created_at','question_title')->where('transaction_id', $tran_id)->take(4)->get();
+
+        return view('files.ticket', compact('event_info', 'sponsor_info', 'buyer_info', 'random_number'));
+
     }
 }

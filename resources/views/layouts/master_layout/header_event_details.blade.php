@@ -182,9 +182,9 @@
                         </li> -->
                     <!-- </ul> -->
                     <ul class="event-buttons">
-                        <li>
+                        <!-- <li>
                             <button class="event-btn-1"><i class="fa fa-heart ml-2" > </i> 250+ </button>
-                        </li>
+                        </li> -->
                         <li>
                             <button class="event-btn-1">{{$single_event->seat_number}} Seats</button>
                         </li>

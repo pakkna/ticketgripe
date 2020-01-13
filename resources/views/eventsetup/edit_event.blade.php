@@ -110,9 +110,13 @@
                                     });
                                 </script>
                             </div>
-                            <div class="add-evnt-dt">											
+                            <div class="add-evnt-dt">	
+                                @if($event_details->event_logo == null)	
+                                <img class="event-add-img1 event-feature-img event-ft-logo" id="imagePreview2" src="{!!asset('master/images/event-logo.png')!!}">
+                                @else									
                                 <img class="event-add-img1 event-feature-img event-ft-logo" id="imagePreview2" src="{!!asset($event_details->event_logo)!!}">
                                 </img>
+                                @endif										
                                 <div class="addpic" id="OpenImgUpload">
                                     <input type="file" id="file2" name="event_logo">
                                     <label for="file2">Choose File</label>

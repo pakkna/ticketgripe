@@ -7915,7 +7915,7 @@ color:
 .cus-background .names{
     color: #65808E;
     text-align: left;
-    width: 19%;
+    width: 27%;
     font-size: 17px;
 }
 .cus-background .names-names{
@@ -7961,4 +7961,9 @@ color:
 }
 .alert-dismissible {
     padding-right: 18px;
+}
+.sponsor-logo {
+    width: 204px;
+    position: relative;
+    left: -32px;
 }

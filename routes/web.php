@@ -68,6 +68,8 @@ Route::group(['middleware' => 'auth'], function () {
     //register form
     Route::get("sign-up","Auth\LoginController@showRegistarForm")->name("sign-up");
 
+    Route::get("ticket-view/{tran_id}/{event_id}/{ticket_id}/{random_number}","PaymentController@ticket_view");
+
 
 Route::get("/","HomeController@index")->name("/");
 

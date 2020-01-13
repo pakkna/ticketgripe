@@ -26,7 +26,7 @@
                                                 <div class="org-img">
                                                     <img src="{!! asset($single_sponsor->sponser_logo) !!}" alt="">																										
                                                 </div>
-                                                <a href="user_dashboard_activity.html"><h4>{{$single_sponsor->sponser_name}}</h4></a>
+                                                <a href="javascript:void(0)"><h4>{{$single_sponsor->sponser_name}}</h4></a>
                                             </div>
                                         </div>
                                         @endforeach													
