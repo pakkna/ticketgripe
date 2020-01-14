@@ -21,8 +21,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post("insert-event","EventControler@create_event")->name("createEvent");
     Route::post("edit-event","EventControler@edit_event")->name("edit-event");
     Route::post("buy-ticket-option","EventControler@buy_ticket_option");
-    Route::get("event-details/{event_id}","EventControler@event_detail")->name("EventDetails");
-    Route::get("buy-ticket/{event_id}","EventControler@event_ticket")->name("Buyticket");
     Route::get("withdraw","WithdrawController@withdraw")->name("Withdraw");
 
     Route::get("event-setup/{id}/{page?}","EventControler@event_setup_view")->name("event_setup");
@@ -39,8 +37,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post("action-edit-ticket","TicketController@action_edit_ticket")->name("action-edit-ticket");
     Route::get("checkout","TicketController@buy_ticket")->name("TicketOrder");
 
-    Route::post("buy-ticket","PaymentController@ticket_generate")->name("ticket-generate");
-    Route::any("payment_status","PaymentController@payment_status");
 
     Route::post("ticket-question-add","OrderController@ticket_questoion_add")->name("ticket-question-add");
     Route::post("all-orders","OrderController@all_order")->name("all_order_datatable");
@@ -57,10 +53,12 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post("all-attendee","AttendeeController@all_attendee")->name("all_attendee_datatable");
 
-
-    
-
 });
+
+Route::post("buy-ticket","PaymentController@ticket_generate")->name("ticket-generate");
+Route::any("payment_status","PaymentController@payment_status");
+Route::get("buy-ticket/{event_id}","EventControler@event_ticket")->name("Buyticket");
+Route::get("event-details/{event_id}","EventControler@event_detail")->name("EventDetails");
 
 
     //login form
