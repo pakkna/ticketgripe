@@ -16,6 +16,7 @@
                                             <th>ID</th>
                                             <th>Ticket Name</th>
                                             <th>Quantity</th>
+                                            <th>Sold</th>
                                             <th>Price</th>
                                             <th>Visibility</th>
                                             <th>Ticket Sells End</th>
@@ -196,6 +197,15 @@
                     },
                     {
 
+                        data: 'total_sold_count',
+
+                        name: 'total_sold_count',
+
+                        searchable: true,
+
+                    },
+                    {
+
                         data: 'ticket_price',
 
                         name: 'ticket_price',
@@ -247,11 +257,13 @@
 
                         name: 'id',
 
+                        event_id: 'event_id',
+
                         searchable: false,
 
                         render: function(data, type, row) {
 
-                            return "<a href='javascript:void(0)' data-toggle='modal' data-target='#editmoadal' onclick='edit_action("+row.id+")' title='Edit' class='btn-hover-shine btn-shadow btn custom-action btn-sm'><i class='fas fa-edit'></i></a>|<a href='#!' title='View' class='btn-hover-shine btn-shadow btn custom-action btn-sm'><i class='fa fa-eye'></i></a>|<a href='javascript:void(0)'  onclick='ticket_delete("+row.id+",this)' title='Delete' class='btn-hover-shine btn-shadow btn custom-action btn-sm' ><i class='fa fa-trash'></i></a>";
+                            return "<a href='javascript:void(0)' data-toggle='modal' data-target='#editmoadal' onclick='edit_action("+row.id+")' title='Edit' class='btn-hover-shine btn-shadow btn custom-action btn-sm'><i class='fas fa-edit'></i></a>|<a href='{{url('demo-ticket')}}/"+row.event_id+"/"+row.id+"' target=_blank title='View' class='btn-hover-shine btn-shadow btn custom-action btn-sm'><i class='fa fa-eye'></i></a>|<a href='javascript:void(0)'  onclick='ticket_delete("+row.id+",this)' title='Delete' class='btn-hover-shine btn-shadow btn custom-action btn-sm' ><i class='fa fa-trash'></i></a>";
 
                         }
 

@@ -1,11 +1,14 @@
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css"/>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
 
+<!-- <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script> -->
 <div class="setting-form">
     <div class="user-data full-width">
         <div class="about-left-heading">
             <h3> <i class="fas fa-edit mr-2"></i> Edit Event</h3>
         </div>
         <div class="add-event-bg">
-            <form class="form-horizontal" method="post" action="{{ route('edit-event') }}" enctype="multipart/form-data">
+            <form class="form-horizontal event_edit_form" method="post" action="{{ route('edit-event') }}" enctype="multipart/form-data">
                 {{ csrf_field() }}
                     <div class="flash_msg">
                        @if(Session::has('EventSuccess'))
@@ -58,12 +61,17 @@
                         </div>
                         <div class="add-input-items">
                                 <br>
+                                <div class="event-link">
+                                    Event Link : <i class="fa fa-link"></i> <a href="https://ticketgripe.com/e/{{ !empty($event_details->custom_link)? $event_details->custom_link : $event_details->id}}" target="_blank" class="mb-2">https://ticketgripe.com/e/{{ !empty($event_details->custom_link)? $event_details->custom_link : $event_details->id}}</a>
+                                </div><br>
                                 <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text display-10" id="basic-addon4">http://ticketgripe.com/event/</span>
-                                </div>
-                                <input type="text" value="{{ !empty($event_details->custom_link)? $event_details->custom_link : ''}}" name="custom_link" class="form-control display-10" id="basic-url" aria-describedby="basic-addon4">
-                                @if ($errors->has('custom_link'))
+                                    <div class="form-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text display-10" id="basic-addon4">https://ticketgripe.com/e/</span>
+                                            <input type="text" value="{{ !empty($event_details->custom_link)? $event_details->custom_link : $event_details->id}}" name="custom_link" class="form-control display-10" id="basic-url" aria-describedby="basic-addon4">
+                                        </div>
+                                    </div>
+                                    @if ($errors->has('custom_link'))
                                     <span class="help-block text-danger">
                                         <strong>{{ $errors->first('custom_link') }}</strong>
                                     </span>
@@ -74,11 +82,15 @@
                     <div class="input-section-item">
                         <div class="add-input-title">								
                             <i class="fas fa-image"></i>
-                            <h6>Event Flyer*</h6>
+                            <h6>Event Flyer</h6>
                         </div>
                         <div class="add-input-items">
-                            <div class="add-evnt-dt">											
+                            <div class="add-evnt-dt">	
+                                @if($event_details->image_path == null)	
+                                <img class="event-add-img1 event-feature-img" id="imagePreview" src="{!!asset('master/images/demo.jpg')!!}">									
+                                @else										
                                 <img class="event-add-img1 event-feature-img" id="imagePreview" src="{!!asset($event_details->image_path)!!}">
+                                @endif										
                                 </img>
                                 <script src="{!! asset('master/js/jquery3.3.1.js') !!}"></script>
 
@@ -120,7 +132,7 @@
                                 <div class="addpic" id="OpenImgUpload">
                                     <input type="file" id="file2" name="event_logo">
                                     <label for="file2">Choose File</label>
-                                    <p>Minimum image dimension : 150 x 150</p>
+                                    <p>Minimum image dimension : 250 x 100</p>
                                     @if ($errors->has('event_logo'))
                                     <span class="help-block text-danger">
                                         <strong>{{ $errors->first('event_logo') }}</strong>
@@ -321,4 +333,35 @@
         "format": "MM/DD/YYYY hh:mm:ss A",
     });
 });
+</script>
+<script>
+    $(document).ready(function() {
+        $('.event_edit_form').bootstrapValidator({
+            message: 'This value is not valid',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                custom_link: {
+                    message: 'This link is not valid',
+                    validators: {
+                        notEmpty: {
+                            message: 'This field is required and cannot be empty'
+                        },
+                        stringLength: {
+                            min: 2,
+                            max: 30,
+                            message: 'The link must be more than 6 and less than 30 characters long'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9_]+$/,
+                            message: 'The link can only consist of alphabetical, number and underscore'
+                        }
+                    }
+                },
+            }
+        });
+    });
 </script>

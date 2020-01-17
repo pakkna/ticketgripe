@@ -30,7 +30,7 @@ class CreatePaymnetTable extends Migration
             $table->string('card_issuer_country');
             $table->string('currency')->nullable();
             $table->float('currency_rate');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('event_id');
             $table->unsignedBigInteger('ticket_id');
             $table->dateTime('tran_date');

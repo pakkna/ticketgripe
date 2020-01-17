@@ -187,8 +187,11 @@ function loadjscssfile(filename, filetype){
 
                     if (i < 3) {
                         var disabled = "disabled";
+                        var action = '---';
+                        
                     }else{
                         var disabled = " ";
+                        var action = '<a href="javascript:void(0)" data-toggle="modal" data-target="#largeModal2" onclick="edit_action_ques('+response[i]['id']+',{{$event_details->id}})" title="Edit" class="btn-hover-shine btn-shadow btn custom-action btn-sm"><i class="fas fa-edit"></i></a>|<a href="javascript:void(0)"  onclick="question_delete('+response[i]['id']+',this)" title="Delete" class="btn-hover-shine btn-shadow btn custom-action btn-sm" ><i class="fa fa-trash"></i></a>';
                     }
                     if ( response[i]['answer_required'] == 'on') {
                         var tick = "checked";
@@ -196,7 +199,7 @@ function loadjscssfile(filename, filetype){
                         var tick = " ";
                     }
                     
-                    $("#cus-order-table").append('<tr id="rem"><td nowrap>' + response[i]['question_title'] + '</td><td nowrap>' + response[i]['question_type'] + '</td><td nowrap> Order </center></td><td nowrap><center>' + '<input type="checkbox" id="toggle_switch" onchange="toggle_btn('+response[i]['id']+',this)" name="'+response[i]['id']+'" data-toggle="toggle" data-on="<i class='+"'fa fa-check-circle mt--2'"+' style='+"'margin-top: -2px;'"+'></i>" data-off="<span style='+"'position: relative;top: 2px;left:-5px;'"+'>Off</span>" data-size="mini" '+disabled+' '+tick+'>' + '</center></td><td nowrap>'+'<a href="javascript:void(0)" data-toggle="modal" data-target="#largeModal2" onclick="edit_action_ques('+response[i]['id']+',{{$event_details->id}})" title="Edit" class="btn-hover-shine btn-shadow btn custom-action btn-sm"><i class="fas fa-edit"></i></a>|<a href="javascript:void(0)"  onclick="question_delete('+response[i]['id']+',this)" title="Delete" class="btn-hover-shine btn-shadow btn custom-action btn-sm" ><i class="fa fa-trash"></i></a>'+'</td></tr>');
+                    $("#cus-order-table").append('<tr id="rem"><td nowrap>' + response[i]['question_title'] + '</td><td nowrap>' + response[i]['question_type'] + '</td><td nowrap> Order </center></td><td nowrap><center>' + '<input type="checkbox" id="toggle_switch" onchange="toggle_btn('+response[i]['id']+',this)" name="'+response[i]['id']+'" data-toggle="toggle" data-on="<i class='+"'fa fa-check-circle mt--2'"+' style='+"'margin-top: -2px;'"+'></i>" data-off="<span style='+"'position: relative;top: 2px;left:-5px;'"+'>Off</span>" data-size="mini" '+disabled+' '+tick+'>' + '</center></td><td nowrap>'+ action+'</td></tr>');
                 }
         // loadjscssfile("/master/css/bootstrap4-toggle.min.css", "css");
             }
@@ -207,8 +210,10 @@ function loadjscssfile(filename, filetype){
 
     $('#select_ticket_id').on('change', function (e) {
 
-        loadjscssfile("/master/js/bootstrap4-toggle.min2.js", "js");
+
         single_ticket_form(this.value);
+        loadjscssfile("/master/css/bootstrap4-toggle.min.css", "css");
+        loadjscssfile("/master/js/bootstrap4-toggle.min.js", "js");
 
         });
 

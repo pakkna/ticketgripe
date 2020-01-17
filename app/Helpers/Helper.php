@@ -18,6 +18,18 @@ if (!function_exists('datetime_validate')) {
 
 }
 
+if (!function_exists('datetime_validate_24')) {
+
+    function datetime_validate_24($date, $format = ('Y-m-d H:i:s'))
+
+    {
+
+        return date($format, strtotime($date));
+
+    }
+
+}
+
 if (!function_exists('date_validate')) {
 
     function date_validate($date, $format = ('Y-m-d'))
@@ -81,3 +93,4 @@ if (!function_exists('EventImageUpload')) {
             return $uploadpath."/".$filename;        
     }
 }
+

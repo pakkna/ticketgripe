@@ -22,6 +22,7 @@ class EventControler extends Controller
         // ->leftjoin('tickets','events.id','=','tickets.event_id')
         // ->select('events.id','title','start_date','end_date','event_status','city','seat_number','image_path','seat_number','custom_link','ticket_price','quantity','selling_currency')
         ->where('events.user_id', Auth::user()->id)
+        ->orderBy('id', 'ASC')
         //need collection and soldout form order table
         ->get();
 
@@ -56,13 +57,18 @@ class EventControler extends Controller
 
     public function create_event(EventRequest $request){
 
-        $upload_path=EventImageUpload($request->file('event_flyer'),'event_flayer');
-        $upload_path2=EventImageUpload($request->file('event_logo'),'event_logo');
+        if ($request->file('event_flyer') == null) {
+            $upload_path = null;
+            $upload_path2 = null;
+        }else{
+            $upload_path=EventImageUpload($request->file('event_flyer'),'event_flayer');
+            $upload_path2=EventImageUpload($request->file('event_logo'),'event_logo');
+        }
 
         $data= [
             'title' => $request->event_title,
-            'start_date' => datetime_validate($request->start_time),
-            'end_date' => datetime_validate($request->end_time),
+            'start_date' => datetime_validate_24($request->start_time),
+            'end_date' => datetime_validate_24($request->end_time),
             'image_path' => $upload_path,
             'event_logo' => $upload_path2,
             'category' => $request->category,
@@ -133,8 +139,8 @@ class EventControler extends Controller
         $data= [
 
             'title' => $request->event_title,
-            'start_date' => datetime_validate($request->start_time),
-            'end_date' => datetime_validate($request->end_time),
+            'start_date' => datetime_validate_24($request->start_time),
+            'end_date' => datetime_validate_24($request->end_time),
             'image_path' => $upload_path,
             'event_logo' => $upload_path2,
             'custom_link' => !empty($request->custom_link) ? $request->custom_link : NULL,
@@ -205,13 +211,33 @@ class EventControler extends Controller
 
     public function buy_ticket_option(Request $request)
     {
+        $count = 0;
+        $total_ticket_sold_count = 0;
         $single_event = DB::table('events')->where('id', $request->event_id)->first();
 
-        $ticket_question = DB::table('custom_form')->where('event_id', $request->event_id)->take(100)->get();
+        $ticket_question = DB::table('custom_form')->where('event_id', $request->event_id)->orderBy('id', 'ASC')->get();
 
         $single_event_tickets = DB::table('tickets')->where('event_id', $request->event_id)->where('ticket_type', $request->ticket)->first();
 
-        $view =  view('files.buy_ticket_form',compact('single_event', 'single_event_tickets', 'ticket_question'))->render();
+        $ticket_count = DB::table('orders')->select('sold_tickets')->where('event_id', $request->event_id)->where('ticket_id', $single_event_tickets->id)->get();
+
+        $total_ticket_sold = DB::table('orders')->select('sold_tickets')->where('event_id', $request->event_id)->get();
+
+        foreach ($total_ticket_sold as $group2) {
+            $total_ticket_sold_count += $group2->sold_tickets;
+        }
+
+        foreach ($ticket_count as $group) {
+            $count += $group->sold_tickets;
+        }
+
+        if ($single_event_tickets->quantity <= $count) {
+            $stock = true;
+        }else{
+            $stock = false;
+        }
+
+        $view =  view('files.buy_ticket_form',compact('single_event', 'single_event_tickets', 'ticket_question', 'stock', 'count','total_ticket_sold_count'))->render();
 
         return response()->json(['html'=>$view]);
     }
@@ -221,5 +247,30 @@ class EventControler extends Controller
         $single_event_ticket = DB::table('custom_form')->where('event_id', $request->event_id)->where('select_specific_ticket', $request->ticket)->get();
 
         echo json_encode($single_event_ticket);
+    }
+
+    public function event_details_for_all($event_link)
+    {
+        $single_event = DB::table('events')->where('custom_link', $event_link)->first();
+
+        if ($single_event == null) {
+
+            $single_event = DB::table('events')->where('id', $event_link)->first();
+        }
+
+        try {
+            $single_event = DB::table('events')
+            ->where('id', $single_event->id)
+            ->first();
+
+            $single_event_tickets = DB::table('tickets')->where('event_id', $single_event->id)->get();
+
+            $single_event_sponsor = DB::table('sponser')->where('event_id', $single_event->id)->get();
+
+            return View('files.events', compact('single_event', 'single_event_tickets', 'single_event_sponsor'));
+
+        } catch (\Exception $th) {
+            return redirect('/');
+        }
     }
 }

@@ -17,8 +17,8 @@ class LoggedIn
     {
         if (is_null(Auth::user())) {
 
-            return redirect('/');
+            return redirect('sign-up');
         }
-        return $next($request);
+        return redirect('sign-up');
     }
 }

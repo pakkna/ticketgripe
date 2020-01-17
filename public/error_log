@@ -1,0 +1,19 @@
+[16-Jan-2020 20:32:30 Asia/Dhaka] PHP Warning:  Uncaught ErrorException: Object of class stdClass could not be converted to string in /home/ticketgripe/public_html/app/Http/Controllers/OrderController.php:253
+Stack trace:
+#0 /home/ticketgripe/public_html/app/Http/Controllers/OrderController.php(253): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(4096, 'Object of class...', '/home/ticketgri...', 253, Array)
+#1 [internal function]: App\Http\Controllers\OrderController->modal_view_order(Object(Illuminate\Http\Request))
+#2 /home/ticketgripe/public_html/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): call_user_func_array(Array, Array)
+#3 /home/ticketgripe/public_html/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(45): Illuminate\Routing\Controller->callAction('modal_view_orde...', Array)
+#4 /home/ticketgripe/public_html/vendor/laravel/framework/src/Illuminate/Routing/Route.php(212): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(App\Http\Controllers\OrderCo in /home/ticketgripe/public_html/app/Http/Controllers/OrderController.php on line 253
+[16-Jan-2020 20:32:30 Asia/Dhaka] PHP Fatal error:  Object of class stdClass could not be converted to string in /home/ticketgripe/public_html/app/Http/Controllers/OrderController.php on line 253
+[16-Jan-2020 14:41:23 UTC] PHP Fatal error:  Cannot use [] for reading in /home/ticketgripe/public_html/app/Http/Controllers/OrderController.php on line 248
+[16-Jan-2020 20:48:33 Asia/Dhaka] PHP Warning:  Uncaught ErrorException: Object of class stdClass could not be converted to string in /home/ticketgripe/public_html/app/Http/Controllers/OrderController.php:252
+Stack trace:
+#0 /home/ticketgripe/public_html/app/Http/Controllers/OrderController.php(252): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(4096, 'Object of class...', '/home/ticketgri...', 252, Array)
+#1 [internal function]: App\Http\Controllers\OrderController->modal_view_order(Object(Illuminate\Http\Request))
+#2 /home/ticketgripe/public_html/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): call_user_func_array(Array, Array)
+#3 /home/ticketgripe/public_html/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(45): Illuminate\Routing\Controller->callAction('modal_view_orde...', Array)
+#4 /home/ticketgripe/public_html/vendor/laravel/framework/src/Illuminate/Routing/Route.php(212): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(App\Http\Controllers\OrderCo in /home/ticketgripe/public_html/app/Http/Controllers/OrderController.php on line 252
+[16-Jan-2020 20:48:33 Asia/Dhaka] PHP Fatal error:  Object of class stdClass could not be converted to string in /home/ticketgripe/public_html/app/Http/Controllers/OrderController.php on line 252
+[16-Jan-2020 15:09:32 UTC] PHP Fatal error:  Cannot use [] for reading in /home/ticketgripe/public_html/app/Http/Controllers/OrderController.php on line 248
+[16-Jan-2020 15:10:24 UTC] PHP Fatal error:  Cannot use [] for reading in /home/ticketgripe/public_html/app/Http/Controllers/OrderController.php on line 248

@@ -50,7 +50,7 @@
                             <div class="input-section-item">
                                 <div class="add-input-title">								
                                     <i class="fas fa-image"></i>
-                                    <h6>Event Flyer & Logo*</h6>
+                                    <h6>Event Flyer & Logo</h6>
                                 </div>
                                 <div class="add-input-items">
                                     <div class="row">
@@ -91,7 +91,7 @@
                                                 <div class="addpic" id="OpenImgUpload">
                                                     <input type="file" id="file2" name="event_logo">
                                                     <label for="file2">Choose File</label>
-                                                    <p>Minimum image dimension : 150 x 150</p>
+                                                    <p>Minimum image dimension : 250 x 100</p>
                                                     @if ($errors->has('event_logo'))
                                                     <span class="help-block text-danger">
                                                         <strong>{{ $errors->first('event_logo') }}</strong>

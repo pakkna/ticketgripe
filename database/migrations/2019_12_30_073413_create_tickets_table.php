@@ -19,8 +19,8 @@ class CreateTicketsTable extends Migration
             $table->float('ticket_price');
             $table->string('quantity')->nullable();
             $table->longText('short_note')->nullable();
-            $table->dateTime('selling_date');
-            $table->dateTime('untill_date');
+            $table->string('selling_date');
+            $table->string('untill_date');
             $table->integer('show_sell_untill_date');
             $table->integer('fees_consume')->nullable()->default(0);
             $table->unsignedBigInteger('event_id');

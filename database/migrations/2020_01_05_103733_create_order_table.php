@@ -23,9 +23,10 @@ class CreateOrderTable extends Migration
             $table->float('system_charge');
             $table->float('sold_amount');
             $table->unsignedBigInteger('payment_id')->nallable();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('event_id');
             $table->unsignedBigInteger('ticket_id');      
+            $table->string('transaction_id');      
             $table->timestamps();
             $table->engine = 'InnoDB'; 	
             $table->charset = 'utf8';

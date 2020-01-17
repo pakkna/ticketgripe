@@ -51,7 +51,7 @@ clear: both;
 
 .card .fa {font-size:50px;}
 </style>
-<div class="row mt-3">
+<!-- <div class="row mt-3">
     <div class="column">
         <div class="card">
         <p><i class="fa fa-money"></i></p>
@@ -115,4 +115,4 @@ clear: both;
         <p>Event Interested</p>
         </div>
     </div>
-</div>
+</div> -->

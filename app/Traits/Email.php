@@ -14,7 +14,7 @@ trait Email
     {
         $sub    = $sub;
         $msg    = $msg;
-        $from   = "bsf@basis.org.bd";
+        $from   = "admin@ticketgripe.com";
 
         $msgBody  = '<html><body>';
 
@@ -31,4 +31,6 @@ trait Email
 
         return $isSuccess;
     }
+
+    
 }

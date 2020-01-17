@@ -44,13 +44,12 @@
 <script>
 function ticket_form(ticket_id){
     $.ajax({
-
         url: '/buy-ticket-option',
         type: 'post',
         data: {
             ticket: ticket_id,
             event_id: {{Request::segment(2)}},
-            '_token': $('meta[name="csrf-token"]').attr('content'),
+            '_token': "{{csrf_token()}}",
         },
         dataType: 'json',
         success: function(response) {    

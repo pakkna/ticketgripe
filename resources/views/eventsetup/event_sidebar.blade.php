@@ -52,6 +52,8 @@
 <!-- Body End -->
 
 @include('layouts.master_layout.footer_events')
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
+
 <script>
     function openForm(tabAction, the) {
         var i, tabopen, click;

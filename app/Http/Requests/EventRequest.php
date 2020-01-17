@@ -25,8 +25,8 @@ class EventRequest extends FormRequest
     {
         return [
             "event_title" => "required|string",
-            "event_flyer" => "required|mimes:jpeg,bmp,png|dimensions:min_width=925,min_height=467",
-            "event_logo" => "required|mimes:jpeg,bmp,png|dimensions:min_width=150,min_height=150",
+            "event_flyer" => "nullable|mimes:jpeg,bmp,png|dimensions:min_width=925,min_height=467",
+            "event_logo" => "nullable|mimes:jpeg,bmp,png|dimensions:min_width=250,min_height=100",
             "category" => "required",
             "country" => "required",
             "city" => "required",

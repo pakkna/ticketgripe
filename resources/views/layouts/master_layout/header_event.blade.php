@@ -84,7 +84,7 @@
                                 <div class="dropdown-menu account-dropdown dropdown-menu-right">
                                     <!-- <a class="link-item" href="my_dashboard_activity.html">Profile</a> -->
                                     <a class="link-item" href="{{route('MyEvents')}}">Events</a>
-                                    <a class="link-item" href="invite.html">Invite</a>
+                                    <!-- <a class="link-item" href="invite.html">Invite</a> -->
                                     <a class="link-item" href="{{route('UserSetting')}}">Setting</a>
                                     <a class="link-item" href="{{route('Withdraw')}}">Withdraw</a>
                                     <a class="link-item" href="javascript:void(0)" onclick="event.preventDefault();
@@ -126,7 +126,7 @@
                         <div class="my-profile-dash">
                             <div class="my-dp-dash">
                                 <?php
-                                $event_details->event_logo == null ? $logo_path='master/images/event-view/my-bg.jpg' : $logo_path=$event_details->event_logo;
+                                $event_details->event_logo == null ? $logo_path='master/images/event-logo.png' : $logo_path=$event_details->event_logo;
                                 ?>
                                 <img src="{!! asset($logo_path) !!}" alt="prifile pic">
                             </div>

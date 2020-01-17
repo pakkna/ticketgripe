@@ -5,10 +5,48 @@
         <input type="hidden" name="ticket_id" id="" value="{{$single_event_tickets->id}}">
         <div class="vip-seats">
             <div class="text-seats-left" style="width: 78%;">
+            <?php
+            $current_time = strtotime(date('Y-m-d H:i:s')); 
+            $event_end = strtotime($single_event->end_date); 
+            $event_start = strtotime($single_event->start_date); 
+            $ticket_start = strtotime($single_event_tickets->selling_date); 
+            $ticket_end = strtotime($single_event_tickets->untill_date); 
+            if($current_time > $event_end){ ?>
+
+            <div class="alert alert-danger alert-dismissible text-center display-15" style="float: right;padding-right: 20px;" role="alert">
+                <h4 style="display: inline-block;"> Event has expired !</h4><br>
+            </div>
+
+            <?php } else if ($current_time < $ticket_start) {  ?>
+
+                <div class="alert alert-danger alert-dismissible text-center display-15" style="float: right;padding-right: 20px;" role="alert">
+                    <h4 style="display: inline-block;"> Event ticket will start selling soon !</h4><br>
+                </div>
+
+            <?php } else if ($current_time > $ticket_end) {  ?>
+
+                <div class="alert alert-danger alert-dismissible text-center display-15" style="float: right;padding-right: 20px;" role="alert">
+                    <h4 style="display: inline-block;"> Ticket has expired !</h4><br>
+                </div>
+
+            <?php } else if ($single_event->seat_number <= $total_ticket_sold_count) {  ?>
+
+                <div class="alert alert-danger alert-dismissible text-center display-15" style="float: right;padding-right: 20px;" role="alert">
+                    <h4 style="display: inline-block;"> Event Ticket sold out !</h4><br>
+                </div>
+
+            <?php } else if ($stock == true) {  ?>
+
+                <div class="alert alert-danger alert-dismissible text-center display-15" style="float: right;padding-right: 20px;" role="alert">
+                    <h4 style="display: inline-block;"> {{$single_event_tickets->ticket_type}} - Ticket stock out !</h4><br>
+                </div>
+
+            <?php }else{ ?>
+
                 <div class="row">
                     <div class="col-md-7">
-                        <h4 style="display: inline-block;">Book VIP Seats</h4><br>
-                        @if($single_event_tickets->show_sell_untill_date == 0)
+                        <h4 style="display: inline-block;">Book {{$single_event_tickets->ticket_type}} Seats</h4><br>
+                        @if($single_event_tickets->show_sell_untill_date != 0)
                             <span>Sales end on {{date(('jS F, Y g:i:s A'), strtotime($single_event_tickets->untill_date))}}</span>
                         @endif
                     </div>
@@ -20,10 +58,26 @@
             <div class="select-sts-right">
                 <div class="select-bg">									
                     <select id="ticket-select" class="nice-select add-inputs payment-input wide custom-list" style="margin-top: 0!important;" name="ticket_count">
-                    <?php for ($i=$single_event_tickets->min_ticket_per_order; $i <= $single_event_tickets->max_ticket_per_order ; $i++) { ?>
+                    <?php 
+                    
+                    $total_single_ticket = $single_event_tickets->quantity; //10
+                    $total_seat = $single_event->seat_number; //30
+                    $total_single_ticket_left = $total_seat - $total_ticket_sold_count;//28
+                    $single_ticket_seat_left = $total_single_ticket - $count;
+
+                    if ($single_event_tickets->max_ticket_per_order < $total_single_ticket_left) {
+                        if ($single_event_tickets->max_ticket_per_order > $single_ticket_seat_left) {
+                            $limit = $single_ticket_seat_left;
+                        }else{
+                            $limit = $single_event_tickets->max_ticket_per_order;
+                        }
+                    }else{
+                        $limit = $total_single_ticket_left;
+                    }
+                    for ($i=1; $i <= $limit ; $i++) { ?>
                             <option value="{{$i}}">{{$i}}</option>
                     <?php } ?>
-                    </select>    
+                    </select>   
                 </div>
             </div>
         </div>
@@ -50,7 +104,7 @@
                             $array2 = explode("~", $one_ticket_question->select_specific_ticket);
                             if($one_ticket_question->answer_required == 'on' && in_array($single_event_tickets->id,$array2) ){
                                 array_push($question_id_array, $one_ticket_question->id);
-                                $array3 = array();
+                                $array3 = (object)array();
                                 $array3 = explode("~", $one_ticket_question->question_options);    
                             ?>
                                 <h5 class="header-buy-tickt">#{{$one_ticket_question->question_title}} *</h5>
@@ -85,7 +139,7 @@
                                 <?php if(count($one_ticket_question->question_instruction)){ ?>
                                 <p>*{{$one_ticket_question->question_instruction}}</p>
                                 <?php } ?>
-                
+                      
                                 <?php } ?>
 
                             
@@ -96,6 +150,7 @@
                         <div class="add-crdt-amnt">
                             <button class="setting-save-btn" type="submit">Submit</button>
                         </div>
+                                <?php } ?>
                     </div>
                 </form>
             </div>

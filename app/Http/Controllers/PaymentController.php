@@ -6,15 +6,26 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Auth;
 use Session;
+use Illuminate\Validation\Rule;
+
 
 class PaymentController extends Controller
 {
+    public function __construct()
+    {
+        date_default_timezone_set('Asia/Dhaka');
+    }
 
     public function ticket_details($id){
         return DB::table('tickets')->select('ticket_type','ticket_price','quantity','fees_consume','selling_currency','fees_consume','event_id')->where('id',$id)->first();
     }
 
     public function ticket_generate(Request $request){
+      
+        $validatedData = $request->validate([
+            "question_ans" => "required",
+            "question_ans" => Rule::unique('questionanswer')->where('question_title', 'Email')->where('ticket_id', $request->ticket_id),
+        ]);
 
         $ticket_info=$this->ticket_details($request->ticket_id);
 
@@ -22,14 +33,14 @@ class PaymentController extends Controller
         $total_price=($ticket_info->ticket_price*$request->ticket_count);
         $product_type=($ticket_info->ticket_type);
 
-        //put buyer input infi in session
+        //put buyer input info in session
 
         if($ticket_info->ticket_price>0){
 
             $names=array_keys($request->all());
             $values=array_values($request->all());
 
-            $tran_id='TGRIPE-'.strtoupper(uniqid());
+            $tran_id='TG-'.strtoupper(uniqid());
 
             for ($i=0; $i <count($names) ; $i++) { 
          
@@ -49,7 +60,7 @@ class PaymentController extends Controller
 
             $this->pay_now_ssl($total_price,$product_type,$ticket_info->selling_currency,$request->all(),$tran_id,$ticket_info->event_id);
         }else{
-            $this->order_confirm($request->all(),0,0,NULL,$ticket_info->event_id);
+            $this->order_confirm_without_ssl($request->all(),0,0,NULL,$ticket_info->event_id,$request->ticket_id);
         }
     }
 
@@ -71,7 +82,7 @@ class PaymentController extends Controller
         $post_data['cancel_url'] = $link . "/payment_status?_token=" . csrf_token();
 
         # CUSTOMER INFORMATIONs
-        $post_data['cus_name'] = $buyer_info['Full_name'];
+        $post_data['cus_name'] = $buyer_info['Name'];
         $post_data['cus_email'] = $buyer_info['Email'];
         $post_data['cus_add1'] = $buyer_info['address'];
         $post_data['cus_city'] = "Dhaka";
@@ -146,11 +157,9 @@ class PaymentController extends Controller
 
     public function payment_status(Request $request)
     {
-
-     
         $bill_info=DB::table('before_order_table')->where('transaction_id',$request->tran_id)->get();
 
-        if($request->card_type== "VALID" || "VALIDED" && $bill_info[0]->request_value==$request->value_a ){
+        if($request->card_type== "VALID" || "VALIDED" && $bill_info[0]->request_value==$request->value_a &&  $request->status != "FAILED"){
                
                 $data = [
                     "product" => "Event Ticket",
@@ -180,7 +189,7 @@ class PaymentController extends Controller
                 }
                
             }else{
-                return redirect("buy-ticket/{$bill_info[1]->request_value}")->with("flashMessageSuccess", "Online Payment System Request Invalid ! Try Again");
+                return redirect("buy-ticket/{$request->value_b}")->with("flashMessageSuccess", "Online Payment System Request Invalid ! Try Again");
             }      
     }
 
@@ -190,19 +199,23 @@ class PaymentController extends Controller
         //$ticket_info=$this->ticket_details($bill_info->ticket_id);
 
 
-        $random_number = mt_rand(1000, 9999);
+        $random_number = mt_rand(100000, 999999);
 
            if($total_amount>0) {
             $ssl_charge=($total_amount-$store_amount);
            }else{
             $ssl_charge=0;
+            $total_amount = 0;
            }   
 
         $parcentage= (($total_amount*10)/100);
         $system_charged=$parcentage-$ssl_charge;
 
+        $array_cut=$bill_info->toArray();
+        $request_array=array_splice($array_cut,3,count($array_cut));
+
         $data = [
-            "order_confirm_id" => "TGripe-".$random_number,
+            "order_confirm_id" => "TG-".$random_number,
             "sold_tickets" => $bill_info[2]->request_value,
             "order_amount" =>  $total_amount,
             "ssl_charge" => $ssl_charge,
@@ -212,13 +225,11 @@ class PaymentController extends Controller
             "user_id" => Auth::id(),
             "ticket_id" =>$bill_info[1]->request_value,
             "event_id" =>$event_id,
-            "created_at" =>date('Y-m-d h:i:s'),
+            'transaction_id'=>$request_array[0]->transaction_id,
+            "created_at" =>date('Y-m-d H:i:s'),
         ];
 
         $data = DB::table('orders')->insert($data);
-
-        $array_cut=$bill_info->toArray();
-         $request_array=array_splice($array_cut,3,count($array_cut));
 
 
         if($data==true){
@@ -232,17 +243,84 @@ class PaymentController extends Controller
                     'transaction_id'=>$request_array[$i]->transaction_id,
                     'event_id'=>$request_array[$i]->event_id,
                     'ticket_id'=>$request_array[$i]->ticket_id,
-                    "created_at" =>date('Y-m-d h:i:s'),
+                    "created_at" =>date('Y-m-d H:i:s'),
                 ];
                 DB::table('questionanswer')->insert($answer_set);
 
             }
+
+            $file = public_path('qr_codes/TG-'.$random_number.'.png');
+            $code_save = \QRCode::text('TG-'.$random_number)->setOutfile($file)->png();
 
         }
 
         //create ticket page
 
         echo "<meta http-equiv='refresh' content='0;url=ticket-view/".$request_array[0]->transaction_id."/".$event_id."/".$request_array[0]->ticket_id . "/".$random_number."'>";        
+
+        
+    }
+    public function order_confirm_without_ssl($bill_info,$total_amount,$store_amount,$payment_id,$event_id,$ticket_id){
+
+        //$ticket_info=$this->ticket_details($bill_info->ticket_id);
+
+        $random_number = mt_rand(100000, 999999);
+
+            $ssl_charge=0;
+            $total_amount = 0; 
+
+        $parcentage= (($total_amount*10)/100);
+        $system_charged=$parcentage-$ssl_charge;
+        $tran_id='TG-'.strtoupper(uniqid());
+
+
+        $data = [
+            "order_confirm_id" => "TG-".$random_number,
+            "sold_tickets" => $bill_info['ticket_count'],
+            "order_amount" =>  $total_amount,
+            "ssl_charge" => $ssl_charge,
+            "system_charge" =>$system_charged,
+            "sold_amount" => ($store_amount-$system_charged),
+            "payment_id" =>$payment_id,
+            "user_id" => Auth::id(),
+            "ticket_id" =>$bill_info['ticket_id'],
+            "event_id" =>$event_id,
+            'transaction_id'=>$tran_id,
+            "created_at" =>date('Y-m-d H:i:s'),
+        ];
+        $request_array=array_slice($bill_info,3);
+        $names=array_keys($request_array);
+        $values=array_values($request_array);
+
+        $data = DB::table('orders')->insert($data);
+
+        // $array_cut=$bill_info->toArray();
+
+        if($data==true){
+
+            for ($i=0; $i <count($request_array) ; $i++) { 
+         
+                $answer_set=[
+
+                    'question_title'=>$names[$i],
+                    'question_ans'=>$values[$i],
+                    'transaction_id'=>$tran_id,
+                    'event_id'=>$event_id,
+                    'ticket_id'=>$ticket_id,
+                    "created_at" =>date('Y-m-d H:i:s'),
+                ];
+                DB::table('questionanswer')->insert($answer_set);
+
+            }
+
+            $file = public_path('qr_codes/TG-'.$random_number.'.png');
+            $code_save = \QRCode::text('TG-'.$random_number)->setOutfile($file)->png();
+
+        }
+
+        //create ticket page
+
+        echo "<meta http-equiv='refresh' content='0;url=ticket-view/".$tran_id."/".$event_id."/".$ticket_id . "/".$random_number."'>";        
 
         
     }
@@ -254,9 +332,11 @@ class PaymentController extends Controller
 
         $sponsor_info = DB::table('sponser')->select('sponser_logo')->where('event_id', $event_id)->get();
 
-        $buyer_info = DB::table('questionanswer')->select('transaction_id','question_ans','created_at','question_title')->where('transaction_id', $tran_id)->take(4)->get();
+        $buyer_info = DB::table('questionanswer')->select('transaction_id','question_ans','created_at','question_title')->where('transaction_id', $tran_id)->take(3)->get();
 
-        return view('files.ticket', compact('event_info', 'sponsor_info', 'buyer_info', 'random_number'));
+        $ticket_type = DB::table('tickets')->select('ticket_type')->where('id', $ticket_id)->first();
+
+        return view('files.ticket', compact('event_info', 'sponsor_info', 'buyer_info', 'random_number', 'ticket_type'));
 
     }
 }

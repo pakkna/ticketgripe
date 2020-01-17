@@ -20,7 +20,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get("add-events","EventControler@show_event_form")->name("AddEvent");
     Route::post("insert-event","EventControler@create_event")->name("createEvent");
     Route::post("edit-event","EventControler@edit_event")->name("edit-event");
-    Route::post("buy-ticket-option","EventControler@buy_ticket_option");
     Route::get("withdraw","WithdrawController@withdraw")->name("Withdraw");
 
     Route::get("event-setup/{id}/{page?}","EventControler@event_setup_view")->name("event_setup");
@@ -44,21 +43,30 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post("ticket-toggle","OrderController@ticket_toggle");
     Route::post("ticket-question-update","OrderController@ticket_update_html")->name("modal-edit-ticket-question");
     Route::post("ticket-question-edit","OrderController@ticket_question_edit")->name("ticket-question-edit");
+    Route::post("order_datatable_form","OrderController@order_datatable_form")->name("order_datatable_form");
+    Route::post("attendee_datatable_form","OrderController@attendee_datatable_form")->name("attendee_datatable_form");
+    Route::post("confirm-order-user","OrderController@confirm_order_user");
 
     Route::post("add-sponser","SponserController@add_sponser")->name("add-sponser");
     Route::post("all-sponser","SponserController@all_sponsers")->name("all-sponser");
     Route::post("sponser-delete","SponserController@sponser_delete")->name("sponser-delete");
 
     Route::post("question-delete","OrderController@order_question_delete")->name("question-delete");
+    Route::post("modal-view-order","OrderController@modal_view_order");
 
     Route::post("all-attendee","AttendeeController@all_attendee")->name("all_attendee_datatable");
 
+
+    Route::get("event-details/{event_id}","EventControler@event_detail")->name("EventDetails");
+    Route::get("demo-ticket/{event_id}/{ticket_id}","TicketController@ticket_detail");
+    Route::get("qrcode","OrderController@qr_generate");
 });
 
 Route::post("buy-ticket","PaymentController@ticket_generate")->name("ticket-generate");
 Route::any("payment_status","PaymentController@payment_status");
 Route::get("buy-ticket/{event_id}","EventControler@event_ticket")->name("Buyticket");
-Route::get("event-details/{event_id}","EventControler@event_detail")->name("EventDetails");
+Route::post("buy-ticket-option","EventControler@buy_ticket_option");
+Route::get("e/{event_link}","EventControler@event_details_for_all");
 
 
     //login form

@@ -1238,6 +1238,9 @@ main {
 	.evnt-ft-img{
 		height: auto !important;
 	}
+	.but-btn-ticket{
+		margin-top: 50px;
+	}
 }
 @media (max-width: 630px) {
 	.dash-dts{
@@ -1312,4 +1315,5 @@ main {
 	.padd-both-zero{
 		padding: 0px !important;
 	}
+	
 }

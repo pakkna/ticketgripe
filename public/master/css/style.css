@@ -1962,7 +1962,8 @@ footer {
 }
 
 .copyright-text img {
-    margin-right: 15px;
+    margin-right: 2px;
+    width: 32px;
 }
 
 .ftr-1 {
@@ -4354,7 +4355,7 @@ footer {
     #607D8B;
     border-radius: 11px;
     padding: 5px 10px;
-    width: 71%;
+    width: 77%;
     text-transform: uppercase;
 }
 
@@ -7850,8 +7851,8 @@ color:
     border-top-right-radius: 25px;
 }
 .cus-header .check-img{
-    /* width: 300px;
-    text-align: center; */
+    width: 300px;
+    text-align: center;
 }
 .cus-title h1{
     color: #223F69;
@@ -7911,6 +7912,7 @@ color:
     float: right;
     margin-top: 12px;
     font-size: 22px;
+    
 }
 .cus-background .names{
     color: #65808E;
@@ -7933,24 +7935,25 @@ color:
 .copyright-ticket{
     transform: rotate(270deg);
     color: #616161;
-    position: absolute;
-    right: 198px;
-    top: 321px;
+    /* position: relative;
+    right: -209px;
+    bottom: 304px; */
     font-size: 12px;
+    text-align: right;
+
+    margin-top: 118px;
+
+    margin-left: 527px;
 }
 .qr-code{
     width: 20%;
     float: right;
-    position: relative;
-    top: -195px;
+    /* position: relative;
+    top: -195px; */
     right: 0;
 }
 .ticket-code{
     color: #3B3B3B !important;
-    position: relative;
-    font-size: 14px !important;
-    left: -47px;
-    top: -21px;
 }
 .sponsor-logo-name{
     background: #fff;
@@ -7966,4 +7969,7 @@ color:
     width: 204px;
     position: relative;
     left: -32px;
+}
+.but-btn-ticket{
+    margin-top: 11px;
 }

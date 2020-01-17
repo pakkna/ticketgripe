@@ -31,90 +31,112 @@
         <div class="container">
             <div class="row justify-content-md-center cus-width">
                     <div class="checkout-heading text-center">
-                        <h2>Order Confirmed</h2>								
+                        <h2>Ticket Confirmed</h2>								
                     </div>
-                    <div id="DomPrint" class="confirm-order">
-                        <div class="checkout-dt1 cus-header">
-                            <div class="check-img">
-                                <img src="{!! asset($event_info->event_logo) !!}" style="float: left;height: 67px;
-                                width: 100%;" alt="">
-                            </div>
-                            <div class="cus-title">
-                                <h1>{{$event_info->title}}</h1>
-                                <!-- <div class="ctgory1">Club</div> -->
-                                <?php 
-                                 $format = ('F d, Y');
-                                 $format2 = ('g:i A');
+                    <?php 
+                    $format = ('F d, Y');
+                    $format2 = ('g:i A');
+                        $current_time = strtotime(date('Y-m-d H:i:s')); 
+                        $end_event = strtotime($event_info->end_date); 
+                        $start = date($format, strtotime($event_info->start_date));
+                        $time1 = date($format2, strtotime($event_info->start_date));
+                        $time2 = date($format2, strtotime($event_info->end_date));
 
-                                    $start = date($format, strtotime($event_info->start_date));
-                                    $time1 = date($format2, strtotime($event_info->start_date));
-                                    $time2 = date($format2, strtotime($event_info->end_date));
-
-                                    
-                                    $end = date($format, strtotime($event_info->end_date));
-                                ?>
-                                <div class="cus-date">{{$start}} (
-                                    {{$time1}} to {{$time2}} ) </div>
-                                <!-- <div class="lctn-dt1"><i class="fas fa-map-marker-alt"></i> India</div> -->
-                            </div>	
-                            <div class="check-img check-img-right">
-                                <img src="{!! asset('master/images/TICKET-GRIPE-1st-logo.png') !!}" style="float: right;height: 67px;width: 100%;" alt="">
-                            </div>								
+                        $end = date($format, strtotime($event_info->end_date));
+                    if ($current_time > $end_event) { ?>
+                        <div class="alert alert-danger alert-dismissible text-center display-15" style="float: right;padding-right: 20px;width: 100%;" role="alert">
+                            <h4 style="display: inline-block;"> Ticket has expired !</h4><br>
                         </div>
-                        <div class="congrats">
-                            <div class="cus-background">
-                                <table class="" style="width: 70%;">
+
+                    <?php }else{ ?>
+                    <div id="DomPrint" class="confirm-order" style="height: 490px;width: 890px;">
+                        <div style="height: 490px;width: 890px;">
+                            <div class="checkout-dt1 cus-header" style="background:#EBEBEB;position: relative;border-top-left-radius: 25px;border-top-right-radius: 25px;padding: 8px 8px;width: 100%;display: flex;float: left;">
+                                <div class="check-img" style="width: 300px;">
+                                    @if($event_info->event_logo == null)
+                                    <img src="{!! asset('master/images/TICKET-GRIPE-1st-logo.png') !!}" style="float: right;width: 100%;" alt="">
+                                    @else
+                                    <img src="{!! asset($event_info->event_logo) !!}" style="float: left;
+                                    width: 100%;margin-left: 6px;" alt="">
+                                    @endif
+                                </div>
+                                <div class="cus-title" style="text-align: center;width: 100%;">
+                                    <h1 style="color:#223F69;font-weight: bold;margin-bottom: 0px !important;font-size: 27px;">{{$event_info->title}}</h1>
+                                    <!-- <div class="ctgory1">Club</div> -->
+                                    <div class="cus-date" style="color:#223F69;font-weight: 500;margin: 0;font-size: 14px;">{{$start}} (
+                                        {{$time1}} to {{$time2}} ) </div>
+                                    <!-- <div class="lctn-dt1"><i class="fas fa-map-marker-alt"></i> India</div> -->
+                                </div>	
+                                <div class="check-img check-img-right" style="width: 300px;">
+                                    <img src="{!! asset('master/images/TICKET-GRIPE-1st-logo.png') !!}" style="float: right;width: 100%;" alt="">
+                                </div>								
+                            </div>
+                        
+                        <div class="congrats" style="text-align: center;float: left;width: 100%;text-align: center;padding: 30px;background:#fff;height: 300px;">
+                            <div class="cus-background" style="background-image: url(/master/images/map.png);background-repeat: no-repeat;background-size: contain;background-position: center;">
+                                <table class="" style="width: 63%;">
                                     <thead style="display: none;">
                                         <th></th>
                                         <th></th>
                                     </thead>
-                                    <tbody class="ticket-table">
+                                    <tbody class="ticket-table" style="text-transform: uppercase;">
                                         @foreach($buyer_info as $user_info)
-                                        <tr>
-                                            <td class="names">{{$user_info->question_title}} &nbsp;<span style="text-align: right;">:</span></td>
-                                            <td class="names-names">&nbsp; &nbsp; &nbsp; {{$user_info->question_ans}}</td>
+                                        <tr style="line-height: 39px;">
+                                            <td class="names" style="color:#65808E;text-align: left;width: 27%;font-size: 17px;">{{$user_info->question_title}} &nbsp;<span style="text-align: right;">:</span></td>
+                                            <td class="names-names" style="color:#607D89;font-weight: bold;text-align:left;ont-size: 17px;">&nbsp; &nbsp; &nbsp; {{$user_info->question_ans}}</td>
                                         </tr>
                                         @endforeach
                                         <!-- <tr>
                                             <td class="names">Company &nbsp;<span style="text-align: right;">:</span></td>
                                             <td class="names-names">&nbsp; &nbsp; &nbsp; abc limited</td>
                                         </tr> -->
-                                        <tr>
-                                            <td class="names">order id &nbsp;<span style="text-align: right;">:</span></td>
-                                            <td class="names-names">&nbsp; &nbsp; &nbsp; TGRIPE-{{$random_number}}</td>
+                                        <tr style="line-height: 39px;">
+                                            <td class="names" style="color:#65808E;text-align: left;width: 27%;font-size: 17px;">Ticket Type &nbsp;<span style="text-align: right;">:</span></td>
+                                            <td class="names-names" style="color:#607D89;font-weight: bold;text-align:left;ont-size: 17px;">&nbsp; &nbsp; &nbsp; {{$ticket_type->ticket_type}}</td>
+                                        </tr>
+                                        <tr style="line-height: 39px;">
+                                            <td class="names" style="color:#65808E;text-align: left;width: 27%;font-size: 17px;">ticket id &nbsp;<span style="text-align: right;">:</span></td>
+                                            <td class="names-names" style="color:#607D89;font-weight: bold;text-align:left;ont-size: 17px;">&nbsp; &nbsp; &nbsp; TG - {{$random_number}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <div class="qr-code">
-                                    <img src="{!! asset('master/images/qr_code_PNG6.png') !!}" alt="">
-                                    <span class="ticket-code">TGRIPE-{{$random_number}}</span>
-                                    <span style="width: 175px;margin-top: -19px;" class="sponsor-logo-name">EVENT SPONSOR</span>
-                                    <div class="sponsor-logo">
+                                <div class="qr-code" style="width: 25%;float: right;margin-top: -195px;right: 0;">
+                                    <img src="{!! asset('qr_codes/TG-') !!}{{$random_number}}.png" alt="" style="width: 100px;">
+                                    <span class="ticket-code" style="float: right;margin-top: 12px;font-weight: 400;line-height: 24px;color:#3B3B3B !important;font-size: 14px !important;margin-left: 61px;margin-top: -3px !important;float: left !important;margin-bottom: 20px;">TG - {{$random_number}}</span>
+                                    @if(count($sponsor_info))
+                                    <span style="width: 175px;margin-top: -19px;float: right;background:#fff;color:#3A3A3A !important;font-weight: 600 !important;padding: 0;font-size: 16px !important;margin-right: 21px;" class="sponsor-logo-name">EVENT SPONSOR</span>
+                                    @endif
+                                    <div class="" style="width: 204px;">
                                         @foreach($sponsor_info as $sponsor_logo)
-                                        <img src="{!! asset($sponsor_logo->sponser_logo) !!}" alt="">
+                                        <img src="{!! asset($sponsor_logo->sponser_logo) !!}" alt="" style="width: 100px;">
                                         @endforeach
                                     </div>
                                 </div>
                                 <!-- <p>Scan OR Code at the event place.</p> -->
                                 <!-- <img src="images/event-view/qr.svg" alt=""> -->
-                                <p class="sms">event address : {{$event_info->address}}, {{$event_info->city}}, {{$event_info->state}} - {{$event_info->zip}}, {{$event_info->country}}</p>
+                                <p class="sms" style="font-size: 14px;color:#fff;font-weight: 400;line-height: 24px;margin-top: 17px !important;background:#607D8B;border-radius: 11px;padding: 5px 10px;width: 77%;text-transform: uppercase;">event address : {{$event_info->address}}, {{$event_info->city}}, {{$event_info->state}} - {{$event_info->zip}}, {{$event_info->country}}</p>
                             </div>
                         </div>
-                        <div class="checkout-dt1 cus-bottom">
-                            <p class="">Note : You are required to show your ticket ( Printed or Digital ) to enter</p>	
-                            <?php  $format = ('M d, Y g:i A');
+                        <div class="checkout-dt1 cus-bottom" style="background-image: url(/master/images/bottom-part-design.png);background-repeat: no-repeat;background-size: cover;background-position: center;height: 47px;border-bottom-left-radius: 25px;border-bottom-right-radius: 25px;padding: 8px 8px;width: 100%;display: flex;float: left;">
+                            <p style="color:#fff;font-size: 13px;padding: 0px 25px;font-weight: bold;">Note : You are required to show your ticket ( Printed or Digital ) to enter</p>	
+                            <?php  $format = ('M d, Y h:i A');
 
                                 $datea = date($format, strtotime($buyer_info[0]->created_at));
                             ?>
-                            <span>Booking : {{$datea}}</span>
+                            <span style="color:#fff;font-size: 13px;padding: 2px 25px;position: relative;left: 106px;top: 3px;font-weight: bold;">Booking : {{$datea}}</span>
                         </div>	
-                        <p class="copyright-ticket">Ticketgripe.com a brand of Innovadeus Pvt Ltd</p>														
+                        <p class="copyright-ticket" style="font-size: 12px;text-align: right;margin-top: 22px;margin-left: 495px;transform: rotate(270deg);color:#616161;width: 300px;position: relative;
+
+top: 29px;"><strong>Ticketgripe.com</strong> a brand of Innovadeus Pvt Ltd</p>														
+                    </div>
                     </div>	
-                    <!-- <div class="row">
-                        <div class="offset-md-1 col-md-4">
-                            <button onclick="printDiv('DomPrint')" value="print a div!" class="btn btn-submit_form invoice_print">Print Ticket</button>
+                                <?php } ?>
+                    <div class="row" style="width: 100%;">
+                        <div class="offset-4 col-6">
+                            <a href="" class="add-event" onclick="printDiv('DomPrint')" value="print a div!">Print Ticket</a>
+                            <!-- <button onclick="printDiv('DomPrint')" value="print a div!" class="btn btn-submit_form invoice_print">Print Ticket</button> -->
                         </div>
-                    </div>														 -->
+                    </div>														
             </div>					
         </div>
     </div>
@@ -126,13 +148,10 @@
 <script>
     function printDiv(divName) {
         var printContents = document.getElementById(divName).innerHTML;
-        var originalContents = document.body.innerHTML;
-
-        document.body.innerHTML = printContents;
-
-        window.print();
-
-        document.body.innerHTML = originalContents;
+        w=window.open();
+        w.document.write(printContents);
+        w.print();
+        w.close();
     }
 </script>
 <!-- Scripts js -->

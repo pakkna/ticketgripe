@@ -72,7 +72,11 @@
                                         <div class="event-main-image">
                                             <div class="main-photo">
                                                 <div class="photo-overlay"></div>
+                                                @if($single_event->image_path == null)
+                                                <img src="{!! asset('master/images/demo.jpg') !!}" alt="">
+                                                @else
                                                 <img src="{{$single_event->image_path}}" alt="">
+                                                @endif
                                             </div>														
                                         </div>
                                         <div class="event-city-dt">

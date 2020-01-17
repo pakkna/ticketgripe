@@ -84,7 +84,7 @@
                                 <div class="dropdown-menu account-dropdown dropdown-menu-right">
                                     <!-- <a class="link-item" href="my_dashboard_activity.html">Profile</a> -->
                                     <a class="link-item" href="{{route('MyEvents')}}">Events</a>
-                                    <a class="link-item" href="invite.html">Invite</a>
+                                    <!-- <a class="link-item" href="invite.html">Invite</a> -->
                                     <a class="link-item" href="{{route('UserSetting')}}">Setting</a>
                                     <a class="link-item" href="{{route('Withdraw')}}">Withdraw</a>
                                     <a class="link-item" href="javascript:void(0)" onclick="event.preventDefault();
@@ -115,16 +115,23 @@
 <!-- Body Start -->
 <main class="dashboard-mp">
     <div class="dash-todo-thumbnail-area1">
-        <!-- <img class="todo-thumb1 dash-bg-image1 dash-bg-overlay" src="{!! asset($single_event->image_path)!!}"></img> -->
-        <img class="todo-thumb1 dash-bg-image1 dash-bg-overlay custom-bg-event2" src="{!! asset('master/images/event_banner.png')!!}"></img>
+        @if($single_event->image_path != null)
         <img class="todo-thumb1 dash-bg-image1 dash-bg-overlay custom-bg-event" src="{!! asset($single_event->image_path)!!}"></img>
+        @endif
+        <img class="todo-thumb1 dash-bg-image1 dash-bg-overlay custom-bg-event2" src="{!! asset('master/images/event_banner.png')!!}"></img>
+        
+        
         <div class="dash-todo-header1">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
                         <div class="my-profile-dash">
                             <div class="my-dp-dash">
+                                @if($single_event->event_logo == null)
                                 <img src="{!! asset('master/images/event-logo.png') !!}" alt="prifile pic">
+                                @else
+                                <img src="{!! asset($single_event->event_logo) !!}" alt="prifile pic">
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -141,8 +148,8 @@
                             <h3>{{ $single_event->title }}</h3>
                             <span>Created at {{date("jS F Y", strtotime($single_event->created_at))}} &nbsp;
                             <?php 
-                            if (Auth::user()->country != null) { ?>
-                                <i class="fas fa-map-marker-alt"></i> <?php echo Auth::user()->country; ?>
+                            if ($single_event->country != null) { ?>
+                                <i class="fas fa-map-marker-alt"></i> <?php echo $single_event->country; ?>
                             <?php }else{ echo '';} ?>
                             </span>
                         </div>
@@ -181,16 +188,16 @@
                             </div>
                         </li> -->
                     <!-- </ul> -->
-                    <ul class="event-buttons">
+                    <ul class="event-buttons but-btn-ticket">
                         <!-- <li>
                             <button class="event-btn-1"><i class="fa fa-heart ml-2" > </i> 250+ </button>
                         </li> -->
-                        <li>
+                        <!-- <li>
                             <button class="event-btn-1">{{$single_event->seat_number}} Seats</button>
-                        </li>
+                        </li> -->
                         @if(Request::segment(1) == 'event-details' && count($single_event_tickets) )
                         <li>
-                            <a href="{{route('Buyticket', ['event_id' =>$single_event->id])}}"><button class="event-btn-1">Buy Ticket</button></a> 
+                            <a class="add-event" href="{{route('Buyticket', ['event_id' =>$single_event->id])}}">Buy Ticket</a> 
                         </li>
                         @endif
                     </ul>

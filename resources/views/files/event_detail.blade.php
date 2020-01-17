@@ -150,9 +150,10 @@
         @include('layouts.master_layout.footer_events')					
         
         <script>
-            <?php  $format = ('M d,Y g:i:s');
+            <?php  $format = ('M d,Y H:i:s');
 
                 $datea = date($format, strtotime($single_event->end_date));
+            //    echo $datea;
             ?>
             // Timer Script
             var count = new Date('{{$datea}}').getTime();

@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Http\FormRequest;
+
 class EditEventRequest extends FormRequest
 {
     /**
@@ -27,8 +29,9 @@ class EditEventRequest extends FormRequest
             "event_title" => "required|string",
             "status" => "required|string",
             "event_flyer" => "nullable|mimes:jpeg,bmp,png|dimensions:min_width=925,min_height=467",
-            "event_logo" => "nullable|mimes:jpeg,bmp,png|dimensions:min_width=150,min_height=150",
-            "custom_link" => "nullable|unique:events,custom_link,".$this->get('id'),
+            "event_logo" => "nullable|mimes:jpeg,bmp,png|dimensions:min_width=250,min_height=100",
+            "custom_link" => "required|string",
+            "custom_link" => Rule::unique('events')->ignore($this->custom_link, 'custom_link'),
             "category" => "required",
             "country" => "required",
             "city" => "required",

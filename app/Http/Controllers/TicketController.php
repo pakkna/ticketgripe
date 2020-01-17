@@ -10,10 +10,16 @@ use Auth;
 
 class TicketController extends Controller
 {
+    public function __construct()
+    {
+        date_default_timezone_set('Asia/Dhaka');
+    }
+
     public function all_ticket(Request $request){
 
         $dataSet = DB::table("tickets")
-            ->where('user_id', Auth::id())
+            ->select('tickets.*', DB::raw('(SELECT IFNULL(sum(sold_tickets),0) as total_sold_count FROM `orders` WHERE orders.ticket_id=tickets.id)  as total_sold_count'))
+            //->where('user_id', Auth::id())
             ->where('event_id', $request->event_id)
             ->get();
         return Datatables::of($dataSet)->make(true);
@@ -27,8 +33,8 @@ class TicketController extends Controller
             'ticket_price' => $request->ticket_price,
             'quantity' => $request->quantity,
             'selling_currency' => $request->currency,
-            'selling_date' => datetime_validate($request->selling_date),
-            'untill_date' => datetime_validate($request->untill_date),
+            'selling_date' => datetime_validate_24($request->selling_date),
+            'untill_date' => datetime_validate_24($request->untill_date),
             'show_sell_untill_date' => isset($request->show_sell_untill_date) ? 1 : 0,
             'hide_ticket' => isset($request->hide_ticket) ? 1 : 0,
             'fees_consume' =>$request->fees_consume,
@@ -47,7 +53,7 @@ class TicketController extends Controller
 
             for ($i=0; $i < 3; $i++) { 
                 if ($i == 0) {
-                    $title = 'Full name';
+                    $title = 'Name';
                     $type = 'Text';
                 }elseif ($i == 1) {
                     $title = 'Email';
@@ -96,8 +102,8 @@ class TicketController extends Controller
             'ticket_price' => $request->ticket_price,
             'quantity' => $request->quantity,
             'selling_currency' => $request->currency,
-            'selling_date' => datetime_validate($request->selling_date),
-            'untill_date' => datetime_validate($request->untill_date),
+            'selling_date' => datetime_validate_24($request->selling_date),
+            'untill_date' => datetime_validate_24($request->untill_date),
             'show_sell_untill_date' => isset($request->show_sell_untill_date) ? 1 : 0,
             'hide_ticket' => isset($request->hide_ticket) ? 1 : 0,
             'fees_consume' =>$request->fees_consume,
@@ -133,5 +139,17 @@ class TicketController extends Controller
     public function buy_ticket()
     {
         return view('files.ticket');
+    }
+
+    public function ticket_detail($event_id,$ticket_id)
+    {
+
+        $event_info = DB::table('events')->select('title','start_date','end_date','address','city','state','zip','country','event_logo')->where('id', $event_id)->where('user_id', Auth::user()->id)->first();
+
+        $sponsor_info = DB::table('sponser')->select('sponser_logo')->where('user_id', Auth::user()->id)->where('event_id', $event_id)->get();
+
+        $ticket_type = DB::table('tickets')->select('ticket_type')->where('user_id', Auth::user()->id)->where('id', $ticket_id)->first();
+
+        return view('files.ticket_demo', compact('event_info', 'sponsor_info', 'ticket_type'));
     }
 }
