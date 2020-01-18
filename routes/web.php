@@ -60,6 +60,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get("event-details/{event_id}","EventControler@event_detail")->name("EventDetails");
     Route::get("demo-ticket/{event_id}/{ticket_id}","TicketController@ticket_detail");
     Route::get("qrcode","OrderController@qr_generate");
+    Route::get("event-setup/{id}/overview}","EventControler@event_overview_admin")->name('event-overview-admin');
 });
 
 Route::post("buy-ticket","PaymentController@ticket_generate")->name("ticket-generate");

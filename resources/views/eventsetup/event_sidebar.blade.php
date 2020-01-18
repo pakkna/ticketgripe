@@ -1,4 +1,5 @@
 @include('layouts.master_layout.header_event')
+
     <div class="dash-tab-links">
         <div class="container" style="max-width: 1368px !important;">
             <div class="setting-page mb-20">

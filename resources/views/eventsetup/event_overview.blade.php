@@ -51,18 +51,18 @@ clear: both;
 
 .card .fa {font-size:50px;}
 </style>
-<!-- <div class="row mt-3">
+<div class="row mt-3">
     <div class="column">
         <div class="card">
         <p><i class="fa fa-money"></i></p>
-        <h3>0</h3>
+        <h3>{{$total_rev_dash}}</h3>
         <p>Revenue</p>
         </div>
     </div>
     <div class="column">
         <div class="card">
         <p><i class="fa fa-shopping-basket"></i></p>
-        <h3>0</h3>
+        <h3>{{$total_ticket_sold_dash}}</h3>
         <p>Sold Out Iteams</p>
         </div>
     </div>
@@ -70,7 +70,7 @@ clear: both;
     <div class="column">
         <div class="card">
         <p><i class="fa fa-recycle"></i></p>
-        <h3>0</h3>
+        <h3>{{$event_details->seat_number - $total_ticket_sold_dash}}</h3>
         <p>Ticket Remaining</p>
         </div>
     </div>
@@ -78,7 +78,7 @@ clear: both;
     <div class="column">
         <div class="card">
         <p><i class='fas fa-chair' style='font-size:48px'></i></p>
-        <h3>100+</h3>
+        <h3>{{$event_details->seat_number}}</h3>
         <p>Events Seats</p>
         </div>
     </div>
@@ -88,14 +88,14 @@ clear: both;
     <div class="column">
         <div class="card">
         <p><i class="fa fa-users"></i></p>
-        <h3>11+</h3>
+        <h3>{{$total_attendee_dash}}</h3>
         <p>Attende</p>
         </div>
     </div>
     <div class="column">
         <div class="card">
         <p><i class="fa fa-handshake-o"></i></p>
-        <h3>3</h3>
+        <h3>{{$total_sponsor_dash}}</h3>
         <p>Sponsers</p>
         </div>
     </div>
@@ -103,16 +103,16 @@ clear: both;
     <div class="column">
         <div class="card">
         <p><i class="fa fa-newspaper-o"></i></p>
-        <h3>2</h3>
+        <h3>{{$total_ticket_dash}}</h3>
         <p>Create Tickets</p>
         </div>
     </div>
     
-    <div class="column">
+    <!-- <div class="column">
         <div class="card">
         <p><i class="fa fa-heart"></i></p>
         <h3>100+</h3>
         <p>Event Interested</p>
         </div>
-    </div>
-</div> -->
+    </div> -->
+</div>

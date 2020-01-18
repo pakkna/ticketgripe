@@ -133,11 +133,22 @@
                                                     </div>
                                                 </li>
                                                 <li>
+            <?php 
+            $total_collection_my = 0;
+            $total_sold_my = 0;
+
+            $total_ticket_details_admin = DB::table('orders')->select('sold_amount','sold_tickets')->where('event_id', $single_event->id)->get();
+
+            foreach ($total_ticket_details_admin as $group855) {
+                $total_collection_my += $group855->sold_amount;
+                $total_sold_my += $group855->sold_tickets;
+            }
+            ?>
                                                     <div class="it-items">
                                                         <i class="fas fa-check" style="color:#a7a8aa;"></i>
                                                         <div class="list-text-dt">
                                                             <span>Sold Out</span>
-                                                            <ins>0</ins>
+                                                            <ins>{{$total_sold_my}}</ins>
                                                         </div>
                                                     </div>
                                                 </li>
@@ -146,7 +157,7 @@
                                                         <i class="fas fa-money-bill-wave" style="color:#a7a8aa;"></i>
                                                         <div class="list-text-dt">
                                                             <span>Collection</span>
-                                                            <ins>0</ins>
+                                                            <ins>{{$total_collection_my}} BDT</ins>
                                                         </div>
                                                     </div>
                                                 </li>															

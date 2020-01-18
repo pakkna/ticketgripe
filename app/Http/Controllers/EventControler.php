@@ -17,16 +17,22 @@ class EventControler extends Controller
     date_default_timezone_set('Asia/Dhaka');
    }
     public function show_my_events(){
-
+        $total_credit_admin = 0;
         $event_details = DB::table('events')
-        // ->leftjoin('tickets','events.id','=','tickets.event_id')
-        // ->select('events.id','title','start_date','end_date','event_status','city','seat_number','image_path','seat_number','custom_link','ticket_price','quantity','selling_currency')
         ->where('events.user_id', Auth::user()->id)
         ->orderBy('id', 'ASC')
         //need collection and soldout form order table
         ->get();
 
-        return View('files.my_events',compact('event_details'));
+        foreach ($event_details as $value) {
+            
+            $total_credit = DB::table('orders')->select('sold_amount')->where('event_id', $value->id)->get();
+            foreach ($total_credit as $group144) {
+                $total_credit_admin += $group144->sold_amount;
+            }
+        }
+
+        return View('files.my_events',compact('event_details','total_credit_admin'));
     }
 
     public function show_event_form(){
@@ -171,7 +177,9 @@ class EventControler extends Controller
     }
 
     public function event_setup_view($id){
-
+        $total_ticket_sold_dash = 0;
+        $total_rev_dash = 0;
+        $total_attendee_dash = 0;
         try {
             $event_details = DB::table('events')
             ->leftjoin('tickets','events.id','=','tickets.event_id')
@@ -194,7 +202,17 @@ class EventControler extends Controller
             if ($event_details == null) {
                 return redirect('my-events');
             }
-            return view('eventsetup.event_sidebar',compact('event_details','all_tickets','ticket_question'));
+            $total_sponsor_dash = DB::table('sponser')->select('id')->where('event_id', $id)->count();
+            $total_ticket_dash = DB::table('tickets')->select('id')->where('event_id', $id)->count();
+
+            $total_ticket_sold1 = DB::table('orders')->select('sold_amount','sold_tickets','attende_confirm')->where('event_id', $id)->get();
+            foreach ($total_ticket_sold1 as $group5) {
+                $total_rev_dash += $group5->sold_amount;
+                $total_ticket_sold_dash += $group5->sold_tickets;
+                $total_attendee_dash += $group5->attende_confirm;
+            }
+
+            return view('eventsetup.event_sidebar',compact('event_details','all_tickets','ticket_question','total_rev_dash','total_ticket_sold_dash','total_attendee_dash','total_sponsor_dash','total_ticket_dash'));
         } catch (\Throwable $th) {
             return redirect('my-events');
         }
@@ -272,5 +290,10 @@ class EventControler extends Controller
         } catch (\Exception $th) {
             return redirect('/');
         }
+    }
+
+    public function event_overview_admin($event_id)
+    {
+        return view('eventsetup.event_sidebar', compact('total_ticket_sold'));
     }
 }

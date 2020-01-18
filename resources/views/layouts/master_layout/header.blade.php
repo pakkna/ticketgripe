@@ -170,7 +170,7 @@
                         <li>
                             <div class="all-dis-evnt">
                                 <div class="dscun-txt">Credit</div>
-                                <div class="dscun-numbr">{{Auth::user()->balance == null ? 0 : Auth::user()->balance}}</div>
+                                <div class="dscun-numbr">{{$total_credit_admin}} BDT</div>
                             </div>
                         </li>
                     </ul>

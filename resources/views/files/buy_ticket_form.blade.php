@@ -17,6 +17,12 @@
                 <h4 style="display: inline-block;"> Event has expired !</h4><br>
             </div>
 
+            <?php } else if ($single_event->event_status == 'Cancel') {  ?>
+
+                <div class="alert alert-danger alert-dismissible text-center display-15" style="float: right;padding-right: 20px;" role="alert">
+                 <h4 style="display: inline-block;"> Event is on hold !</h4><br>
+                </div>
+
             <?php } else if ($current_time < $ticket_start) {  ?>
 
                 <div class="alert alert-danger alert-dismissible text-center display-15" style="float: right;padding-right: 20px;" role="alert">
