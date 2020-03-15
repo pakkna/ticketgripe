@@ -423,6 +423,10 @@ main {
 .errror-404 img {
     width: 100%;
 }
+
+div.dt-buttons{
+	top: 45px !important;
+}
 }
  
 /* Small devices (landscape phones, 576px and up) */

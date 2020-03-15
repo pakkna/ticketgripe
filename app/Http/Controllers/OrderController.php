@@ -4,14 +4,12 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\Traits\Email;
+use App\Mail\Ticket_Confirm_Mail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
-use App\Mail\SendMail;
-
-
 
 class OrderController extends Controller
 {
@@ -184,14 +182,17 @@ class OrderController extends Controller
     public function order_datatable_form(Request $request){
 
             $dataSet = DB::table("orders")
-            ->select('id','transaction_id','created_at','order_confirm_id','sold_tickets','attende_confirm')
+            ->select('id','transaction_id','created_at','order_confirm_id','sold_tickets','attende_confirm','ticket_id','status')
             ->where('orders.event_id', $request->event_id)
+            ->orderBy('created_at', 'ASC')
             ->get();
+
+            //$event_name = DB::table('events')->select('title')->where('id', $request->event_id)->first();
 
             $order_details=array();
 
             foreach($dataSet as $value){  
-                
+                $random_number = trim($value->order_confirm_id,"TG-");
                 $set=[
                     'id'=>$value->id,
                     'order_confirm_id'=>$value->order_confirm_id,
@@ -202,6 +203,10 @@ class OrderController extends Controller
                     'sold_tickets'=>$value->sold_tickets,
                     'order_date'=>$value->created_at,
                     'attende_confirm'=>$value->attende_confirm,
+                    'ticket_id'=>$value->ticket_id,
+                    'status'=>$value->status,
+                    'random_number'=>$random_number,
+                    //'event_title'=>$event_name->title,
                 ];
                 
                     array_push($order_details, $set);
@@ -276,6 +281,19 @@ class OrderController extends Controller
             echo false;
         }
     }
+    public function suspend_order_user(Request $request)
+    {
+        $data=[
+            "status" => $request->flag == 0 ? 'active' : 'suspend'
+        ];
+
+        $dataSet = DB::table('orders')->where('transaction_id', $request->tran_id)->update($data);
+        if($dataSet == true){
+            echo true;
+        }else{
+            echo false;
+        }
+    }
 
     public function attendee_datatable_form(Request $request){
 
@@ -283,6 +301,7 @@ class OrderController extends Controller
         ->select('id','transaction_id','created_at','order_confirm_id','sold_tickets','attende_confirm')
         ->where('orders.event_id', $request->event_id)
         ->where('orders.attende_confirm', 1)
+        ->orderBy('created_at', 'ASC')
         ->get();
     
         $order_details=array();
@@ -308,12 +327,54 @@ class OrderController extends Controller
 
     public function qr_generate()
     {
-        $data = array(
-            'email' => 'sifat.ezzyr@gmail.com',
-            'subject' => 'testing',
-            'message' => 'testing message',
-        );
-
-        Mail::to('sifat.ezzyr@gmail.com')->send(new SendMail($data));
+        // $data = array(
+        //     "email" => 'sifat.ezzyr@gmail.com',
+        //     "subject" => "Ticket Purchase Confirmation",
+        //     "event_title" => 'title',
+        //     "tran_id" => 'tran_id',
+        //     "event_id" => 'event_id',
+        //     "ticket_id" => 'ticket_id',
+        //     "random_number" => 'random_number',
+        // );
+        
+        // Mail::to($data['email'])->send(new Ticket_Confirm_Mail($data));
+        // try {
+        //     $file = public_path('qr_codes/TG-005049.png');
+        //     $code_save = \QRCode::text('TG-005049')->setOutfile($file)->png();
+        // } catch (\Throwable $th) {
+        //     echo $th->getMessage();
+        // }
+        $token = DB::table('password_resets')->select('token')->where('email', 'syedsifat02@gmail.com')->first();
+            echo '<pre>'; 
+            echo '======================<br>';
+            print_r($token);
+            echo '<br>======================';
+            exit();
     }
+
+    public function demo_example()
+    {
+
+        $total_credit_admin = 0;
+        $event_details = DB::table('events')
+        ->where('events.user_id', Auth::user()->id)
+        ->orderBy('id', 'ASC')
+        //need collection and soldout form order table
+        ->get();
+
+        foreach ($event_details as $value) {
+            
+            $total_credit = DB::table('orders')->select('sold_amount')->where('event_id', $value->id)->get();
+            foreach ($total_credit as $group144) {
+                $total_credit_admin += $group144->sold_amount;
+            }
+        }
+        $event_details = (object)array(
+            'event_logo' => null,
+            'title' => 'sdsdsds',
+            'seat_number' => '00',
+        );
+        return view('files.demo_exam', compact('total_credit_admin', 'event_details'));
+    }
+
 }

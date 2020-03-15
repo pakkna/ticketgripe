@@ -25,8 +25,16 @@
     </head>
 
 <body oncontextmenu="return false;">
+
+<style>
+@media(max-width:1000px){
+    .discussion-mp{
+        width: 1000px !important;
+    }
+}
+</style>
 <!-- Body Start -->
-<main class="discussion-mp" style="background: #8C8585D4;height: 800px;">	
+<main class="discussion-mp" style="background: #8C8585D4;height: 800px;width: 100%;">	
     <div class="main-section">
         <div class="container">
             <div class="row justify-content-md-center cus-width">
@@ -36,9 +44,11 @@
                     <?php 
                     $format = ('F d, Y');
                     $format2 = ('g:i A');
+                    $format3 = ('F d, Y g:i A');
                         $current_time = strtotime(date('Y-m-d H:i:s')); 
                         $end_event = strtotime($event_info->end_date); 
-                        $start = date($format, strtotime($event_info->start_date));
+                        $start = date($format3, strtotime($event_info->start_date));
+                        $endtime = date($format3, strtotime($event_info->end_date));
                         $time1 = date($format2, strtotime($event_info->start_date));
                         $time2 = date($format2, strtotime($event_info->end_date));
 
@@ -63,8 +73,7 @@
                                 <div class="cus-title" style="text-align: center;width: 100%;">
                                     <h1 style="color:#223F69;font-weight: bold;margin-bottom: 0px !important;font-size: 27px;">{{$event_info->title}}</h1>
                                     <!-- <div class="ctgory1">Club</div> -->
-                                    <div class="cus-date" style="color:#223F69;font-weight: 500;margin: 0;font-size: 14px;">{{$start}} (
-                                        {{$time1}} to {{$time2}} ) </div>
+                                    <div class="cus-date" style="color:#223F69;font-weight: 500;margin: 0;font-size: 14px;">{{$start}} to {{$endtime}} </div>
                                     <!-- <div class="lctn-dt1"><i class="fas fa-map-marker-alt"></i> India</div> -->
                                 </div>	
                                 <div class="check-img check-img-right" style="width: 300px;">
@@ -102,7 +111,7 @@
                                 </table>
                                 <div class="qr-code" style="width: 25%;float: right;margin-top: -195px;right: 0;">
                                     <img src="{!! asset('qr_codes/TG-') !!}{{$random_number}}.png" alt="" style="width: 100px;">
-                                    <span class="ticket-code" style="float: right;margin-top: 12px;font-weight: 400;line-height: 24px;color:#3B3B3B !important;font-size: 14px !important;margin-left: 61px;margin-top: -3px !important;float: left !important;margin-bottom: 20px;">TG - {{$random_number}}</span>
+                                    <span class="ticket-code" style="float: right;margin-top: 12px;font-weight: 400;line-height: 24px;color:#3B3B3B !important;font-size: 14px !important;margin-left: 68px;margin-top: -3px !important;float: left !important;margin-bottom: 20px;">TG - {{$random_number}}</span>
                                     @if(count($sponsor_info))
                                     <span style="width: 175px;margin-top: -19px;float: right;background:#fff;color:#3A3A3A !important;font-weight: 600 !important;padding: 0;font-size: 16px !important;margin-right: 21px;" class="sponsor-logo-name">EVENT SPONSOR</span>
                                     @endif
@@ -119,15 +128,15 @@
                         </div>
                         <div class="checkout-dt1 cus-bottom" style="background-image: url(/master/images/bottom-part-design.png);background-repeat: no-repeat;background-size: cover;background-position: center;height: 47px;border-bottom-left-radius: 25px;border-bottom-right-radius: 25px;padding: 8px 8px;width: 100%;display: flex;float: left;">
                             <p style="color:#fff;font-size: 13px;padding: 0px 25px;font-weight: bold;">Note : You are required to show your ticket ( Printed or Digital ) to enter</p>	
-                            <?php  $format = ('M d, Y h:i A');
+                            <?php  $format = ('M d, Y h:i:s A');
 
                                 $datea = date($format, strtotime($buyer_info[0]->created_at));
                             ?>
-                            <span style="color:#fff;font-size: 13px;padding: 2px 25px;position: relative;left: 106px;top: 3px;font-weight: bold;">Booking : {{$datea}}</span>
+                            <span style="color:#fff;font-size: 13px;padding: 2px 25px;position: relative;left: 49px;top: 3px;font-weight: bold;">Booking Date : {{$datea}}</span>
                         </div>	
                         <p class="copyright-ticket" style="font-size: 12px;text-align: right;margin-top: 22px;margin-left: 495px;transform: rotate(270deg);color:#616161;width: 300px;position: relative;
 
-top: 29px;"><strong>Ticketgripe.com</strong> a brand of Innovadeus Pvt Ltd</p>														
+top: 17px;"><strong>Ticketgripe.com</strong> a brand of Innovadeus Pvt. Ltd.</p>														
                     </div>
                     </div>	
                                 <?php } ?>

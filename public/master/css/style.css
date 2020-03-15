@@ -60,7 +60,7 @@ body {
 	margin:0 auto;
 }
 
-ol, ul {
+ul {
 	list-style: none;
 }
 a:hover {
@@ -584,7 +584,7 @@ header {
 }
 
 .mt1-5 {
-	margin-top: 59px !important;
+	margin-top: 73px !important;
 }
 
 .page-links {
@@ -7972,4 +7972,59 @@ color:
 }
 .but-btn-ticket{
     margin-top: 11px;
+}
+.tooltip2 {
+    position: relative;
+    display: inline-block;
+}
+.copy-sms {
+    margin-right: 10px;
+    padding: 2px 8px;
+    border: 1px solid
+    #eee;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: sans-serif;
+    font-weight: bold;
+    box-sizing: border-box;
+    background:
+    #007BFF;
+    color:
+    #fff;
+}
+.tooltip2 .tooltiptext {
+    visibility: hidden;
+    width: 109px;
+    background-color: 
+#555;
+color:
+    #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 114%;
+    left: 63%;
+    margin-left: -75px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 11px;
+}
+.tooltip2 .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: 
+#555 transparent transparent
+    transparent;
+}
+.tooltip2:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
 }

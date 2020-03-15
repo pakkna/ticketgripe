@@ -6,7 +6,7 @@ $(function() {
         a = $(this).closest("tr");
         var b = a.prev("tr");
         0 !== b.length && a.insertBefore(b);
-        reIndexOptionNames();
+        reIndexOptionNames2();
         return !1
     });
     $(document).on("click", ".option-down", function(a) {
@@ -15,20 +15,20 @@ $(function() {
         a = $(this).closest("tr");
         var b = a.next("tr");
         0 !== b.length && a.insertAfter(b);
-        reIndexOptionNames();
+        reIndexOptionNames2();
         return !1
     });
     $(document).on("click", ".option-delete", function(a) {
         $(this).closest("tr").remove();
-        reIndexOptionNames();
+        reIndexOptionNames2();
         return !1
     })
 });
 
-function reIndexOptionNames() {
+function reIndexOptionNames2() {
     var a = $("#availableOptionTable2 tr");
-    // console.debug(a);
-    // console.debug(a.size());
+    console.debug(a);
+    console.debug(a.size());
     a.each(function(a) {
         // console.log("Index: " + a);
         $(this).find("input[name*='id']").attr("name", "choices[" + a + "].id");
@@ -46,5 +46,5 @@ function addOption2() {
         e = $("<button/>").addClass("btn btn-xs btn-danger option-delete").append($("<i/>").addClass("fas fa-trash")),
         c = $("<td/>").append(c).append("&nbsp;").append(d).append("&nbsp;").append(e);
     $("#availableOptionTable2").append(a.append(b).append(c));
-    reIndexOptionNames()
+    reIndexOptionNames2()
 };

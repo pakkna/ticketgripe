@@ -14,7 +14,7 @@
                             <span class="d-inline-block pr-2">
                                 <i class="lnr-apartment opacity-6"></i>
                             </span>
-                            <span class="d-inline-block">Cox's Bazer Police Portal</span>
+                            <span class="d-inline-block">TIcket Gripe Portal</span>
                         </div>
                         <div class="page-title-subheading opacity-10">
                             <nav class="" aria-label="breadcrumb">
@@ -50,13 +50,13 @@
                 <div class="card-shadow-primary mb-3 widget-chart widget-chart2 text-left card">
                     <div class="widget-chat-wrapper-outer">
                         <div class="widget-chart-content">
-                            <h6 class="widget-subheading">Verified Domain</h6>
+                            <h6 class="widget-subheading">Total Events</h6>
                             <div class="widget-chart-flex">
                                 <div class="widget-numbers mb-0 w-100">
                                     <div class="widget-chart-flex">
                                         <div class="fsize-4">
                                             <small class="opacity-5"><i class="fa fa-calculator"> </i></small>
-                                            10
+                                            {{$total_event}}
                                         </div>
                                     </div>
                                 </div>
@@ -69,34 +69,52 @@
                 <div class="card-shadow-primary mb-3 widget-chart widget-chart2 text-left card">
                     <div class="widget-chat-wrapper-outer">
                         <div class="widget-chart-content">
-                            <h6 class="widget-subheading">Total Sold Out</h6>
-                            <div class="widget-chart-flex">
-                                <div class="widget-numbers mb-0 w-100">
-                                    <div class="widget-chart-flex">
-                                        <div class="fsize-4">
-                                            <small class="opacity-5"><i class="fa fa-calculator"> </i></small>
-                                            10 TK
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="card-shadow-primary mb-3 widget-chart widget-chart2 text-left card">
-                    <div class="widget-chat-wrapper-outer">
-                        <div class="widget-chart-content">
-                            <h6 class="widget-subheading">Bid Responsed</h6>
+                            <h6 class="widget-subheading">Total Users</h6>
                             <div class="widget-chart-flex">
                                 <div class="widget-numbers mb-0 w-100">
                                     <div class="widget-chart-flex">
                                         <div class="fsize-4 text-danger">
                                             <small class="opacity-5 text-muted"><i class="fa fa-university"></i> </small>
-                                           10
+                                        {{$total_user}}
                                         </div>
-
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card-shadow-primary mb-3 widget-chart widget-chart2 text-left card">
+                    <div class="widget-chat-wrapper-outer">
+                        <div class="widget-chart-content">
+                            <h6 class="widget-subheading">Total Income </h6>
+                            <div class="widget-chart-flex">
+                                <div class="widget-numbers mb-0 w-100">
+                                    <div class="widget-chart-flex">
+                                        <div class="fsize-4">
+                                            <small class="opacity-5"><i class="fa fa-calculator"> </i></small>
+                                            {{round($total_income, 2)}} TK
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card-shadow-primary mb-3 widget-chart widget-chart2 text-left card">
+                    <div class="widget-chat-wrapper-outer">
+                        <div class="widget-chart-content">
+                            <h6 class="widget-subheading">Total Revenue</h6>
+                            <div class="widget-chart-flex">
+                                <div class="widget-numbers mb-0 ">
+                                    <div class="widget-chart-flex">
+                                        <div class="fsize-4">
+                                            <small class="opacity-5"><i class="fa fa-angle-down"></i> </small>
+                                            {{round($total_rev, 2)}} TK
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -108,57 +126,17 @@
                 <div class="card-shadow-primary mb-3 widget-chart widget-chart2 text-left card">
                     <div class="widget-chat-wrapper-outer">
                         <div class="widget-chart-content">
-                            <h6 class="widget-subheading"> Order Confirmed</h6>
+                            <h6 class="widget-subheading"> Total Registree</h6>
                             <div class="widget-chart-flex">
                                 <div class="widget-numbers mb-0 w-100">
                                     <div class="widget-chart-flex">
                                         <div class="fsize-4">
                                             <span class="text-success pr-2">
-                                                <i class="fa fa-angle-down"></i>
+                                                <i class="fa fa-address-card"></i>
                                             </span>
                                             <small class="opacity-5"></small>
-                                            10
+                                            {{$total_reg}}
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="card-shadow-primary mb-3 widget-chart widget-chart2 text-left card">
-                    <div class="widget-chat-wrapper-outer">
-                        <div class="widget-chart-content">
-                            <h6 class="widget-subheading">EPP Code Submitted</h6>
-                            <div class="widget-chart-flex">
-                                <div class="widget-numbers mb-0 ">
-                                    <div class="widget-chart-flex">
-                                        <div class="fsize-4">
-                                            <small class="opacity-5"><i class="fa fa-address-card"></i> </small>
-                                          10
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="card-shadow-primary mb-3 widget-chart widget-chart2 text-left card">
-                    <div class="widget-chat-wrapper-outer">
-                        <div class="widget-chart-content">
-                            <h6 class="widget-subheading">Domain Transferred</h6>
-                            <div class="widget-chart-flex">
-                                <div class="widget-numbers mb-0 ">
-                                    <div class="widget-chart-flex">
-                                        <div class="fsize-4">
-                                            <small class="opacity-5"><i class="fa fa-satellite"></i> </small>
-                                           10
-                                        </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -194,7 +172,7 @@
 
                     </thead>
 
-                     <tbody>
+                    <tbody>
                         
                     </tbody> 
                 </table>
@@ -215,102 +193,8 @@
     </div>
 
 </div>
-{{--
+
 <script src="{!! asset('js/sweetalert.min.js') !!}"></script>
-<script>
 
-    $.ajaxSetup({
-
-        headers: {
-
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-
-        }
-
-    });
-
-
-    function ajaxApprove(id, the, action,university) {
-
-        $.ajax({
-
-            url: 'approve-action',
-            type: 'post',
-            data: {
-                id: id,
-                university: university,
-                type: action
-            },
-            dataType: 'json',
-            success: function(response) {
-
-                if (response==1) {
-                    $(the).closest("tr").fadeOut(200, function() {
-                        $(this).remove();
-                    });
-                }
-                else if (response==2) {
-
-                    swal({
-                        title: university+" Already Approve !",
-                        text: "( You Want to Replace It ! )",
-                        icon: "warning",
-                        buttons: ["Cancel", "Yes"],
-                        SuccessMode: true,
-                    })
-                        .then((willSuccess) => {
-                            if (willSuccess) {
-
-                                $.ajax({
-
-                                    url: 'approve-action',
-                                    type: 'post',
-                                    data: {
-                                        id: id,
-                                        university: university,
-                                        type: 'replace',
-                                    },
-                                    dataType: 'json',
-                                    success: function(response) {
-
-                                        if (response == 4) {
-                                            $(the).closest("tr").fadeOut(200, function () {
-                                                $(this).remove();
-                                            });
-
-                                            swal("University Chapter Replaced Successfully", {
-                                                icon: "success",
-                                            });
-                                        }
-                                    }
-
-                                });
-
-                            } else {
-                                swal("The Current Chapter Is Safe!");
-                            }
-                        });
-
-
-
-                    $(".swal-text").css('color', '#B40000');
-                    $(".swal-text").css('font-weight', '600');
-                    $(".swal-title").css('font-size', '18px');
-                }
-
-                else if (response==3) {
-                    swal({
-                        title: university+" do not Assign !",
-                        text: "( Please Add This University )",
-                        icon: "warning",
-                        buttons: false,
-                    })
-                }
-
-
-            }
-        });
-    }
-</script>--}}
 
 @include('layouts.footer')

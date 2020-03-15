@@ -63,7 +63,14 @@
                                 <br>
                                 <div class="event-link">
                                     Event Link : <i class="fa fa-link"></i> <a href="https://ticketgripe.com/e/{{ !empty($event_details->custom_link)? $event_details->custom_link : $event_details->id}}" target="_blank" class="mb-2">https://ticketgripe.com/e/{{ !empty($event_details->custom_link)? $event_details->custom_link : $event_details->id}}</a>
-                                </div><br>
+                                    <div class="tooltip2">
+                                        <button class="copy-sms" onclick="myFunction(155); return false;" onmouseout="outFunc(155)">
+                                        <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
+                                        Copy Link
+                                        </button>
+                                    </div>
+                                </div>
+                                <input type="text" style="height: 1px;width: 1px;" value="https://ticketgripe.com/e/{{ !empty($event_details->custom_link)? $event_details->custom_link : $event_details->id}}" id="155">
                                 <div class="input-group mb-3">
                                     <div class="form-group">
                                         <div class="input-group-prepend">
@@ -335,6 +342,23 @@
 });
 </script>
 <script>
+    function myFunction(id) {
+        var copyText = document.getElementById(id);
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        document.execCommand("copy");
+    
+        var tooltip = document.getElementById("myTooltip");
+        tooltip.innerHTML = "Link Copied";
+        return false;
+    }
+
+    function outFunc(id) {
+        var tooltip = document.getElementById("myTooltip");
+        tooltip.innerHTML = "Copy to clipboard";
+    }
+</script>
+<script>
     $(document).ready(function() {
         $('.event_edit_form').bootstrapValidator({
             message: 'This value is not valid',
@@ -353,10 +377,10 @@
                         stringLength: {
                             min: 2,
                             max: 30,
-                            message: 'The link must be more than 6 and less than 30 characters long'
+                            message: 'The link must be more than 2 and less than 30 characters long'
                         },
                         regexp: {
-                            regexp: /^[a-zA-Z0-9_]+$/,
+                            regexp: /^[a-zA-Z0-9_-]+$/,
                             message: 'The link can only consist of alphabetical, number and underscore'
                         }
                     }

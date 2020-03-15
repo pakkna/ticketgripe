@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AuthLoginRequest;
-use App\Http\Requests\RegisterRequest;
-use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\AuthLoginRequest;
+use session;
 
 class AuthLoginController extends Controller
 {
@@ -54,24 +56,42 @@ class AuthLoginController extends Controller
 
     public function login(AuthLoginRequest $request)
     {
-
-       
         $request->request->add(['email' =>  $request->username]);
+        $request->request->add(['def_password' =>  $request->password]);
+
         $credentials1 = $request->only('username','password');
         $credentials2 = $request->only('email','password');
 
-        if (Auth::attempt($credentials1) || Auth::attempt($credentials2)) {
-            // Authentication passed...
-            return redirect()->route("MyEvents");
+        // $match = DB::table('users')->select('id')->where('def_password', bcrypt($request->password))->first();
+        $credentials3 = $request->only('email','def_password');
+
+        if (Auth::attempt($credentials1) || Auth::attempt($credentials2) || Auth::attempt($credentials3)) {
+            if (Auth::user()->status != 1) {
+                \Session::flush();
+                Auth::logout();
+                return redirect("sign-in")->with("flashMessageDanger", "Account is suspended !");
+            }else{
+                return redirect()->route("MyEvents"); 
+            }
         } else {
-            return redirect()->route("login")->with("flashMessageDanger", "Invalid User Credentials.");
+            return redirect("sign-in")->with("flashMessageDanger", "Invalid User Credentials.");
         }
     }
 
     public function logout()
     {
+        if(Auth::user()->user_type=="Super Admin" || Auth::user()->user_type == "Admin" ){
+            \Session::flush();
+            Auth::logout();
+            return redirect("tgadmin")->with("flashMessageSuccess", "Logout Succesfully");
+           
+        }else if(Auth::user()->user_type == "user"){
+            \Session::flush();
+            Auth::logout();
+            return redirect("sign-in")->with("flashMessageSuccess", "Logout Succesfully");
+        }
         Auth::logout();
-        return redirect()->route("login")->with("flashMessageSuccess", "Logout Succesfully");
+        return redirect("sign-in")->with("flashMessageSuccess", "Logout Succesfully");
     }
     /**
      * Show the form for creating a new resource.
@@ -284,6 +304,54 @@ class AuthLoginController extends Controller
         } else {
 
             return redirect("user-list");
+        }
+    }
+
+    public function showResetForm($token)
+    {
+        $email = DB::table('password_resets')->select('email')->where('token', $token)->first();
+        if($email == true){
+            return view('auth.resetpass',compact('token'));
+        }else{
+            return redirect()->route("login")->with("flashMessageDanger", "Invalid token !");
+        }
+    }
+
+    public function reset_pass_post(Request $request)
+    {
+        $request->validate([
+            'new_pass' => 'required',
+            'confirm_pass' => ['same:new_pass'],
+        ]);
+
+        $new_pass = bcrypt($request->confirm_pass);
+        try {
+            $token = Str::random(60);
+            $email = DB::table('users')->where('token', $request->token)->update(['password' => $new_pass, 'token' => $token]);
+            $token_update = DB::table('password_resets')->where('token', $request->token)->update(['token' => $token]);
+            return redirect()->route("login")->with("flashMessageSuccess", "Password changed !");
+        } catch (\Throwable $th) {
+            return redirect()->route("login")->with("flashMessageDanger", "Error ! Please try again.");
+        }
+    }
+
+    public function admin_login_form()
+    {
+        return view('auth.auth_login');
+    }
+
+    public function admin_login_post(Request $request)
+    {
+        $validatedData = $request->validate([
+            "email" => "required|email",
+            "password" => "required",
+        ]);
+        $Admin_credentials = array('email' => $request->email, 'password' => $request->password, "user_type" => "Admin");
+
+        if (Auth::attempt($Admin_credentials)) {
+            return redirect()->route('dashboard');
+        } else {
+        return redirect()->back()->with("flashMessageDanger", "Invalid User Credentials.");
         }
     }
 }

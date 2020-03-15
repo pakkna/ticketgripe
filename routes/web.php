@@ -5,7 +5,7 @@
 // | User Login Information |
 // +===================================+
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => 'check_user_access','auth'], function () {
     //my-events page
     Route::get("pay","PayOrderController@store")->name("demo");
     Route::get("demo","HomeController@demo_view")->name("demo");
@@ -46,6 +46,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post("order_datatable_form","OrderController@order_datatable_form")->name("order_datatable_form");
     Route::post("attendee_datatable_form","OrderController@attendee_datatable_form")->name("attendee_datatable_form");
     Route::post("confirm-order-user","OrderController@confirm_order_user");
+    Route::post("suspend-order-user","OrderController@suspend_order_user");
 
     Route::post("add-sponser","SponserController@add_sponser")->name("add-sponser");
     Route::post("all-sponser","SponserController@all_sponsers")->name("all-sponser");
@@ -59,15 +60,27 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get("event-details/{event_id}","EventControler@event_detail")->name("EventDetails");
     Route::get("demo-ticket/{event_id}/{ticket_id}","TicketController@ticket_detail");
-    Route::get("qrcode","OrderController@qr_generate");
     Route::get("event-setup/{id}/overview}","EventControler@event_overview_admin")->name('event-overview-admin');
+    Route::get("resend-mail/{random}/{event_id}/{tran}","EventControler@resend_mail");
+    Route::get("ticket-view-admin/{tran_id}/{event_id}/{random_number}","EventControler@ticket_view_admin");
+
+    Route::post("withdraw-cash","WithdrawController@withdraw_money")->name("WithdrawCredit");
+    Route::post("withdraw-history","WithdrawController@withdraw_status")->name("withdraw-status");
+
+
 });
+Route::get("qrcode","OrderController@qr_generate");
 
 Route::post("buy-ticket","PaymentController@ticket_generate")->name("ticket-generate");
 Route::any("payment_status","PaymentController@payment_status");
-Route::get("buy-ticket/{event_id}","EventControler@event_ticket")->name("Buyticket");
+Route::get("e/buy-ticket/{event_id}","EventControler@event_ticket")->name("Buyticket");
 Route::post("buy-ticket-option","EventControler@buy_ticket_option");
 Route::get("e/{event_link}","EventControler@event_details_for_all");
+Route::get("exam","OrderController@demo_example");
+Route::get("faq","HomeController@faq")->name("FAQ");
+Route::get("privacy-policy","HomeController@privacy")->name("Privacy");
+Route::get("tos","HomeController@tos")->name("TOS");
+Route::get("about-us","HomeController@about_us")->name("ABOUT");
 
 
     //login form
@@ -94,14 +107,27 @@ Route::post('user-logout', 'AuthLoginController@logout')->name("user.logout");
 // Password Reset Routes...
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::get('password/reset/{token}', 'AuthLoginController@showResetForm')->name('password.reset');
+Route::post('password-reset', 'AuthLoginController@reset_pass_post')->name('reset_pass_post');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
+Route::group(['middleware' => 'CheckAdmin','auth'], function () {
 
+    Route::get('dashboard', 'Dashboard\DashboardController@index')->name('dashboard');
+    Route::post('dashboard', 'AuthLoginController@index')->name('user-create');
+    Route::get('user-list', 'Dashboard\UserInfoController@user_info')->name('UserList');
+    Route::post('user_info_datatable', 'Dashboard\UserInfoController@user_info_dt');
+    Route::post('auth-user-info', 'Dashboard\UserInfoController@user_info_modal');
+    Route::post('suspend-user', 'Dashboard\UserInfoController@suspend_user');
+    Route::get('event-list/{id?}', 'Dashboard\AuthEventController@event_info')->name('EventList');
+    Route::post('event-list-dt', 'Dashboard\AuthEventController@event_info_dt');
+    Route::get('single-event-info/{id}', 'Dashboard\AuthEventController@event_info_single');
+    Route::get("withdraw-history","WithdrawController@withdraw_history");
+    Route::post("withdraw_list_datatable","WithdrawController@withdraw_list_datatable");
+    Route::get("withdraw/{user_id}/{id}/{amount}","WithdrawController@withdraw_confirmation");
+    Route::get("withdraw/{id}/decline","WithdrawController@withdraw_decline");
 
+});
 
-
-
-
-
-
+Route::get('tgadmin', 'AuthLoginController@admin_login_form')->name('admin.login');
+Route::post('admin-login', 'AuthLoginController@admin_login_post')->name('admin.login.post');

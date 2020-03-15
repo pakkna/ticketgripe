@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 use Yajra\Datatables\Datatables;
 use App\Http\Requests\EventRequest;
 use App\Http\Requests\EditEventRequest;
+use App\Mail\Ticket_Confirm_Mail;
+use Illuminate\Support\Facades\Mail;
 
 class EventControler extends Controller
 {
@@ -37,7 +39,21 @@ class EventControler extends Controller
 
     public function show_event_form(){
 
-        return View('files.add_event');
+        $total_credit_admin = 0;
+        $event_details = DB::table('events')
+        ->where('events.user_id', Auth::user()->id)
+        ->orderBy('id', 'ASC')
+        //need collection and soldout form order table
+        ->get();
+
+        foreach ($event_details as $value) {
+            
+            $total_credit = DB::table('orders')->select('sold_amount')->where('event_id', $value->id)->get();
+            foreach ($total_credit as $group144) {
+                $total_credit_admin += $group144->sold_amount;
+            }
+        }
+        return View('files.add_event',compact('total_credit_admin'));
     }
     public function event_detail($event_id){
 
@@ -221,26 +237,40 @@ class EventControler extends Controller
     public function event_ticket($event_id)
     {
         $single_event = DB::table('events')->where('id', $event_id)->first();
+        if ($single_event == null) {
+            $single_event = DB::table('events')->where('custom_link', $event_id)->first();
+        }
+        $chck_access = DB::table('users')->select('status')->where('id', $single_event->user_id)->first();
 
-        $single_event_tickets = DB::table('tickets')->where('event_id', $event_id)->get();
-
-        return View('files.buy_ticket', compact('single_event', 'single_event_tickets'));
+        $single_event_tickets = DB::table('tickets')->where('event_id', $single_event->id)->get();
+        if ($chck_access->status == 1) {
+            return View('files.buy_ticket', compact('single_event', 'single_event_tickets'));
+        }
+        else{
+            return redirect('sign-in');
+        }
     }
 
     public function buy_ticket_option(Request $request)
     {
         $count = 0;
         $total_ticket_sold_count = 0;
-        $single_event = DB::table('events')->where('id', $request->event_id)->first();
+        $event_id = DB::table('events')->select('id')->where('id', $request->event_id)->first();
+        if ($event_id == null) {
+            $event_id = DB::table('events')->select('id')->where('custom_link', $request->event_id)->first();
+        }
+        $event_id = $event_id->id;
 
-        $ticket_question = DB::table('custom_form')->where('event_id', $request->event_id)->orderBy('id', 'ASC')->get();
+        $single_event = DB::table('events')->where('id', $event_id)->first();
 
-        $single_event_tickets = DB::table('tickets')->where('event_id', $request->event_id)->where('ticket_type', $request->ticket)->first();
-
-        $ticket_count = DB::table('orders')->select('sold_tickets')->where('event_id', $request->event_id)->where('ticket_id', $single_event_tickets->id)->get();
-
-        $total_ticket_sold = DB::table('orders')->select('sold_tickets')->where('event_id', $request->event_id)->get();
-
+        
+        $single_event_tickets = DB::table('tickets')->where('event_id', $event_id)->where('ticket_type', $request->ticket)->first();
+        
+        
+        $ticket_count = DB::table('orders')->select('sold_tickets')->where('event_id', $event_id)->where('ticket_id', $single_event_tickets->id)->get();
+        
+        $ticket_question = DB::table('custom_form')->where('event_id', $event_id)->orderBy('id', 'ASC')->get();
+        $total_ticket_sold = DB::table('orders')->select('sold_tickets')->where('event_id', $event_id)->get();
         foreach ($total_ticket_sold as $group2) {
             $total_ticket_sold_count += $group2->sold_tickets;
         }
@@ -255,6 +285,7 @@ class EventControler extends Controller
             $stock = false;
         }
 
+        
         $view =  view('files.buy_ticket_form',compact('single_event', 'single_event_tickets', 'ticket_question', 'stock', 'count','total_ticket_sold_count'))->render();
 
         return response()->json(['html'=>$view]);
@@ -295,5 +326,51 @@ class EventControler extends Controller
     public function event_overview_admin($event_id)
     {
         return view('eventsetup.event_sidebar', compact('total_ticket_sold'));
+    }
+
+    public function resend_mail($random_number, $event_id, $tran_id)
+    {
+
+        try {
+            $event_name = DB::table('events')->select('title')->where('id', $event_id)->first();
+            $ticket_id = DB::table('orders')->select('ticket_id')->where('transaction_id', $tran_id)->first();
+            $email = DB::table('questionanswer')->select('question_ans')->where('transaction_id', $tran_id)->where('question_title', 'Email')->first();
+            $name = DB::table('questionanswer')->select('question_ans')->where('transaction_id', $tran_id)->where('question_title', 'Name')->first();
+
+            $data = array(
+                "email" => $email->question_ans,
+                "name" => $name->question_ans,
+                "subject" => "Ticket Purchase Confirmation",
+                "event_title" => $event_name->title,
+                "tran_id" => $tran_id,
+                "event_id" => $event_id,
+                "ticket_id" => $ticket_id->ticket_id,
+                "random_number" => $random_number,
+            );
+
+            Mail::to($data['email'])->send(new Ticket_Confirm_Mail($data));
+            echo 'Mail resend successfull !';
+        } catch (\Throwable $th) {
+            echo $th->getMessage();
+        }
+    }
+
+    public function ticket_view_admin($tran_id,$event_id,$random_number)
+    {
+        try {
+            $event_info = DB::table('events')->select('title','start_date','end_date','address','city','state','zip','country','event_logo')->where('id', $event_id)->where('user_id', Auth::user()->id)->first();
+
+            $sponsor_info = DB::table('sponser')->select('sponser_logo')->where('event_id', $event_id)->get();
+
+            $buyer_info = DB::table('questionanswer')->select('transaction_id','question_ans','created_at','question_title')->where('transaction_id', $tran_id)->take(3)->get();
+
+            $ticket_id = DB::table('orders')->select('ticket_id')->where('transaction_id', $tran_id)->first();
+
+            $ticket_type = DB::table('tickets')->select('ticket_type')->where('id', $ticket_id->ticket_id)->first();
+
+            return view('files.ticket_admin_view', compact('event_info', 'sponsor_info', 'buyer_info', 'random_number', 'ticket_type'));
+        } catch (\Throwable $th) {
+            echo $th->getMessage();
+        }
     }
 }

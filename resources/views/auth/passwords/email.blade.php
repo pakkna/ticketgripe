@@ -4,9 +4,9 @@
 <div class="container">
     <br><br><br><br>
     <div class="row">
-        <div class="col-md-offset-5 col-md-7">
+        <div class="col-md-offset-4 col-md-7">
             <a href="{{ url('/') }}">
-                <div style="margin-left: 24px;height: 23px;width: 97px;margin-bottom:50px"><img src="../assets/images/login-logo.png" style="width: 125%;margin-top: -30px;" alt=""></div> {{--{{ config('app.name', 'Laravel') }}--}}
+                <div style="margin-left: 68px;width: 167px;"><img src="{!! asset('master/images/logo.png') !!}" style="width: 125%;margin-top: -30px;" alt=""></div> {{--{{ config('app.name', 'Laravel') }}--}}
             </a><br>
 
         </div>

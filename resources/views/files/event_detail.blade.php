@@ -9,7 +9,7 @@
                                     Description
                                 </div>
                                 <div class="event-item-description">
-                                    <p>{{strip_tags($single_event->description)}}</p>
+                                    <p>{!! $single_event->description !!}</p>
                                 </div>
                             </div>
                             @if(count($single_event_sponsor))

@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Auth;
 use Session;
+use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Mail\Ticket_Confirm_Mail;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
+
+
 
 
 class PaymentController extends Controller
@@ -17,16 +23,32 @@ class PaymentController extends Controller
     }
 
     public function ticket_details($id){
-        return DB::table('tickets')->select('ticket_type','ticket_price','quantity','fees_consume','selling_currency','fees_consume','event_id')->where('id',$id)->first();
+        return DB::table('tickets')->select('ticket_type','ticket_price','quantity','fees_consume','selling_currency','fees_consume','event_id','user_id')->where('id',$id)->first();
     }
 
     public function ticket_generate(Request $request){
-      
-        $validatedData = $request->validate([
-            "question_ans" => "required",
-            "question_ans" => Rule::unique('questionanswer')->where('question_title', 'Email')->where('ticket_id', $request->ticket_id),
-        ]);
+        
+        // $validatedData = $request->validate([
+        //     "question_ans" => "required",
+        //     "question_ans" => Rule::unique('questionanswer')->where('question_title', 'Email')->where('ticket_id', $request->ticket_id),
+        // ]);
 
+        // $validatedData = validator::make($request->all(),[
+        //     // 'question_ans' => 'required|unique:questionanswer,question_ans,Email,ticket_id,{$request->ticket_id}',
+        //     // 'question_ans' => Rule::unique('questionanswer')->where('question_title', 'Email')->where('ticket_id', $request->ticket_id)
+        //     // 'question_ans' => [
+        //     //     'required',
+        //     //     Rule::unique('questionanswer')->where(function ($query) {
+        //     //         $query->where('ticket_id', 23);
+        //     //     })
+        //     // ],
+        // ]);
+        $check_same_email = DB::table('questionanswer')->where('question_title', 'Email')->where('ticket_id', $request->ticket_id)->where('question_ans', $request->Email)->get();
+
+        if (count($check_same_email)) {
+            return redirect()->back()->with("BuyTicketMessageDanger", "Email address already taken ! please try with another mail.");
+        }else{
+        
         $ticket_info=$this->ticket_details($request->ticket_id);
 
        // $total_ticket=$request->ticket_count;
@@ -56,11 +78,12 @@ class PaymentController extends Controller
 
                 DB::table('before_order_table')->insert($data);
 
-            }
+                }
 
             $this->pay_now_ssl($total_price,$product_type,$ticket_info->selling_currency,$request->all(),$tran_id,$ticket_info->event_id);
-        }else{
-            $this->order_confirm_without_ssl($request->all(),0,0,NULL,$ticket_info->event_id,$request->ticket_id);
+            }else{
+                $this->order_confirm_without_ssl($request->all(),0,0,NULL,$ticket_info->event_id,$request->ticket_id,$ticket_info->user_id);
+            }
         }
     }
 
@@ -72,8 +95,10 @@ class PaymentController extends Controller
             "https" : "http") . "://" . $_SERVER['HTTP_HOST'];
         /* PHP */
         $post_data = array();
-        $post_data['store_id'] = "innov5d88a62376485";
-        $post_data['store_passwd'] = "innov5d88a62376485@ssl";
+        // $post_data['store_id'] = "innov5d88a62376485";
+        // $post_data['store_passwd'] = "innov5d88a62376485@ssl";
+        $post_data['store_id'] = "ticketgripelive";
+        $post_data['store_passwd'] = "5E16FC35BA2B869168";
         $post_data['total_amount'] = $pay_amount;
         $post_data['currency'] = $currency;
         $post_data['tran_id'] = $tran_id;
@@ -115,7 +140,8 @@ class PaymentController extends Controller
         $post_data['convenience_fee'] = 0;
 
 
-        $direct_api_url = "https://sandbox.sslcommerz.com/gwprocess/v3/api.php";
+        // $direct_api_url = "https://sandbox.sslcommerz.com/gwprocess/v3/api.php";
+        $direct_api_url = "https://securepay.sslcommerz.com/gwprocess/v4/api.php";
 
         $handle = curl_init();
         curl_setopt($handle, CURLOPT_URL, $direct_api_url);
@@ -159,7 +185,7 @@ class PaymentController extends Controller
     {
         $bill_info=DB::table('before_order_table')->where('transaction_id',$request->tran_id)->get();
 
-        if($request->card_type== "VALID" || "VALIDED" && $bill_info[0]->request_value==$request->value_a &&  $request->status != "FAILED"){
+        if($request->card_type== "VALID" || "VALIDED" && $bill_info[0]->request_value==$request->value_a &&  $request->status != "FAILED" &&  $request->status != "CANCELLED"){
                
                 $data = [
                     "product" => "Event Ticket",
@@ -193,11 +219,11 @@ class PaymentController extends Controller
             }      
     }
 
-
     public function order_confirm($bill_info,$total_amount,$store_amount,$payment_id,$event_id){
 
         //$ticket_info=$this->ticket_details($bill_info->ticket_id);
-
+        $user_id = DB::table('events')->select('user_id')->where('id', $event_id)->first();
+        $user_info = User::where('id', $user_id->user_id)->firstOrFail();
 
         $random_number = mt_rand(100000, 999999);
 
@@ -208,7 +234,7 @@ class PaymentController extends Controller
             $total_amount = 0;
            }   
 
-        $parcentage= (($total_amount*10)/100);
+        $parcentage= (($total_amount*5)/100);
         $system_charged=$parcentage-$ssl_charge;
 
         $array_cut=$bill_info->toArray();
@@ -222,17 +248,18 @@ class PaymentController extends Controller
             "system_charge" =>$system_charged,
             "sold_amount" => ($store_amount-$system_charged),
             "payment_id" =>$payment_id,
-            "user_id" => Auth::id(),
+            "user_id" => $user_id->user_id,
             "ticket_id" =>$bill_info[1]->request_value,
             "event_id" =>$event_id,
             'transaction_id'=>$request_array[0]->transaction_id,
             "created_at" =>date('Y-m-d H:i:s'),
         ];
+        $user_balance = $user_info->balance + ($store_amount-$system_charged);
 
         $data = DB::table('orders')->insert($data);
+        $data2 = DB::table('users')->where('id', $user_id->user_id)->update(['balance' => $user_balance]);
 
-
-        if($data==true){
+        if($data==true && $data2==true){
 
             for ($i=0; $i <count($request_array) ; $i++) { 
          
@@ -252,6 +279,21 @@ class PaymentController extends Controller
             $file = public_path('qr_codes/TG-'.$random_number.'.png');
             $code_save = \QRCode::text('TG-'.$random_number)->setOutfile($file)->png();
 
+            $event_name = DB::table('events')->select('title')->where('id', $event_id)->first();
+
+            $data = array(
+                "email" => $request_array[1]->request_value,
+                "name" => $request_array[0]->request_value,
+                "subject" => "Ticket Purchase Confirmation",
+                "event_title" => $event_name->title,
+                "tran_id" => $request_array[0]->transaction_id,
+                "event_id" => $event_id,
+                "ticket_id" => $request_array[0]->ticket_id,
+                "random_number" => $random_number,
+            );
+    
+            Mail::to($data['email'])->send(new Ticket_Confirm_Mail($data));
+
         }
 
         //create ticket page
@@ -260,7 +302,7 @@ class PaymentController extends Controller
 
         
     }
-    public function order_confirm_without_ssl($bill_info,$total_amount,$store_amount,$payment_id,$event_id,$ticket_id){
+    public function order_confirm_without_ssl($bill_info,$total_amount,$store_amount,$payment_id,$event_id,$ticket_id,$user_id){
 
         //$ticket_info=$this->ticket_details($bill_info->ticket_id);
 
@@ -269,7 +311,7 @@ class PaymentController extends Controller
             $ssl_charge=0;
             $total_amount = 0; 
 
-        $parcentage= (($total_amount*10)/100);
+        $parcentage= (($total_amount*5)/100);
         $system_charged=$parcentage-$ssl_charge;
         $tran_id='TG-'.strtoupper(uniqid());
 
@@ -282,7 +324,7 @@ class PaymentController extends Controller
             "system_charge" =>$system_charged,
             "sold_amount" => ($store_amount-$system_charged),
             "payment_id" =>$payment_id,
-            "user_id" => Auth::id(),
+            "user_id" => $user_id,
             "ticket_id" =>$bill_info['ticket_id'],
             "event_id" =>$event_id,
             'transaction_id'=>$tran_id,
@@ -315,6 +357,21 @@ class PaymentController extends Controller
 
             $file = public_path('qr_codes/TG-'.$random_number.'.png');
             $code_save = \QRCode::text('TG-'.$random_number)->setOutfile($file)->png();
+
+            $event_name = DB::table('events')->select('title')->where('id', $event_id)->first();
+
+            $data = array(
+                "email" => $request_array['Email'],
+                "name" => $request_array['Name'],
+                "subject" => "Ticket Purchase Confirmation",
+                "event_title" => $event_name->title,
+                "tran_id" => $tran_id,
+                "event_id" => $event_id,
+                "ticket_id" => $ticket_id,
+                "random_number" => $random_number,
+            );
+        
+            Mail::to($data['email'])->send(new Ticket_Confirm_Mail($data));
 
         }
 

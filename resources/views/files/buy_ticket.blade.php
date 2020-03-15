@@ -40,7 +40,19 @@
 <!-- Body End -->	
 <script src="{!! asset('master/js/jquery.min.js') !!}"></script>
 @include('layouts.master_layout.footer_events')	
+<script src="{!! asset('js/sweetalert.min.js') !!}"></script>
 
+<script>
+    @if(Session::has('BuyTicketMessageDanger'))
+        swal({
+            title: "Ticket Action",
+            text: "Email address already taken ! please try again with another mail address",
+            icon: "error",
+            buttons: false,
+        })
+        $(".swal-text").css('text-align', 'center');
+    @endif
+</script>
 <script>
 function ticket_form(ticket_id){
     $.ajax({
@@ -48,7 +60,7 @@ function ticket_form(ticket_id){
         type: 'post',
         data: {
             ticket: ticket_id,
-            event_id: {{Request::segment(2)}},
+            event_id: "{{Request::segment(3)}}",
             '_token': "{{csrf_token()}}",
         },
         dataType: 'json',

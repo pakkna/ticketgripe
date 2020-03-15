@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, shrink-to-fit=9">
-        <meta name="description" content="Gambolthemes">
-        <meta name="author" content="Gambolthemes">
+        <meta name="description" content="Ticketgripe is online E-ticketing system to a event organize and ticket order.">
+        <meta name="author" content="innovadeus">
         <title>Ticket Gripe - Login Now</title>
 		
         <!-- Favicon Icon -->
@@ -17,8 +17,6 @@
         <link href="{!! asset('master/css/datepicker.min.css') !!}" rel="stylesheet">
         <link href="{!! asset('master/css/bootstrap.min.css') !!}" rel="stylesheet">
         <link href="{!! asset('master/css/all.min.css') !!}" rel="stylesheet">
-        <link href="{!! asset('master/css/owl.carousel.css') !!}" rel="stylesheet">
-        <link href="{!! asset('master/css/owl.theme.default.min.css') !!}" rel="stylesheet">
 	
     </head>
 
@@ -67,7 +65,7 @@
                                                     </div>
                                                     <button class="login-btn" type="submit">Login Now</button>
                                                 </form>
-                                                <!-- <a href="{{ route('password.request')}}" class="forgot-link">Forgot Password?</a> -->
+                                                <a href="{{ route('password.request')}}" class="forgot-link">Forgot Password?</a>
                                                 <div class="regstr-link">Don’t have an account? <a href="{{route('sign-up')}}">Register Now</a></div>
                                             </div>
                                         </div>

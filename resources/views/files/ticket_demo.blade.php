@@ -38,6 +38,11 @@
     left: -47px;
     top: -21px;
 }
+@media(max-width:1000px){
+        .discussion-mp{
+            width: 1000px !important;
+        }
+    }
 </style>
 <body oncontextmenu="return false;">
 <!-- Body Start -->
@@ -64,16 +69,17 @@
                                 <?php 
                                 $format = ('F d, Y');
                                 $format2 = ('g:i A');
+                                $format3 = ('F d, Y g:i A');
 
-                                    $start = date($format, strtotime($event_info->start_date));
+                                    $start = date($format3, strtotime($event_info->start_date));
+                                    $endtime = date($format3, strtotime($event_info->end_date));
                                     $time1 = date($format2, strtotime($event_info->start_date));
                                     $time2 = date($format2, strtotime($event_info->end_date));
 
                                     
                                     $end = date($format, strtotime($event_info->end_date));
                                 ?>
-                                <div class="cus-date">{{$start}} (
-                                    {{$time1}} to {{$time2}} ) </div>
+                                <div class="cus-date">{{$start}} to {{$endtime}} </div>
                                 <!-- <div class="lctn-dt1"><i class="fas fa-map-marker-alt"></i> India</div> -->
                             </div>	
                             <div class="check-img check-img-right">
@@ -133,9 +139,9 @@
                         </div>
                         <div class="checkout-dt1 cus-bottom">
                             <p class="">Note : You are required to show your ticket ( Printed or Digital ) to enter</p>	
-                            <span>Booking : Jan 15, 2020 12:04 PM</span>
+                            <span style="left: 60px;">Booking Date : Jan 15, 2020 12:04:55 PM</span>
                         </div>	
-                        <p class="copyright-ticket">Ticketgripe.com a brand of Innovadeus Pvt Ltd</p>														
+                        <p class="copyright-ticket" style="margin-top: 101px;margin-left: 513px;">Ticketgripe.com a brand of Innovadeus Pvt. Ltd.</p>														
                     </div>	
                     <!-- <div class="row">
                         <div class="offset-md-1 col-md-4">

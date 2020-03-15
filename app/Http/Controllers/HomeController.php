@@ -43,7 +43,22 @@ class HomeController extends Controller
     }
     public function user_setting()
     {
-        return View('files.user_dashboard');
+        $total_credit_admin = 0;
+        $event_details = DB::table('events')
+        ->where('events.user_id', Auth::user()->id)
+        ->orderBy('id', 'ASC')
+        //need collection and soldout form order table
+        ->get();
+
+        foreach ($event_details as $value) {
+            
+            $total_credit = DB::table('orders')->select('sold_amount')->where('event_id', $value->id)->get();
+            foreach ($total_credit as $group144) {
+                $total_credit_admin += $group144->sold_amount;
+            }
+        }
+
+        return View('files.user_dashboard',compact('total_credit_admin'));
     }
     public function edit_basic_info(Request $request)
     {
@@ -131,5 +146,24 @@ class HomeController extends Controller
         }else{
             return redirect('user-setting/passsword')->with('UserpassDanger',"Old password is not matched !"); 
         }
+    }
+
+    public function faq()
+    {
+        return View('files.faq');
+    }
+
+    public function privacy()
+    {
+        return View('files.privacy');
+    }
+    public function tos()
+    {
+        return View('files.tos');
+    }
+
+    public function about_us()
+    {
+        return View('files.about');
     }
 }

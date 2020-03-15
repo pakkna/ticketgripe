@@ -12355,7 +12355,7 @@ button,
 .app-header__logo .logo-src {
   height: 49px;
   width: 200px;
-  background: url(assets/images/coxsbazerpolice.png)
+  /* background: url(master/images/logo.png) */
 }
 
 .app-header__menu,

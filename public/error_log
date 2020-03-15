@@ -17,3 +17,10 @@ Stack trace:
 [16-Jan-2020 20:48:33 Asia/Dhaka] PHP Fatal error:  Object of class stdClass could not be converted to string in /home/ticketgripe/public_html/app/Http/Controllers/OrderController.php on line 252
 [16-Jan-2020 15:09:32 UTC] PHP Fatal error:  Cannot use [] for reading in /home/ticketgripe/public_html/app/Http/Controllers/OrderController.php on line 248
 [16-Jan-2020 15:10:24 UTC] PHP Fatal error:  Cannot use [] for reading in /home/ticketgripe/public_html/app/Http/Controllers/OrderController.php on line 248
+[20-Jan-2020 15:02:37 Asia/Dhaka] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 98570240 bytes) in /home/ticketgripe/public_html/app/Http/Controllers/PaymentController.php on line 41
+[20-Jan-2020 15:03:10 Asia/Dhaka] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 98570240 bytes) in /home/ticketgripe/public_html/app/Http/Controllers/PaymentController.php on line 41
+[22-Jan-2020 06:02:16 UTC] PHP Fatal error:  Class 'App\Http\Controllers\Dashboard\Controller' not found in /home/ticketgripe/public_html/app/Http/Controllers/Dashboard/DashboardController.php on line 13
+[22-Jan-2020 07:04:23 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 98570240 bytes) in /home/ticketgripe/public_html/app/Http/Controllers/Dashboard/UserInfoController.php on line 33
+[22-Jan-2020 07:06:35 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 98570240 bytes) in /home/ticketgripe/public_html/app/Http/Controllers/Dashboard/UserInfoController.php on line 33
+[22-Jan-2020 09:45:50 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 98570240 bytes) in /home/ticketgripe/public_html/app/Http/Controllers/Dashboard/UserInfoController.php on line 32
+[22-Jan-2020 11:37:15 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 98570240 bytes) in /home/ticketgripe/public_html/app/Http/Controllers/Dashboard/UserInfoController.php on line 39

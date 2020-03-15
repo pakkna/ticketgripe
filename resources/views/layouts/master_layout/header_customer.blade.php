@@ -43,6 +43,9 @@
                                         <a class="nav-link" href="{{route('/')}}">Home <span class="sr-only">(current)</span></a>
                                     </li>
                                     <!-- <li class="nav-item">
+                                        <a class="nav-link" href="{{route('ABOUT')}}">About Us</a>
+                                    </li> -->
+                                    <!-- <li class="nav-item">
                                         <a class="nav-link" href="discussions.html">How it works</a>
                                     </li>									
                                     <li class="nav-item dropdown">
@@ -97,10 +100,10 @@
                         <?php }else{ ?>
                             <ul class="navbar-nav align-self-stretch">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{route('sign-up')}}">Sign Up </a>
+                                    <a class="nav-link" style="padding-top: 13px;" href="{{route('sign-up')}}">Sign Up </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{route('login')}}">Sign In </a>
+                                    <a class="nav-link" style="padding-top: 13px;" href="{{route('login')}}">Sign In </a>
                                 </li>
                             </ul>
                         <?php } ?>
@@ -197,7 +200,8 @@
                         </li> -->
                         @if(Request::segment(1) == 'e' && count($single_event_tickets) )
                         <li>
-                        <a class="add-event" href="{{route('Buyticket', ['event_id' =>$single_event->id])}}">Buy Ticket</a> 
+                        <!-- <a class="add-event" href="{{route('Buyticket', ['event_id' =>$single_event->id])}}">Buy Ticket</a>  -->
+                            <a class="add-event" href="{{url('/e/buy-ticket')}}/{{Request::segment(2)}}">Buy Ticket</a>
                         </li>
                         @endif
                     </ul>

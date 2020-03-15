@@ -9,15 +9,17 @@ $(function() {
         reIndexOptionNames();
         return !1
     });
-    $(document).on("click", ".option-down", function(a) {
+    
+    $(document).on("click", ".option-down", function(aa) {
         console.debug("Option down");
-        a.preventDefault();
-        a = $(this).closest("tr");
-        var b = a.next("tr");
-        0 !== b.length && a.insertAfter(b);
+        aa.preventDefault();
+        aa = $(this).closest("tr");
+        var b = aa.next("tr");
+        0 !== b.length && aa.insertAfter(b);
         reIndexOptionNames();
         return !1
     });
+
     $(document).on("click", ".option-delete", function(a) {
         $(this).closest("tr").remove();
         reIndexOptionNames();

@@ -4,39 +4,6 @@
         <div class="container">
             <div class="dash-discussions mb20">
                 <div class="main-section">
-                <!-- <div class="all-search-filters">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="search-filters">
-                                        <div class="search-filters-left">	
-                                            <div class="dropdown">										
-                                                <a href="#" class="filter-d wt-mp dropdown-toggle-no-caret" role="button" data-toggle="dropdown" aria-expanded="false">Category<i class="fas fa-angle-down"></i></a>
-                                                <div class="dropdown-menu cate-dropdown" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 21px, 0px);">
-                                                    <a class="link-item" href="#">Music</a>
-                                                    <a class="link-item" href="#">Festival</a>	
-                                                    <a class="link-item" href="#">Art</a>
-                                                    <a class="link-item" href="#">Club</a>
-                                                    <a class="link-item" href="#">Comedy</a>
-                                                    <a class="link-item" href="#">Theatre</a>
-                                                    <a class="link-item" href="#">Promotions</a>
-                                                    <a class="link-item" href="#">Other</a>
-                                                </div>	
-                                            </div>	
-                                        </div>
-                                        <div class="search-filters-right dropdown">
-                                            <a href="#" class="filter-d dropdown-toggle-no-caret" role="button" data-toggle="dropdown" aria-expanded="false">All Dates<i class="fas fa-angle-down"></i> </a>
-                                            <div class="dropdown-menu date-dropdown dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(72px, 21px, 0px);">
-                                                <a class="link-item" href="#">All Dates</a>
-                                                <a class="link-item" href="#">Upcoming Events</a>		
-                                                <a class="link-item" href="#">Past Events</a>
-                                            </div>	
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
                     <div class="all-search-events">
                     @include("layouts.includes.flash")								
                         <div class="row">

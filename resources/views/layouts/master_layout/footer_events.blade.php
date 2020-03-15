@@ -2,7 +2,23 @@
 <footer>
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 col-md-12">
+            <div class="col-lg-6 col-md-12">
+                <ul class="copyright-text">
+                    <li style="padding: 0px 20px;">
+                        <div class="ftr-1"><a href="{{route('ABOUT')}}">About Us</a></div>
+                    </li>
+                    <li style="padding: 0px 20px;">
+                        <div class="ftr-1"><a href="{{route('FAQ')}}">FAQ</a></div>
+                    </li>
+                    <li style="padding: 0px 20px;">
+                        <div class="ftr-1"><a href="{{route('Privacy')}}">Privacy Policy</a></div>
+                    </li>
+                    <li style="padding: 0px 20px;">
+                        <div class="ftr-1"><a href="{{route('TOS')}}">TOS</a></div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-6 col-md-12">
                 <ul class="copyright-text">
                     <li><a href="{{route('/')}}"><img src="{!! asset('master/images/icon1.png') !!}" alt=""></a></li>
                     <li>

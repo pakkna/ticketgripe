@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, shrink-to-fit=9">
-        <meta name="description" content="Ticketgripe is online E-ticketing system.">
+        <meta name="description" content="Ticketgripe is online E-ticketing system to a event organize and ticket order.">
         <meta name="author" content="innovadeus">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>Ticket Gripe</title>
@@ -41,9 +41,9 @@
                                         <a class="nav-link" href="{{route('/')}}">Home <span class="sr-only">(current)</span></a>
                                     </li>
                                     <!-- <li class="nav-item">
-                                        <a class="nav-link" href="discussions.html">How it works</a>
-                                    </li>									
-                                    <li class="nav-item dropdown">
+                                        <a class="nav-link" href="{{route('ABOUT')}}">About Us</a>
+                                    </li>									 -->
+                                        <!-- <li class="nav-item dropdown">
                                         <a href="#" class="nav-link dropdown-toggle-no-caret" role="button" data-toggle="dropdown">
                                             Pages
                                         </a>
@@ -95,10 +95,10 @@
                         <?php }else{ ?>
                             <ul class="navbar-nav align-self-stretch">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{route('sign-up')}}">Sign Up </a>
+                                    <a class="nav-link" style="padding-top: 13px;" href="{{route('sign-up')}}">Sign Up </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{route('login')}}">Sign In </a>
+                                    <a class="nav-link" style="padding-top: 13px;" href="{{route('login')}}">Sign In </a>
                                 </li>
                             </ul>
                         <?php } ?>
@@ -170,7 +170,7 @@
                         <li>
                             <div class="all-dis-evnt">
                                 <div class="dscun-txt">Credit</div>
-                                <div class="dscun-numbr">{{$total_credit_admin}} BDT</div>
+                                <div class="dscun-numbr">{{Auth::user()->balance}} BDT</div>
                             </div>
                         </li>
                     </ul>

@@ -25,8 +25,8 @@
 	
 	
     </head>
-
-    <body oncontextmenu="return false;">
+    <!-- oncontextmenu="return false;" -->
+    <body>
         <!-- Header Start -->
         <header>
             <div class="container">				
@@ -42,6 +42,9 @@
                                     <li class="nav-item active">
                                         <a class="nav-link" href="{{route('/')}}">Home <span class="sr-only">(current)</span></a>
                                     </li>
+                                    <!-- <li class="nav-item">
+                                        <a class="nav-link" href="{{route('ABOUT')}}">About Us</a>
+                                    </li> -->
                                     <!-- <li class="nav-item">
                                         <a class="nav-link" href="discussions.html">How it works</a>
                                     </li>									
@@ -97,10 +100,10 @@
                         <?php }else{ ?>
                             <ul class="navbar-nav align-self-stretch">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{route('sign-up')}}">Sign Up </a>
+                                    <a class="nav-link" style="padding-top: 13px;" href="{{route('sign-up')}}">Sign Up </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{route('login')}}">Sign In </a>
+                                    <a class="nav-link" style="padding-top: 13px;" href="{{route('login')}}">Sign In </a>
                                 </li>
                             </ul>
                         <?php } ?>

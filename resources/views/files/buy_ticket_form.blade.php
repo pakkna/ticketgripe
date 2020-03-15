@@ -111,9 +111,10 @@
                             if($one_ticket_question->answer_required == 'on' && in_array($single_event_tickets->id,$array2) ){
                                 array_push($question_id_array, $one_ticket_question->id);
                                 $array3 = (object)array();
-                                $array3 = explode("~", $one_ticket_question->question_options);    
+                                $array3 = explode("~", $one_ticket_question->question_options);  
+                                 
                             ?>
-                                <h5 class="header-buy-tickt">#{{$one_ticket_question->question_title}} *</h5>
+                                <h5 class="header-buy-tickt"><strong>{{$one_ticket_question->question_title}} *</strong></h5>
                                 <?php
                                 if ($one_ticket_question->question_type == 'Checkboxes' || $one_ticket_question->question_type == 'Radio Buttons') {
                                 for ($i=0; $i < count($array3) ; $i++) {
@@ -147,12 +148,12 @@
                                 <?php } ?>
                       
                                 <?php } ?>
-
-                            
                         </div>
                         @endforeach
-                        <label>#Billing Address *</label>
-                       <input type="text" class="payment-input" name="address" required>
+                        @if($single_event_tickets->ticket_price != 0)
+                        <label><strong>Address *</strong></label>
+                        <input type="text" class="payment-input" name="address" required>
+                        @endif
                         <div class="add-crdt-amnt">
                             <button class="setting-save-btn" type="submit">Submit</button>
                         </div>
@@ -163,3 +164,4 @@
         </div>
     </div>
 </div>
+
